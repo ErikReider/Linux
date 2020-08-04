@@ -15,7 +15,7 @@ echo "Do you wish to install all apps? [y/n]"
 read install_app_var
 if [[ $install_app_var = y ]]
 then
-	pamac install github-desktop-bin visual-studio-code-bin google-chrome
+	pamac install github-desktop-bin visual-studio-code-bin google-chrome android-studio
 	
 	sudo pacman -Syy discord jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless
 
@@ -26,12 +26,23 @@ fi
 echo ""
 ##
 
+##Ulauncher
+echo "Do you wish to install all apps? [y/n]"
+read install_app_var
+if [[ $install_app_var = y ]]
+then
+	pamac install ulauncher
+	sed -i 's/<Primary>space/<alt>space/g' ~/.config/ulauncher/settings.json
+fi
+echo ""
+##
+
 ##Shell Theme
 echo "Do you wish to install the Elementary theme? [y/n]"
 read install_theme_var
 if [[ $install_theme_var = y ]]
 then
-	pamac install elementary-icon-theme sound-theme-elementary ulauncher
+	pamac install elementary-icon-theme sound-theme-elementary
 	sudo pacman -Syy sassc bc inkscape optipng 
 	git clone https://github.com/hrdwrrsk/adementary-theme.git
 	cd ./adementary-theme/
