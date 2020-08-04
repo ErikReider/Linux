@@ -15,7 +15,9 @@ echo "Do you wish to install all apps? [y/n]"
 read install_app_var
 if [[ $install_app_var = y ]]
 then
-	sudo pamac install github-desktop-bin visual-studio-code-bin discord google-chrome
+	pamac install github-desktop-bin visual-studio-code-bin google-chrome
+	
+	sudo pacman -Syy discord jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless
 
 	sudo flatpak install Spotify 
 
