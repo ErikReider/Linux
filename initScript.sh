@@ -31,7 +31,7 @@ echo "Do you wish to install the Elementary theme? [y/n]"
 read install_theme_var
 if [[ $install_theme_var = y ]]
 then
-	sudo pamac install elementary-icon-theme sound-theme-elementary
+	pamac install elementary-icon-theme sound-theme-elementary ulauncher
 	sudo pacman -Syy sassc bc inkscape optipng 
 	git clone https://github.com/hrdwrrsk/adementary-theme.git
 	cd ./adementary-theme/
