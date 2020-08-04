@@ -27,8 +27,8 @@ echo ""
 ##
 
 ##Ulauncher
-echo "Do you wish to install all apps? [y/n]"
-read install_app_var
+echo "Do you wish to install Ulauncher? [y/n]"
+read install_ulauncher_var
 if [[ $install_app_var = y ]]
 then
 	pamac install ulauncher
