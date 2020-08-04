@@ -45,7 +45,7 @@ echo "Do you wish to add Chrome Dark? [y/n]"
 read chrome_dark_var
 if [[ $chrome_dark_var = y ]]
 then
-	sudo cp ./dark-google-chrome.desktop /usr/share/applications/
+	sudo cp ./google-chrome.desktop /usr/share/applications/
 fi
 echo ""
 ##
