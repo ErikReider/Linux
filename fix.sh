@@ -19,11 +19,11 @@ sudo snap install flutter
 sudo cp ./dark-google-chrome.desktop /usr/share/applications/
 
 #Extension Sync
-git clone https://github.com/oae/gnome-shell-extensions-sync.git
-cd ./gnome-shell-extensions-sync
-yarn install
-yarn build
-ln -s "$PWD/dist" "$HOME/.local/share/gnome-shell/extensions/extensions-sync@elhan.io"
+#git clone https://github.com/oae/gnome-shell-extensions-sync.git
+#cd ./gnome-shell-extensions-sync
+#yarn install
+#yarn build
+#ln -s "$PWD/dist" "$HOME/.local/share/gnome-shell/extensions/extensions-sync@elhan.io"
 
 echo "Do you wish to show Extension Credentials? [y/n]"
 read input_variable
@@ -31,6 +31,6 @@ if [[ $input_variable = y ]]
 then
 	echo "Github Gist ID: ***REMOVED***"
 	echo "Github User Token: ***REMOVED***"
-else
-	echo "You entered: $input_variable yeeeee"
 fi
+
+echo "Done! 😊"
