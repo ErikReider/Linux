@@ -15,7 +15,7 @@ echo "Do you wish to install all apps? [y/n]"
 read install_app_var
 if [[ $install_app_var = y ]]
 then
-	pamac install github-desktop-bin visual-studio-code-bin google-chrome android-studio
+	pamac install github-desktop-bin visual-studio-code-bin google-chrome android-studio nautilus-copy-path
 	
 	sudo pacman -Syy discord jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless
 
