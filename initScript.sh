@@ -6,6 +6,9 @@ if [[ $change_to_bash_var = y ]]
 then
     sudo chsh --shell=/bin/bash $USER
     cp ./.bashrc ~/.bashrc
+
+    read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understodd? [y/n] "
+    sudo visudo
 fi
 echo ""
 ##
@@ -16,7 +19,7 @@ if [[ $install_app_var = y ]]
 then
     pamac install github-desktop-bin visual-studio-code-bin google-chrome android-studio nautilus-copy-path android-messages-desktop-bin
     
-    sudo pacman -Syy discord auto-cpufreq jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless
+    sudo pacman -Syy discord auto-cpufreq jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm
     
     sudo flatpak install Spotify
     
