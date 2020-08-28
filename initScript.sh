@@ -1,6 +1,6 @@
 #!/bin/bash
 
-##Bash
+## Bash
 read -p "Do you wish to switch to BASH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var = y ]]
 then
@@ -10,7 +10,7 @@ fi
 echo ""
 ##
 
-##Applications
+## Applications
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]
 then
@@ -25,9 +25,9 @@ fi
 echo ""
 ##
 
-##Ulauncher
+## Ulauncher
 read -p "Do you wish to install Ulauncher? [y/n] " install_ulauncher_var
-if [[ $install_app_var = y ]]
+if [[ $install_ulauncher_var = y ]]
 then
     pamac install ulauncher
     sed -i 's/<Primary>space/<alt>space/g' ~/.config/ulauncher/settings.json
@@ -35,7 +35,7 @@ fi
 echo ""
 ##
 
-##Shell Theme
+## Shell Theme
 read -p  "Do you wish to install the Elementary theme? [y/n] " install_theme_var
 if [[ $install_theme_var = y ]]
 then
@@ -59,7 +59,7 @@ fi
 echo ""
 ##
 
-#Extension Sync
+# Extension Sync
 #git clone https://github.com/oae/gnome-shell-extensions-sync.git
 #cd ./gnome-shell-extensions-sync
 #yarn install
