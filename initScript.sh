@@ -25,8 +25,8 @@ then
     
     sudo snap install flutter --classic
     
-    sudo auto-cpufreq --install
-    sudo auto-cpufreq --live
+    systemctl start auto-cpufreq
+    systemctl enable auto-cpufreq
 fi
 echo ""
 ##
