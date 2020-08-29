@@ -24,6 +24,9 @@ then
     sudo flatpak install Spotify
     
     sudo snap install flutter --classic
+    
+    sudo auto-cpufreq --install
+    sudo auto-cpufreq --live
 fi
 echo ""
 ##
