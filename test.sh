@@ -1,5 +1,24 @@
 #!/bin/bash
+number=0
+lastIndex=""
 
-find1="google-chrome-stable"
-replace1="google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode"
-sudo sed -i "s|$find1|$replace1|g" /usr/share/applications/google-chrome.desktop
+for var in `pactl list sources short`
+do
+    number=$((number+1))
+    mod=$((number%7))
+    # echo $number $word    $mod
+    if [ "$mod" -eq "1" ] || [ "$mod" -eq "2" ];
+    then
+        numberTwo=$((numberTwo+1))
+        modTwo=$((numberTwo%2))
+        if [ "${modTwo}" -eq "1" ]
+        then
+            lastIndex=$var
+        else
+            if [[ "$var" == *"input"* ]];
+            then
+                echo "index ${lastIndex} - ${var}"
+            fi
+        fi
+    fi
+done
