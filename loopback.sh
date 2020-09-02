@@ -1,81 +1,71 @@
 #!/bin/bash
+GLOBIGNORE="*"
 
-function listInputs() {
+function getActiveDevice {
+    #sinks or sources
+    li=(`pacmd list-$1 | grep -e 'index:'`)
+    for((i=0; i<${#li[@]}; i++)); do
+        if [[ "${li[i]}" == "*" ]]; then
+            activeIndex=${li[${i}+2]}
+        fi
+    done
+}
+
+function list {
     number=0
     lastIndex=""
-    for var in `pactl list sources short`
-    do
+    audioType="$1"
+    if [[ "$1" == "input" ]]; then
+        type="sources"
+        elif [[ "$1" == "output" ]]; then
+        type="sinks"
+    fi
+    getActiveDevice $type
+    for var in `pactl list $type short`; do
         number=$((number+1))
         mod=$((number%7))
-        # echo $number $word    $mod
-        if [ "$mod" -eq "1" ] || [ "$mod" -eq "2" ];
-        then
+        if [ "$mod" == "1" ] || [ "$mod" == "2" ]; then
             numberTwo=$((numberTwo+1))
             modTwo=$((numberTwo%2))
-            if [ "${modTwo}" -eq "1" ]
-            then
+            if [ "${modTwo}" == "1" ]; then
                 lastIndex=$var
             else
-                if [[ "$var" == *"input"* ]];
-                then
-                    echo "index ${lastIndex} - ${var}"
+                if [[ "$var" == *"$audioType"* ]]; then
+                    active=""
+                    if [ "$activeIndex" == "$lastIndex" ]; then
+                        active="[Active]"
+                    fi
+                    echo "Index ${lastIndex} $active - ${var}"
                 fi
             fi
         fi
     done
 }
 
-function listOutputs() {
-    number=0
-    lastIndex=""
-    for var in `pactl list sinks short`
-    do
-        number=$((number+1))
-        mod=$((number%7))
-        # echo $number $word    $mod
-        if [ "$mod" -eq "1" ] || [ "$mod" -eq "2" ];
-        then
-            numberTwo=$((numberTwo+1))
-            modTwo=$((numberTwo%2))
-            if [ "${modTwo}" -eq "1" ]
-            then
-                lastIndex=$var
-            else
-                if [[ "$var" == *"output"* ]];
-                then
-                    echo "index ${lastIndex} - ${var}"
-                fi
-            fi
-        fi
-    done
-}
-
-function enableFunction(){
-    #source
-    # pacmd list-sources | grep -e 'index:' -e "name:" | grep 'input\|index:'
-    # pactl list sources short
-    listInputs
+function enableFunction {
+    #input
+    list "input"
     read -p "Select Source/Input Index: " source_index
-    # echo $source_index
     
-    #sink
-    # pacmd list-sinks | grep -e 'index:' -e "name:" | grep 'output\|index:'
-    listOutputs
+    #output
+    list "output"
     read -p "Select Sink/Output Index: " sink_index
-    # echo $sink_index
     
     pacmd load-module module-loopback latency_msec=1 source=$source_index sink=$sink_index
+    
+    echo ""
+    echo "Loopback device created"
 }
 
-function disableFunction(){
+function disableFunction {
     pacmd unload-module module-loopback
+    echo ""
+    echo "All loopback devices removed"
 }
 
-read -p "Do you wish to enable the loopback device? [y/n] " loop_var
-if [[ $loop_var = y ]]
-then
+read -p "Do you wish to enable the loopback device? [Y/n] " loop_var
+if [[ $loop_var = y ]]; then
     enableFunction
 else
     disableFunction
 fi
-echo "Done 😊"
