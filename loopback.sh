@@ -46,13 +46,11 @@ function enableFunction {
     #input
     list "input"
     read -p "Select Source/Input Index: " source_index
-    
     #output
     list "output"
     read -p "Select Sink/Output Index: " sink_index
-    
+    #load module
     pacmd load-module module-loopback latency_msec=1 source=$source_index sink=$sink_index
-    
     echo ""
     echo "Loopback device created"
 }
@@ -60,7 +58,7 @@ function enableFunction {
 function disableFunction {
     pacmd unload-module module-loopback
     echo ""
-    echo "All loopback devices removed"
+    echo "All loopback devices unleaded"
 }
 
 read -p "Do you wish to enable the loopback device? [Y/n] " loop_var
