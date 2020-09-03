@@ -1,5 +1,7 @@
 #!/bin/bash
 GLOBIGNORE="*"
+bold=$(tput bold)
+normal=$(tput sgr0)
 
 function getActiveDevice {
     #sinks or sources
@@ -31,11 +33,11 @@ function list {
                 lastIndex=$var
             else
                 if [[ "$var" == *"$audioType"* ]]; then
-                    active=""
+                    txt="Index ${lastIndex}"
                     if [ "$activeIndex" == "$lastIndex" ]; then
-                        active="[Active]"
+                        txt="${bold}Index ${lastIndex}"
                     fi
-                    echo "Index ${lastIndex} $active - ${var}"
+                    echo "    $txt - ${var}${normal}"
                 fi
             fi
         fi
