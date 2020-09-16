@@ -7,8 +7,10 @@ then
     sudo chsh --shell=/bin/bash $USER
     cp ./.bashrc ~/.bashrc
 
-    read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] "
-    sudo visudo
+    read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
+    if [[ $visudo_var = y ]] ; then
+        sudo visudo
+    fi
 fi
 echo ""
 ##
