@@ -104,3 +104,7 @@ fi
 
 export CHROME_EXECUTABLE=google-chrome-stable
 # export PS1="\u@\h \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
+
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"

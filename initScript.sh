@@ -6,7 +6,7 @@ if [[ $change_to_bash_var = y ]]
 then
     sudo chsh --shell=/bin/bash $USER
     cp ./.bashrc ~/.bashrc
-
+    
     read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
     if [[ $visudo_var = y ]] ; then
         sudo visudo
@@ -63,9 +63,10 @@ read -p  "Do you wish to add Chrome Dark? [y/n] " chrome_dark_var
 if [[ $chrome_dark_var = y ]]
 then
     #sudo cp ./google-chrome.desktop /usr/share/applications/
-    find1="google-chrome-stable"
-	replace1="google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode"
-	sudo sed -i "s|$find1|$replace1|g" /usr/share/applications/google-chrome.desktop
+    # find1="google-chrome-stable"
+    # replace1="google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode"
+    # sudo sed -i "s|$find1|$replace1|g" /usr/share/applications/google-chrome.desktop
+    cp ./assets/chromium-flags.conf ~/.config/
 fi
 echo ""
 ##
