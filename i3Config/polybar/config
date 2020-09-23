@@ -28,7 +28,7 @@ font-8 = NotoSans-Symbols2:size=9;3
 
 modules-left = i3 cpu memory
 modules-center = date
-modules-right = pulseaudio-control lan wireless-network battery updates-pacman-aurhelper powermenu
+modules-right = pulseaudio-control lan wireless-network battery updates-pacman-aurhelper user powermenu
 
 wm-restack = i3
 

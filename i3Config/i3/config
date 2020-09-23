@@ -259,13 +259,3 @@ mode "resize" {
 # bindsym $mod+Tab exec rofi -lines 20 -show window
 
 bindsym $mod+r mode "resize"
-
-# bar {
-#     # position top
-#     # # status_command i3status
-#     # # status_command i3blocks
-#     # height 28
-#     # tray_output primary
-#     # tray_padding 2
-#     # workspace_min_width 28
-# }
