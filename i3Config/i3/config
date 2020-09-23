@@ -110,6 +110,8 @@ bindsym $alt+space exec rofi -show drun -show-icons -lines 8 \
 -theme custom -sort -drun-match-fields name \
 -async-pre-read -click-to-exit Escape
 
+bindsym $mod+period exec rofi -show emoji -modi emoji -lines 4
+
 # Alt-tab
 # bindsym $alt+Tab exec i3-alt-tab --next
 # bindsym $alt+Shift+Tab exec i3-alt-tab --prev
