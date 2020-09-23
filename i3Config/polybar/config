@@ -1,0 +1,434 @@
+[bar/top]
+enable-ipc = true
+bottom = false
+monitor = ${env:MONITOR:DisplayPort-0}
+width = 100%
+height = 28
+dpi = 125
+background = #99333333
+foreground = #eee
+line-color = ${bar/top.background}
+line-size = 1
+padding-left = 1
+padding-right = 1
+module-margin-left = 1
+module-margin-right = 1
+; separator = |
+spacing = 1
+
+font-0 = NotoSans-Regular:size=9;3
+font-1 = Material\ Icons:size=12;5
+font-2 = xos4\ Terminus:size=14;0
+font-3 = Siji:pixelsize=11;1
+font-4 = FontAwesome:style=Regular
+font-5 = Roboto:size=11:weight=bold;2
+font-6 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-7 = NotoSans-Symbols:size=9;3
+font-8 = NotoSans-Symbols2:size=9;3
+
+modules-left = i3 cpu memory
+modules-center = date
+modules-right = pulseaudio-control lan wireless-network battery updates-pacman-aurhelper powermenu
+
+wm-restack = i3
+
+tray-position = right 
+tray-scale = 1.0
+tray-background = ${self.background}
+tray-maxsize = 64
+tray-detached = false
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+overline-size = 10
+overline-color = ${self.background}
+underline-size = 2
+underline-color = ${self.background}
+
+
+[bar/bottom]
+monitor = ${env:MONITOR:HDMI-A-0}
+bottom = false
+width = 100%
+height = ${bar/top.height}
+dpi = ${bar/top.dpi}
+; separator = ${bar/top.separator}
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
+
+line-color = ${bar/top.background}
+line-size = ${bar/top.line-size}
+
+spacing = ${bar/top.spacing}
+padding-right = ${bar/top.padding-right}
+padding-left = ${bar/top.padding-left}
+module-margin-left = ${bar/top.module-margin-left}
+module-margin-right = ${bar/top.module-margin-right}
+font-0 = ${bar/top.font-0}
+font-1 = ${bar/top.font-1}
+font-2 = ${bar/top.font-2}
+font-3 = ${bar/top.font-3}
+font-4 = ${bar/top.font-4}
+modules-left = ${bar/top.modules-left}
+modules-center = ${bar/top.modules-center}
+modules-right = ${bar/top.modules-right}
+
+
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+label=%output%
+format-underline = #fffffff
+exec = ~/.config/polybar/scripts/pulseaudio-control.bash listen
+; click-right = exec pavucontrol &
+click-right = exec gnome-control-center sound &
+click-left = ~/.config/polybar/scripts/pulseaudio-control.bash togmute
+; click-middle = ~/.config/polybar/scripts/pulseaudio-control.bash next-sink
+scroll-up = ~/.config/polybar/scripts/pulseaudio-control.bash up
+scroll-down = ~/.config/polybar/scripts/pulseaudio-control.bash down
+label-padding = 0
+label-foreground = #fffffff
+
+
+[module/user]
+type = custom/script
+format = <label>
+exec = ~/.config/polybar/scripts/user.sh
+# click-left = echo left
+# click-middle = echo middle
+# click-right = echo right
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:40:...%
+label-padding = 0
+
+[module/updates-pacman-aurhelper]
+label-padding = 0
+type = custom/script
+exec = ~/.config/polybar/scripts/updates-pacman-aurhelper.sh
+interval = 600
+
+
+[module/lan]
+type = internal/network
+interface = enp7s0
+interval = 3
+label-padding = 0
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+; label-connected = " (%local_ip%)"
+label-connected = %{A1:exec gnome-control-center network &:}%{A}
+label-connected-foreground = #ffffff
+label-disconnected = %{A1:exec gnome-control-center network &:}"not connected"%{A}
+label-disconnected-foreground = #66ffffff
+
+[module/wireless-network]
+type = internal/network
+interface = wlp6s0
+interval = 3
+label-padding = 0
+click-left = exec gnome-control-center wifi &
+ping-interval = 10
+format-connected = <ramp-signal>
+; format-connected = <ramp-signal> <label-connected>  
+; label-connected = %{A1:exec gnome-control-center wifi &:}%local_ip%    %downspeed%    %upspeed%%{A}
+# label-disconnected =    not connected
+label-disconnected =  %{A1:exec gnome-control-center wifi &:}%{A}
+label-disconnected-foreground = #66
+
+ramp-signal-0 = %{A1:exec gnome-control-center wifi &:}%{A}
+ramp-signal-1 = %{A1:exec gnome-control-center wifi &:}%{A}
+ramp-signal-2 = %{A1:exec gnome-control-center wifi &:}%{A}
+ramp-signal-3 = %{A1:exec gnome-control-center wifi &:}%{A}
+ramp-signal-4 = %{A1:exec gnome-control-center wifi &:}%{A}
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-framerate = 500
+
+
+[module/backlight]
+type = internal/backlight
+format = <label>
+#format = <ramp> <bar>
+label-padding = 0
+card =  intel_backlight
+
+label = %percentage%%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-font = 3
+bar-indicator-foreground = #ff
+bar-fill = ─
+bar-fill-font = 3
+bar-fill-foreground = #c9665e
+bar-empty = ─
+bar-empty-font = 3
+bar-empty-foreground = #44
+
+
+
+[module/consumation]
+type = custom/script
+label-padding = 0
+exec = ~/.config/polybar/scripts/power.sh
+interval = 2
+
+
+
+
+[module/battery]
+type = internal/battery
+full-at = 98
+label-padding = 0
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+label-charging = %percentage%% %time%h
+label-discharging = %percentage%% %time%h 
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 3
+bar-capacity-empty = █
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+
+
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format = <label>
+label-padding = 0
+label = %percentage%%
+
+
+
+[module/date]
+type = internal/date
+# date =    %%{F#99}%Y-%m-%d%%{F-}    %%{F#fff}%H:%M:%S%%{F-}
+date = %%{F#fff}%A, %d %B  %%{F#fff}%H:%M%%{F#666}
+
+
+
+[module/memory]
+type = internal/memory
+format = <label>
+label-padding = 0
+label = %gb_used%
+
+
+[module/mpd]
+type = internal/mpd
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
+label-padding = 0
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+icon-random = 
+icon-repeat = 
+
+toggle-on-foreground =
+toggle-off-foreground = #55
+
+bar-progress-width = 45
+bar-progress-format = %{A4:mpdseek+2: A5:mpdseek-2:}%fill%%indicator%%empty%%{A A}
+bar-progress-indicator = |
+bar-progress-indicator-foreground = #ff
+bar-progress-indicator-font = 3
+bar-progress-fill = ─
+bar-progress-fill-foreground = #bb
+bar-progress-fill-font = 3
+bar-progress-empty = ─
+bar-progress-empty-font = 3
+bar-progress-empty-foreground = #44
+
+
+
+
+[module/volume]
+type = internal/alsa
+;speaker-mixer = Speaker
+;headphone-mixer = Headphone
+;headphone-id = 9
+label-padding = 0
+label-active-font = 3
+format-volume = <ramp-volume> <label-volume>
+label-muted =   muted
+label-muted-foreground = #66
+# ramp-volume-0 = 🔈
+# ramp-volume-1 = 🔉
+# ramp-volume-2 = 🔊
+# ramp-volume-3 = █
+
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted =  %mountpoint%: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = #66
+
+
+[module/powermenu]
+type = custom/menu
+; format-padding = 1
+label-open = 
+label-close = 
+label-separator = |
+#
+menu-0-0 = Log Out
+menu-0-0-foreground = #fba922
+menu-0-0-exec = menu-open-3
+#
+menu-0-1 = Reboot
+menu-0-1-foreground = #fba922
+menu-0-1-exec = menu-open-1
+#
+menu-0-2 = Power off
+menu-0-2-foreground = #fba922
+menu-0-2-exec = menu-open-2
+#
+#
+menu-1-0 = Cancel
+menu-1-0-foreground = #fba922
+menu-1-0-exec = menu-open-0
+#
+menu-1-1 = Reboot
+menu-1-1-foreground = #fba922
+menu-1-1-exec = reboot
+#
+menu-2-0 = Power off
+menu-2-0-foreground = #fba922
+menu-2-0-exec = poweroff
+#
+menu-2-1 = Cancel
+menu-2-1-foreground = #fba922
+menu-2-1-exec = menu-open-0
+#
+menu-3-0 = Log Out
+menu-3-0-foreground = #fba922
+menu-3-0-exec = pkill -KILL -u $USER
+#
+menu-3-1 = Cancel
+menu-3-1-foreground = #fba922
+menu-3-1-exec = menu-open-0
+
+
+
+[module/clock]
+type = internal/date
+interval = 2
+date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+label-padding = 0
+
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 5
+warn-temperature = 65
+label-padding = 0
+
+format = <ramp> <label>
+;format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+;format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = HOT! %temperature%
+label-warn-foreground = #f00
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = #66
+
+
+
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = false
+wrapping-scroll = false
+index-sort = true
+fuzzy-match = false
+label-dimmed-underline = ${root.background}
+format = <label-state> <label-mode>
+label-mode = %mode%
+label-mode-padding = 0
+label-mode-background = #e60053
+# Focused
+label-focused = %name%
+label-focused-foreground = #fba922
+label-focused-background = #E63f3f3f
+label-focused-underline = #fba922
+label-focused-padding = 4
+# Unfocused
+label-unfocused =  %name%
+label-unfocused-padding = 4
+# Visible
+label-visible = %name%
+label-visible-underline = #555555
+label-visible-padding = 4
+# Urgent
+label-urgent = %name%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 4
+# Seperator
+# label-separator = |
+label-separator-padding = 0
+label-separator-foreground = #ffb52a
+
+
+
+[module/spotify]
+type = custom/script
+interval = 1
+label-padding = 0
+; format-prefix = " "
+format = <label>
+exec = python ~/.config/polybar/scripts/spotify.py -f '{play_pause} {song} - {artist} - {album}' --font=1
+
+format-underline = #1db954
+
+; vim:ft=dosini

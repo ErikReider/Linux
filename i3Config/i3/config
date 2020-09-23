@@ -1,0 +1,269 @@
+# Dependencies: 
+# ttf-material-icons
+# picom
+# polybar
+# xss-lock
+# xidlehook
+# scrot
+# i3lock
+# rofi
+# alttab-git
+
+# i3 config file (v4)
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+
+# Set display modes
+exec --no-startup-id xrandr --output DisplayPort-0 --primary --mode 1920x1080  --rate 160.00 --right-of HDMI-A-0
+
+# Lower mouse sensitivity
+# exec --no-startup-id xinput set-prop 'pointer:Logitech G900' "Coordinate Transformation Matrix" 1.5 0 0 0 1.5 0 0 0 1
+
+# Workspace renaming
+# exec_always ~/.config/i3/scripts/workspace_autorename.py
+
+# Authenticator
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+
+# Picom
+exec --no-startup-id ~/.config/picom/startPicom.sh &
+
+# Numlock on
+exec_always --no-startup-id numlockx on
+
+# Panel
+exec_always --no-startup-id ~/.config/polybar/launch.sh &
+# exec_always --no-startup-id gnome-panel
+# exec_always --no-startup-id vala-panel
+# exec_always --no-startup-id xfce4-panel
+
+
+# Borders
+for_window [class=".*"] border pixel 5
+for_window [class="Ulauncher"] border pixel 0
+hide_edge_borders both
+gaps inner 12
+gaps outer 1
+smart_gaps on
+smart_borders on
+
+
+# Colors
+# class                 border  bground text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #222222
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #FF0000 #ffffff #FF0000   #FF0000
+
+# Popups during fullscreen mode
+popup_during_fullscreen smart
+
+
+set $mod Mod4
+set $alt Mod1
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec_always --no-startup-id ~/.config/i3/scripts/mainLockScript.sh
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+#exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+q kill
+
+# start dmenu (a program launcher)
+# bindsym $mod+d exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindsym Mod1+space exec rdddofi -combi-modi window#drun -show combi -modi combi -show-icons
+bindsym $alt+space exec rofi -show drun -show-icons -lines 8 \
+-theme custom -sort -drun-match-fields name,comment,generic \
+-async-pre-read -click-to-exit Escape,Control+g,Control+bracketleft,Alt+space
+
+# Alt-tab
+# bindsym $alt+Tab exec i3-alt-tab --next
+# bindsym $alt+Shift+Tab exec i3-alt-tab --prev
+exec_always --no-startup-id alttab -d 1 -t 128x128 -i 128x64 &
+
+set $Locker loginctl lock-session
+bindsym $mod+l exec --no-startup-id $Locker && sleep 1 && xset dpms force off
+set $mode_system (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker; systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Pause mode "$mode_system"
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+Shift+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Switch to next or prev workspace
+bindsym $mod+Ctrl+Right workspace next_on_output
+bindsym $mod+Ctrl+Left workspace prev_on_output
+
+# Move Workspace to other monitor
+bindsym $mod+Ctrl+$alt+Right move workspace to output right
+bindsym $mod+Ctrl+$alt+Left move workspace to output left
+
+# Move container to next and prev workspace
+bindsym $mod+$alt+Right move to workspace next_on_output
+bindsym $mod+$alt+Left move to workspace prev_on_output
+
+# Move cursor to next and prev monitor
+bindsym $mod+Ctrl+Shift+Left focus output left
+bindsym $mod+Ctrl+Shift+Right focus output right
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+    
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym odiaeresis resize grow width 10 px or 10 ppt
+    
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+# bindsym $mod+Tab exec rofi -lines 20 -show window
+
+bindsym $mod+r mode "resize"
+
+# bar {
+#     # position top
+#     # # status_command i3status
+#     # # status_command i3blocks
+#     # height 28
+#     # tray_output primary
+#     # tray_padding 2
+#     # workspace_min_width 28
+# }
