@@ -21,7 +21,10 @@ scrot \
 i3lock \
 rofi \
 alttab-git \
-i3-gnome-flashback
+i3-gnome-flashback \
+pa-applet \
+gnome-applets \
+network-manager-applet
 
 # To override i3-gnome-flashbacks i3
 pamac install i3-gaps
