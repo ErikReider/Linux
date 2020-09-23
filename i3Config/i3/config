@@ -107,8 +107,8 @@ bindsym $mod+q kill
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # bindsym Mod1+space exec rdddofi -combi-modi window#drun -show combi -modi combi -show-icons
 bindsym $alt+space exec rofi -show drun -show-icons -lines 8 \
--theme custom -sort -drun-match-fields name,comment,generic \
--async-pre-read -click-to-exit Escape,Control+g,Control+bracketleft,Alt+space
+-theme custom -sort -drun-match-fields name \
+-async-pre-read -click-to-exit Escape
 
 # Alt-tab
 # bindsym $alt+Tab exec i3-alt-tab --next
