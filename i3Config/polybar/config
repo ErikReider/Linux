@@ -20,7 +20,7 @@ font-0 = NotoSans-Regular:size=9;3
 font-1 = Material\ Icons:size=12;5
 font-2 = xos4\ Terminus:size=14;0
 font-3 = Siji:pixelsize=11;1
-font-4 = TerminessTTF Nerd Font Mono:style=Medium;5
+font-4 = TerminessTTF Nerd Font Mono:size=24:style=Medium;7
 font-5 = Roboto:size=11:weight=bold;2
 font-6 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-7 = NotoSans-Symbols:size=9;3
@@ -206,8 +206,10 @@ format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 format-full = <ramp-capacity> <label-full>
 
-label-charging = %percentage%% %time%h
-label-discharging = %percentage%% %time%h 
+# label-charging = %percentage%% %time%h
+# label-discharging = %percentage%% %time%h
+label-charging = %percentage%%
+label-discharging = %percentage%% 
 ramp-capacity-0 = 
 ramp-capacity-0-foreground = #f53c3c
 ramp-capacity-1 = 
@@ -231,8 +233,6 @@ animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-framerate = 750
-
-
 
 
 [module/cpu]
@@ -380,8 +380,8 @@ format = <ramp> <label>
 format-warn = <ramp> <label-warn>
 ;format-warn-underline = ${self.format-underline}
 
-label = %temperature%
-label-warn = HOT! %temperature%
+label = %temperature-c%
+label-warn = HOT! %temperature-c%
 label-warn-foreground = #f00
 
 ramp-0 = 
