@@ -20,7 +20,9 @@ if [[ $1 == "-i" ]]; then
     network-manager-applet \
     rofi-emoji \
     xsel \
-    gnome-terminal-transparency
+    gnome-terminal-transparency \
+    Blueberry \
+    bluez-utils
     
     # To override i3-gnome-flashbacks i3
     pamac install i3-gaps

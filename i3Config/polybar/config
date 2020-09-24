@@ -20,14 +20,15 @@ font-0 = NotoSans-Regular:size=9;3
 font-1 = Material\ Icons:size=12;5
 font-2 = xos4\ Terminus:size=14;0
 font-3 = Siji:pixelsize=11;1
-font-4 = TerminessTTF Nerd Font Mono:size=24:style=Medium;7
+font-4 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
 font-5 = Roboto:size=11:weight=bold;2
 font-6 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-7 = NotoSans-Symbols:size=9;3
+font-8 = TerminessTTF Nerd Font Mono:size=24:style=Medium;7
 
-modules-left = i3 cpu memory
+modules-left = i3 cpu memory temperature
 modules-center = date
-modules-right = pulseaudio-control lan wireless-network battery updates-pacman-aurhelper user powermenu
+modules-right = pulseaudio-control lan wireless-network bluetooth battery updates-pacman-aurhelper user powermenu
 
 wm-restack = i3
 
@@ -63,12 +64,6 @@ foreground = ${bar/top.foreground}
 line-color = ${bar/top.background}
 line-size = ${bar/top.line-size}
 
-tray-position = right 
-tray-scale = 1.0
-tray-background = ${self.background}
-tray-maxsize = 64
-tray-detached = false
-
 spacing = ${bar/top.spacing}
 padding-right = ${bar/top.padding-right}
 padding-left = ${bar/top.padding-left}
@@ -85,6 +80,18 @@ font-7 = ${bar/top.font-7}
 modules-left = ${bar/top.modules-left}
 modules-center = ${bar/top.modules-center}
 modules-right = ${bar/top.modules-right}
+
+
+[module/bluetooth]
+type = custom/script
+format-font= font-8
+exec = ~/.config/polybar/scripts/bluetooth.sh
+interval = 2
+click-left = exec blueberry
+click-right = exec ~/.config/polybar/scripts/toggle_bluetooth.sh
+format-padding = 1
+format-background = #000000
+format-foreground = #ffffff
 
 
 [module/pulseaudio-control]
@@ -126,27 +133,27 @@ interval = 600
 
 [module/lan]
 type = internal/network
-interface = enp7s0
+interface = ${env:ETH}
 interval = 3
 label-padding = 0
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 ; label-connected = " (%local_ip%)"
-label-connected = %{A1:exec gnome-control-center network &:}%{A}
+label-connected = %{A1:exec gnome-control-center network &:} %local_ip% %{A}
 label-connected-foreground = #ffffff
 label-disconnected = %{A1:exec gnome-control-center network &:}"not connected"%{A}
 label-disconnected-foreground = #66ffffff
 
 [module/wireless-network]
 type = internal/network
-interface = wlp6s0
+interface = ${env:WIFI}
 interval = 3
 label-padding = 0
 click-left = exec gnome-control-center wifi &
 ping-interval = 10
-format-connected = <ramp-signal>
-; format-connected = <ramp-signal> <label-connected>  
-; label-connected = %{A1:exec gnome-control-center wifi &:}%local_ip%    %downspeed%    %upspeed%%{A}
+; format-connected = <ramp-signal>
+format-connected = <ramp-signal> <label-connected>
+label-connected = %{A1:exec gnome-control-center wifi &:}%local_ip%%{A}
 # label-disconnected =    not connected
 label-disconnected =  %{A1:exec gnome-control-center wifi &:}%{A}
 label-disconnected-foreground = #66
@@ -240,6 +247,7 @@ type = internal/cpu
 interval = 1
 format = <label>
 label-padding = 0
+; label = %percentage%%
 label = %percentage%%
 
 
@@ -384,9 +392,12 @@ label = %temperature-c%
 label-warn = HOT! %temperature-c%
 label-warn-foreground = #f00
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+; ramp-0 = 
+; ramp-1 = 
+; ramp-2 = 
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
 ramp-foreground = #66
 
 
