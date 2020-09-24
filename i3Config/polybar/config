@@ -20,11 +20,10 @@ font-0 = NotoSans-Regular:size=9;3
 font-1 = Material\ Icons:size=12;5
 font-2 = xos4\ Terminus:size=14;0
 font-3 = Siji:pixelsize=11;1
-font-4 = FontAwesome:style=Regular
+font-4 = TerminessTTF Nerd Font Mono:style=Medium;5
 font-5 = Roboto:size=11:weight=bold;2
 font-6 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-7 = NotoSans-Symbols:size=9;3
-font-8 = NotoSans-Symbols2:size=9;3
 
 modules-left = i3 cpu memory
 modules-center = date
@@ -64,6 +63,12 @@ foreground = ${bar/top.foreground}
 line-color = ${bar/top.background}
 line-size = ${bar/top.line-size}
 
+tray-position = right 
+tray-scale = 1.0
+tray-background = ${self.background}
+tray-maxsize = 64
+tray-detached = false
+
 spacing = ${bar/top.spacing}
 padding-right = ${bar/top.padding-right}
 padding-left = ${bar/top.padding-left}
@@ -74,6 +79,9 @@ font-1 = ${bar/top.font-1}
 font-2 = ${bar/top.font-2}
 font-3 = ${bar/top.font-3}
 font-4 = ${bar/top.font-4}
+font-5 = ${bar/top.font-5}
+font-6 = ${bar/top.font-6}
+font-7 = ${bar/top.font-7}
 modules-left = ${bar/top.modules-left}
 modules-center = ${bar/top.modules-center}
 modules-right = ${bar/top.modules-right}
