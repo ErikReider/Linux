@@ -20,11 +20,11 @@ font-0 = NotoSans-Regular:size=9;3
 font-1 = Material\ Icons:size=12;5
 font-2 = xos4\ Terminus:size=14;0
 font-3 = Siji:pixelsize=11;1
-font-4 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
+font-4 = TerminessTTF Nerd Font Mono:size=24:style=Medium;7
 font-5 = Roboto:size=11:weight=bold;2
 font-6 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-7 = NotoSans-Symbols:size=9;3
-font-8 = TerminessTTF Nerd Font Mono:size=24:style=Medium;7
+font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
 
 modules-left = i3 cpu memory temperature
 modules-center = date
@@ -90,7 +90,7 @@ interval = 2
 click-left = exec blueberry
 click-right = exec ~/.config/polybar/scripts/toggle_bluetooth.sh
 format-padding = 1
-format-background = #000000
+format-background = ${bar/top.background}
 format-foreground = #ffffff
 
 
@@ -169,6 +169,7 @@ animation-packetloss-0-foreground = #ffa64c
 animation-packetloss-1 = 
 animation-packetloss-1-foreground = ${bar/top.foreground}
 animation-packetloss-framerate = 500
+font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
 
 
 [module/backlight]
@@ -186,8 +187,8 @@ ramp-2 = 
 bar-width = 10
 bar-indicator = |
 bar-indicator-font = 3
-bar-indicator-foreground = #ff
-bar-fill = ─
+bar-indicator-foreground font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
+
 bar-fill-font = 3
 bar-fill-foreground = #c9665e
 bar-empty = ─
@@ -395,11 +396,9 @@ label-warn-foreground = #f00
 ; ramp-0 = 
 ; ramp-1 = 
 ; ramp-2 = 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = #66
-
+ramp-0 = %{T9}%{T-}
+ramp-1 = %{T9}%{T-}
+ramp-2 = %{T9}%{T-}
 
 
 
