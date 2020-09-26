@@ -1,19 +1,38 @@
 #!/usr/bin/bash
-if [ "$#" == 0 ]; then
-    programname=`basename "$0"`
-    echo "ERROR: No name supplied"
-    echo
+function help {
     echo "Usage: $programname <name> <next operations> Or sudo $programname -i (for initial installation)"
+    echo
+    echo "Arguments: "
+    echo "-i: Install"
+}
+
+function error {
+    programname=`basename "$0"`
+    echo "ERROR: $1"
+    echo
+    help
     exit 1
+}
+
+if [ "$#" == 0 ]; then
+    error 'No name supplied. -h or --help for help'
+fi
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    help
+    exit
+fi
+
+if [[ "$1" == "--uninstall" ]]; then
+    sudo rm /usr/bin/`basename "$0"`
+    echo "Uninstalled"
+    exit
 fi
 
 if [[ "$1" == "-i" ]] ;then
-    currentDir=$PWD
-    cd /usr/bin/
-    sudo rm ./i3wp
-    sudo cp $currentDir/i3wp ./i3wp
-
+    sudo cp ./`basename "$0"` /usr/bin/`basename "$0"`
     echo "Installed"
+    if [ "$2" == "" ]; then exit; fi
     shift
 fi
 
