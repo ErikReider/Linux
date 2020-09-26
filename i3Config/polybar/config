@@ -64,11 +64,6 @@ foreground = ${bar/top.foreground}
 line-color = ${bar/top.background}
 line-size = ${bar/top.line-size}
 
-spacing = ${bar/top.spacing}
-padding-right = ${bar/top.padding-right}
-padding-left = ${bar/top.padding-left}
-module-margin-left = ${bar/top.module-margin-left}
-module-margin-right = ${bar/top.module-margin-right}
 font-0 = ${bar/top.font-0}
 font-1 = ${bar/top.font-1}
 font-2 = ${bar/top.font-2}
@@ -77,6 +72,15 @@ font-4 = ${bar/top.font-4}
 font-5 = ${bar/top.font-5}
 font-6 = ${bar/top.font-6}
 font-7 = ${bar/top.font-7}
+font-8 = ${bar/top.font-8}
+
+
+spacing = ${bar/top.spacing}
+padding-right = ${bar/top.padding-right}
+padding-left = ${bar/top.padding-left}
+module-margin-left = ${bar/top.module-margin-left}
+module-margin-right = ${bar/top.module-margin-right}
+
 modules-left = ${bar/top.modules-left}
 modules-center = ${bar/top.modules-center}
 modules-right = ${bar/top.modules-right}
