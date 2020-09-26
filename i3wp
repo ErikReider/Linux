@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+if [ "$#" == 0 ]; then
+    programname=`basename "$0"`
+    echo "ERROR: No name supplied"
+    echo
+    echo "Usage: $programname <name> <next operations> Or sudo $programname -i (for initial installation)"
+    exit 1
+fi
+
+if [[ "$1" == "-i" ]] ;then
+    currentDir=$PWD
+    cd /usr/bin/
+    sudo rm ./i3wp
+    sudo cp $currentDir/i3wp ./i3wp
+
+    echo "Installed"
+    shift
+fi
+
+if [[ "$@" != "" ]]; then
+    i3-msg "workspace ${1}"; shift; exec "$@"
+fi
