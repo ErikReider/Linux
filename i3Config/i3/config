@@ -1,17 +1,4 @@
-# Dependencies: 
-# ttf-material-icons
-# picom
-# polybar
-# xss-lock
-# xidlehook
-# scrot
-# i3lock
-# rofi
-# alttab-git
-
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+# https://i3wm.org/docs/userguide.html
 
 
 # Set display modes
@@ -19,13 +6,6 @@ exec --no-startup-id xrandr --output DisplayPort-0 --primary --mode 1920x1080  -
 
 # Lower mouse sensitivity
 # exec --no-startup-id xinput set-prop 'pointer:Logitech G900' "Coordinate Transformation Matrix" 1.5 0 0 0 1.5 0 0 0 1
-
-# Workspace renaming
-# exec_always ~/.config/i3/scripts/workspace_autorename.py
-
-# Authenticator
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-# exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 
 # Picom
 exec --no-startup-id ~/.config/picom/startPicom.sh &
@@ -35,15 +15,16 @@ exec_always --no-startup-id numlockx on
 
 # Panel
 exec_always --no-startup-id ~/.config/polybar/launch.sh &
-# exec_always --no-startup-id gnome-panel
-# exec_always --no-startup-id vala-panel
-# exec_always --no-startup-id xfce4-panel
 
+# Floating
+for_window [title="Microsoft Teams Notification"] floating enable
+for_window [title="Calculator"] floating enable
+for_window [title="Color Picker"] floating enable
 
 # Borders
 for_window [class=".*"] border pixel 5
 for_window [class="Ulauncher"] border pixel 0
-hide_edge_borders both
+hide_edge_borders smart
 gaps inner 12
 gaps outer 1
 smart_gaps on
@@ -52,7 +33,7 @@ smart_borders on
 
 # Colors
 # class                 border  bground text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused          #007ACC #007ACC #ffffff #00A2FF   #007ACC
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #222222
 client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 client.urgent           #2f343a #FF0000 #ffffff #FF0000   #FF0000
@@ -85,8 +66,8 @@ exec_always --no-startup-id ~/.config/i3/scripts/mainLockScript.sh
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 

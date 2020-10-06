@@ -102,12 +102,9 @@ format-foreground = #ffffff
 type = custom/script
 tail = true
 label=%output%
-format-underline = #fffffff
 exec = ~/.config/polybar/scripts/pulseaudio-control.bash listen
-; click-right = exec pavucontrol &
 click-right = exec gnome-control-center sound &
 click-left = ~/.config/polybar/scripts/pulseaudio-control.bash togmute
-; click-middle = ~/.config/polybar/scripts/pulseaudio-control.bash next-sink
 scroll-up = ~/.config/polybar/scripts/pulseaudio-control.bash up
 scroll-down = ~/.config/polybar/scripts/pulseaudio-control.bash down
 label-padding = 0
@@ -126,6 +123,7 @@ exec = ~/.config/polybar/scripts/user.sh
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:40:...%
+label-maxlen = 40
 label-padding = 0
 
 [module/updates-pacman-aurhelper]
@@ -145,7 +143,7 @@ format-disconnected = <label-disconnected>
 ; label-connected = " (%local_ip%)"
 label-connected = %{A1:exec gnome-control-center network &:} %local_ip% %{A}
 label-connected-foreground = #ffffff
-label-disconnected = %{A1:exec gnome-control-center network &:}"not connected"%{A}
+label-disconnected = %{A1:exec gnome-control-center network &:}%{A}
 label-disconnected-foreground = #66ffffff
 
 [module/wireless-network]
@@ -420,9 +418,9 @@ label-mode-padding = 0
 label-mode-background = #e60053
 # Focused
 label-focused = %name%
-label-focused-foreground = #fba922
-label-focused-background = #E63f3f3f
-label-focused-underline = #fba922
+label-focused-foreground = #00A2FF
+label-focused-background = #3f3f3f
+label-focused-underline = #00A2FF
 label-focused-padding = 4
 # Unfocused
 label-unfocused =  %name%
@@ -437,9 +435,9 @@ label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
 label-urgent-padding = 4
 # Seperator
-# label-separator = |
-label-separator-padding = 0
-label-separator-foreground = #ffb52a
+; label-separator = |
+; label-separator-padding = 0
+; label-separator-foreground = #00A2FF
 
 
 

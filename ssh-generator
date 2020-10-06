@@ -1,0 +1,6 @@
+#!/bin/bash
+
+read -p "Input email: " email
+read -p "Key location  ($HOME/.ssh/id_rsa): " name
+ssh-keygen -t rsa -b 4096 -C "$email" -f "$HOME/.ssh/id_rsa/$name"
+ssh-add "$HOME/.ssh/id_rsa/$name"
