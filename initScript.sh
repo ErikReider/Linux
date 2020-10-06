@@ -71,24 +71,6 @@ fi
 echo ""
 ##
 
-# Extension Sync
-#git clone https://github.com/oae/gnome-shell-extensions-sync.git
-#cd ./gnome-shell-extensions-sync
-#yarn install
-#yarn build
-#ln -s "$PWD/dist" "$HOME/.local/share/gnome-shell/extensions/extensions-sync@elhan.io"
-##
-
-## Extension Credentials
-read -p  "Do you wish to show Extension Credentials? [y/n] " input_variable
-if [[ $input_variable = y ]]
-then
-    echo "Github Gist ID: ***REMOVED***"
-    echo "Github User Token: ***REMOVED***"
-fi
-echo ""
-##
-
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 echo ""
 echo "Done! 😊"
