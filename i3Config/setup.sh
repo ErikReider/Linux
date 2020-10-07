@@ -22,7 +22,9 @@ if [[ $1 == "-i" ]]; then
     xsel \
     gnome-terminal-transparency \
     Blueberry \
-    bluez-utils
+    bluez-utils \
+    playerctl \
+    redshift
     
     # To override i3-gnome-flashbacks i3
     pamac install i3-gaps
@@ -38,3 +40,5 @@ for item in ${dirs[@]}; do
     rm ./$item
     ln -s $currentDir/$item/ ./$item
 done
+
+systemctl --user enable redshift-gtk.service

@@ -30,6 +30,7 @@ modules-left = i3 cpu memory temperature
 modules-center = date
 modules-right = pulseaudio-control lan wireless-network bluetooth battery updates-pacman-aurhelper user powermenu
 
+; override-redirect = false
 wm-restack = i3
 
 tray-position = right 
@@ -37,6 +38,7 @@ tray-scale = 1.0
 tray-background = ${self.background}
 tray-maxsize = 64
 tray-detached = false
+pseudo-transparency = true
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev

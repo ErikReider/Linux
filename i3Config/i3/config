@@ -4,8 +4,21 @@
 # Set display modes
 exec --no-startup-id xrandr --output DisplayPort-0 --primary --mode 1920x1080  --rate 160.00 --right-of HDMI-A-0
 
-# Lower mouse sensitivity
-# exec --no-startup-id xinput set-prop 'pointer:Logitech G900' "Coordinate Transformation Matrix" 1.5 0 0 0 1.5 0 0 0 1
+# Mouse Sensitivity and disable acceleration
+exec --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
+
+# Executes all .desktop files in ~/.config/autostart directory
+exec --no-startup-id ~/.config/i3/scripts/autoStart.sh &
+
+# Start Pulse Effects background service
+exec --no-startup-id pulseeffects --gapplication-service &
+
+# Start Pulse Effects background service
+exec --no-startup-id nitrogen --restore
+
+# Authenticator
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 
 # Picom
 exec --no-startup-id ~/.config/picom/startPicom.sh &
@@ -48,13 +61,7 @@ popup_during_fullscreen smart
 set $mod Mod4
 set $alt Mod1
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:monospace 8
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 8
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -62,45 +69,6 @@ font pango:monospace 8
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec_always --no-startup-id ~/.config/i3/scripts/mainLockScript.sh
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-#exec --no-startup-id nm-applet
-
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-
-# kill focused window
-bindsym $mod+q kill
-
-# start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-# bindsym Mod1+space exec rdddofi -combi-modi window#drun -show combi -modi combi -show-icons
-bindsym $alt+space exec rofi -show drun -show-icons -lines 8 \
--theme custom -sort -drun-match-fields name \
--async-pre-read -click-to-exit Escape
-
-bindsym $mod+period exec rofi -show emoji -modi emoji -lines 4
-
-# Alt-tab
-# bindsym $alt+Tab exec i3-alt-tab --next
-# bindsym $alt+Shift+Tab exec i3-alt-tab --prev
-exec_always --no-startup-id alttab -d 1 -t 128x128 -i 128x64 &
-
 set $Locker loginctl lock-session
 bindsym $mod+l exec --no-startup-id $Locker && sleep 1 && xset dpms force off
 set $mode_system (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
@@ -115,6 +83,44 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
+# Volume keys
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioPlayPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+q kill
+
+# Rofi
+bindsym $alt+space exec rofi -show drun -show-icons -lines 8 \
+-theme custom -sort -drun-match-fields name \
+-async-pre-read -click-to-exit Escape
+
+bindsym $mod+period exec rofi -show emoji -modi emoji -lines 4
+
+# Alt-tab
+exec_always --no-startup-id alttab -d 1 -t 128x128 -i 128x64 &
+
+# Power options
 bindsym $mod+Pause mode "$mode_system"
 
 # change focus
@@ -153,7 +159,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -223,12 +229,6 @@ mode "resize" {
     # Pressing right will grow the window’s width.
     # Pressing up will shrink the window’s height.
     # Pressing down will grow the window’s height.
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym odiaeresis resize grow width 10 px or 10 ppt
-    
-    # same bindings, but for the arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
@@ -239,7 +239,6 @@ mode "resize" {
     bindsym Escape mode "default"
     bindsym $mod+r mode "default"
 }
-
-# bindsym $mod+Tab exec rofi -lines 20 -show window
-
 bindsym $mod+r mode "resize"
+
+# bindsym $mod+Tab exec rofi -show window
