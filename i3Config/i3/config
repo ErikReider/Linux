@@ -16,10 +16,13 @@ exec_always --no-startup-id numlockx on
 # Panel
 exec_always --no-startup-id ~/.config/polybar/launch.sh &
 
+title_align center
+
 # Floating
 for_window [title="Microsoft Teams Notification"] floating enable
 for_window [title="Calculator"] floating enable
 for_window [title="Color Picker"] floating enable
+for_window [title="Reminders"] floating enable resize set 200px 400px
 
 # Borders
 for_window [class=".*"] border pixel 5
