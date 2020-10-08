@@ -7,6 +7,8 @@ exec --no-startup-id xrandr --output DisplayPort-0 --primary --mode 1920x1080  -
 # Mouse Sensitivity and disable acceleration
 exec --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
 
+exec --no-startup-id ~/.config/i3/scripts/gnome-agent.sh &
+
 # Executes all .desktop files in ~/.config/autostart directory
 exec --no-startup-id ~/.config/i3/scripts/autoStart.sh &
 
