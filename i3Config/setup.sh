@@ -14,7 +14,6 @@ if [[ $1 == "-i" ]]; then
     i3lock \
     rofi \
     alttab-git \
-    i3-gnome-flashback \
     pa-applet \
     gnome-applets \
     network-manager-applet \
@@ -27,7 +26,10 @@ if [[ $1 == "-i" ]]; then
     redshift \
     appimagelauncher \
     libappimage \
-    nitrogen
+    nitrogen \
+    lxappearance \
+    dunst
+    # i3-gnome-flashback \
     
     # To override i3-gnome-flashbacks i3
     pamac install i3-gaps
@@ -37,7 +39,7 @@ fi
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("i3" "picom" "polybar" "rofi")
+dirs=("i3" "picom" "polybar" "rofi" "dunst")
 
 for item in ${dirs[@]}; do
     rm ./$item
