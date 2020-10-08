@@ -21,10 +21,13 @@ if [[ $1 == "-i" ]]; then
     rofi-emoji \
     xsel \
     gnome-terminal-transparency \
-    Blueberry \
+    blueberry \
     bluez-utils \
     playerctl \
-    redshift
+    redshift \
+    appimagelauncher \
+    libappimage \
+    nitrogen
     
     # To override i3-gnome-flashbacks i3
     pamac install i3-gaps
