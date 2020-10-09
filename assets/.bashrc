@@ -108,3 +108,6 @@ export CHROME_EXECUTABLE=google-chrome-stable
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+
+eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK

@@ -5,7 +5,7 @@ read -p "Do you wish to switch to BASH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var = y ]]
 then
     sudo chsh --shell=/bin/bash $USER
-    cp ./.bashrc ~/.bashrc
+    cp ./assets/.bashrc ~/.bashrc
     
     read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
     if [[ $visudo_var = y ]] ; then

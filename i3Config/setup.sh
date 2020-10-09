@@ -2,24 +2,19 @@
 
 if [[ $1 == "-i" ]]; then
     pamac install \
+    i3-gaps \
     ttf-font-awesome \
-    xidlehook \
     xss-lock \
-    ttf-material-icons-git \
     pa-applet \
     ttf-roboto \
-    picom-ibhagwan-git \
     polybar \
     scrot \
     i3lock \
     rofi \
-    alttab-git \
     pa-applet \
     gnome-applets \
     network-manager-applet \
-    rofi-emoji \
     xsel \
-    gnome-terminal-transparency \
     blueberry \
     bluez-utils \
     playerctl \
@@ -28,11 +23,23 @@ if [[ $1 == "-i" ]]; then
     libappimage \
     nitrogen \
     lxappearance \
-    dunst
+    dunst \
+    arandr
+
+    # AUR
+    pamac install \
+    polkit-gnome-gtk2 \
+    alttab-git \
+    picom-ibhagwan-git \
+    rofi-emoji \
+    gnome-terminal-transparency \
+    ttf-material-icons-git \
+    xidlehook
+
     # i3-gnome-flashback \
     
     # To override i3-gnome-flashbacks i3
-    pamac install i3-gaps
+    # pamac install i3-gaps
     
     libtool --finish /usr/lib/rofi/
 fi

@@ -7,9 +7,12 @@ exec --no-startup-id xrandr --output DisplayPort-0 --primary --mode 1920x1080  -
 # Mouse Sensitivity and disable acceleration
 exec --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
 
+# Redshift GEO
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent &
+
 # Notification Daemon
 exec killall -q dunst
-exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc &
 
 # Executes all .desktop files in ~/.config/autostart directory
 exec --no-startup-id ~/.config/i3/scripts/autoStart.sh &
@@ -18,7 +21,7 @@ exec --no-startup-id ~/.config/i3/scripts/autoStart.sh &
 exec --no-startup-id pulseeffects --gapplication-service &
 
 # Start Pulse Effects background service
-exec --no-startup-id nitrogen --restore
+exec --no-startup-id nitrogen --restore &
 
 # Authenticator
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -29,7 +32,7 @@ exec --no-startup-id ~/.config/i3/scripts/gnome-agent.sh &
 exec --no-startup-id ~/.config/picom/startPicom.sh &
 
 # Numlock on
-exec_always --no-startup-id numlockx on
+exec_always --no-startup-id numlockx on &
 
 # Panel
 exec_always --no-startup-id ~/.config/polybar/launch.sh &
