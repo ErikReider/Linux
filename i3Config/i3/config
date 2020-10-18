@@ -4,15 +4,29 @@
 # Set display modes
 exec --no-startup-id xrandr --output DisplayPort-0 --primary --mode 1920x1080  --rate 160.00 --right-of HDMI-A-0
 
+<<<<<<< Updated upstream
 # Mouse Sensitivity and disable acceleration
 exec --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
+=======
+<<<<<<< Updated upstream
+# Lower mouse sensitivity
+# exec --no-startup-id xinput set-prop 'pointer:Logitech G900' "Coordinate Transformation Matrix" 1.5 0 0 0 1.5 0 0 0 1
+=======
+# Mouse Sensitivity and disable acceleration
+exec_always --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
+>>>>>>> Stashed changes
 
 # Redshift GEO
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent &
 
 # Notification Daemon
+<<<<<<< Updated upstream
 exec killall -q dunst
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc &
+=======
+exec_always killall -q dunst
+exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc &
+>>>>>>> Stashed changes
 
 # Executes all .desktop files in ~/.config/autostart directory
 exec --no-startup-id ~/.config/i3/scripts/autoStart.sh &
@@ -24,12 +38,19 @@ exec --no-startup-id pulseeffects --gapplication-service &
 exec --no-startup-id nitrogen --restore &
 
 # Authenticator
+<<<<<<< Updated upstream
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 exec --no-startup-id ~/.config/i3/scripts/gnome-agent.sh &
+=======
+exec_always --no-startup-id  /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 
+exec_always --no-startup-id  /usr/bin/gnome-keyring-daemon --start --components=secrets 
+exec_always --no-startup-id  source ~/.config/i3/scripts/gnome-agent.sh 
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 # Picom
-exec --no-startup-id ~/.config/picom/startPicom.sh &
+exec_always --no-startup-id ~/.config/picom/startPicom.sh &
 
 # Numlock on
 exec_always --no-startup-id numlockx on &
@@ -37,27 +58,76 @@ exec_always --no-startup-id numlockx on &
 # Panel
 exec_always --no-startup-id ~/.config/polybar/launch.sh &
 
+<<<<<<< Updated upstream
 title_align center
 
+=======
+<<<<<<< Updated upstream
+=======
+title_align center
+
+# assign workspace
+assign [class="^Steam$"] Steam
+for_window [class="discord"] move to workspace Second
+for_window [class="Spotify"] move to workspace Second
+
+# Borders
+for_window [class=".*"] border pixel 5
+for_window [class="Ulauncher"] border pixel 0
+
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 # Floating
 for_window [title="Microsoft Teams Notification"] floating enable
 for_window [title="Calculator"] floating enable
 for_window [title="Color Picker"] floating enable
+<<<<<<< Updated upstream
 for_window [title="Reminders"] floating enable resize set 200px 400px
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
 
 # Borders
 for_window [class=".*"] border pixel 5
 for_window [class="Ulauncher"] border pixel 0
 hide_edge_borders smart
+=======
+for_window [title="Reminders"] floating enable resize set 200px 400px
+for_window [class="^Pavucontrol$"] floating enable  resize set 1000px 600px
+# The Chrome "Page Unresponsive" dialog is not floating...
+for_window [title="Page Unresponsive"] floating enable
+# Share your screen from Google Cast extension
+for_window [title="Share your screen - Google Cast"] floating enable
+# Android Device Monitor startup window
+for_window [class="^Monitor$" instance="^Monitor$" title="^Monitor$"] floating enable
+# Unity
+for_window [class="^Unity$" title="^Starting Unity...$"] floating enable
+for_window [class="^Unity$" title="^Hold On$"] floating enable
+for_window [class="^Unity$" title="^Preparing Package$"] floating enable
+for_window [class="^Unity$" title="^Importing Package$"] floating enable
+# https://github.com/ValveSoftware/steam-for-linux/issues/1040
+for_window [class="^Steam$" title="^Friends List$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
+
+# hide_edge_borders smart
+>>>>>>> Stashed changes
 gaps inner 12
 gaps outer 1
 smart_gaps on
-smart_borders on
+# smart_borders on
 
 
 # Colors
 # class                 border  bground text    indicator child_border
-client.focused          #007ACC #007ACC #ffffff #00A2FF   #007ACC
+client.focused          #0069B0 #0069B0 #ffffff #00B7FF   #0069B0
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #222222
 client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 client.urgent           #2f343a #FF0000 #ffffff #FF0000   #FF0000
@@ -118,10 +188,28 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+q kill
 
+<<<<<<< Updated upstream
 # Rofi
+=======
+<<<<<<< Updated upstream
+# start dmenu (a program launcher)
+# bindsym $mod+d exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindsym Mod1+space exec rdddofi -combi-modi window#drun -show combi -modi combi -show-icons
+=======
+# Rofi
+# Apps
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 bindsym $alt+space exec rofi -show drun -show-icons -lines 8 \
 -theme custom -sort -drun-match-fields name \
 -async-pre-read -click-to-exit Escape
+# New workspace with name
+bindsym $mod+$alt+space exec rofi -modi "NewWorkspace:$HOME/.config/rofi/i3wpCreator" \
+-show NewWorkspace -lines 0
 
 bindsym $mod+period exec rofi -show emoji -modi emoji -lines 4
 
@@ -197,6 +285,8 @@ bindsym $mod+0 workspace number $ws10
 # Switch to next or prev workspace
 bindsym $mod+Ctrl+Right workspace next_on_output
 bindsym $mod+Ctrl+Left workspace prev_on_output
+bindsym $mod+Tab workspace next_on_output
+bindsym $mod+Shift+Tab workspace prev_on_output
 
 # Move Workspace to other monitor
 bindsym $mod+Ctrl+$alt+Right move workspace to output right
@@ -229,14 +319,26 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
+# resize window
 mode "resize" {
+<<<<<<< Updated upstream
     # These bindings trigger as soon as you enter the resize mode
     
     # Pressing left will shrink the window’s width.
     # Pressing right will grow the window’s width.
     # Pressing up will shrink the window’s height.
     # Pressing down will grow the window’s height.
+<<<<<<< Updated upstream
+=======
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym odiaeresis resize grow width 10 px or 10 ppt
+    
+    # same bindings, but for the arrow keys
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     bindsym Left resize shrink width 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
@@ -247,6 +349,17 @@ mode "resize" {
     bindsym Escape mode "default"
     bindsym $mod+r mode "default"
 }
+<<<<<<< Updated upstream
 bindsym $mod+r mode "resize"
 
 # bindsym $mod+Tab exec rofi -show window
+=======
+<<<<<<< Updated upstream
+
+# bindsym $mod+Tab exec rofi -lines 20 -show window
+
+bindsym $mod+r mode "resize"
+=======
+bindsym $mod+r mode "resize"
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes

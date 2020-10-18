@@ -1,0 +1,13 @@
+#!/bin/bash
+IFS=$'\n'
+
+# for i in $(wmctrl -l | awk '{$1=$2=$3=""; print $0}' | cut -c 4-); do
+#     echo $i
+# done
+
+selected=$(rofi -show window -l 6)
+echo "$selected"
+# if [[ "$#" > 0 ]]; then
+#     echo "EXIT"
+#     exit 0
+# fi

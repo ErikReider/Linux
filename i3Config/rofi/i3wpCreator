@@ -1,0 +1,4 @@
+#!/bin/bash
+if [[ "$#" != 0 ]]; then
+    i3wp "${1^}" >/dev/null
+fi
