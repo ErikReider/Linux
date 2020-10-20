@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ "$#" != 0 ]]; then
+    current = $(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2)
+    # i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
+    i3-msg rename workspace $current to "${1^}"
+fi

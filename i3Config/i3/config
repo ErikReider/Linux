@@ -169,8 +169,11 @@ bindsym $alt+space exec rofi -show drun -show-icons -lines 8 \
 -theme custom -sort -drun-match-fields name \
 -async-pre-read -click-to-exit Escape
 # New workspace with name
-bindsym $mod+$alt+space exec rofi -modi "NewWorkspace:$HOME/.config/rofi/i3wpCreator" \
--show NewWorkspace -lines 0
+# bindsym $mod+$alt+space exec rofi -modi "NewWorkspace:$HOME/.config/rofi/i3wpCreator" \
+# -show NewWorkspace -lines 0
+# Rename Workspace to...
+bindsym $mod+$alt+space exec rofi -modi "RenameWorkspace:$HOME/.config/rofi/i3wpRenamer" \
+-show RenameWorkspace -lines 0
 
 bindsym $mod+period exec rofi -show emoji -modi emoji -lines 4
 
