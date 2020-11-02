@@ -24,7 +24,8 @@ if [[ $1 == "-i" ]]; then
     nitrogen \
     lxappearance \
     dunst \
-    arandr
+    arandr \
+    kitty
 
     # AUR
     pamac install \
@@ -35,21 +36,16 @@ if [[ $1 == "-i" ]]; then
     gnome-terminal-transparency \
     ttf-material-icons-git \
     xidlehook
-
-    # i3-gnome-flashback \
-    
-    # To override i3-gnome-flashbacks i3
-    # pamac install i3-gaps
     
     libtool --finish /usr/lib/rofi/
 fi
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("i3" "picom" "polybar" "rofi" "dunst")
+dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty")
 
 for item in ${dirs[@]}; do
-    rm ./$item
+    rm -r ./$item
     ln -s $currentDir/$item/ ./$item
 done
 

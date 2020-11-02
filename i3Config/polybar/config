@@ -382,27 +382,34 @@ label-padding = 0
 
 
 
+; [module/temperature]
+; type = internal/temperature
+; thermal-zone = 5
+; warn-temperature = 65
+; label-padding = 0
+
+; format = <ramp> <label>
+; ;format-underline = #f50a4d
+; format-warn = <ramp> <label-warn>
+; ;format-warn-underline = ${self.format-underline}
+
+; label = %temperature-c%
+; label-warn = HOT! %temperature-c%
+; label-warn-foreground = #f00
+
+; ; ramp-0 = 
+; ; ramp-1 = 
+; ; ramp-2 = 
+; ramp-0 = %{T9}%{T-}
+; ramp-1 = %{T9}%{T-}
+; ramp-2 = %{T9}%{T-}
 [module/temperature]
-type = internal/temperature
-thermal-zone = 5
-warn-temperature = 65
-label-padding = 0
-
-format = <ramp> <label>
-;format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-;format-warn-underline = ${self.format-underline}
-
-label = %temperature-c%
-label-warn = HOT! %temperature-c%
-label-warn-foreground = #f00
-
-; ramp-0 = 
-; ramp-1 = 
-; ramp-2 = 
-ramp-0 = %{T9}%{T-}
-ramp-1 = %{T9}%{T-}
-ramp-2 = %{T9}%{T-}
+type = custom/script
+interval = 1
+label-padding = 2
+; format-prefix = " "
+format = <label>
+exec = ~/.config/polybar/scripts/temperature.sh
 
 
 
