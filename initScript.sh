@@ -1,11 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
 
-## Bash
-read -p "Do you wish to switch to BASH? [y/n] " change_to_bash_var
+## ZSH
+read -p "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var = y ]]
 then
-    sudo chsh --shell=/bin/bash $USER
-    cp ./assets/.bashrc ~/.bashrc
+    sudo chsh --shell=/bin/zsh $USER
+    pamac install zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
+    rm ~/.zshrc
+    ln ./assets/.zshrc ~/.zshrc
     
     read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
     if [[ $visudo_var = y ]] ; then
