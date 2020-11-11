@@ -60,8 +60,9 @@ bindkey '^[[Z' undo                                             # Shift+tab undo
 alias cp="cp -i"                                                # Confirm before overwriting something
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
-alias gitu='git add . && git commit && git push origin ${git branch --show-current}'
-alias cls='clear'
+alias gitu='git add . && git commit && git push'
+alias clear="printf '\033[2J\033[3J\033[1;1H'; clear"
+alias cls="clear"
 alias sta='git status'
 
 # Theming section
