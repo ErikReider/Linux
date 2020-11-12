@@ -3,6 +3,7 @@
 
 # Set display modes
 exec --no-startup-id xrandr --output DisplayPort-0 --primary --mode 1920x1080  --rate 160.00 --right-of HDMI-A-0
+exec_always --no-startup-id autorandr -c
 
 # Lower mouse sensitivity
 # exec --no-startup-id xinput set-prop 'pointer:Logitech G900' "Coordinate Transformation Matrix" 1.5 0 0 0 1.5 0 0 0 1
@@ -23,7 +24,7 @@ exec --no-startup-id ~/.config/i3/scripts/autoStart.sh &
 exec --no-startup-id pulseeffects --gapplication-service &
 
 # Start Pulse Effects background service
-exec --no-startup-id nitrogen --restore &
+exec_always --no-startup-id nitrogen --restore &
 
 # Authenticator
 exec_always --no-startup-id  /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 
