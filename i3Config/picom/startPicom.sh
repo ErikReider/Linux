@@ -3,4 +3,4 @@ if ps -A | grep picom; then
     killall -q picom
 fi
 
-picom --config ~/.config/picom/picom.conf --experimental-backends &
+picom --config $HOME/.config/picom/picom.conf --experimental-backends --log-file $HOME/picom.log
