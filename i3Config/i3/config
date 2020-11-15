@@ -14,8 +14,7 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh &
 # Mouse Sensitivity and disable acceleration
 exec_always --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
 
-# exec_always --no-startup-id ./scripts/redshift.sh
-# # Redshift GEO
+# Redshift GEO
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent &
 
 # Notification Daemon
