@@ -1,16 +1,21 @@
 # https://i3wm.org/docs/userguide.html
 
-
 # Set display modes
-exec --no-startup-id xrandr --output DisplayPort-0 --primary --mode 1920x1080  --rate 160.00 --right-of HDMI-A-0
-exec_always --no-startup-id autorandr -c
+exec_always --no-startup-id autorandr -c --skip-options gamma
+
+# Picom
+exec_always --no-startup-id ~/.config/picom/startPicom.sh &
+
+# Panel
+exec_always --no-startup-id ~/.config/polybar/launch.sh &
 
 # Lower mouse sensitivity
 # exec --no-startup-id xinput set-prop 'pointer:Logitech G900' "Coordinate Transformation Matrix" 1.5 0 0 0 1.5 0 0 0 1
 # Mouse Sensitivity and disable acceleration
 exec_always --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
 
-# Redshift GEO
+# exec_always --no-startup-id ./scripts/redshift.sh
+# # Redshift GEO
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent &
 
 # Notification Daemon
@@ -31,14 +36,8 @@ exec_always --no-startup-id  /usr/lib/polkit-gnome/polkit-gnome-authentication-a
 exec_always --no-startup-id  /usr/bin/gnome-keyring-daemon --start --components=secrets 
 exec_always --no-startup-id  source ~/.config/i3/scripts/gnome-agent.sh 
 
-# Picom
-exec_always --no-startup-id ~/.config/picom/startPicom.sh &
-
 # Numlock on
 exec_always --no-startup-id numlockx on &
-
-# Panel
-exec_always --no-startup-id ~/.config/polybar/launch.sh &
 
 title_align center
 
@@ -177,7 +176,7 @@ bindsym $alt+space exec rofi -show drun -show-icons -lines 8 \
 bindsym $mod+$alt+space exec rofi -modi "RenameWorkspace:$HOME/.config/rofi/i3wpRenamer" \
 -show RenameWorkspace -lines 0
 
-bindsym $mod+period exec rofi -show emoji -modi emoji -lines 4
+bindsym $mod+period exec rofi -show emoji -modi emoji -lines 5
 
 # Alt-tab
 exec_always --no-startup-id alttab -d 1 -t 128x128 -i 128x64 &
@@ -283,7 +282,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window
 mode "resize" {

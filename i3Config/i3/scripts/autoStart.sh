@@ -2,13 +2,14 @@
 
 IFS=$'\n'
 
-blackList=("redshift" "create-template")
+blackList=("create-template")
 
 for file in $(ls $HOME/.config/autostart/); do
     found=false
     for item in ${blackList[@]}; do
         if [[ "$file" == *"$item"* ]]; then
             found=true
+            echo "$file"
         fi
     done
     if [ $found == false ]; then

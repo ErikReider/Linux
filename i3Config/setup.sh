@@ -42,11 +42,11 @@ fi
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty")
+dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty", "redshift")
 
 for item in ${dirs[@]}; do
     rm -r ./$item
     ln -s $currentDir/$item/ ./$item
 done
 
-systemctl --user enable redshift-gtk.service
+systemctl --user disable redshift-gtk.service
