@@ -1,7 +1,7 @@
 # https://i3wm.org/docs/userguide.html
 
 # Set display modes
-exec_always --no-startup-id autorandr -c --skip-options gamma
+exec_always --no-startup-id autorandr -c --skip-options gamma,brightness &
 
 # Picom
 exec_always --no-startup-id ~/.config/picom/startPicom.sh &
@@ -9,8 +9,6 @@ exec_always --no-startup-id ~/.config/picom/startPicom.sh &
 # Panel
 exec_always --no-startup-id ~/.config/polybar/launch.sh &
 
-# Lower mouse sensitivity
-# exec --no-startup-id xinput set-prop 'pointer:Logitech G900' "Coordinate Transformation Matrix" 1.5 0 0 0 1.5 0 0 0 1
 # Mouse Sensitivity and disable acceleration
 exec_always --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
 
@@ -18,7 +16,7 @@ exec_always --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent &
 
 # Notification Daemon
-exec_always killall -q dunst
+exec_always killall -q dunst &
 exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc &
 
 # Executes all .desktop files in ~/.config/autostart directory
@@ -31,9 +29,9 @@ exec --no-startup-id pulseeffects --gapplication-service &
 exec_always --no-startup-id nitrogen --restore &
 
 # Authenticator
-exec_always --no-startup-id  /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 
-exec_always --no-startup-id  /usr/bin/gnome-keyring-daemon --start --components=secrets 
-exec_always --no-startup-id  source ~/.config/i3/scripts/gnome-agent.sh 
+exec_always --no-startup-id  /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec_always --no-startup-id  /usr/bin/gnome-keyring-daemon --start --components=secrets &
+exec_always --no-startup-id  source ~/.config/i3/scripts/gnome-agent.sh &
 
 # Numlock on
 exec_always --no-startup-id numlockx on &
@@ -110,7 +108,7 @@ font pango:DejaVu Sans Mono 8
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec_always --no-startup-id ~/.config/i3/scripts/mainLockScript.sh
+exec_always --no-startup-id ~/.config/i3/scripts/mainLockScript.sh &
 set $Locker loginctl lock-session
 bindsym $mod+l exec --no-startup-id $Locker && sleep 1 && xset dpms force off
 set $mode_system (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
