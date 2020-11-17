@@ -1,0 +1,1 @@
+( IFS=$'\n'; for D in ~/.steam/root $(egrep '^[^"]*"[0-9]+"' ~/.steam/root/steamapps/libraryfolders.vdf | cut -d\" -f4); do for F in "$D"/steamapps/appmanifest_*.acf; do printf "%10s %s\n" $(grep '"appid"' "$F" | cut -d\" -f4) $(grep '"name"' "$F" | cut -d\" -f4); done; done ) | sort -g
