@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# -*- coding: utf-8 -*-
 
 ## ZSH
 read -p "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
@@ -14,6 +13,22 @@ then
     if [[ $visudo_var = y ]] ; then
         sudo visudo
     fi
+fi
+echo ""
+##
+
+
+## Vim
+read -p "Do you wish to link vim config files? [y/n] " vim_var
+if [[ $vim_var = y ]]; then
+    currentDir=$PWD
+    cd $HOME
+    rm .vimrc
+    rm -rf .vimConf
+    
+    ln -s $currentDir/.vimrc .vimrc
+    ln -s $currentDir/.vimConf .vimConf
+    cd $currentDir/.. 
 fi
 echo ""
 ##
