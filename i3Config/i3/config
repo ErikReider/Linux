@@ -110,7 +110,7 @@ font pango:DejaVu Sans Mono 8
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec_always --no-startup-id ~/.config/i3/scripts/mainLockScript.sh &
 set $Locker loginctl lock-session
-bindsym $mod+l exec --no-startup-id $Locker && sleep 1 && xset dpms force off
+bindsym $mod+l exec --no-startup-id $Locker
 set $mode_system (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
