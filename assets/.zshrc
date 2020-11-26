@@ -64,6 +64,8 @@ alias gitu='git add . && git commit && git push'
 alias clear="printf '\033[2J\033[3J\033[1;1H'; clear"
 alias cls="clear"
 alias sta='git status'
+alias vimcfg="vim ~/.zshrc"
+alias zshcfg="vim ~/.vimrc"
 
 # Theming section
 autoload -U compinit colors zcalc
