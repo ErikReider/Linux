@@ -43,9 +43,11 @@ if [[ $1 == "-i" ]]; then
     libtool --finish /usr/lib/rofi/
 fi
 
+pip install pulsectl
+
 currentDir=$PWD
 cd ~/.config/
-dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty", "redshift")
+dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty" "redshift" "xob")
 
 for item in ${dirs[@]}; do
     rm -r ./$item

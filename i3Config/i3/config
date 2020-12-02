@@ -1,13 +1,13 @@
 # https://i3wm.org/docs/userguide.html
 
 # Set display modes
-exec_always --no-startup-id autorandr -c --skip-options gamma,brightness &
+exec_always --no-startup-id autorandr -c --skip-options gamma,brightness
 
 # Picom
-exec_always --no-startup-id ~/.config/picom/startPicom.sh &
+exec_always --no-startup-id ~/.config/picom/startPicom.sh
 
 # Panel
-exec_always --no-startup-id ~/.config/polybar/launch.sh &
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Mouse Sensitivity and disable acceleration
 exec_always --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
@@ -27,9 +27,10 @@ exec --no-startup-id pulseeffects --gapplication-service &
 
 # Xob indicator
 exec --no-startup-id mkfifo /tmp/xobVolPipe
-exec --no-startup-id tail -f /tmp/xobVolPipe | xob &
+exec --no-startup-id tail -f /tmp/xobVolPipe | xob -c ~/.config/xob/styles.cfg &
 exec --no-startup-id mkfifo /tmp/xobBriPipe
-exec --no-startup-id tail -f /tmp/xobBriPipe | xob &
+exec --no-startup-id tail -f /tmp/xobBriPipe | xob -c ~/.config/xob/styles.cfg &
+exec --no-startup-id python3 ~/.config/i3/scripts/pulse-volume-watcher.py | xob -c ~/.config/xob/styles.cfg
 
 # Start Pulse Effects background service
 exec_always --no-startup-id nitrogen --restore &
@@ -46,8 +47,8 @@ title_align center
 
 # assign workspace
 assign [class="^Steam$"] 10 Steam
-for_window [class="discord"] move to workspace 2 Second
-for_window [class="Spotify"] move to workspace 2 Second
+for_window [class="discord"] move to workspace 3 Second
+for_window [class="Spotify"] move to workspace 3 Second
 
 
 
@@ -130,11 +131,10 @@ mode "$mode_system" {
 }
 
 # Volume keys
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s 10%+ && echo "print(`brightnessctl g` / `brightnessctl m` * 100)" | python3 >> /tmp/xobBriPipe
