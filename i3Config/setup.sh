@@ -10,6 +10,7 @@ if [[ $1 == "-i" ]]; then
     polybar \
     scrot \
     i3lock \
+    brightnessctl \
     rofi \
     pa-applet \
     gnome-applets \
@@ -29,13 +30,15 @@ if [[ $1 == "-i" ]]; then
 
     # AUR
     pamac install \
+    i3lock-fancy-rapid-git \
     polkit-gnome-gtk2 \
     alttab-git \
     picom-ibhagwan-git \
     rofi-emoji \
     gnome-terminal-transparency \
     ttf-material-icons-git \
-    xidlehook
+    xidlehook \
+    xob
     
     libtool --finish /usr/lib/rofi/
 fi

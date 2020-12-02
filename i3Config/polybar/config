@@ -356,6 +356,7 @@ menu-1-1 = Reboot
 menu-1-1-foreground = #fba922
 menu-1-1-exec = reboot
 #
+#
 menu-2-0 = Power off
 menu-2-0-foreground = #fba922
 menu-2-0-exec = poweroff
@@ -363,6 +364,7 @@ menu-2-0-exec = poweroff
 menu-2-1 = Cancel
 menu-2-1-foreground = #fba922
 menu-2-1-exec = menu-open-0
+#
 #
 menu-3-0 = Log Out
 menu-3-0-foreground = #fba922
