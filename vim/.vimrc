@@ -87,8 +87,8 @@ let g:cpp_concepts_highlight = 1
 " Shows space and tab as characters
 set list
 set listchars=space:·,tab:→·
-hi SpecialKey ctermfg=grey guifg=grey30
-hi NonText ctermfg=grey guifg=grey30
+hi SpecialKey ctermfg=grey guifg=grey20
+hi NonText ctermfg=grey guifg=grey20
 
 filetype indent on
 
