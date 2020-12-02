@@ -10,6 +10,7 @@ if [[ $1 == "-i" ]]; then
     polybar \
     scrot \
     i3lock \
+    brightnessctl \
     rofi \
     pa-applet \
     gnome-applets \
@@ -36,7 +37,8 @@ if [[ $1 == "-i" ]]; then
     rofi-emoji \
     gnome-terminal-transparency \
     ttf-material-icons-git \
-    xidlehook
+    xidlehook \
+    xob
     
     libtool --finish /usr/lib/rofi/
 fi

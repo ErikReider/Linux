@@ -25,6 +25,12 @@ exec --no-startup-id ~/.config/i3/scripts/autoStart.sh &
 # Start Pulse Effects background service
 exec --no-startup-id pulseeffects --gapplication-service &
 
+# Xob indicator
+exec --no-startup-id mkfifo /tmp/xobVolPipe
+exec --no-startup-id tail -f /tmp/xobVolPipe | xob &
+exec --no-startup-id mkfifo /tmp/xobBriPipe
+exec --no-startup-id tail -f /tmp/xobBriPipe | xob &
+
 # Start Pulse Effects background service
 exec_always --no-startup-id nitrogen --restore &
 
@@ -130,9 +136,9 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# Screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+# Brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s 10%+ && echo "print(`brightnessctl g` / `brightnessctl m` * 100)" | python3 >> /tmp/xobBriPipe
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && echo "print(`brightnessctl g` / `brightnessctl m` * 100)" | python3 >> /tmp/xobBriPipe
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
