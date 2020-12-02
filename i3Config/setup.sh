@@ -29,6 +29,7 @@ if [[ $1 == "-i" ]]; then
 
     # AUR
     pamac install \
+    i3lock-fancy-rapid-git \
     polkit-gnome-gtk2 \
     alttab-git \
     picom-ibhagwan-git \
