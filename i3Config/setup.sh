@@ -33,7 +33,7 @@ if [[ $1 == "-i" ]]; then
     i3lock-fancy-rapid-git \
     polkit-gnome-gtk2 \
     alttab-git \
-    picom-ibhagwan-git \
+    picom-jonaburg-git\
     rofi-emoji \
     gnome-terminal-transparency \
     ttf-material-icons-git \

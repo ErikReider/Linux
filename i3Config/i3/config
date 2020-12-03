@@ -47,8 +47,8 @@ title_align center
 
 # assign workspace
 assign [class="^Steam$"] 10 Steam
-for_window [class="discord"] move to workspace 3 Second
-for_window [class="Spotify"] move to workspace 3 Second
+for_window [class="discord"] move to workspace 9 Second
+for_window [class="Spotify"] move to workspace 9 Second
 
 
 
