@@ -5,7 +5,7 @@ for id in $(xinput list | grep "pointer" | cut -d '=' -f 2 | cut -f 1); do
     if [[ "$(xinput list-props $id | grep Device)" != *"Touchpad"* ]]; then
         xinput --set-prop $id 'libinput Accel Speed' -0.2
     else
-        xinput --set-prop $id 'libinput Accel Speed' 1.2
-        xinput --set-prop $id 'Natural Scrolling Enabled' 1
+        xinput --set-prop $id 'libinput Accel Speed' 1
+        xinput --set-prop $id 'libinput Natural Scrolling Enabled' 1
     fi
 done
