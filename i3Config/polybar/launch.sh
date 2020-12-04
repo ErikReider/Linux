@@ -5,7 +5,7 @@ IFS=$'\n'
 # Terminate already running bar instances
 killall -q polybar
 
-# # Wait until the processes have been shut down
+# Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 wifiDevice=""
@@ -20,9 +20,9 @@ for device in `ip link show | awk 'NR % 2 { if ($2 != "lo:" ) print $2}' | cut -
 done
 
 if type "xrandr"; then
-    for m in $(xrandr --query | grep ' connected'); do
-        monitor=$(echo ${m} | cut -f1 -d" ")
-        if [[ "$m" == *"primary"* ]]; then
+    for monitor in `python3 $HOME/.config/polybar/scripts/getMonitors.py`; do
+        if [[ "$monitor" == *"primary-"* ]]; then
+            monitor=${monitor#"primary-"}
             WIFI=$wifiDevice ETH=$ethDevice MONITOR=$monitor polybar top -r &
         else
             WIFI=$wifiDevice ETH=$ethDevice MONITOR=$monitor polybar bottom -r &
