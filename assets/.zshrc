@@ -20,8 +20,7 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 HISTFILE=~/.zhistory
 HISTSIZE=1000
 SAVEHIST=1000
-export EDITOR=/usr/bin/nano
-#export VISUAL=/usr/bin/nano
+export EDITOR=/usr/bin/nvim
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
 #CUSTOM
@@ -57,15 +56,32 @@ bindkey '^H' backward-kill-word                                 # delete previou
 bindkey '^[[Z' undo                                             # Shift+tab undo last action
 
 ## Alias section
+alias vim="nvim"
 alias cp="cp -i"                                                # Confirm before overwriting something
+alias lsa="ls -a"
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
 alias clear="printf '\033[2J\033[3J\033[1;1H'; clear"
 alias cls="clear"
 alias sta='git status'
-alias vimcfg="vim ~/.zshrc"
-alias zshcfg="vim ~/.vimrc"
+
+alias pacu='pamac checkupdates --aur -q'
+alias pacup='pamac upgrade --aur'
+alias paci='pamac install'
+alias pacr='pamac remove'
+alias pacs='pamac search'
+alias pacl='pamac list -i' 
+alias paclg='pamac list -i | grep -e'
+
+alias nvimcfg="nvim ~/.config/nvim/init.vim"
+alias zshcfg="nvim ~/.zshrc"
+alias src="source ~/.zshrc"
+
+function mkcd { 
+    mkdir $1
+    cd $1
+}
 
 # Theming section
 autoload -U compinit colors zcalc
@@ -143,7 +159,6 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
 esac
 
 ### Custom
-
 export CHROME_EXECUTABLE=google-chrome-stable
 
 export GEM_HOME="$HOME/gems"
@@ -153,3 +168,16 @@ export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
 export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 export TERM=kitty
+export ANDROID_SDK_ROOT=/home/erikreider/Android/Sdk
+
+
+export DOTNET_ROOT=/usr/share/dotnet
+export MSBuildSDKsPath=$DOTNET_ROOT/sdk/$(${DOTNET_ROOT}/dotnet --version)/Sdks
+export PATH=${PATH}:${DOTNET_ROOT}
+
+#export GFXRECON_CAPTURE_FILE_FLUSH=1
+#export VK_LAYER_PATH=~/gfxreconstruct/build/layer:$VK_LAYER_PATH
+#export VK_INSTANCE_LAYERS=VK_LAYER_LUNARG_gfxreconstruct
+#export VK_LOADER_DEBUG=all
+#export GFXRECON_CAPTURE_FILE=/home/erikreider/gfxrecon_capture.gfxr
+#export GFXRECON_CAPTURE_TRIGGER=F3
