@@ -1,4 +1,4 @@
-[bar/top]
+[bar/main]
 enable-ipc = true
 bottom = false
 monitor = ${env:MONITOR:DisplayPort-0}
@@ -7,7 +7,7 @@ height = 28
 dpi = 125
 background = #99000000
 foreground = #eee
-line-color = ${bar/top.background}
+line-color = ${bar/main.background}
 line-size = 1
 padding-left = 1
 padding-right = 1
@@ -26,9 +26,9 @@ font-6 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-7 = NotoSans-Symbols:size=9;3
 font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
 
-modules-left = i3 cpu memory temperature
-modules-center = date
-modules-right = pulseaudio-control lan wireless-network bluetooth battery updates-pacman-aurhelper user powermenu
+modules-left = cpu memory temperature
+modules-center = i3 
+modules-right = pulseaudio-control bluetooth wireless-network lan updates-pacman-aurhelper battery date powermenu
 
 ; override-redirect = false
 wm-restack = i3
@@ -40,8 +40,8 @@ tray-maxsize = 64
 tray-detached = false
 pseudo-transparency = true
 
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+scroll-up = i3wm-wsprev
+scroll-down = i3wm-wsnext
 
 overline-size = 10
 overline-color = ${self.background}
@@ -49,43 +49,43 @@ underline-size = 2
 underline-color = ${self.background}
 
 
-[bar/bottom]
+[bar/other]
 monitor = ${env:MONITOR:HDMI-A-0}
 bottom = false
 width = 100%
-height = ${bar/top.height}
-dpi = ${bar/top.dpi}
-; separator = ${bar/top.separator}
+height = ${bar/main.height}
+dpi = ${bar/main.dpi}
+; separator = ${bar/main.separator}
 
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+scroll-up = i3wm-wsprev
+scroll-down = i3wm-wsnext
 
-background = ${bar/top.background}
-foreground = ${bar/top.foreground}
+background = ${bar/main.background}
+foreground = ${bar/main.foreground}
 
-line-color = ${bar/top.background}
-line-size = ${bar/top.line-size}
+line-color = ${bar/main.background}
+line-size = ${bar/main.line-size}
 
-font-0 = ${bar/top.font-0}
-font-1 = ${bar/top.font-1}
-font-2 = ${bar/top.font-2}
-font-3 = ${bar/top.font-3}
-font-4 = ${bar/top.font-4}
-font-5 = ${bar/top.font-5}
-font-6 = ${bar/top.font-6}
-font-7 = ${bar/top.font-7}
-font-8 = ${bar/top.font-8}
+font-0 = ${bar/main.font-0}
+font-1 = ${bar/main.font-1}
+font-2 = ${bar/main.font-2}
+font-3 = ${bar/main.font-3}
+font-4 = ${bar/main.font-4}
+font-5 = ${bar/main.font-5}
+font-6 = ${bar/main.font-6}
+font-7 = ${bar/main.font-7}
+font-8 = ${bar/main.font-8}
 
 
-spacing = ${bar/top.spacing}
-padding-right = ${bar/top.padding-right}
-padding-left = ${bar/top.padding-left}
-module-margin-left = ${bar/top.module-margin-left}
-module-margin-right = ${bar/top.module-margin-right}
+spacing = ${bar/main.spacing}
+padding-right = ${bar/main.padding-right}
+padding-left = ${bar/main.padding-left}
+module-margin-left = ${bar/main.module-margin-left}
+module-margin-right = ${bar/main.module-margin-right}
 
-modules-left = ${bar/top.modules-left}
-modules-center = ${bar/top.modules-center}
-modules-right = ${bar/top.modules-right}
+modules-left = ${bar/main.modules-left}
+modules-center = ${bar/main.modules-center}
+modules-right = ${bar/main.modules-right}
 
 
 [module/bluetooth]
@@ -96,7 +96,7 @@ interval = 2
 click-left = exec blueberry
 click-right = exec ~/.config/polybar/scripts/toggle_bluetooth.sh
 format-padding = 1
-format-background = ${bar/top.background}
+format-background = ${bar/main.background}
 format-foreground = #ffffff
 
 
@@ -105,8 +105,8 @@ type = custom/script
 tail = true
 label=%output%
 exec = ~/.config/polybar/scripts/pulseaudio-control.bash listen
-click-right = exec gnome-control-center sound &
-click-left = ~/.config/polybar/scripts/pulseaudio-control.bash togmute
+click-left = exec gnome-control-center sound &
+click-right = ~/.config/polybar/scripts/pulseaudio-control.bash togmute
 scroll-up = ~/.config/polybar/scripts/pulseaudio-control.bash up
 scroll-down = ~/.config/polybar/scripts/pulseaudio-control.bash down
 label-padding = 0
@@ -128,6 +128,11 @@ label = %title:0:40:...%
 label-maxlen = 40
 label-padding = 0
 
+[module/window]
+label-padding = 0
+type = custom/script
+exec = ~/.config/polybar/scripts/windowTitle.sh
+
 [module/updates-pacman-aurhelper]
 label-padding = 0
 type = custom/script
@@ -143,8 +148,10 @@ label-padding = 0
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 ; label-connected = " (%local_ip%)"
-label-connected = %{A1:exec gnome-control-center network &:} %local_ip% %{A}
+# label-connected = %{A1:exec gnome-control-center network &:} %local_ip% %{A}
+label-connected = %{A1:exec gnome-control-center network &:}%{A}
 label-connected-foreground = #ffffff
+# label-disconnected = %{A1:exec gnome-control-center network &:}%{A}
 label-disconnected = %{A1:exec gnome-control-center network &:}%{A}
 label-disconnected-foreground = #66ffffff
 
@@ -157,8 +164,10 @@ click-left = exec gnome-control-center wifi &
 ping-interval = 10
 ; format-connected = <ramp-signal>
 format-connected = <ramp-signal> <label-connected>
-label-connected = %{A1:exec gnome-control-center wifi &:}%local_ip%%{A}
+#label-connected = %{A1:exec gnome-control-center wifi &:}%local_ip%%{A}
+label-connected = %{A1:exec gnome-control-center wifi &:}%%{A}
 # label-disconnected =    not connected
+#label-disconnected =  %{A1:exec gnome-control-center wifi &:}%{A}
 label-disconnected =  %{A1:exec gnome-control-center wifi &:}%{A}
 label-disconnected-foreground = #66
 
@@ -171,7 +180,7 @@ ramp-signal-4 = %{A1:exec gnome-control-center wifi &:}%{A}
 animation-packetloss-0 = 
 animation-packetloss-0-foreground = #ffa64c
 animation-packetloss-1 = 
-animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-1-foreground = ${bar/main.foreground}
 animation-packetloss-framerate = 500
 font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
 
@@ -191,7 +200,7 @@ ramp-2 = 
 bar-width = 10
 bar-indicator = |
 bar-indicator-font = 3
-bar-indicator-foreground font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
+;bar-indicator-foreground font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
 
 bar-fill-font = 3
 bar-fill-foreground = #c9665e
@@ -260,7 +269,8 @@ label = %percentage%%
 [module/date]
 type = internal/date
 # date =    %%{F#99}%Y-%m-%d%%{F-}    %%{F#fff}%H:%M:%S%%{F-}
-date = %%{F#fff}%A, %d %B  %%{F#fff}%H:%M%%{F#666}
+# date = %%{F#fff}%A, %d %B  %%{F#fff}%H:%M%%{F#666}
+date = %a %d %b %H:%M%
 
 
 
@@ -273,11 +283,11 @@ label = %gb_used%
 
 [module/mpd]
 type = internal/mpd
-format-online = <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
+format-online = <icon-prev> <icon-smain> <toggle> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
 label-padding = 0
 icon-play = 
 icon-pause = 
-icon-stop = 
+icon-smain = 
 icon-prev = 
 icon-next = 
 icon-random = 
@@ -420,6 +430,7 @@ type = internal/i3
 pin-workspaces = true
 strip-wsnumbers = false
 wrapping-scroll = false
+;reverse-scroll = false
 index-sort = false
 fuzzy-match = false
 label-dimmed-underline = ${root.background}

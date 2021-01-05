@@ -23,9 +23,9 @@ if type "xrandr"; then
     for monitor in `python3 $HOME/.config/polybar/scripts/getMonitors.py`; do
         if [[ "$monitor" == *"primary-"* ]]; then
             monitor=${monitor#"primary-"}
-            WIFI=$wifiDevice ETH=$ethDevice MONITOR=$monitor polybar top -r &
+            WIFI=$wifiDevice ETH=$ethDevice MONITOR=$monitor polybar main -r &
         else
-            WIFI=$wifiDevice ETH=$ethDevice MONITOR=$monitor polybar bottom -r &
+            WIFI=$wifiDevice ETH=$ethDevice MONITOR=$monitor polybar other -r &
         fi
     done
 else

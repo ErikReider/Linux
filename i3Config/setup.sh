@@ -47,7 +47,7 @@ pip install pulsectl
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty" "redshift" "xob")
+dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty" "redshift" "xob" "spicetify")
 
 for item in ${dirs[@]}; do
     rm -r ./$item

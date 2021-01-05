@@ -1,4 +1,77 @@
 configuration {
-    theme: "./custom.rasi";
-    hide-scrollbar: false;
+    font: "Noto Sans Bold 13";
+    drun-display-format: "{name}";
+    disable-history: false;
+    fullscreen: false;
+    hide-scrollbar: true;
+    sidebar-mode: false;
+}
+
+* {
+    background-color: transparent;
+    background-alt: rgba(242, 242, 242, 0.08);
+    background: rgba(0, 0, 0, 0.6);
+    text-color: #ffffff;
+    spacing: 0;
+    width: 512px;
+}
+
+window {
+    border-radius: 8px;
+    background-color: @background;
+}
+
+inputbar {
+    background-color: rgba(242, 242, 242, 0.08);
+    margin: 14px;
+    border-radius: 8px;
+    border: 0 0 1px 0;
+    /* children: [prompt, entry]; */
+    children: [ entry];
+}
+
+prompt {
+    padding: 16px;
+    /* border: 0 1px 0 0; */
+}
+
+textbox {
+    background-color: transparent;
+    padding: 8px 16px;
+    blink: true;
+}
+
+entry {
+    expand: false;
+    padding: 10px;
+}
+
+listview {
+    cycle: false;
+    margin: 0 0 -1px 0;
+    scrollbar: true;
+    dynamic: true;
+}
+
+scrollbar {
+    handle-color: rgba(46, 52, 63, 1);
+}
+
+element {
+    border: 0 0 1px 0;
+    padding: 4px;
+    background-color: transparent;
+}
+
+element-text {
+    margin: 19px 0;
+}
+
+element-icon {
+    size: 50px;
+    margin: 4px;
+}
+
+element selected {
+    background-color: @background-alt;
 }

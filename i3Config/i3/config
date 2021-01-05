@@ -15,6 +15,9 @@ exec_always --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
 # Redshift GEO
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent &
 
+# Corectrl
+#exec --no-startup-id corectrl &
+
 # Notification Daemon
 exec_always killall -q dunst &
 exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc &
@@ -53,10 +56,12 @@ for_window [class="Spotify"] move to workspace 9 Second
 
 
 # Floating
+for_window [instance="origin.exe"] floating enable
 for_window [title="Microsoft Teams Notification"] floating enable
 for_window [title="Calculator"] floating enable
 for_window [title="Color Picker"] floating enable
 for_window [title="Reminders"] floating enable resize set 200px 400px
+for_window [title="jetbrains-studio"] floating enable resize set 200px 400px
 
 # Borders
 for_window [class=".*"] border pixel 5
@@ -117,11 +122,10 @@ font pango:DejaVu Sans Mono 8
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec_always --no-startup-id ~/.config/i3/scripts/mainLockScript.sh &
 set $Locker loginctl lock-session
-bindsym $mod+l exec --no-startup-id $Locker
-set $mode_system (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+set $mode_system (e) logout, (l) lock, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker; systemctl suspend, mode "default"
+    bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
@@ -170,8 +174,7 @@ bindsym $mod+q kill
 # Rofi
 # Apps
 bindsym $alt+space exec rofi -show drun -show-icons -lines 8 \
--theme custom -sort -drun-match-fields name \
--async-pre-read -click-to-exit Escape
+-sort -drun-match-fields name -async-pre-read -click-to-exit Escape
 # New workspace with name
 # bindsym $mod+$alt+space exec rofi -modi "NewWorkspace:$HOME/.config/rofi/i3wpCreator" \
 # -show NewWorkspace -lines 0
@@ -192,12 +195,22 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+# change focus ALT
+# bindsym $mod+h focus left
+# bindsym $mod+j focus down
+# bindsym $mod+k focus up
+# bindsym $mod+l focus right
 
 # move focused window
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+# move focused window ALT
+# bindsym $mod+Shift+h move left
+# bindsym $mod+Shift+j move down
+# bindsym $mod+Shift+k move up
+# bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+h split h
@@ -237,6 +250,16 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -249,24 +272,55 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+bindsym $mod+F1 workspace number $ws11
+bindsym $mod+F2 workspace number $ws12
+bindsym $mod+F3 workspace number $ws13
+bindsym $mod+F4 workspace number $ws14
+bindsym $mod+F5 workspace number $ws15
+bindsym $mod+F6 workspace number $ws16
+bindsym $mod+F7 workspace number $ws17
+bindsym $mod+F8 workspace number $ws18
+bindsym $mod+F9 workspace number $ws19
+bindsym $mod+F10 workspace number $ws20
 
 # Switch to next or prev workspace
 bindsym $mod+Ctrl+Right workspace next_on_output
 bindsym $mod+Ctrl+Left workspace prev_on_output
+# Switch to next or prev workspace ALT
+# bindsym $mod+Ctrl+l workspace next_on_output
+# bindsym $mod+Ctrl+h workspace prev_on_output
+# Switch to next or prev workspace ALT 2
 bindsym $mod+Tab workspace next_on_output
 bindsym $mod+Shift+Tab workspace prev_on_output
 
 # Move Workspace to other monitor
 bindsym $mod+Ctrl+$alt+Right move workspace to output right
 bindsym $mod+Ctrl+$alt+Left move workspace to output left
+bindsym $mod+Ctrl+$alt+Up move workspace to output up
+bindsym $mod+Ctrl+$alt+Down move workspace to output down
+# Move Workspace to other monitor ALT
+# bindsym $mod+Ctrl+$alt+l move workspace to output right
+# bindsym $mod+Ctrl+$alt+h move workspace to output left
+# bindsym $mod+Ctrl+$alt+k move workspace to output up
+# bindsym $mod+Ctrl+$alt+j move workspace to output down
 
 # Move container to next and prev workspace
 bindsym $mod+$alt+Right move to workspace next_on_output
 bindsym $mod+$alt+Left move to workspace prev_on_output
+# Move container to next and prev workspace ALT
+bindsym $mod+$alt+l move to workspace next_on_output
+bindsym $mod+$alt+h move to workspace prev_on_output
 
 # Move cursor to next and prev monitor
 bindsym $mod+Ctrl+Shift+Left focus output left
 bindsym $mod+Ctrl+Shift+Right focus output right
+bindsym $mod+Ctrl+Shift+Up focus output up
+bindsym $mod+Ctrl+Shift+Down focus output down
+# Move cursor to next and prev monitor ALT
+# bindsym $mod+Ctrl+Shift+h focus output left
+# bindsym $mod+Ctrl+Shift+l focus output right
+# bindsym $mod+Ctrl+Shift+k focus output up
+# bindsym $mod+Ctrl+Shift+j focus output down
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -279,13 +333,23 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+F1 move container to workspace number $ws11
+bindsym $mod+Shift+F2 move container to workspace number $ws12
+bindsym $mod+Shift+F3 move container to workspace number $ws13
+bindsym $mod+Shift+F4 move container to workspace number $ws14
+bindsym $mod+Shift+F5 move container to workspace number $ws15
+bindsym $mod+Shift+F6 move container to workspace number $ws16
+bindsym $mod+Shift+F7 move container to workspace number $ws17
+bindsym $mod+Shift+F8 move container to workspace number $ws18
+bindsym $mod+Shift+F9 move container to workspace number $ws19
+bindsym $mod+Shift+F10 move container to workspace number $ws20
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+Shift+m exec ~/.config/i3/scripts/mouseSensitivity.sh &
 
 # resize window
 mode "resize" {
@@ -293,6 +357,11 @@ mode "resize" {
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
+    # ALT
+    # bindsym h resize shrink width 10 px or 10 ppt
+    # bindsym j resize grow height 10 px or 10 ppt
+    # bindsym k resize shrink height 10 px or 10 ppt
+    # bindsym l resize grow width 10 px or 10 ppt
     # back to normal: Enter or Escape or $mod+r
     bindsym Return mode "default"
     bindsym Escape mode "default"
