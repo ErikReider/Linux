@@ -27,6 +27,8 @@ nmap <C-c> <plug>NERDCommenterToggle
 nmap <C-d> yyp
 map ö :split term://zsh<CR>
 map <C-M-b> :Format<CR>
+" Use ESC to exit insert mode in :term
+tnoremap <Esc> <C-\><C-n>
 
 " open NERDTree automatically
 autocmd StdinReadPre * let s:std_in=1
@@ -76,7 +78,8 @@ set splitright
 set shiftwidth=2
 " always uses spaces instead of tab characters
 set expandtab
-
+" Yank to clipboard
+set clipboard=unnamedplus
 
 colorscheme gruvbox
 
