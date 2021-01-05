@@ -22,12 +22,13 @@ echo ""
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
     currentDir=$PWD
-    cd $HOME
-    rm .vimrc
-    rm -rf .vimConf
-    
-    ln -s $currentDir/.vimrc .vimrc
-    ln -s $currentDir/.vimConf .vimConf
+    # cd $HOME
+    cd ~/.config/
+    rm -rf nvim 
+
+    ln -s $currentDir/nvim nvim
+    # ln -s $currentDir/nvim/.nvimrc .nvimrc
+    # ln -s $currentDir/nvim/.nvimConf .nvimConf
     cd $currentDir/.. 
 fi
 echo ""
