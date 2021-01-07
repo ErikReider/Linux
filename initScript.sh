@@ -22,14 +22,13 @@ echo ""
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
     currentDir=$PWD
-    # cd $HOME
     cd ~/.config/
     rm -rf nvim 
 
     ln -s $currentDir/nvim nvim
-    # ln -s $currentDir/nvim/.nvimrc .nvimrc
-    # ln -s $currentDir/nvim/.nvimConf .nvimConf
     cd $currentDir/.. 
+
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 echo ""
 ##
@@ -38,9 +37,9 @@ echo ""
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]
 then
-    pamac install github-desktop-bin visual-studio-code-bin google-chrome android-studio nautilus-copy-path android-messages-desktop-bin
+    pamac install github-desktop-bin visual-studio-code-bin google-chrome android-studio nautilus-copy-path android-messages-desktop-bin dotnet-sdk neovim
     
-    sudo pacman -Syy discord auto-cpufreq jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm bash-completion
+    sudo pacman -Syy --needed discord auto-cpufreq jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm bash-completion
     
     sudo flatpak install Spotify
     
