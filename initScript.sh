@@ -29,6 +29,7 @@ if [[ $vim_var = y ]]; then
     cd $currentDir/.. 
 
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
 fi
 echo ""
 ##
@@ -45,6 +46,10 @@ then
     
     sudo snap install flutter --classic
     
+    read -p "Do you wish to install all apps? [y/n] " install_app_var
+    if [[ $install_app_var = y ]]; then
+        
+    fi
     systemctl start auto-cpufreq
     systemctl enable auto-cpufreq
 fi
