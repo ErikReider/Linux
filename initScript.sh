@@ -17,23 +17,6 @@ fi
 echo ""
 ##
 
-
-## Vim
-read -p "Do you wish to link vim config files? [y/n] " vim_var
-if [[ $vim_var = y ]]; then
-    currentDir=$PWD
-    cd ~/.config/
-    rm -rf nvim 
-
-    ln -s $currentDir/nvim nvim
-    cd $currentDir/.. 
-
-    sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' 
-    nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
-fi
-echo ""
-##
-
 ## Applications
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]
@@ -48,10 +31,26 @@ then
     
     read -p "Do you wish to install all apps? [y/n] " install_app_var
     if [[ $install_app_var = y ]]; then
-        
+        echo ""
     fi
     systemctl start auto-cpufreq
     systemctl enable auto-cpufreq
+fi
+echo ""
+##
+
+## Neovim
+read -p "Do you wish to link vim config files? [y/n] " vim_var
+if [[ $vim_var = y ]]; then
+    currentDir=$PWD
+    cd ~/.config/
+    rm -rf nvim 
+
+    ln -s $currentDir/nvim nvim
+    cd $currentDir/.. 
+
+    sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' 
+    nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
 fi
 echo ""
 ##
@@ -77,6 +76,8 @@ then
     ./parse-sass.sh
     mkdir ~/.themes
     ./install.sh -d ~/.themes
+    cd ..
+    rm -rf ./adementary-theme
 fi
 echo ""
 ##
