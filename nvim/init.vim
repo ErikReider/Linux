@@ -1,4 +1,5 @@
-"Specify a directory for plugins
+
+"{{{ Plug
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -14,29 +15,28 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+
+Plug 'vim-airline/vim-airline'
 
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 
-" Initialize plugin system
+Plug 'mboughaba/i3config.vim'
+
 call plug#end()
+"}}}
 
-inoremap jk <ESC>
-nmap <C-n> :NERDTreeToggle<CR>
+"{{{ NERDCommenter
 nmap <C-c> <plug>NERDCommenterToggle
-nmap <C-d> yyp
-map ö :split term://zsh<CR>
-map <C-M-b> :Format<CR>
-" Use ESC to exit insert mode in :term
-tnoremap <Esc> <C-\><C-n>
+vmap <C-c> <plug>NERDCommenterToggle
+"}}}
 
-" open NERDTree automatically
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree
-"autocmd VimEnter * wincmd l
+"{{{ NERDTree
+nmap <C-n> :NERDTreeToggle<CR>
 
 let g:NERDTreeGitStatusWithFlags = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 "let g:NERDTreeGitStatusNodeColorization = 1
 "let g:NERDTreeColorMapCustom = {
     "\ "Staged"    : "#0ee375",  
@@ -49,39 +49,8 @@ let g:NERDTreeGitStatusWithFlags = 1
     "\ "Ignored"   : "#808080"   
     "\ }                         
 
-
+let g:NERDSpaceDelims = 1
 let g:NERDTreeIgnore = ['^node_modules$']
-
-" vim-prettier
-"let g:prettier#quickfix_enabled = 0
-"let g:prettier#quickfix_auto_focus = 0
-" prettier command for coc
-"command! -nargs=0 Prettier :CocCommand prettier.formatFile
-" run prettier on save
-let g:prettier#autoformat = 0
-"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-
-
-" ctrlp
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-" j/k will move virtual lines (lines that wrap)
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-
-set number
-set smarttab
-set cindent
-set tabstop=4
-set splitbelow
-set splitright
-set shiftwidth=2
-" always uses spaces instead of tab characters
-set expandtab
-" Yank to clipboard
-set clipboard=unnamedplus
-
-colorscheme gruvbox
 
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
@@ -101,14 +70,46 @@ endfunction
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()
 
-" coc config
+
+"}}}
+
+"{{{ Vim-GitGutter
+" always show signcolumns
+set signcolumn=yes
+"}}}
+
+"{{{ VimEnter
+"Open NERDTree automatically if no files specified
+autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd l
+"}}}
+
+"{{{ vim-prettier
+"let g:prettier#quickfix_enabled = 0
+"let g:prettier#quickfix_auto_focus = 0
+" prettier command for coc
+"command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" run prettier on save
+let g:prettier#autoformat = 0
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+"}}}
+
+"{{{ctrlp
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+"}}}
+
+"{{{Coc Config
 let g:coc_global_extensions = [
+  \ 'coc-highlight',
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-tsserver',
   \ 'coc-eslint', 
   \ 'coc-prettier', 
   \ 'coc-json', 
+  \ 'coc-python',
   \ ]
 " from readme
 " if hidden is not set, TextEdit might fail.
@@ -117,9 +118,6 @@ set updatetime=300
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -197,10 +195,6 @@ xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
-" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-"nmap <silent> <C-d> <Plug>(coc-range-select)
-"xmap <silent> <C-d> <Plug>(coc-range-select)
-
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
 
@@ -230,7 +224,56 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+"}}}
 
-" Mouse settings                                                                                                                                                                                             
+"{{{ General map
+" Duplicate line
+nmap <C-d> yyp
+" Open terminal
+map ö :split term://zsh<CR>
+" Format file on ctrl+alt+b
+map <C-M-b> :Format<CR>
+" reload file on ctrl+r
+map <C-r> :checktime <CR>
+" Use ESC to exit insert mode in :term
+tnoremap <Esc> <C-\><C-n>
+" Use ESC to clear highlights
+map <esc><esc> :noh<CR> 
+" open init.vim on ,
+map , :vsplit $MYVIMRC <CR>
+" apply init.vim changes 
+map . :source $MYVIMRC <CR>
+" k/j and up/down will move virtual lines (lines that wrap)
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+noremap <silent> <expr> <Down> (v:count == 0 ? 'g<Down>' : '<Down>')
+noremap <silent> <expr> <Up> (v:count == 0 ? 'g<Up>' : '<Up>')
+"}}}
+
+"{{{ General
+set number
+syntax on
+set smarttab
+set cindent
+set tabstop=4
+set splitbelow
+set splitright
+set foldmethod=marker
+filetype plugin on
+set shiftwidth=4
+set cursorline
+" always uses spaces instead of tab characters
+set expandtab
+" Yank to clipboard
+set clipboard=unnamedplus
+" Select with mouse
 set mouse=a
+"}}}
 
+"{{{ Theme settings
+colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
+
+hi Pmenu ctermbg=darkgray guibg=#363738 guifg=white ctermfg=188
+hi PmenuSel ctermbg=180 guibg=#e5c07b guifg=black ctermfg=236
+"}}}
