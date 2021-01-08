@@ -26,6 +26,7 @@ if [[ $1 == "-i" ]]; then
     lxappearance \
     dunst \
     arandr \
+    autorandr \
     kitty
 
     # AUR
