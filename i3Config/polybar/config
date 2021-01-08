@@ -162,13 +162,12 @@ interval = 3
 label-padding = 0
 click-left = exec gnome-control-center wifi &
 ping-interval = 10
-; format-connected = <ramp-signal>
-format-connected = <ramp-signal> <label-connected>
-#label-connected = %{A1:exec gnome-control-center wifi &:}%local_ip%%{A}
+format-connected = <ramp-signal>
+; format-connected = <ramp-signal> <label-connected>
+; label-connected = %{A1:exec gnome-control-center wifi &:}%local_ip%%{A}
 label-connected = %{A1:exec gnome-control-center wifi &:}%{A}
 # label-disconnected =    not connected
-#label-disconnected =  %{A1:exec gnome-control-center wifi &:}%{A}
-label-disconnected =  %{A1:exec gnome-control-center wifi &:}%{A}
+label-disconnected = %{A1:exec gnome-control-center wifi &:}%{A}
 label-disconnected-foreground = #66
 
 ramp-signal-0 = %{A1:exec gnome-control-center wifi &:}%{A}
