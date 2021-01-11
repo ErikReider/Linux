@@ -1,4 +1,6 @@
 #!/bin/bash
+# git update-index --skip-worktree filename
+# git update-index --no-skip-worktree filename
 
 # Sleep
 export shouldSleep=true
