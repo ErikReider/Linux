@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Sleep
+export shouldSleep=true
+# Time until i3lock activates
+export lockTimer=900
+# Time until sleep after lock
+export sleepTimer=30
