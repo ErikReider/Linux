@@ -10,7 +10,7 @@ function setTouchPadSettings() {
     xinput --set-prop $id 'libinput Natural Scrolling Enabled' 1
 }
 
-whitelist=`cat ~/.config/i3/touchpadWhitelist.txt`
+whitelist=`cat ~/.config/i3/touchpadWhitelist`
 
 for id in $(xinput list | grep "pointer" | cut -d '=' -f 2 | cut -f 1); do
     name=$(xinput list-props $id | grep "Device '" | awk -F"'" '$0=$2')

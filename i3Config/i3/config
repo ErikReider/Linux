@@ -1,6 +1,9 @@
 # vim: filetype=i3config
 # https://i3wm.org/docs/userguide.html
 
+# Init settings files
+exec_always --no-startup-id ~/.config/i3/scripts/init.sh
+
 # Set display modes
 exec_always --no-startup-id autorandr -c --skip-options gamma,brightness
 
