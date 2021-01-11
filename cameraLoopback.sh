@@ -17,8 +17,8 @@ MON_WIDTH=`echo $MON_PARSE | cut -f1 -d'/'`
 MON_X=`echo $MON_PARSE | cut -f2 -d'+'`
 MON_Y=`echo $MON_PARSE | cut -f3 -d'+'`
 
-# ffmpeg -f x11grab -r $FPS_RATE -s "$MON_WIDTH"x"$MON_HEIGHT" -i $DISPLAY+"$MON_X","$MON_Y" -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 /dev/video4
+ffmpeg -f x11grab -r $FPS_RATE -s "$MON_WIDTH"x"$MON_HEIGHT" -i $DISPLAY+"$MON_X","$MON_Y" -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 /dev/video4
 
-ffmpeg -vaapi_device /dev/dri/renderD128 -f x11grab -r $FPS_RATE -s "$MON_WIDTH"x"$MON_HEIGHT" -i $DISPLAY+"$MON_X","$MON_Y" -vf 'format=nv12,hwupload' -c:v h264_vaapi -f v4l2 /dev/video4
+# ffmpeg -f x11grab -r $FPS_RATE -s "$MON_WIDTH"x"$MON_HEIGHT" -i $DISPLAY+"$MON_X","$MON_Y" -vf 'format=nv12,hwupload' -c:v -f v4l2 /dev/video4
 
 

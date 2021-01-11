@@ -114,20 +114,28 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 
 "{{{Coc Config
 let g:coc_global_extensions = [
-  \ 'coc-highlight',
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-prettier', 
-  \ 'coc-json', 
-  \ 'coc-python',
-  \ ]
+    \ 'coc-highlight',
+    \ 'coc-snippets',
+    \ 'coc-pairs',
+    \ 'coc-tsserver',
+    \ 'coc-eslint', 
+    \ 'coc-prettier', 
+    \ 'coc-json', 
+    \ 'coc-python',
+    \ "coc-sh",
+    \ "coc-clangd",
+\ ]
 " from readme
 " if hidden is not set, TextEdit might fail.
 set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 
+set completeopt=longest,menuone
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
@@ -145,7 +153,11 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -154,8 +166,8 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> ög <Plug>(coc-diagnostic-prev)
+nmap <silent> äg <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -242,11 +254,11 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Duplicate line
 nmap <C-d> yyp
 " Open terminal
-map ö :split term://zsh<CR>
+map å :split term://zsh<CR>
 " Format file on ctrl+alt+b
 map <C-M-b> :Format<CR>
 " reload file on ctrl+r
-map <C-r> :checktime <CR>
+map <F5> :checktime <CR>
 " Use ESC to exit insert mode in :term
 tnoremap <Esc> <C-\><C-n>
 " Use ESC to clear highlights
@@ -274,18 +286,34 @@ set foldmethod=marker
 filetype plugin on
 set shiftwidth=4
 set cursorline
+set softtabstop=4
+set wildmenu
+set showmatch
+set hlsearch
 " always uses spaces instead of tab characters
 set expandtab
 " Yank to clipboard
 set clipboard=unnamedplus
 " Select with mouse
 set mouse=a
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 "}}}
 
-"{{{ Theme settings
+"Theme Settings{{{ 
 colorscheme onehalfdark
 let g:airline_theme='onehalfdark'
-
+" Set menu colors to match theme
 hi Pmenu ctermbg=darkgray guibg=#363738 guifg=white ctermfg=188
 hi PmenuSel ctermbg=180 guibg=#e5c07b guifg=black ctermfg=236
+
+" Shows space and tab as characters
+set list
+set showbreak=↪\ 
+set listchars=space:·,tab:⟶\ ,nbsp:␣,trail:·,extends:⟩,precedes:⟨
+hi SpecialKey ctermfg=darkgray guifg=darkgray
+hi NonText ctermfg=darkgray guifg=darkgray
+hi Whitespace ctermfg=darkgray guifg=darkgray
 "}}}
