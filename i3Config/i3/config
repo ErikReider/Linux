@@ -51,8 +51,10 @@ title_align center
 
 # assign workspace
 assign [class="^Steam$"] 10 Steam
-for_window [class="discord"] move to workspace 9 Second
-for_window [class="Spotify"] move to workspace 9 Second
+assign [class="discord"] 9 Second
+assign [class="Spotify"] 9 Second
+assign [class="Microsoft Teams - Preview"] 19 Teams
+assign [class="Trello"] 18 Trello
 
 
 
@@ -63,6 +65,8 @@ for_window [title="Calculator"] floating enable
 for_window [title="Color Picker"] floating enable
 for_window [title="Reminders"] floating enable resize set 200px 400px
 for_window [title="jetbrains-studio"] floating enable resize set 200px 400px
+for_window [title="^Android Emulator -"] floating enable
+for_window [title="sun-awt-X11-XWindowPeer"] floating enable resize set 200px 400px
 
 # Borders
 for_window [class=".*"] border pixel 5
