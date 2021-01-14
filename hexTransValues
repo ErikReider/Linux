@@ -33,17 +33,13 @@ function fromHex() {
     exit 1
 }
 
-while [[ $# -gt 0 ]]; do
-    opt="$1";
-    shift;
-    case "$opt" in
-        "-a" | "--alpha" )
-           fromAlpha $1; shift;;
-        "-h" | "--hex" )
-           fromHex $1; shift;;
-        "--help" )
-           showHelp; shift;;
-        *) echo >&2 "Invalid option: $opt. \"--help\" for help"; exit 1;;
-   esac
-done
+case "$1" in
+    "-a" | "--alpha" )
+       fromAlpha $2; shift;;
+    "-h" | "--hex" )
+       fromHex $2; shift;;
+    "--help" )
+       showHelp; shift;;
+    *) echo >&2 "Invalid option: $1. \"--help\" for help"; exit 1;;
+esac
 
