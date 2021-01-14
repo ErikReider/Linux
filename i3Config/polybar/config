@@ -5,7 +5,7 @@ monitor = ${env:MONITOR:DisplayPort-0}
 width = 100%
 height = 28
 dpi = 125
-background = #99000000
+background = #B3000000
 foreground = #eee
 line-color = ${bar/main.background}
 line-size = 1
@@ -18,7 +18,7 @@ spacing = 1
 
 font-0 = NotoSans-Regular:size=9;3
 font-1 = Material\ Icons:size=12;5
-font-2 = xos4\ Terminus:size=14;0
+font-2 = xos4\ Terminus:size=14;4
 font-3 = Siji:pixelsize=11;1
 font-4 = TerminessTTF Nerd Font Mono:size=24:style=Medium;7
 font-5 = Roboto:size=11:weight=bold;2
@@ -28,7 +28,7 @@ font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
 
 modules-left = cpu memory temperature
 modules-center = i3 
-modules-right = pulseaudio-control bluetooth wireless-network lan updates-pacman-aurhelper battery date powermenu
+modules-right = headsetcontrol pulseaudio-control airplane bluetooth wireless-network lan updates-pacman-aurhelper battery date powermenu
 
 ; override-redirect = false
 wm-restack = i3
@@ -86,6 +86,22 @@ module-margin-right = ${bar/main.module-margin-right}
 modules-left = ${bar/main.modules-left}
 modules-center = ${bar/main.modules-center}
 modules-right = ${bar/main.modules-right}
+
+
+[module/headsetcontrol]
+type = custom/script
+exec = ~/.config/polybar/scripts/headsetcontrol.sh
+exec-if = which headsetcontrol
+interval = 60
+format-background = ${bar/main.background}
+format-foreground = #ffffff
+
+
+[module/airplane]
+type = custom/script
+exec = ~/.config/polybar/scripts/airplanemode.sh
+click-left = exec ~/.config/polybar/scripts/airplanemode.sh --toggle
+format-foreground = #ffffff
 
 
 [module/bluetooth]
