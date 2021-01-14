@@ -39,6 +39,11 @@ Plug 'mboughaba/i3config.vim'
 " Markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
+" Flutter
+Plug 'dart-lang/dart-vim-plugin'
+" Plug 'natebosch/vim-lsc'
+" Plug 'natebosch/vim-lsc-dart'
+
 
 call plug#end()
 "}}}
@@ -224,6 +229,7 @@ let g:coc_global_extensions = [
     \ "coc-sh",
     \ "coc-clangd",
     \ "coc-markdownlint",
+    \ "coc-flutter",
 \ ]
 " from readme
 " if hidden is not set, TextEdit might fail.
@@ -350,6 +356,11 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "}}}
 
+"{{{ Flutter
+
+
+"}}}
+
 "{{{ General map
 " Duplicate line
 nmap <C-d> yyp
@@ -377,16 +388,18 @@ noremap <silent> <expr> <Up> (v:count == 0 ? 'g<Up>' : '<Up>')
 "{{{ General
 set number
 syntax on
+set shiftwidth=4
+set smartindent
+set autoindent
 set smarttab
 set cindent
-set tabstop=4
+" set softtabstop=4
+" set tabstop=4
 set splitbelow
 set splitright
 set foldmethod=marker
 filetype plugin on
-set shiftwidth=4
 set cursorline
-set softtabstop=4
 set wildmenu
 set showmatch
 set hlsearch
@@ -400,6 +413,7 @@ set mouse=a
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
 "}}}
 
 "Theme Settings{{{ 
