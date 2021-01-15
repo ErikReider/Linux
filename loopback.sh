@@ -1,71 +1,64 @@
 #!/bin/bash
-GLOBIGNORE="*"
-bold=$(tput bold)
-normal=$(tput sgr0)
+IFS=$'\n'
 
-function getActiveDevice {
-    #sinks or sources
-    li=(`pacmd list-$1 | grep -e 'index:'`)
-    for((i=0; i<${#li[@]}; i++)); do
-        if [[ "${li[i]}" == "*" ]]; then
-            activeIndex=${li[${i}+2]}
-        fi
-    done
+function showHelp() {
+    # Display Help
+    echo "Options:"
+    echo "  `basename $0`                  Starts the setup"
+    echo "  `basename $0` -r, --remove     Unloads the loopback module"
 }
 
-function list {
-    number=0
-    lastIndex=""
-    audioType="$1"
-    if [[ "$1" == "input" ]]; then
+function list() {
+    if [ "$1" == "input" ]; then
         type="sources"
-        elif [[ "$1" == "output" ]]; then
+        search="Source"
+    elif [ "$1" == "output" ]; then
         type="sinks"
+        search="Sink"
     fi
-    getActiveDevice $type
-    for var in `pactl list $type short`; do
-        number=$((number+1))
-        mod=$((number%7))
-        if [ "$mod" == "1" ] || [ "$mod" == "2" ]; then
-            numberTwo=$((numberTwo+1))
-            modTwo=$((numberTwo%2))
-            if [ "${modTwo}" == "1" ]; then
-                lastIndex=$var
-            else
-                if [[ "$var" == *"$audioType"* ]]; then
-                    txt="Index ${lastIndex}"
-                    if [ "$activeIndex" == "$lastIndex" ]; then
-                        txt="${bold}Index ${lastIndex}"
-                    fi
-                    echo "    $txt - ${var}${normal}"
-                fi
-            fi
-        fi
+
+    activeIndex=`pacmd list-$type | grep -e '* index:' | awk '{print $3}'`
+    allDevices=$(pactl list $type | grep -e "$search" -e "Name" | paste -d" " - - | cut -d "#" -f2 | sed -n '/monitor/!p')
+    for devices in $allDevices; do
+        index=`echo $devices | awk '{print $1}'`
+        if (( $activeIndex == $index )); then devices="*$devices"; fi
+        echo "  Index: "${devices//"Name: "/} | sed 's/\t/ /; s/alsa_output.//; s/alsa_input.//'
     done
 }
 
-function enableFunction {
+function enableFunction() {
+    echo "Loopback module:"
     #input
     list "input"
     read -p "Select Source/Input Index: " source_index
+    if [ "$source_index" == "" ]; then source_index=$activeIndex; fi
     #output
     list "output"
     read -p "Select Sink/Output Index: " sink_index
+    if [ "$sink_index" == "" ]; then sink_index=$activeIndex; fi
     #load module
     pacmd load-module module-loopback latency_msec=1 source=$source_index sink=$sink_index
-    echo ""
+    echo "Input: $source_index Output: $sink_index"
     echo "Loopback device created"
 }
 
-function disableFunction {
-    pacmd unload-module module-loopback
-    echo ""
-    echo "All loopback devices unleaded"
+function disableFunction() {
+    if [ "`pacmd info | grep loopback`" != "" ]; then
+        pacmd unload-module module-loopback
+        echo "All loopback devices unleaded"
+    else
+        echo "No loopback module loaded"
+        exit 1
+    fi
 }
 
-read -p "Do you wish to enable the loopback device? [Y/n] " loop_var
-if [[ $loop_var = y ]]; then
-    enableFunction
-else
-    disableFunction
-fi
+case "$1" in
+    "")
+       enableFunction;;
+    "-r" | "--remove" )
+       disableFunction;;
+    "-h" | "--help" )
+       showHelp;;
+    *) showHelp;;
+esac
+
