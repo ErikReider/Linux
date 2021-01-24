@@ -39,7 +39,8 @@ if [[ $1 == "-i" ]]; then
     gnome-terminal-transparency \
     ttf-material-icons-git \
     xidlehook \
-    xob
+    xob \
+    ttf-weather-icons
     
     libtool --finish /usr/lib/rofi/
 fi
