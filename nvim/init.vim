@@ -28,7 +28,8 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'christoomey/vim-tmux-navigator'
 
 "Plug 'morhetz/gruvbox'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'tomasiser/vim-code-dark'
 
 Plug 'vim-airline/vim-airline'
 
@@ -41,9 +42,14 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 " Flutter
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
 " Plug 'natebosch/vim-lsc'
 " Plug 'natebosch/vim-lsc-dart'
 
+Plug 'frazrepo/vim-rainbow'
+
+
+Plug 'vim-python/python-syntax'
 
 call plug#end()
 "}}}
@@ -358,6 +364,19 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 "{{{ Flutter
 
+" call FlutterMenu()
+
+"}}}
+
+"{{{ Python
+
+let g:python_highlight_all = 1
+
+"}}}
+
+"{{{ Rainbow Brackets
+
+let g:rainbow_active = 1
 
 "}}}
 
@@ -417,11 +436,12 @@ set statusline+=%*
 "}}}
 
 "Theme Settings{{{ 
-colorscheme onehalfdark
-let g:airline_theme='onehalfdark'
+" let g:codedark_conservative = 1
+colorscheme codedark
+let g:airline_theme='codedark'
 " Set menu colors to match theme
-hi Pmenu ctermbg=darkgray guibg=#363738 guifg=white ctermfg=188
-hi PmenuSel ctermbg=180 guibg=#e5c07b guifg=black ctermfg=236
+" hi Pmenu ctermbg=darkgray guibg=#363738 guifg=white ctermfg=188
+" hi PmenuSel ctermbg=180 guibg=#e5c07b guifg=black ctermfg=236
 
 " Shows space and tab as characters
 set list
