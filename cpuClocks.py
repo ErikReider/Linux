@@ -4,8 +4,8 @@ from typing import List
 import math
 
 maxClocks: List[int] = []
-print("\x1bc" + "/proc/cpuinfo:")
 while True:
+    print("\x1bc" + "/proc/cpuinfo" + ((", Max Clock: " + str(max(maxClocks)) + "MHz") if len(maxClocks) > 0 else ""))
     all_info = str(subprocess.check_output("cat /proc/cpuinfo", shell=True).strip().decode()).splitlines()
     lines: List[str] = []
     for line in all_info:
