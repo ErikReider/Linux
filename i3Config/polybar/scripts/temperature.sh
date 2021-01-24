@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sens=$(sensors)
+sens=$(sensors -j)
 printVar=""
 
 # Tdie=`grep Tdie <<< "$sens" | awk '{print $2}' | cut -d "+" -f2`

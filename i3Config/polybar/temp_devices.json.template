@@ -1,0 +1,6 @@
+{
+  "DEVICENAME": {
+    "fan1": { "name": "fan1_input", "suffix": "RPM", "prefix": "" },
+    "junction": { "name": "temp2_input", "suffix": "C", "prefix": "" }
+  }
+}

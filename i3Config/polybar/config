@@ -19,12 +19,13 @@ spacing = 1
 font-0 = NotoSans-Regular:size=9;3
 font-1 = Material\ Icons:size=12;5
 font-2 = xos4\ Terminus:size=14;4
-font-3 = Siji:pixelsize=11;1
-font-4 = TerminessTTF Nerd Font Mono:size=24:style=Medium;7
+font-3 = Siji:size=14;4
+font-4 = TerminessTTF Nerd Font Mono:size=18:style=Medium;5
 font-5 = Roboto:size=11:weight=bold;2
 font-6 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-7 = NotoSans-Symbols:size=9;3
 font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
+font-9 = Weather Icons:size=12;4
 
 modules-left = cpu memory temperature
 modules-center = i3 
@@ -36,7 +37,7 @@ wm-restack = i3
 tray-position = right 
 tray-scale = 1.0
 tray-background = ${self.background}
-tray-maxsize = 64
+tray-maxsize = 22
 tray-detached = false
 pseudo-transparency = true
 
@@ -75,7 +76,7 @@ font-5 = ${bar/main.font-5}
 font-6 = ${bar/main.font-6}
 font-7 = ${bar/main.font-7}
 font-8 = ${bar/main.font-8}
-
+font-9 = ${bar/main.font-8}
 
 spacing = ${bar/main.spacing}
 padding-right = ${bar/main.padding-right}
@@ -86,6 +87,15 @@ module-margin-right = ${bar/main.module-margin-right}
 modules-left = ${bar/main.modules-left}
 modules-center = ${bar/main.modules-center}
 modules-right = ${bar/main.modules-right}
+
+
+[module/owm]
+type = custom/script
+exec = python3.9 ~/.config/polybar/scripts/openWeatherMap.py
+interval = 600
+label-font = 10
+format-background = ${bar/main.background}
+format-foreground = #ffffff
 
 
 [module/headsetcontrol]
@@ -133,9 +143,6 @@ label-foreground = #fffffff
 type = custom/script
 format = <label>
 exec = ~/.config/polybar/scripts/user.sh
-# click-left = echo left
-# click-middle = echo middle
-# click-right = echo right
 
 
 [module/xwindow]
@@ -144,10 +151,12 @@ label = %title:0:40:...%
 label-maxlen = 40
 label-padding = 0
 
+
 [module/window]
 label-padding = 0
 type = custom/script
 exec = ~/.config/polybar/scripts/windowTitle.sh
+
 
 [module/updates-pacman-aurhelper]
 label-padding = 0
@@ -163,11 +172,8 @@ interval = 3
 label-padding = 0
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
-; label-connected = " (%local_ip%)"
-# label-connected = %{A1:exec gnome-control-center network &:} %local_ip% %{A}
 label-connected = %{A1:exec gnome-control-center network &:}%{A}
 label-connected-foreground = #ffffff
-# label-disconnected = %{A1:exec gnome-control-center network &:}%{A}
 label-disconnected = %{A1:exec gnome-control-center network &:}%{A}
 label-disconnected-foreground = #66ffffff
 
@@ -179,10 +185,7 @@ label-padding = 0
 click-left = exec gnome-control-center wifi &
 ping-interval = 10
 format-connected = <ramp-signal>
-; format-connected = <ramp-signal> <label-connected>
-; label-connected = %{A1:exec gnome-control-center wifi &:}%local_ip%%{A}
 label-connected = %{A1:exec gnome-control-center wifi &:}%{A}
-# label-disconnected =    not connected
 label-disconnected = %{A1:exec gnome-control-center wifi &:}%{A}
 label-disconnected-foreground = #66
 
@@ -224,14 +227,11 @@ bar-empty-font = 3
 bar-empty-foreground = #44
 
 
-
 [module/consumation]
 type = custom/script
 label-padding = 0
 exec = ~/.config/polybar/scripts/power.sh
 interval = 2
-
-
 
 
 [module/battery]
@@ -242,8 +242,6 @@ format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 format-full = <ramp-capacity> <label-full>
 
-# label-charging = %percentage%% %time%h
-# label-discharging = %percentage%% %time%h
 label-charging = %percentage%%
 label-discharging = %percentage%% 
 ramp-capacity-0 = 
@@ -280,20 +278,16 @@ label-padding = 0
 label = %percentage%%
 
 
-
 [module/date]
 type = internal/date
-# date =    %%{F#99}%Y-%m-%d%%{F-}    %%{F#fff}%H:%M:%S%%{F-}
-# date = %%{F#fff}%A, %d %B  %%{F#fff}%H:%M%%{F#666}
 date = %a %d %b %H:%M%
-
 
 
 [module/memory]
 type = internal/memory
 format = <label>
 label-padding = 0
-label = %gb_used%
+label =  %gb_used%
 
 
 [module/mpd]
@@ -430,13 +424,14 @@ label-padding = 0
 ; ramp-0 = %{T9}%{T-}
 ; ramp-1 = %{T9}%{T-}
 ; ramp-2 = %{T9}%{T-}
+
 [module/temperature]
 type = custom/script
 interval = 1
-label-padding = 2
+label-padding = 0
 ; format-prefix = " "
 format = <label>
-exec = ~/.config/polybar/scripts/temperature.sh
+exec = python ~/.config/polybar/scripts/temperature.py
 
 
 

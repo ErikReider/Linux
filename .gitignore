@@ -5,3 +5,5 @@ autoload/
 plugged/
 settings
 touchpadWhitelist
+owm_config.json
+temp_devices.json
