@@ -1,3 +1,4 @@
+#!/bin/bash
 PROMPT=$'%{$fg_bold[cyan]%}%~%{$reset_color%} $(git_prompt_info)\
 %{$fg_bold[white]%}>%{$reset_color%} '
 

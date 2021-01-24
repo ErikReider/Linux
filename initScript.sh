@@ -4,11 +4,26 @@
 read -p "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var = y ]]
 then
-    sudo chsh --shell=/bin/zsh $USER
     pamac install zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
-    rm ~/.zshrc
-    ln ./assets/.zshrc ~/.zshrc
-    
+    sudo chsh --shell=/bin/zsh $USER
+
+    currentDir=$PWD
+    # Init ohmyzsh
+    cd $HOME
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    # Remove provided configs and themes
+    rm .zshrc
+    rm -rf .oh-my-zsh/custom
+
+    ln -s $currentDir/zsh/.zshrc .zshrc
+    cd .oh-my-zsh
+    ln -s $currentDir/zsh/custom custom
+    cd custom/plugins
+    ln -s /usr/share/zsh/plugins/* .
+
+    cd $currentDir/
+
+    # Set password feedback
     read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
     if [[ $visudo_var = y ]] ; then
         sudo visudo
@@ -28,7 +43,9 @@ then
     sudo flatpak install Spotify
     
     sudo snap install flutter --classic
-    
+
+    pip install jedi
+
     read -p "Do you wish to install all apps? [y/n] " install_app_var
     if [[ $install_app_var = y ]]; then
         echo ""
