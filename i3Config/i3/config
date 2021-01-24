@@ -19,6 +19,9 @@ exec_always --no-startup-id ~/.config/i3/scripts/mouseSensitivity.sh &
 # Redshift GEO
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent &
 
+# Clipit
+exec_always --no-startup-id ~/.config/i3/scripts/clipit.sh &
+
 # Notification Daemon
 exec_always killall -q dunst &
 exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc &
@@ -51,6 +54,7 @@ title_align center
 
 # assign workspace
 assign [class="^Steam$"] 10 Steam
+assign [class="Lutris"] 11 Lutris
 assign [class="discord"] 9 Second
 assign [class="Spotify"] 9 Second
 assign [class="Microsoft Teams - Preview"] 19 Teams
