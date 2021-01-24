@@ -27,7 +27,8 @@ if [[ $1 == "-i" ]]; then
     dunst \
     arandr \
     autorandr \
-    kitty
+    kitty \
+    clipit
 
     # AUR
     pamac install \
