@@ -1,1 +1,9 @@
-{}
+{
+    "coc.preferences.formatOnSave": true,
+    "coc.preferences.bracketEnterImprove": true,
+    "coc.preferences.colorSupport": true,
+    "clangd.semanticHighlighting": true,
+    "clangd.arguments": [
+        "-fallback-style=Google"
+    ]
+}

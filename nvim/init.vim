@@ -1,22 +1,20 @@
-
 "{{{ Plug
 
 if empty(glob('~/.config/nvim/plugged'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC | call mkdp#util#install()
+silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+autocmd VimEnter * PlugInstall --sync | source $MYVIMRC | call mkdp#util#install()
 endif
 
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC | call mkdp#util#install()
+\| PlugInstall --sync | source $MYVIMRC | call mkdp#util#install()
 \| endif
 
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
-"Plug 'tsony-tsonev/nerdtree-git-plugin'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
@@ -48,6 +46,16 @@ Plug 'thosakwe/vim-flutter'
 
 Plug 'frazrepo/vim-rainbow'
 
+" C/C++
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+" Plug 'rhysd/vim-clang-format'
+" Plug 'm-pilia/vim-ccls'
+" Plug 'vim-syntastic/syntastic'
+
+
+" Latex
+Plug 'astoff/digestif'
+
 
 Plug 'vim-python/python-syntax'
 
@@ -60,7 +68,7 @@ vmap <C-c> <plug>NERDCommenterToggle
 "}}}
 
 "{{{ NERDTree
-nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-n> :NERDTreeToggle <CR>
 
 let g:NERDTreeGitStatusWithFlags = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -81,21 +89,21 @@ let g:NERDTreeIgnore = ['^node_modules$']
 
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
+" function! IsNERDTreeOpen()        
+  " return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+" endfunction
 
 " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 " file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
+" function! SyncTree()
+  " if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    " NERDTreeFind
+    " wincmd p
+  " endif
+" endfunction
 
 " Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
+" autocmd BufEnter * call SyncTree()
 
 
 "}}}
@@ -108,8 +116,7 @@ set signcolumn=yes
 "{{{ VimEnter
 "Open NERDTree automatically if no files specified
 autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimEnter * NERDTree
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "autocmd VimEnter * wincmd l
 "}}}
 
@@ -233,10 +240,9 @@ let g:coc_global_extensions = [
     \ 'coc-json', 
     \ 'coc-python',
     \ "coc-sh",
-    \ "coc-clangd",
     \ "coc-markdownlint",
     \ "coc-flutter",
-\ ]
+    \ "coc-clangd"]
 " from readme
 " if hidden is not set, TextEdit might fail.
 set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
@@ -300,6 +306,7 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
 
 " Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
@@ -335,7 +342,7 @@ omap af <Plug>(coc-funcobj-a)
 command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
@@ -365,6 +372,22 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "{{{ Flutter
 
 " call FlutterMenu()
+
+"}}}
+
+"{{{ C/C++
+
+" c++ syntax highlighting
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+
+let g:syntastic_cpp_checkers = ['cpplint']
+let g:syntastic_c_checkers = ['cpplint']
+let g:syntastic_cpp_cpplint_exec = 'cpplint'
+" The following two lines are optional. Configure it to your liking!
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 "}}}
 
@@ -402,6 +425,9 @@ noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 noremap <silent> <expr> <Down> (v:count == 0 ? 'g<Down>' : '<Down>')
 noremap <silent> <expr> <Up> (v:count == 0 ? 'g<Up>' : '<Up>')
+
+noremap <A-Up> :m-2 <CR>
+noremap <A-Down> :m+ <CR>
 "}}}
 
 "{{{ General
