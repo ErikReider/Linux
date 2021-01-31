@@ -72,6 +72,19 @@ ZSH_THEME="custom"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting history-substring-search)
 
+### Fix slowness of pastes with zsh-syntax-highlighting.zsh
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+### Fix slowness of pastes
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -140,6 +153,8 @@ alias gitu='git add . && git commit && git push'
 alias clear="printf '\033[2J\033[3J\033[1;1H'; clear"
 alias cls="clear"
 alias sta='git status'
+alias play="ffplay -nostats -hide_banner -nodisp -autoexit"
+alias cat="bat"
 
 alias pacu='pamac checkupdates --aur -q'
 alias pacup='pamac upgrade --aur'
