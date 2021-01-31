@@ -59,6 +59,9 @@ echo ""
 ## Neovim
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
+    pamac install ccls
+    pip install cpplint
+
     currentDir=$PWD
     cd ~/.config/
     rm -rf nvim 
