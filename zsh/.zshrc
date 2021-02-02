@@ -152,7 +152,8 @@ alias free='free -m'                                            # Show sizes in 
 alias gitu='git add . && git commit && git push'
 alias clear="printf '\033[2J\033[3J\033[1;1H'; clear"
 alias cls="clear"
-alias sta='git status'
+alias cdu="cd .."
+alias cdp="cd -"
 alias play="ffplay -nostats -hide_banner -nodisp -autoexit"
 alias cat="bat"
 
