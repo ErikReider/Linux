@@ -55,6 +55,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 " Latex
 Plug 'astoff/digestif'
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 
 Plug 'vim-python/python-syntax'
@@ -397,6 +398,13 @@ let g:python_highlight_all = 1
 
 "}}}
 
+"{{{ LaTeX
+
+let g:tex_flavor = "latex"
+let g:livepreview_cursorhold_recompile = 0
+
+"}}}
+
 "{{{ Rainbow Brackets
 
 let g:rainbow_active = 1
@@ -419,7 +427,7 @@ map <esc><esc> :noh<CR>
 " open init.vim on ,
 map , :vsplit $MYVIMRC <CR>
 " apply init.vim changes 
-map . :source % <CR>
+map . :source $MYVIMRC <CR>
 " k/j and up/down will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')

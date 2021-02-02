@@ -6,7 +6,7 @@ function setMouseSettings() {
 }
 
 function setTouchPadSettings() {
-    xinput --set-prop $id 'libinput Accel Speed' 1
+    xinput --set-prop $id 'libinput Accel Speed' 0.5
     xinput --set-prop $id 'libinput Natural Scrolling Enabled' 1
 }
 

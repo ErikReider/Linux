@@ -1,9 +1,12 @@
 {
-    "coc.preferences.formatOnSave": true,
-    "coc.preferences.bracketEnterImprove": true,
-    "coc.preferences.colorSupport": true,
-    "clangd.semanticHighlighting": true,
-    "clangd.arguments": [
-        "-fallback-style=Google"
-    ]
+  "coc.preferences.bracketEnterImprove": true,
+  "coc.preferences.colorSupport": true,
+  "clangd.semanticHighlighting": true,
+  "clangd.arguments": ["-fallback-style=Google"],
+  "languageserver": {
+    "digestif": {
+      "command": "digestif",
+      "filetypes": ["tex", "plaintex", "context"]
+    }
+  }
 }
