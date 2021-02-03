@@ -57,6 +57,7 @@ assign [class="^Steam$"] 10 Steam
 assign [class="Lutris"] 11 Lutris
 assign [class="discord"] 9 Second
 assign [class="Spotify"] 9 Second
+assign [class="Unity"] 15 Unity
 assign [class="Microsoft Teams - Preview"] 19 Teams
 assign [class="Trello"] 18 Trello
 
