@@ -1,3 +1,4 @@
+#!/bin/bash
 source ~/.config/i3/settings
 # Disable defaults
 # https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling
@@ -16,10 +17,13 @@ xss-lock --transfer-sleep-lock -- ~/.config/i3/scripts/lock.sh &
 if [ "$shouldSleep" = true ]; then
     # Activate the idle listener with it's callbacks
     xidlehook --not-when-fullscreen --not-when-audio \
-      --timer $lockTimer \
-        'loginctl lock-session; ./dimAllDisplays.sh' \
-        '' \
-      --timer $sleepTimer \
-        'xset dpms force off' \
-        '' &
+        --timer $lockTimer \
+            './dimAllDisplays.sh -d' \
+            './dimAllDisplays.sh' \
+        --timer 10 \
+            'loginctl lock-session' \
+            '' \
+        --timer $sleepTimer \
+            'xset dpms force off' \
+            '' &
 fi

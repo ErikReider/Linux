@@ -1,3 +1,4 @@
+# Currently doesn't work with redshift...
 function dim {
     if type "xrandr"; then
         for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
