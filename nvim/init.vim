@@ -31,7 +31,6 @@ Plug 'tomasiser/vim-code-dark'
 
 Plug 'vim-airline/vim-airline'
 
-Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 
 Plug 'mboughaba/i3config.vim'
 
@@ -52,12 +51,22 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 " Plug 'm-pilia/vim-ccls'
 " Plug 'vim-syntastic/syntastic'
 
+" Typescript
+Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+Plug 'leafgarland/typescript-vim'
+
+" Javascript
+" Plug 'jelera/vim-javascript-syntax'
+
+" LESS
+Plug 'plasticscafe/vim-less-autocompile'
+
 
 " Latex
 Plug 'astoff/digestif'
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
-
+" Python
 Plug 'vim-python/python-syntax'
 
 call plug#end()
@@ -243,6 +252,8 @@ let g:coc_global_extensions = [
     \ "coc-sh",
     \ "coc-markdownlint",
     \ "coc-flutter",
+    \ "coc-css",
+    \ "coc-html",
     \ "coc-clangd"]
 " from readme
 " if hidden is not set, TextEdit might fail.
@@ -395,6 +406,23 @@ let g:syntastic_check_on_wq = 0
 "{{{ Python
 
 let g:python_highlight_all = 1
+
+"}}}
+
+"{{{ Typescript
+
+autocmd FileType typescript :set makeprg=tsc
+autocmd BufWritePost *.ts make
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
+"}}}
+
+"{{{ CSS/LESS/SASS
+
+autocmd FileType scss setl iskeyword+=@-@
+au! BufRead,BufNewFile *.less set filetype=less
+let g:less_autocompile=1
 
 "}}}
 
