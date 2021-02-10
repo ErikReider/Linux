@@ -429,7 +429,6 @@ let g:less_autocompile=1
 "{{{ LaTeX
 
 let g:tex_flavor = "latex"
-" let g:livepreview_use_biber = 1
 let g:livepreview_cursorhold_recompile = 0
 
 "}}}
