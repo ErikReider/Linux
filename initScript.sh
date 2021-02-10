@@ -59,7 +59,8 @@ echo ""
 ## Neovim
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
-    pamac install ccls texlive-core
+    pamac install ccls texlive-bibtexextra
+    sudo pacman -Syu texlive-core texlive-fontsextra texlive-latexextra texlive-science biber
     pip install cpplint
 
     # Install digestif for latex
