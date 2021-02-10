@@ -23,15 +23,12 @@ Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'preservim/nerdcommenter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
-Plug 'christoomey/vim-tmux-navigator'
-
-"Plug 'morhetz/gruvbox'
-" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+" Color Scheme
 Plug 'tomasiser/vim-code-dark'
 
 Plug 'vim-airline/vim-airline'
 
-
+" i3
 Plug 'mboughaba/i3config.vim'
 
 " Markdown preview
@@ -40,27 +37,22 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " Flutter
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
-" Plug 'natebosch/vim-lsc'
-" Plug 'natebosch/vim-lsc-dart'
 
-Plug 'frazrepo/vim-rainbow'
+" Plug 'frazrepo/vim-rainbow'
+Plug 'luochen1990/rainbow'
 
 " C/C++
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-" Plug 'rhysd/vim-clang-format'
-" Plug 'm-pilia/vim-ccls'
-" Plug 'vim-syntastic/syntastic'
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 Plug 'leafgarland/typescript-vim'
 
-" Javascript
-" Plug 'jelera/vim-javascript-syntax'
-
 " LESS
 Plug 'plasticscafe/vim-less-autocompile'
 
+" HTML
+Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
 
 " Latex
 Plug 'astoff/digestif'
@@ -254,6 +246,7 @@ let g:coc_global_extensions = [
     \ "coc-flutter",
     \ "coc-css",
     \ "coc-html",
+    \ "coc-emmet",
     \ "coc-clangd"]
 " from readme
 " if hidden is not set, TextEdit might fail.
@@ -319,6 +312,7 @@ endfunction
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
+nnoremap <silent> K :call CocAction('doHover')<CR>
 
 " Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
@@ -411,10 +405,13 @@ let g:python_highlight_all = 1
 
 "{{{ Typescript
 
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+au! BufRead,BufNewFile *.ts set filetype=typescript
+" au! BufWritePost *.ts AsyncRun tsc "%"
+au! BufWritePost *.ts make
+" let g:ts_autocompile=1
 autocmd FileType typescript :set makeprg=tsc
-autocmd BufWritePost *.ts make
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
 
 "}}}
 
@@ -423,6 +420,12 @@ autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType scss setl iskeyword+=@-@
 au! BufRead,BufNewFile *.less set filetype=less
 let g:less_autocompile=1
+
+"}}}
+
+"{{{ HTML
+au! BufRead,BufNewFile *.html set filetype=html
+au BufEnter,BufReadPost *.html set syntax=html
 
 "}}}
 
@@ -435,6 +438,8 @@ let g:livepreview_cursorhold_recompile = 0
 
 "{{{ Rainbow Brackets
 
+" let g:rainbow_active = 1
+" au FileType c,cpp,ts,js,cs,dart,json,sh call rainbow#load()
 let g:rainbow_active = 1
 
 "}}}
@@ -461,6 +466,8 @@ noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 noremap <silent> <expr> <Down> (v:count == 0 ? 'g<Down>' : '<Down>')
 noremap <silent> <expr> <Up> (v:count == 0 ? 'g<Up>' : '<Up>')
+map <silent> <home> g<home>
+map <silent> <End> g<End>
 
 noremap <A-Up> :m-2 <CR>
 noremap <A-Down> :m+ <CR>
