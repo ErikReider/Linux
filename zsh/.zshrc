@@ -109,6 +109,9 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# AUTOSUGGESTION_ACCEPT_RIGHT_ARROW=0
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
+
 EDITOR="nvim"
 
 #CUSTOM
