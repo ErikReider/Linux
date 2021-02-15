@@ -45,7 +45,7 @@ Plug 'luochen1990/rainbow'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 " Typescript
-Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'leafgarland/typescript-vim'
 
 " LESS
@@ -53,6 +53,7 @@ Plug 'plasticscafe/vim-less-autocompile'
 
 " HTML
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
+Plug 'gregsexton/MatchTag'
 
 " Latex
 Plug 'astoff/digestif'
@@ -427,6 +428,10 @@ let g:less_autocompile=1
 au! BufRead,BufNewFile *.html set filetype=html
 au BufEnter,BufReadPost *.html set syntax=html
 
+
+let g:bracey_server_path = "http://localhost"
+let g:bracey_refresh_on_save = 1
+
 "}}}
 
 "{{{ LaTeX
@@ -438,9 +443,38 @@ let g:livepreview_cursorhold_recompile = 0
 
 "{{{ Rainbow Brackets
 
-" let g:rainbow_active = 1
 " au FileType c,cpp,ts,js,cs,dart,json,sh call rainbow#load()
 let g:rainbow_active = 1
+let g:rainbow_conf = {
+\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\	'guis': [''],
+\	'cterms': [''],
+\	'operators': '_,_',
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\	'separately': {
+\		'*': {},
+\		'markdown': {
+\			'parentheses_options': 'containedin=markdownCode contained',
+\		},
+\		'lisp': {
+\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+\		},
+\		'haskell': {
+\			'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/\v\{\ze[^-]/ end=/}/ fold'],
+\		},
+\		'vim': {
+\			'parentheses_options': 'containedin=vimFuncBody',
+\		},
+\		'perl': {
+\			'syn_name_prefix': 'perlBlockFoldRainbow',
+\		},
+\		'stylus': {
+\			'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'],
+\		},
+\		'css': 0,
+\	}
+\}
 
 "}}}
 
