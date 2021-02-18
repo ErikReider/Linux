@@ -59,6 +59,8 @@ Plug 'plasticscafe/vim-less-autocompile', {'for': 'less'}
 " HTML
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server', 'for': 'html'}
 Plug 'gregsexton/MatchTag', {'for': 'html'}
+" Pug
+Plug 'digitaltoad/vim-pug', {'for': 'pug'}
 
 " Latex
 Plug 'astoff/digestif'
@@ -418,6 +420,8 @@ au! BufRead,BufNewFile *.ts set filetype=typescript
 au! BufWritePost *.ts make
 " let g:ts_autocompile=1
 autocmd FileType typescript :set makeprg=tsc
+
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 "}}}
 

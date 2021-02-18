@@ -8,5 +8,6 @@
       "command": "digestif",
       "filetypes": ["tex", "plaintex", "context"]
     }
-  }
+  },
+  "eslint.autoFixOnSave": true
 }
