@@ -158,7 +158,6 @@ alias cls="clear"
 alias cdu="cd .."
 alias cdp="cd -"
 alias play="ffplay -nostats -hide_banner -nodisp -autoexit"
-alias cat="bat"
 
 alias pacu='pamac checkupdates --aur -q'
 alias pacup='pamac upgrade --aur'
