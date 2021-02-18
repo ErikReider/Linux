@@ -35,32 +35,37 @@ Plug 'mboughaba/i3config.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 " Flutter
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
+Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
+Plug 'thosakwe/vim-flutter', {'for': 'dart'}
 
 " Plug 'frazrepo/vim-rainbow'
 Plug 'luochen1990/rainbow'
 
 " C/C++
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'h', 'cpp', 'hpp']}
 
 " Typescript
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'leafgarland/typescript-vim'
+" TS
+Plug 'HerringtonDarkholme/yats.vim', {'for': ['ts', 'tsx']}
+Plug 'leafgarland/typescript-vim', {'for': ['ts', 'tsx']}
+" TSX
+Plug 'ianks/vim-tsx', {'for': 'tsx'}
 
+" CSS
+Plug 'ap/vim-css-color', {'for': ['css', 'less', 'scss', 'sass']}
 " LESS
-Plug 'plasticscafe/vim-less-autocompile'
+Plug 'plasticscafe/vim-less-autocompile', {'for': 'less'}
 
 " HTML
-Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}
-Plug 'gregsexton/MatchTag'
+Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server', 'for': 'html'}
+Plug 'gregsexton/MatchTag', {'for': 'html'}
 
 " Latex
 Plug 'astoff/digestif'
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 " Python
-Plug 'vim-python/python-syntax'
+Plug 'vim-python/python-syntax', {'for': 'py'}
 
 call plug#end()
 "}}}
