@@ -10,7 +10,8 @@ then
     currentDir=$PWD
     # Init ohmyzsh
     cd $HOME
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    rm -rf .oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     # Remove provided configs and themes
     rm .zshrc
     rm -rf .oh-my-zsh/custom
@@ -28,6 +29,7 @@ then
     if [[ $visudo_var = y ]] ; then
         sudo visudo
     fi
+    source ~/.zshrc
 fi
 echo ""
 ##
