@@ -255,6 +255,7 @@ let g:coc_global_extensions = [
     \ "coc-css",
     \ "coc-html",
     \ "coc-emmet",
+    \ "coc-react-refactor",
     \ "coc-clangd"]
 " from readme
 " if hidden is not set, TextEdit might fail.
