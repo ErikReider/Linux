@@ -209,7 +209,7 @@ export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
 export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 export TERM=kitty
-export ANDROID_SDK_ROOT=/home/erikreider/Android/Sdk
+export ANDROID_SDK_ROOT=/home/$USER/Android/Sdk
 
 
 export DOTNET_ROOT=/usr/share/dotnet
