@@ -1,6 +1,4 @@
 #!/bin/bash
-# git update-index --skip-worktree filename
-# git update-index --no-skip-worktree filename
 
 # Sleep
 export shouldSleep=true
@@ -8,3 +6,12 @@ export shouldSleep=true
 export lockTimer=900
 # Time until sleep after lock
 export sleepTimer=30
+
+# Mouse Settings
+export mouseSensitivity=1
+export mouseNaturalScrolling=0
+export mouseAccereration=0
+# Touchpad Settings
+export touchpadNaturalScrolling=1
+export touchpadSensitivity=1
+export touchpadAccereration=0

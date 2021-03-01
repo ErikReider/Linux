@@ -1,5 +1,5 @@
 #!/bin/bash
-source ~/.config/i3/settings
+source $(dirname $0)/../settings
 # Disable defaults
 # https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling
 # https://www.linuxquestions.org/questions/arch-29/screen-goes-blank-after-ten-minutes-in-lxde-how-to-change-this-769000/
