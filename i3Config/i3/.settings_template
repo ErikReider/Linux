@@ -8,7 +8,7 @@ export lockTimer=900
 export sleepTimer=30
 
 # Mouse Settings
-export mouseSensitivity=1
+export mouseSensitivity=-0.2
 export mouseNaturalScrolling=0
 export mouseAccereration=0
 # Touchpad Settings
