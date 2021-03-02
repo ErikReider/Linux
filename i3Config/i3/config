@@ -10,6 +10,9 @@ exec_always --no-startup-id autorandr -c --skip-options gamma,brightness
 # Picom
 exec_always --no-startup-id ~/.config/picom/startPicom.sh
 
+# Touchegg
+exec_always --no-startup-id ~/.config/i3/scripts/startTouchegg.sh
+
 # Panel
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 

@@ -255,6 +255,7 @@ let g:coc_global_extensions = [
     \ "coc-css",
     \ "coc-html",
     \ "coc-emmet",
+    \ "coc-xml",
     \ "coc-react-refactor",
     \ "coc-solargraph",
     \ "coc-clangd"]

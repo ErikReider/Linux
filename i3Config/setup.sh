@@ -41,6 +41,7 @@ if [[ $1 == "-i" ]]; then
     ttf-material-icons-git \
     xidlehook \
     xob \
+    touchegg \
     ttf-weather-icons
     
     libtool --finish /usr/lib/rofi/
@@ -50,7 +51,7 @@ pip install pulsectl
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty" "redshift" "xob" "spicetify")
+dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty" "redshift" "xob" "touchegg")
 
 for item in ${dirs[@]}; do
     rm -r ./$item
