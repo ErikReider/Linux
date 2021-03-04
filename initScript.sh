@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+## Power Managment
+read -p "Do you wish to enable powermanagment? [y/n] " power_var
+if [[ $power_var = y ]]
+then
+    pamac install tlp tlpui powertop
+    currPWD=$PWD
+    cd ./services/powertune
+    ./init.sh
+    cd $currPWD
+fi
+echo ""
+##
+
 ## ZSH
 read -p "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var = y ]]
