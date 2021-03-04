@@ -12,6 +12,8 @@ function setTouchPadSettings() {
     xinput --set-prop $id 'libinput Accel Profile Enabled' $touchpadAccereration, 1
     xinput --set-prop $id 'libinput Accel Speed' $touchpadSensitivity
     xinput --set-prop $id 'libinput Natural Scrolling Enabled' $touchpadNaturalScrolling
+    xinput --set-prop $id 'libinput Click Method Enabled' 0, 1
+    xinput --set-prop $id 'libinput Middle Emulation Enabled' 1
 }
 
 whitelist=`cat ~/.config/i3/touchpadWhitelist`
