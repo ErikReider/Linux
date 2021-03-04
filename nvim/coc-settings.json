@@ -9,5 +9,10 @@
       "filetypes": ["tex", "plaintex", "context"]
     }
   },
-  "eslint.autoFixOnSave": true
+  "tsserver.enableJavascript": true,
+  "eslint.autoFixOnSave": true,
+  "diagnostic.errorSign": "❌",
+  "diagnostic.warningSign": "⚠️",
+  "emmet.showExpandedAbbreviation": "always",
+  "emmet.showAbbreviationSuggestions": true
 }

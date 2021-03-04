@@ -44,12 +44,13 @@ Plug 'luochen1990/rainbow'
 " C/C++
 Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'h', 'cpp', 'hpp']}
 
-" Typescript
 " TS
+Plug 'ianks/vim-tsx', {'for': ['ts','tsx']}
 Plug 'HerringtonDarkholme/yats.vim', {'for': ['ts', 'tsx']}
 Plug 'leafgarland/typescript-vim', {'for': ['ts', 'tsx']}
-" TSX
-Plug 'ianks/vim-tsx', {'for': 'tsx'}
+" JS
+Plug 'MaxMEllon/vim-jsx-pretty', {'for': ['js','jsx']}
+Plug 'othree/yajs.vim', {'for': ['js', 'jsx']}
 
 " CSS
 Plug 'ap/vim-css-color', {'for': ['css', 'less', 'scss', 'sass']}
@@ -257,6 +258,7 @@ let g:coc_global_extensions = [
     \ "coc-emmet",
     \ "coc-xml",
     \ "coc-react-refactor",
+    \ "coc-styled-components",
     \ "coc-solargraph",
     \ "coc-clangd"]
 " from readme
@@ -304,7 +306,8 @@ nmap <silent> ög <Plug>(coc-diagnostic-prev)
 nmap <silent> äg <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gd :call CocAction('jumpDefinition', 'tab drop')<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -384,6 +387,7 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
 "}}}
 
 "{{{ Flutter
@@ -424,7 +428,8 @@ au! BufWritePost *.ts make
 " let g:ts_autocompile=1
 autocmd FileType typescript :set makeprg=tsc
 
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+autocmd BufNewFile,BufRead *.ts,*.tsx set filetype=typescriptreact
+autocmd BufNewFile,BufRead *.js,*.jsx set filetype=javascriptreact
 
 "}}}
 
@@ -522,7 +527,7 @@ noremap <A-Down> :m+ <CR>
 "{{{ General
 set number
 syntax on
-set shiftwidth=4
+set shiftwidth=2
 set smartindent
 set autoindent
 set smarttab
@@ -565,4 +570,5 @@ set listchars=space:·,tab:⟶\ ,nbsp:␣,trail:·,extends:⟩,precedes:⟨
 hi SpecialKey ctermfg=darkgray guifg=darkgray
 hi NonText ctermfg=darkgray guifg=darkgray
 hi Whitespace ctermfg=darkgray guifg=darkgray
+hi CocHighlightText ctermbg=darkgray guibg=darkgray ctermfg=white guifg=white
 "}}}
