@@ -507,7 +507,7 @@ map <F5> :checktime <CR>
 " Use ESC to exit insert mode in :term
 tnoremap <Esc> <C-\><C-n>
 " Use ESC to clear highlights
-map <esc><esc> :noh<CR> 
+map <esc><esc> :nohl<CR> 
 " open init.vim on ,
 map , :vsplit $MYVIMRC <CR>
 " apply init.vim changes 
