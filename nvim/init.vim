@@ -306,7 +306,7 @@ nmap <silent> ög <Plug>(coc-diagnostic-prev)
 nmap <silent> äg <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-" nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gs <Plug>(coc-definition)
 nmap <silent> gd :call CocAction('jumpDefinition', 'tab drop')<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -527,7 +527,7 @@ noremap <A-Down> :m+ <CR>
 "{{{ General
 set number
 syntax on
-set shiftwidth=2
+set shiftwidth=4
 set smartindent
 set autoindent
 set smarttab
