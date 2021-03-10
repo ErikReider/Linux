@@ -158,9 +158,9 @@ alias cls="clear"
 alias play="ffplay -nostats -hide_banner -nodisp -autoexit"
 
 alias pacu='pamac checkupdates --aur -q'
-alias pacup='pamac upgrade --aur'
-alias paci='pamac install'
-alias pacr='pamac remove'
+alias pacup='sudo pamac upgrade --aur'
+alias paci='sudo pamac install'
+alias pacr='sudo pamac remove'
 alias pacs='pamac search'
 alias pacl='pamac list -i' 
 alias paclg='pamac list -i | grep -e'
