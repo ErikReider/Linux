@@ -63,6 +63,7 @@ assign [class="Spotify"] 9 Second
 assign [class="Unity"] 15 Unity
 assign [class="Microsoft Teams - Preview"] 19 Teams
 assign [class="Trello"] 18 Trello
+assign [class="Mailspring"] 17 Mail
 
 # Floating
 for_window [instance="origin.exe"] floating enable
