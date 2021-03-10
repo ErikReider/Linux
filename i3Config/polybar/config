@@ -130,11 +130,11 @@ format-foreground = #ffffff
 type = custom/script
 tail = true
 label=%output%
-exec = ~/.config/polybar/scripts/pulseaudio-control.bash listen
+exec = ~/.config/polybar/scripts/pulseaudio-control.sh listen
 click-left = exec gnome-control-center sound &
-click-right = ~/.config/polybar/scripts/pulseaudio-control.bash togmute
-scroll-up = ~/.config/polybar/scripts/pulseaudio-control.bash up
-scroll-down = ~/.config/polybar/scripts/pulseaudio-control.bash down
+click-right = ~/.config/polybar/scripts/pulseaudio-control.sh togmute
+scroll-up = ~/.config/polybar/scripts/pulseaudio-control.sh up
+scroll-down = ~/.config/polybar/scripts/pulseaudio-control.sh down
 label-padding = 0
 label-foreground = #fffffff
 
@@ -321,7 +321,7 @@ bar-progress-empty-foreground = #44
 
 
 [module/volume]
-type = internal/alsa
+type = internal/pulseaudio
 ;speaker-mixer = Speaker
 ;headphone-mixer = Headphone
 ;headphone-id = 9
