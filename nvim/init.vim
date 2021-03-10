@@ -22,6 +22,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'preservim/nerdcommenter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'tpope/vim-surround'
 
 " Color Scheme
 Plug 'tomasiser/vim-code-dark'
