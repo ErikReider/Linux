@@ -23,6 +23,7 @@ Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'preservim/nerdcommenter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'tpope/vim-surround'
+Plug 'AndrewRadev/tagalong.vim'
 
 " Color Scheme
 Plug 'tomasiser/vim-code-dark'
@@ -72,6 +73,12 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 Plug 'vim-python/python-syntax', {'for': 'py'}
 
 call plug#end()
+"}}}
+
+"{{{ Tagalong
+
+inoremap <silent> <c-c> <c-c>:call tagalong#Apply()<cr>
+
 "}}}
 
 "{{{ NERDCommenter
