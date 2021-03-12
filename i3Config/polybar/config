@@ -27,14 +27,14 @@ font-7 = NotoSans-Symbols:size=9;3
 font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
 font-9 = Weather Icons:size=12;4
 
-modules-left = cpu memory temperature
-modules-center = i3 
+modules-left = i3 cpu memory temperature
+; modules-center = i3
 modules-right = headsetcontrol pulseaudio-control airplane bluetooth wireless-network lan updates-pacman-aurhelper battery date powermenu
 
 ; override-redirect = false
 wm-restack = i3
 
-tray-position = right 
+tray-position = right
 tray-scale = 1.0
 tray-background = ${self.background}
 tray-maxsize = 22
@@ -243,7 +243,7 @@ format-discharging = <ramp-capacity> <label-discharging>
 format-full = <ramp-capacity> <label-full>
 
 label-charging = %percentage%%
-label-discharging = %percentage%% 
+label-discharging = %percentage%%
 ramp-capacity-0 = 
 ramp-capacity-0-foreground = #f53c3c
 ramp-capacity-1 = 
