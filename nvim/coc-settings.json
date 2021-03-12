@@ -3,6 +3,7 @@
   "coc.preferences.colorSupport": true,
   "clangd.semanticHighlighting": true,
   "clangd.arguments": ["-fallback-style=Google"],
+  "clangd.checkUpdates": true,
   "languageserver": {
     "digestif": {
       "command": "digestif",

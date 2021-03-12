@@ -528,6 +528,10 @@ noremap <silent> <expr> <Up> (v:count == 0 ? 'g<Up>' : '<Up>')
 map <silent> <home> g<home>
 map <silent> <End> g<End>
 
+" Switch tabs
+nnoremap <silent> <A-Left> :tabp<CR>
+nnoremap <silent> <A-Right> :tabn<CR>
+
 noremap <A-Up> :m-2 <CR>
 noremap <A-Down> :m+ <CR>
 "}}}
