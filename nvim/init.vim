@@ -72,6 +72,9 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 " Python
 Plug 'vim-python/python-syntax', {'for': 'py'}
 
+" JSON
+Plug 'kevinoid/vim-jsonc'
+
 call plug#end()
 "}}}
 
