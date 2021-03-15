@@ -1,0 +1,13 @@
+# background-color = red
+
+font=Roboto
+background-color=#222222
+progress-color=#444444
+icons=1
+padding=20
+width=450
+border-size=1
+border-radius=4
+icon-path=/usr/share/icons/Yaru/
+actions=1
+default-timeout=3333

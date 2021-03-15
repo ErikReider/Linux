@@ -1,3 +1,4 @@
+# vim: set ft=dosini
 [global]
 
     # --- Display --- #
@@ -93,7 +94,7 @@
     # hide_duplicate_count = false
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
+    show_indicators = no
 
     
     # ---- Icons ---- #
@@ -102,7 +103,7 @@
     icon_position = left
 
     # Scale small icons up to this size, set to 0 to disable.
-    min_icon_size = 0
+    min_icon_size = 24
 
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 64
@@ -143,7 +144,7 @@
     verbosity = mesg
 
     # Define the corner radius of the notification window
-    corner_radius = 0
+    corner_radius = 8
 
     # Don't gnore the dbus closeNotification message.
     ignore_dbusclose = false
@@ -167,16 +168,16 @@
 
 [shortcuts]
     # Close notification.
-    close = ctrl+space
+    # close = ctrl+space
 
     # Close all notifications.
-    close_all = ctrl+shift+space
+    # close_all = ctrl+shift+space
 
     # Redisplay last message(s).
-    history = ctrl+grave
+    # history = ctrl+grave
 
     # Context menu.
-    context = ctrl+shift+period
+    # context = ctrl+shift+period
 
 
 # --- Colors --- #

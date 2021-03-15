@@ -1,0 +1,209 @@
+// vim: ft=jsonc
+// 
+// 
+// 
+// 
+//
+//
+//
+//
+//
+
+{
+  "layer": "top",
+  "position": "top",
+  "height": 41,
+  "modules-left": [
+    "custom/linux",
+    "custom/headsetcontrol",
+    "battery",
+    "cpu",
+    "memory",
+    "custom/weather",
+    "sway/mode"
+  ],
+  "modules-center": ["sway/workspaces"],
+  "modules-right": [
+    "tray",
+    "custom/wallpaperRefresh",
+    "custom/ArchUpdates",
+    "custom/dunst",
+    "pulseaudio",
+    // "custom/airplane",
+    // "custom/bluetooth",
+    "bluetooth",
+    "network#wifi",
+    "network#ethernet",
+    "clock"
+  ],
+  "custom/linux": {
+    "format": "<span font='16' font_family='Roboto'>  </span>"
+  },
+  "sway/workspaces": {
+    "disable-scroll-wraparound": true,
+    "disable-scroll": false,
+    "all-outputs": false,
+    "enable-bar-scroll": true,
+    "format": "{value}"
+  },
+  "sway/mode": {
+    "format": "<span>{}</span>"
+  },
+  "tray": {
+    "icon-size": 24,
+    "spacing": 10
+  },
+  "clock": {
+    "format": "{:%a %d %b %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}"
+  },
+  "cpu": {
+    "format": "<span font_family='Material Icons' rise='-4000' size='large'></span> {usage}%",
+    "interval": 1
+  },
+  "memory": {
+    "interval": 10,
+    "format": " {used:0.2f} GiB"
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{percent}% {icon}",
+    "format-icons": ["", ""]
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "custom/dunst": {
+    "signal": 6,
+    "format": "  {icon}{}  ",
+    "return-type": "json",
+    "format-icons": {
+      "true": "",
+      "false": ""
+    },
+    "interval": 15,
+    "exec": "~/.config/waybar/scripts/dunst.sh",
+    "on-click": "dunstctl set-paused toggle; pkill -SIGRTMIN+6 waybar"
+  },
+  "custom/airplane": {
+    "format": "{icon}",
+    "return-type": "json",
+    "max-length": 70,
+    "interval": "once",
+    "format-icons": {
+      "disabled": "<span foreground='#928374'> ✈ </span>",
+      "enabled": " ✈ "
+    },
+    "exec": "~/.config/waybar/scripts/airplaneMode.sh",
+    "on-click": "~/.config/waybar/scripts/airplaneMode.sh --toggle",
+    "signal": 8
+  },
+  "bluetooth": {
+    "format": "{icon}",
+    "interval": 30,
+    "format-icons": {
+      "enabled": "  ",
+      "disabled": "<span foreground='#928374'>  </span>"
+    },
+    "tooltip-format": "{}",
+    "on-click": "blueberry",
+    "on-click-right": "bluetooth toggle",
+    "tooltip": false
+  },
+  "network#wifi": {
+    "interface": "wlp*",
+    "interval": 30,
+    "format-wifi": "{icon}",
+    "format-linked": "",
+    "format-disconnected": "",
+    "format-icons": ["", "", "", "", ""],
+    "on-click": "gnome-control-center wifi",
+    "on-click-right": "wifi toggle",
+    "tooltip-format": "{}",
+    "tooltip-format-wifi": "{signalStrength} {ipaddr}"
+  },
+  "network#ethernet": {
+    "interface": "enp*",
+    "interval": 30,
+    "format-ethernet": "",
+    "on-click": "gnome-control-center network",
+    "tooltip-format": "{}",
+    "tooltip-format-ethernet": "{ipaddr}"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-bluetooth-muted": "{icon} {volume}%",
+    "format-muted": " {volume}%",
+    // "tooltip": false,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "scroll-step": 5,
+    "on-click": " gnome-control-center sound",
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  },
+  "custom/wallpaperRefresh": {
+    "exec": "echo '  '",
+    "tooltip": false,
+    "on-click": "~/.config/sway/scripts/randomWallpaper.sh --click"
+  },
+  "custom/headsetcontrol": {
+    "interval": 60,
+    "tooltip": false,
+    "exec": "~/.config/waybar/scripts/headsetcontrol.sh",
+    "exec-if": "which headsetcontrol"
+  },
+  "custom/ArchUpdates": {
+    "interval": 600,
+    "tooltip": false,
+    "signal": 9,
+    "exec": "~/.config/waybar/scripts/updates-pacman-aurhelper.sh",
+    "on-click": "pamac-manager --updates; pkill -SIGRTMIN+9 waybar"
+  },
+  "custom/weather": {
+    "format": "<span font_family='Weather Icons'>{icon}</span> {}",
+    "format-icons": {
+      "01d": "",
+      "01n": "",
+      "02d": "",
+      "02n": "",
+      "03d": "",
+      "03n": "",
+      "04d": "",
+      "04n": "",
+      "09d": "",
+      "09n": "",
+      "10d": "",
+      "10n": "",
+      "11d": "",
+      "11n": "",
+      "13d": "",
+      "13n": "",
+      "50d": "",
+      "50n": ""
+    },
+    "tooltip": false,
+    "interval": 1200,
+    "exec": "python ~/.config/waybar/scripts/openWeatherMap.py",
+    "return-type": "json"
+  }
+}

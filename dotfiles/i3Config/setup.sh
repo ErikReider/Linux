@@ -51,11 +51,12 @@ pip install pulsectl
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("i3" "picom" "polybar" "rofi" "dunst" "kitty" "redshift" "xob" "touchegg")
+dirs=("i3" "picom" "polybar" "../rofi" "../dunst" "../kitty" "redshift" "xob" "touchegg")
 
 for item in ${dirs[@]}; do
-    rm -r ./$item
-    ln -s $currentDir/$item/ ./$item
+    name=$(basename $item)
+    rm -r ./$name
+    ln -s $currentDir/$item/ ./$name
 done
 
 systemctl --user disable redshift-gtk.service

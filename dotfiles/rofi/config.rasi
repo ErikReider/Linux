@@ -1,3 +1,4 @@
+/* vim:ft=css */
 configuration {
     font: "Noto Sans Bold 13";
     drun-display-format: "{name}";
