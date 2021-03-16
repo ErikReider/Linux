@@ -6,11 +6,14 @@ input * xkb_layout "se"
 
 input type:touchpad {
     accel_profile flat
-    scroll_factor 2
+    click_method clickfinger
     scroll_method two_finger
-    tap enabled
+    pointer_accel 1
+    # tap enabled
+    tap_button_map lrm
     natural_scroll enabled
     middle_emulation enabled
+
     dwt disabled
 }
 

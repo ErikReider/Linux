@@ -136,6 +136,8 @@
     "interface": "enp*",
     "interval": 30,
     "format-ethernet": "",
+    "format-linked": "",
+    "format-disconnected": "",
     "on-click": "gnome-control-center network",
     "tooltip-format": "{}",
     "tooltip-format-ethernet": "{ipaddr}"
