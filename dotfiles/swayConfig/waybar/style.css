@@ -102,8 +102,16 @@ window#waybar.solo {
 }
 
 #battery {
-  background-color: #ffffff;
-  color: #000000;
+  /* background-color: #ffffff; */
+  /* color: #000000; */
+}
+
+#battery.critical {
+    color: red;
+}
+
+#battery.warning {
+    color: yellow;
 }
 
 #battery.charging {

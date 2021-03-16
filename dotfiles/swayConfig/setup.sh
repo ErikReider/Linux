@@ -1,9 +1,13 @@
 #!/bin/bash
 
 if [[ $1 == "-i" ]]; then
-    pamac install \
+    pamac install --no-upgrade \
         wl-clipboard \
         wdisplays \
+        grim \
+        slurp \
+        swayidle \
+        wallutils \
         kanshi \
         otf-font-awesome \
         i3-gaps \
@@ -27,15 +31,17 @@ if [[ $1 == "-i" ]]; then
         libappimage \
         nitrogen \
         lxappearance \
-        dunst-git \
-        pod2man \
         arandr \
         autorandr \
         kitty \
         clipit
 
+    pamac install pod2man
+
     # AUR
-    pamac install \
+    pamac install --no-upgrade \
+        pod2man \
+        dunst-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
         wlsunset \
