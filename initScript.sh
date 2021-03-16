@@ -96,18 +96,10 @@ echo ""
 ##
 
 ## Shell Theme
-read -p  "Do you wish to install the Elementary theme? [y/n] " install_theme_var
+read -p  "Do you wish to install Firefox Gnome theme? [y/n] " install_theme_var
 if [[ $install_theme_var = y ]]
 then
-    pamac install elementary-icon-theme sound-theme-elementary
-    sudo pacman -Syy sassc bc inkscape optipng
-    git clone https://github.com/hrdwrrsk/adementary-theme.git
-    cd ./adementary-theme/
-    ./parse-sass.sh
-    mkdir ~/.themes
-    ./install.sh -d ~/.themes
-    cd ..
-    rm -rf ./adementary-theme
+    curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
 fi
 echo ""
 ##

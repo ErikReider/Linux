@@ -4,11 +4,15 @@ if [[ $1 == "-i" ]]; then
     pamac install --no-upgrade \
         wl-clipboard \
         wdisplays \
+        xdg-desktop-portal-wlr \
         grim \
         slurp \
         swayidle \
         wallutils \
         kanshi \
+        grim \
+        slurp \
+        swappy \
         otf-font-awesome \
         i3-gaps \
         ttf-font-awesome \
@@ -40,7 +44,6 @@ if [[ $1 == "-i" ]]; then
 
     # AUR
     pamac install --no-upgrade \
-        pod2man \
         dunst-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
@@ -76,3 +79,4 @@ done
 # Kanshi
 mkdir ~/.config/kanshi
 echo "syntax is similar to 'man 5 sway-output'. Get outputs: 'swaymsg -t get_outputs'"
+echo "add 'XDG_CURRENT_DESKTOP=sway' to /etc/environment"
