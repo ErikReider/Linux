@@ -4,6 +4,7 @@ if [[ $1 == "-i" ]]; then
     pamac install --no-upgrade \
         wl-clipboard \
         wdisplays \
+        wl-recorder \
         xdg-desktop-portal-wlr \
         grim \
         slurp \

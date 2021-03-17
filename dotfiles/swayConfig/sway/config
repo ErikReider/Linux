@@ -73,6 +73,7 @@ title_align center
 assign [class="^Steam$"] 10 
 assign [app_id="lutris"] 11 
 assign [class="discord"] 9 Second
+assign [app_id="discord"] 9 Second
 assign [class="Spotify"] 9 Second
 assign [class="Unity"] 15 
 assign [class="Microsoft Teams - Preview"] 19 
