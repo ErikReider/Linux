@@ -5,7 +5,6 @@ if [[ $1 == "-i" ]]; then
         wl-clipboard \
         wdisplays \
         wf-recorder \
-        xdg-desktop-portal-wlr \
         grim \
         slurp \
         swayidle \
@@ -37,6 +36,7 @@ if [[ $1 == "-i" ]]; then
     # AUR
     pamac install --no-upgrade \
         waybar-git \
+        xdg-desktop-portal-wlr-git \
         dunst-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
