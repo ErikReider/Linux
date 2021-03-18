@@ -3,6 +3,7 @@
 if [[ $1 == "-i" ]]; then
     pamac install --no-upgrade \
         wl-clipboard \
+        gammastep \
         wdisplays \
         wf-recorder \
         grim \
@@ -27,7 +28,10 @@ if [[ $1 == "-i" ]]; then
         appimagelauncher \
         libappimage \
         lxappearance \
+        alacritty \
         kitty \
+        geoclue \
+        geocode-glib \
         pacdep \
         sway
 
@@ -40,7 +44,6 @@ if [[ $1 == "-i" ]]; then
         dunst-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
-        wlsunset \
         i3lock-fancy-rapid-git \
         polkit-gnome-gtk2 \
         rofi-emoji \
@@ -54,7 +57,7 @@ pip install pulsectl autotiling
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("sway" "waybar" "mako" "../rofi" "../dunst" "../kitty")
+dirs=("sway" "waybar" "../rofi" "../dunst" "../kitty" "gammastep")
 
 for item in ${dirs[@]}; do
     name=$(basename $item)

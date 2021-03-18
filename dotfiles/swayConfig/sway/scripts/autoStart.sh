@@ -1,6 +1,6 @@
 #!/bin/bash
 
-blackList=("redshift" "geary")
+blackList=("gammastep" "redshift" "geary")
 for file in $(ls $HOME/.config/autostart/); do
     found=false
     for item in ${blackList[@]}; do
