@@ -39,6 +39,7 @@ if [[ $1 == "-i" ]]; then
 
     # AUR
     pamac install --no-upgrade \
+        faba-icon-theme \
         waybar-git \
         xdg-desktop-portal-wlr-git \
         dunst-git \
