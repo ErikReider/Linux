@@ -58,7 +58,7 @@ pip install pulsectl autotiling
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("sway" "waybar" "../rofi" "../dunst" "../kitty" "gammastep")
+dirs=("sway" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty")
 
 for item in ${dirs[@]}; do
     name=$(basename $item)
