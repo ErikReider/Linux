@@ -37,8 +37,8 @@
     "clock"
   ],
   "custom/linux": {
-    "format": "<span font='16' font_family='Roboto'>  </span>",
-    "on-click": "kitty sh -c 'neofetch; read'"
+    "format": "<span font='16' font_family='Roboto'></span>",
+    "on-click": "alacritty -e $SHELL -c 'neofetch; read'"
   },
   "sway/workspaces": {
     "disable-scroll-wraparound": true,
@@ -113,8 +113,8 @@
     "format": "{icon}",
     "interval": 30,
     "format-icons": {
-      "enabled": "  ",
-      "disabled": "<span foreground='#928374'>  </span>"
+      "enabled": "",
+      "disabled": "<span foreground='#928374'></span>"
     },
     "tooltip-format": "{}",
     "on-click": "blueberry",

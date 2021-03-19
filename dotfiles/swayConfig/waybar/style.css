@@ -107,11 +107,11 @@ window#waybar.solo {
 }
 
 #battery.critical {
-    color: red;
+  color: red;
 }
 
 #battery.warning {
-    color: yellow;
+  color: yellow;
 }
 
 #battery.charging {
@@ -153,8 +153,12 @@ label:focus {
   font-size: 24px;
 }
 
-#custom-bluetooth, #bluetooth {
-  font-size: 20px;
+#bluetooth {
+  font-size: 22px;
+}
+
+#bluetooth.disabled {
+  color: #928374;
 }
 
 #network {
