@@ -35,6 +35,8 @@ if [[ $1 == "-i" ]]; then
         pacdep \
         sway
 
+    yay -S --noconfirm clipman
+
     pamac install pod2man
 
     # AUR
