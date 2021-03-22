@@ -75,6 +75,9 @@ Plug 'vim-python/python-syntax', {'for': 'py'}
 " JSON
 Plug 'kevinoid/vim-jsonc'
 
+" Vala
+Plug 'arrufat/vala.vim', {'for': 'vala'}
+
 call plug#end()
 "}}}
 
@@ -268,6 +271,7 @@ let g:coc_global_extensions = [
     \ "coc-html",
     \ "coc-emmet",
     \ "coc-xml",
+    \ "coc-svg",
     \ "coc-react-refactor",
     \ "coc-styled-components",
     \ "coc-solargraph",
@@ -461,6 +465,14 @@ let g:bracey_server_path = "http://localhost"
 let g:bracey_refresh_on_save = 1
 
 "}}}
+
+" {{{ Vala
+
+let vala_comment_strings = 1
+let vala_space_errors = 1
+let vala_minlines = 120
+
+" }}}
 
 "{{{ LaTeX
 

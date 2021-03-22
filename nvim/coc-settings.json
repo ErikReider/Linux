@@ -8,6 +8,10 @@
     "digestif": {
       "command": "digestif",
       "filetypes": ["tex", "plaintex", "context"]
+    },
+    "vala": {
+      "command": "vala-language-server",
+      "filetypes": ["vala", "genie"]
     }
   },
   "tsserver.enableJavascript": true,
