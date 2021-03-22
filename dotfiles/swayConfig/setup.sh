@@ -35,7 +35,7 @@ if [[ $1 == "-i" ]]; then
         pacdep \
         sway
 
-    yay -S --noconfirm clipman
+    yay -S clipman aur/autotiling
 
     pamac install pod2man
 
@@ -56,7 +56,7 @@ if [[ $1 == "-i" ]]; then
     libtool --finish /usr/lib/rofi/
 fi
 
-pip install pulsectl autotiling
+pip install pulsectl
 
 currentDir=$PWD
 cd ~/.config/
