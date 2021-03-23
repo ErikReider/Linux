@@ -374,7 +374,10 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 " Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
+" command! -nargs=0 Format :call CocAction('format')
+" Format file on ctrl+alt+b
+" map <C-M-b> :Format<CR>
+map <expr><C-M-b> CocHasProvider("format") ? '<Plug>(coc-format)' : ':call CustomFormatter()<cr>'
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
@@ -402,6 +405,31 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+"}}}
+
+"{{{ Formatters
+
+function CustomFormatter()
+    " Save the current cursor position.
+    let cursor_position = getpos('.')
+    " Save the current window position.
+    normal! H
+    let window_position = getpos('.')
+
+    if (&ft == 'vala')
+        :silent exec "!uncrustify -c uncrustify.cfg -L VALA --replace --no-backup --if-changed %"
+    else
+        echo "No formatter for"&ft
+    endif
+    :silent exec "bufdo e!"
+
+    " Restore the previous window position.
+    call setpos('.', window_position)
+    normal! zt
+    " Restore the previous cursor position.
+    call setpos('.', cursor_position)
+endfunction
 
 "}}}
 
@@ -523,8 +551,6 @@ let g:rainbow_conf = {
 nmap <C-d> yyp
 " Open terminal
 map å :split term://zsh<CR>
-" Format file on ctrl+alt+b
-map <C-M-b> :Format<CR>
 " reload file on ctrl+r
 map <F5> :checktime <CR>
 " Use ESC to exit insert mode in :term
@@ -569,6 +595,8 @@ set cursorline
 set wildmenu
 set showmatch
 set hlsearch
+" Reloads open file on external modification
+setlocal autoread
 " always uses spaces instead of tab characters
 set expandtab
 " Yank to clipboard
