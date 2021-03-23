@@ -77,6 +77,10 @@ Plug 'kevinoid/vim-jsonc'
 
 " Vala
 Plug 'arrufat/vala.vim', {'for': 'vala'}
+Plug 'cofyc/vim-uncrustify', {'for': 'vala'}
+
+" Shell script
+Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
 
 call plug#end()
 "}}}
@@ -411,24 +415,13 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "{{{ Formatters
 
 function CustomFormatter()
-    " Save the current cursor position.
-    let cursor_position = getpos('.')
-    " Save the current window position.
-    normal! H
-    let window_position = getpos('.')
-
     if (&ft == 'vala')
-        :silent exec "!uncrustify -c uncrustify.cfg -L VALA --replace --no-backup --if-changed %"
+        :call Uncrustify('VALA')
+    elseif (&ft == 'sh')
+        :Shfmt -i 4
     else
         echo "No formatter for"&ft
     endif
-    :silent exec "bufdo e!"
-
-    " Restore the previous window position.
-    call setpos('.', window_position)
-    normal! zt
-    " Restore the previous cursor position.
-    call setpos('.', cursor_position)
 endfunction
 
 "}}}
