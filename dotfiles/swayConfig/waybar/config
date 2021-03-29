@@ -150,12 +150,6 @@
     "format-muted": " {volume}%",
     // "tooltip": false,
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
       "default": ["", "", ""]
     },
     "scroll-step": 5,
