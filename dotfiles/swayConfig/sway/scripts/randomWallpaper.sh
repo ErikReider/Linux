@@ -10,7 +10,7 @@ fi
 
 wlpath=${WALLPAPER_PATH:-"$HOME/.config/wallpaper.jpg"}
 output=${WALLPAPER_OUTPUT:-"*"}
-url="https://source.unsplash.com/1920x1080/?wallpapers"
+url="https://source.unsplash.com/1920x1080/?city,night,ocean,space,fire,hell"
 
 # Checks if gotten wallpaper within 1 hour
 if [[ -f $HOME/.config/wallpaper.jpg ]]; then
