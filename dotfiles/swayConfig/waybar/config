@@ -12,7 +12,7 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 41,
+  "height": 31,
   "modules-left": [
     "custom/linux",
     "custom/headsetcontrol",
@@ -80,8 +80,8 @@
     "full-at": 97,
     "interval": 60,
     "format": "{icon} {capacity}%",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
+    "format-charging": "{icon} {capacity}% ",
+    "format-plugged": "{icon} {capacity}% ",
     "format-icons": ["", "", "", "", ""]
   },
   "custom/dunst": {

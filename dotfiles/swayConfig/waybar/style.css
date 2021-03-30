@@ -18,14 +18,14 @@ window#waybar.hidden {
 }
 
 window {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.7);
 }
 
 window box > box {
-  margin: 4px 0;
+  /* margin: 4px 0; */
   padding: 0 5px;
   border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.7);
+  /* background-color: rgba(0, 0, 0, 0.7); */
 }
 
 .modules-left {
@@ -114,10 +114,10 @@ window#waybar.solo {
   color: yellow;
 }
 
-#battery.charging {
-  color: #ffffff;
-  background-color: #26a65b;
-}
+/* #battery.charging { */
+  /* color: #ffffff; */
+  /* background-color: #26a65b; */
+/* } */
 
 @keyframes blink {
   to {
