@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+flatpak install flathub --system org.gtk.Gtk3theme.Adwaita-dark
+flatpak install flathub --user org.gtk.Gtk3theme.Adwaita-dark
+sudo flatpak override --filesystem=~/.themes
+
 ## Power Managment
 read -p "Do you wish to enable powermanagment? [y/n] " power_var
 if [[ $power_var = y ]]; then
