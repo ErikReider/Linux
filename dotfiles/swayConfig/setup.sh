@@ -15,6 +15,7 @@ if [[ $1 == "-i" ]]; then
         grim \
         slurp \
         swappy \
+        pipewire-media-session \
         otf-font-awesome \
         ttf-font-awesome \
         pa-applet \
@@ -60,7 +61,7 @@ pip install pulsectl
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("sway" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty")
+dirs=("sway" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty" "xdg-desktop-portal-wlr")
 
 for item in ${dirs[@]}; do
     name=$(basename $item)
