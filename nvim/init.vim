@@ -61,9 +61,12 @@ Plug 'plasticscafe/vim-less-autocompile', {'for': 'less'}
 
 " HTML
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server', 'for': 'html'}
-Plug 'gregsexton/MatchTag', {'for': 'html'}
 " Pug
 Plug 'digitaltoad/vim-pug', {'for': 'pug'}
+
+" XML-like
+Plug 'gregsexton/MatchTag', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx'] }
+Plug 'alvan/vim-closetag'
 
 " Latex
 Plug 'astoff/digestif'
@@ -83,6 +86,20 @@ Plug 'cofyc/vim-uncrustify', {'for': 'vala'}
 Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
 
 call plug#end()
+"}}}
+
+"{{{ vim-closetag
+
+let g:closetag_filenames = "*.html,*.js,*.jsx,*.ts,*.tsx,*.vue,*.xhml,*.xml"
+let g:closetag_filetypes = 'html,xhtml,jsx,javascript,javascriptreact,tsx,typescript,typescriptreact'
+
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+
 "}}}
 
 "{{{ Tagalong
@@ -545,7 +562,7 @@ nmap <C-d> yyp
 " Open terminal
 map å :split term://zsh<CR>
 " reload file on ctrl+r
-map <F5> :checktime <CR>
+map <F5> :checktime <CR> :CocRestart <CR>
 " Use ESC to exit insert mode in :term
 tnoremap <Esc> <C-\><C-n>
 " Use ESC to clear highlights
@@ -596,6 +613,8 @@ set expandtab
 set clipboard=unnamedplus
 " Select with mouse
 set mouse=a
+
+set encoding=UTF-8
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
