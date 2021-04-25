@@ -1,4 +1,5 @@
-/* vim:ft=css */
+/* vim:ft=css 
+*/
 configuration {
     font: "Noto Sans Bold 13";
     drun-display-format: "{name}";
@@ -11,7 +12,7 @@ configuration {
 * {
     background-color: transparent;
     background-alt: rgba(242, 242, 242, 0.08);
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.8);
     text-color: #ffffff;
     spacing: 0;
     width: 512px;
