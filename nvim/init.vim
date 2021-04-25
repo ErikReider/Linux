@@ -111,6 +111,8 @@ inoremap <silent> <c-c> <c-c>:call tagalong#Apply()<cr>
 "{{{ NERDCommenter
 nmap <C-c> <plug>NERDCommenterToggle
 vmap <C-c> <plug>NERDCommenterToggle
+
+let g:NERDCustomDelimiters = { 'dosini': { 'left': '#' } }
 "}}}
 
 "{{{ NERDTree
