@@ -2,4 +2,5 @@
 # Read `man 5 sway` for a complete reference.
 
 include ~/.config/sway/sway.d/*.conf
+include ~/.config/sway/.generated_settings/*.conf
 
