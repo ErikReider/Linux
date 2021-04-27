@@ -16,10 +16,18 @@
   },
   "tsserver.enableJavascript": true,
   "eslint.autoFixOnSave": true,
+  "diagnostic.enableSign": true,
   "diagnostic.errorSign": "❌",
   "diagnostic.warningSign": "⚠️",
+  "diagnostic.hintSign": "?",
+  "diagnostic.infoSign": "",
   "emmet.showExpandedAbbreviation": "always",
   "emmet.showAbbreviationSuggestions": true,
+  "snippets.extends": {
+    "cpp": ["c"],
+    "javascriptreact": ["typescript"],
+    "typescriptreact": ["typescript"]
+  },
   "suggest.completionItemKindLabels": {
     "method": "  ",
     "function": "  ",
@@ -46,5 +54,6 @@
     "constructor": "  ",
     "value": "  ",
     "enumMember": "  "
-  }
+  },
+  "clangd.path": "/home/erikreider/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd"
 }
