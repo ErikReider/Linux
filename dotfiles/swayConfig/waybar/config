@@ -118,7 +118,7 @@
     },
     "tooltip-format": "{}",
     "on-click": "blueberry",
-    "on-click-right": "bluetooth toggle",
+    "on-click-right": "python3 ~/.config/waybar/scripts/bluetooth-toggle.py",
     "tooltip": false
   },
   "network#wifi": {
@@ -172,7 +172,7 @@
     "tooltip": false,
     "signal": 9,
     "exec": "~/.config/waybar/scripts/updates-pacman-aurhelper.sh",
-    "on-click": "pamac-manager --updates; pkill -SIGRTMIN+9 waybar"
+    "on-click": "alacritty -e $SHELL -c 'pamac checkupdates --aur -q; yay -Syyu; flatpak update; sudo snap refresh'; pkill -SIGRTMIN+9 waybar"
   },
   "custom/weather": {
     "format": "<span font_family='Weather Icons'>{icon}</span> {}",
