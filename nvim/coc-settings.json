@@ -15,6 +15,9 @@
     }
   },
   "tsserver.enableJavascript": true,
+  "javascript.showUnused": true,
+  "javascript.validate.enable": true,
+  "javascript.suggest.autoImports": true,
   "eslint.autoFixOnSave": true,
   "diagnostic.enableSign": true,
   "diagnostic.errorSign": "❌",
