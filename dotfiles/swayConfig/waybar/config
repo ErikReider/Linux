@@ -148,11 +148,11 @@
     "format-bluetooth": "{icon} {volume}%",
     "format-bluetooth-muted": "{icon} {volume}%",
     "format-muted": " {volume}%",
-    // "tooltip": false,
     "format-icons": {
       "default": ["", "", ""]
     },
-    "scroll-step": 5,
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
     "on-click": " gnome-control-center sound",
     "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
   },
