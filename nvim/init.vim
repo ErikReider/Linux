@@ -615,6 +615,8 @@ set expandtab
 set clipboard=unnamedplus
 " Select with mouse
 set mouse=a
+" Shows the 80 char line
+set colorcolumn=80
 
 set encoding=UTF-8
 
