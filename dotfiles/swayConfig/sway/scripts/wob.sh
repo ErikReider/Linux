@@ -65,8 +65,8 @@ case $1 in
         ;;
     "lower")
         res=$(brightnessctl info | sed -En 's/.*\(([0-9]+)%\).*/\1/p' 2>&1)
-        if [[ $res -eq 0 ]]; then
-            inc=$+0%
+        if [[ $res -lt $backlight_inc ]]; then
+            inc=+0%
         else
             inc="$backlight_inc"%-
         fi
