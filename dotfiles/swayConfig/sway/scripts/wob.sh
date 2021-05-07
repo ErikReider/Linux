@@ -13,7 +13,7 @@ if [[ "$1" == "--init" ]]; then
 
     # Special case for keyboard brightness
     res=$(brightnessctl --device='*kbd_backlight' get 2>&1)
-    if [[ "$res" == *"not found"* ]]; then
+    if [[ "$res" != *"not found"* ]]; then
         max=$(brightnessctl --device='*kbd_backlight' m)
         item="/tmp/wob_keyboard_brightness_pipe"
         rm $item
