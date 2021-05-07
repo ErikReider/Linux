@@ -4,23 +4,26 @@ if [[ "$1" == "--init" ]]; then
     # Wait until the processes have been shut down
     while pgrep -u $UID -x wob >/dev/null; do sleep 1; done
 
+    wob_cmd='wob -p 0 -M 0 -b 0 -H 34 --background-color #E6000000 --bar-color #CCFFFFFF'
+
     dirs=("/tmp/wob_volume_pipe" "/tmp/wob_backlight_pipe")
     for item in ${dirs[@]}; do
         rm $item
         mkfifo $item
-        tail -f $item | wob &
+        tail -f $item | $wob_cmd &
     done
 
     # Special case for keyboard brightness
     res=$(brightnessctl --device='*kbd_backlight' get 2>&1)
+    item="/tmp/wob_keyboard_brightness_pipe"
+    rm $item
     if [[ "$res" != *"not found"* ]]; then
         max=$(brightnessctl --device='*kbd_backlight' m)
-        item="/tmp/wob_keyboard_brightness_pipe"
-        rm $item
         mkfifo $item
-        tail -f $item | wob -m $max &
+        tail -f $item | $wob_cmd -m $max &
     fi
     unset $res
+    unset $item
 
     exit 0
 fi
