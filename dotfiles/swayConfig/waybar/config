@@ -139,6 +139,7 @@
     "format-ethernet": "",
     "format-linked": "",
     "format-disconnected": "",
+    "format-disabled": "",
     "on-click": "gnome-control-center network",
     "tooltip-format": "{}",
     "tooltip-format-ethernet": "{ipaddr}"

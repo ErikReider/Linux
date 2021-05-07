@@ -116,8 +116,8 @@ window#waybar.solo {
 }
 
 /* #battery.charging { */
-  /* color: #ffffff; */
-  /* background-color: #26a65b; */
+/* color: #ffffff; */
+/* background-color: #26a65b; */
 /* } */
 
 @keyframes blink {
@@ -170,6 +170,10 @@ label:focus {
 #network.linked {
   opacity: 0.4;
   /* font-family: TerminessTTF Nerd Font Mono; */
+}
+
+#network.disconnected.ethernet {
+    margin: 0;
 }
 
 #pulseaudio.muted {
