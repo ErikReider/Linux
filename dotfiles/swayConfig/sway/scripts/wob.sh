@@ -61,7 +61,12 @@ case $1 in
         inc=+"$backlight_inc"%
         ;;
     "lower")
-        inc="$backlight_inc"%-
+        res=$(brightnessctl info | sed -En 's/.*\(([0-9]+)%\).*/\1/p' 2>&1)
+        if [[ $res -eq 0 ]]; then
+            inc=$+0%
+        else
+            inc="$backlight_inc"%-
+        fi
         ;;
     *)
         echo "not correct!"
