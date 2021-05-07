@@ -54,20 +54,13 @@ read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]; then
     pamac install github-desktop-bin visual-studio-code-bin google-chrome android-studio nautilus-copy-path android-messages-desktop-bin dotnet-sdk neovim jq dart mailspring
 
-    sudo pacman -Syy --needed discord auto-cpufreq jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm bash-completion alacritty manjaro-bluetooth
+    sudo pacman -Syy --needed discord jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm bash-completion alacritty manjaro-bluetooth
 
     sudo flatpak install Spotify
 
     sudo snap install flutter --classic
 
     pip install jedi
-
-    read -p "Do you wish to install all apps? [y/n] " install_app_var
-    if [[ $install_app_var = y ]]; then
-        echo ""
-    fi
-    systemctl start auto-cpufreq
-    systemctl enable auto-cpufreq
 fi
 echo ""
 ##
