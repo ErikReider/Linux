@@ -2,6 +2,7 @@
 
 if [[ $1 == "-i" ]]; then
     pamac install --no-upgrade \
+        wob \
         wl-clipboard \
         gammastep \
         wdisplays \
