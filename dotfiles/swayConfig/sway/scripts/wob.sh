@@ -55,7 +55,7 @@ case $1 in
     ;;
 
 "backlight")
-    file="/tmp/wob_keyboard_brightness_pipe"
+    file="/tmp/wob_backlight_pipe"
     case $2 in
     "raise")
         inc=+"$backlight_inc"%
@@ -73,7 +73,7 @@ case $1 in
     ;;
 
 "keyboard")
-    file="/tmp/wob_backlight_pipe"
+    file="/tmp/wob_keyboard_brightness_pipe"
     value=$(brightnessctl --device='*kbd_backlight' get 2>&1)
     if [[ "$value" == *"not found"* ]]; then exit 0; fi
     ;;
