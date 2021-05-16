@@ -1,15 +1,7 @@
 #!/bin/bash
 
-blackList=("gammastep" "redshift" "geary")
-for file in $(ls $HOME/.config/autostart/); do
-    found=false
-    for item in ${blackList[@]}; do
-        if [[ "$file" == *"$item"* ]]; then 
-            found=true
-            break
-        fi
-    done
-    if [[ $found == false ]]; then 
-        gtk-launch $file &
+for file in $HOME/.config/autostart/*.desktop; do
+    if ! grep -q "Hidden=true" "$file"; then
+        gtk-launch `basename $file` &
     fi
 done
