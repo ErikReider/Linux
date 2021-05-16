@@ -1,15 +1,19 @@
 #!/bin/bash
 
+cmd='i3-msg'
+
+if [[ $(which i3-msg) -eq *"not found"* ]]; then cmd='swaymsg'; fi
+
 if [[ "$#" != 0 ]]; then
-    current=`i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2`
-    currentNum=`i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num'`
+    current=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2)
+    currentNum=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')
     # Capitalize the first letter in each word
-    name=`echo $@ | sed -e "s/\b\(.\)/\u\1/g"`
+    name=$(echo $@ | sed -e "s/\b\(.\)/\u\1/g")
     if [[ ! $@ =~ [0-9] ]]; then
         # No numbers
         index=1
         changed=false
-        for i in `i3-msg -t get_workspaces | jq '.[].num' | sort -n`; do
+        for i in $(i3-msg -t get_workspaces | jq '.[].num' | sort -n); do
             # Check for smallest avilable number
             if [[ ! "$index" == "$i" ]]; then
                 # Checks if the selected number is smaller than the current wp number
