@@ -24,6 +24,8 @@ Plug 'preservim/nerdcommenter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/tagalong.vim'
+" Auto tabwidth and style detection
+Plug 'tpope/vim-sleuth'
 
 " Color Scheme
 Plug 'tomasiser/vim-code-dark'
@@ -592,11 +594,11 @@ noremap <A-Down> :m+ <CR>
 "{{{ General
 set number
 syntax on
-set shiftwidth=4
+" set shiftwidth=4
 set smartindent
 set autoindent
 set smarttab
-set cindent
+" set cindent
 " set softtabstop=4
 " set tabstop=4
 set splitbelow
@@ -610,7 +612,7 @@ set hlsearch
 " Reloads open file on external modification
 setlocal autoread
 " always uses spaces instead of tab characters
-set expandtab
+" set expandtab
 " Yank to clipboard
 set clipboard=unnamedplus
 " Select with mouse
