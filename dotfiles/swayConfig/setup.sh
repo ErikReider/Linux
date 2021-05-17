@@ -34,27 +34,27 @@ if [[ $1 == "-i" ]]; then
         kitty \
         geoclue \
         geocode-glib \
-        pacdep \
-        sway
+        pacdep
 
     yay -S clipman aur/autotiling
 
-    pamac install pod2man
+    yay -S pod2man
 
     # AUR
-    pamac install --no-upgrade \
+    yay -S \
+        sway-git \
+        wlroots-git \
         faba-icon-theme \
         waybar-git \
         xdg-desktop-portal-wlr-git \
         dunst-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
-        i3lock-fancy-rapid-git \
-        polkit-gnome-gtk2 \
+        polkit-gnome \
         rofi-emoji \
         ttf-material-icons-git \
         ttf-weather-icons
-    
+
     libtool --finish /usr/lib/rofi/
 fi
 
