@@ -42,6 +42,7 @@ if [[ $change_to_bash_var = y ]]; then
     # Set password feedback
     read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
     if [[ $visudo_var = y ]]; then
+        export EDITOR=/usr/bin/nvim
         sudo visudo
     fi
     source ~/.zshrc
@@ -52,15 +53,15 @@ echo ""
 ## Applications
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]; then
-    pamac install pamixer github-desktop-bin visual-studio-code-bin google-chrome android-studio nautilus-copy-path android-messages-desktop-bin dotnet-sdk neovim jq dart mailspring
+    pamac install pamixer github-desktop-bin visual-studio-code-bin google-chrome nautilus-copy-path dotnet-sdk neovim jq dart mailspring noisetorch-git
 
-    sudo pacman -Syy --needed discord jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm bash-completion alacritty manjaro-bluetooth noisetorch-git
+    sudo pacman -Syy --needed discord jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm alacritty manjaro-bluetooth yarn
 
     sudo flatpak install Spotify
 
-    sudo snap install flutter --classic
-
     pip install jedi
+
+    sudo snap install flutter --classic
 fi
 echo ""
 ##
@@ -68,9 +69,10 @@ echo ""
 ## Neovim
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
-    pamac install ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server
-    sudo pacman -Syu --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt
-    pip install cpplint
+    pamac install ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git
+    sudo pacman -Syu --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
+    pip install cpplint neovim
+    npm install -g neovim
 
     # Install digestif for latex
     wget -P ~/.local/bin https://raw.githubusercontent.com/astoff/digestif/master/scripts/digestifi
