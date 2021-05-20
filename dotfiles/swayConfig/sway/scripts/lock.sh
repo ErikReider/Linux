@@ -15,7 +15,7 @@ if [[ "$1" == "--lock" ]]; then
         --separator-color 00000000 \
         --fade-in 0.2
 else
-    xset s off -dpms
+    xset s off
     # Killall these prev processes
     killall -9 xss-lock
     killall -9 swayidle
