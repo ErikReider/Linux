@@ -3,6 +3,7 @@
 if [[ $1 == "-i" ]]; then
     pamac install --no-upgrade \
         wob \
+        xss-lock \
         wl-clipboard \
         gammastep \
         wdisplays \
