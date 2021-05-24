@@ -17,11 +17,17 @@ def listen_type(type: str):
             for info in li:
                 if info.state._value == "running":
                     running = True
+                    break
             string = "RUNNING" if running else "NOT RUNNING"
-            if len(args) > 2 and args[2] == "--json":
-                jsonOutput = {"text": string, "tooltip": string,
-                              "alt": string, "class": "USINGMIC"}
-                string = json.dumps(jsonOutput)
+            if len(args) > 2:
+                if args[2] == "--json":
+                    jsonOutput = {"text": string, "tooltip": string,
+                                  "alt": string, "class": "USINGMIC"}
+                    string = json.dumps(jsonOutput)
+                elif args[2] == "--once":
+                    sys.stdout.write(string + "\n")
+                    exit(0)
+
             sys.stdout.write(string + "\n")
 
         print_events(None)

@@ -87,8 +87,7 @@
   "custom/usingMic": {
     "format": "{icon}",
     "format-icons": {
-      "RUNNING": "  ",
-      "NOT RUNNING": ""
+      "RUNNING": "  "
     },
     "return-type": "json",
     "exec": "python -u ~/.config/sway/scripts/pulse_events.py source --json"

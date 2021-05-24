@@ -13,6 +13,7 @@ if [[ $1 == "-i" ]]; then
         swayidle \
         wallutils \
         wlogout \
+        caffeinated \
         kanshi \
         grim \
         slurp \
