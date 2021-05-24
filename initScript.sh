@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 
-flatpak install flathub --system org.gtk.Gtk3theme.Adwaita-dark
-flatpak install flathub --user org.gtk.Gtk3theme.Adwaita-dark
-sudo flatpak override --filesystem=~/.themes
-
-## Power Managment
-read -p "Do you wish to enable powermanagment? [y/n] " power_var
-if [[ $power_var = y ]]; then
-    pamac install tlp tlpui powertop
-    currPWD=$PWD
-    cd ./services/powertune
-    ./init.sh
-    cd $currPWD
+## Flatpak theme override
+read -p "Do you wish to enable flatpatk theme override? [y/n] " flatpakTheme
+if [[ $flatpakTheme = y ]]; then
+    flatpak install flathub --system org.gtk.Gtk3theme.Adwaita-dark
+    flatpak install flathub --user org.gtk.Gtk3theme.Adwaita-dark
+    sudo flatpak override --filesystem=~/.themes
 fi
 echo ""
 ##
@@ -72,7 +66,7 @@ if [[ $vim_var = y ]]; then
     pamac install ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git
     sudo pacman -Syu --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
     pip install cpplint neovim
-    npm install -g neovim
+    sudo npm install -g neovim
 
     # Install digestif for latex
     wget -P ~/.local/bin https://raw.githubusercontent.com/astoff/digestif/master/scripts/digestifi
