@@ -17,6 +17,7 @@
     "tray",
     "custom/ArchUpdates",
     "custom/dunst",
+    "custom/usingMic",
     "pulseaudio",
     "bluetooth",
     "network#wifi",
@@ -82,6 +83,15 @@
     "interval": 15,
     "exec": "~/.config/waybar/scripts/dunst.sh",
     "on-click": "dunstctl set-paused toggle; pkill -SIGRTMIN+6 waybar"
+  },
+  "custom/usingMic": {
+    "format": "{icon}",
+    "format-icons": {
+      "RUNNING": "  ",
+      "NOT RUNNING": ""
+    },
+    "return-type": "json",
+    "exec": "python -u ~/.config/sway/scripts/pulse_events.py source --json"
   },
   "custom/airplane": {
     "format": "{icon}",
