@@ -1,14 +1,4 @@
 // vim: ft=jsonc
-// 
-// 
-// 
-// 
-//
-//
-//
-//
-//
-
 {
   "layer": "top",
   "position": "top",
@@ -25,19 +15,16 @@
   "modules-center": ["sway/workspaces"],
   "modules-right": [
     "tray",
-    "custom/wallpaperRefresh",
     "custom/ArchUpdates",
     "custom/dunst",
     "pulseaudio",
-    // "custom/airplane",
-    // "custom/bluetooth",
     "bluetooth",
     "network#wifi",
     "network#ethernet",
     "clock"
   ],
   "custom/linux": {
-    "format": "<span font='16' font_family='Roboto'></span>",
+    "format": "<span font='14' font_family='Roboto'></span>",
     "on-click": "alacritty -e $SHELL -c 'neofetch; read'"
   },
   "sway/workspaces": {
