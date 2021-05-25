@@ -1,8 +1,0 @@
-#boxy {
-    height: 100px;
-    width: 90vw;
-    background-color: grey;
-    display: grid;
-    grid-auto-flow: column;
-    margin: auto;
-}
