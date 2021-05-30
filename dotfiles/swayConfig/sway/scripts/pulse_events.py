@@ -3,35 +3,42 @@ import sys
 import json
 
 
-pulseInfo = pulsectl.Pulse("info")
-
-
 def listen_type(type: str):
     with pulsectl.Pulse(type) as pulse:
-        def print_events(ev):
+        def print_events(ev = None):
             if type == "sink":
                 li = pulseInfo.sink_list()
             else:
                 li = pulseInfo.source_list()
+
             running = False
             for info in li:
                 if info.state._value == "running":
                     running = True
                     break
-            string = "RUNNING" if running else "NOT RUNNING"
-            if len(args) > 2:
-                if args[2] == "--json":
-                    jsonOutput = {"text": string, "tooltip": string,
-                                  "alt": string, "class": "USINGMIC"}
-                    string = json.dumps(jsonOutput)
-                elif args[2] == "--once":
-                    sys.stdout.write(string + "\n")
-                    exit(0)
 
-            sys.stdout.write(string + "\n")
+            state = "RUNNING" if running else "NOT RUNNING"
+            if "--json" in args:
+                names: list[str] = []
+                for e in pulseInfo.source_output_list():
+                    name = e.proplist["media.name"]
+                    if "application.name" in e.proplist:
+                        name = e.proplist["application.name"]
+                    names.append("• " + name)
 
-        print_events(None)
+                state = json.dumps({
+                    "text": state,
+                    "tooltip": "\n".join(names),
+                    "alt": state,
+                    "class": state
+                })
 
+            sys.stdout.write(state + "\n")
+            if "--once" in args:
+                exit(0)
+
+
+        print_events()
         pulse.event_mask_set(type)
         pulse.event_callback_set(print_events)
         pulse.event_listen()
@@ -48,6 +55,7 @@ if __name__ == "__main__":
         arg = args[1]
 
         if arg == "sink" or arg == "source":
+            pulseInfo = pulsectl.Pulse("info")
             listen_type(arg)
         else:
             print("Wrong argument (sink or source)")
