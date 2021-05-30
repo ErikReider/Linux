@@ -6,7 +6,7 @@
 }
 {
     "label" : "logout",
-    "action" : "swaymsg exit",
+    "action" : "loginctl terminate-session self",
     "text" : "Logout",
     "keybind" : "e",
 }
