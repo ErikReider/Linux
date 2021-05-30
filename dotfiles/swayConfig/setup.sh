@@ -64,12 +64,12 @@ pip install pulsectl
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("sway" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty" "xdg-desktop-portal-wlr" "wlogout")
+dirs=("sway" "wayfire/wayfire.ini" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty" "xdg-desktop-portal-wlr" "wlogout")
 
 for item in ${dirs[@]}; do
     name=$(basename $item)
     rm -r ./$name
-    ln -s $currentDir/$item/ ./$name
+    ln -s $currentDir/$item ./$name
 done
 
 # Kanshi
