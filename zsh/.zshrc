@@ -74,17 +74,7 @@ ZSH_CUSTOM="${HOME}/.oh-my-zsh-custom/"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting history-substring-search)
 
 ### Fix slowness of pastes with zsh-syntax-highlighting.zsh
-pasteinit() {
-  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
-}
-
-pastefinish() {
-  zle -N self-insert $OLD_SELF_INSERT
-}
-zstyle :bracketed-paste-magic paste-init pasteinit
-zstyle :bracketed-paste-magic paste-finish pastefinish
-### Fix slowness of pastes
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -209,6 +199,7 @@ if hash gnome-keyring-daemon 2>/dev/null; then
   eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
   export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 fi
+
 export TERM=alacritty
 export ANDROID_SDK_ROOT=/home/$USER/Android/Sdk
 
