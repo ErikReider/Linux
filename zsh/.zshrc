@@ -1,3 +1,4 @@
+# vim: ft=sh
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -147,14 +148,12 @@ bindkey '^H' backward-kill-word                                 # delete previou
 bindkey '^[[Z' undo                                             # Shift+tab undo last action
 
 ## Alias section
-alias vim="nvim"
 alias cp="cp -i"                                                # Confirm before overwriting something
 alias lsa="ls -a"
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
 alias clear="printf '\033[2J\033[3J\033[1;1H'; clear"
-alias cls="clear"
 alias play="ffplay -nostats -hide_banner -nodisp -autoexit"
 
 alias pacu='pamac checkupdates --aur -q'
@@ -198,7 +197,9 @@ export LESS=-r
 
 
 ### Custom
-export CHROME_EXECUTABLE=google-chrome-stable
+if hash chromium 2>/dev/null; then
+  export CHROME_EXECUTABLE=chromium
+fi
 
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
@@ -210,6 +211,8 @@ export TERM=alacritty
 export ANDROID_SDK_ROOT=/home/$USER/Android/Sdk
 
 
-export DOTNET_ROOT=/usr/share/dotnet
-export MSBuildSDKsPath=$DOTNET_ROOT/sdk/$(${DOTNET_ROOT}/dotnet --version)/Sdks
-export PATH=${PATH}:${DOTNET_ROOT}
+if hash dotnet 2>/dev/null; then
+  export DOTNET_ROOT=/usr/share/dotnet
+  export MSBuildSDKsPath=$DOTNET_ROOT/sdk/$(${DOTNET_ROOT}/dotnet --version)/Sdks
+  export PATH=${PATH}:${DOTNET_ROOT}
+fi
