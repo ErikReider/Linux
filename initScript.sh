@@ -13,7 +13,7 @@ echo ""
 ## ZSH
 read -p "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var = y ]]; then
-    pamac install zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
+    yay -S zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
     sudo chsh --shell=/bin/zsh $USER
 
     currentDir=$PWD
@@ -64,8 +64,8 @@ echo ""
 ## Neovim
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
-    pamac install ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git
-    sudo pacman -Syu --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
+    yay -S ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git
+    sudo pacman -Syyu --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
     pip install cpplint neovim
     sudo npm install -g neovim
 
