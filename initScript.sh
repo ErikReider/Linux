@@ -22,13 +22,11 @@ if [[ $change_to_bash_var = y ]]; then
     rm -rf .oh-my-zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     # Remove provided configs and themes
-    rm .zshrc
-    rm -rf .oh-my-zsh/custom
+    rm -rf .oh-my-zsh/custom .oh-my-zsh-custom .zshrc
 
     ln -s $currentDir/zsh/.zshrc .zshrc
-    cd .oh-my-zsh
-    ln -s $currentDir/zsh/custom custom
-    cd custom/plugins
+    ln -s $currentDir/zsh/.oh-my-zsh-custom .
+    cd .oh-my-zsh-custom/plugins
     ln -s /usr/share/zsh/plugins/* .
 
     cd $currentDir/
