@@ -6,6 +6,7 @@ if [[ $1 == "-i" ]]; then
         xss-lock \
         wl-clipboard \
         gammastep \
+        wlsunset \
         wdisplays \
         wf-recorder \
         grim \
