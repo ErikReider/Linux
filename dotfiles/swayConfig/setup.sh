@@ -6,7 +6,6 @@ if [[ $1 == "-i" ]]; then
         xss-lock \
         wl-clipboard \
         gammastep \
-        wlsunset \
         wdisplays \
         wf-recorder \
         grim \
@@ -47,6 +46,7 @@ if [[ $1 == "-i" ]]; then
     yay -S \
         sway-git \
         wlroots-git \
+        wlsunset-git \
         faba-icon-theme \
         waybar-git \
         xdg-desktop-portal-wlr-git \
