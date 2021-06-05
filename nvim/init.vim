@@ -1,3 +1,5 @@
+" vim: foldmethod=marker
+
 "{{{ Plug
 
 if empty(glob('~/.config/nvim/plugged'))
@@ -104,6 +106,8 @@ let g:suda_smart_edit = 1
 "{{{ FZF
 
 nnoremap <C-f> :FZF<CR>
+nnoremap <A-S-f> :Ag<CR>
+let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-i': 'split',
@@ -132,14 +136,19 @@ inoremap <silent> <c-c> <c-c>:call tagalong#Apply()<cr>
 "}}}
 
 "{{{ NERDCommenter
+
+let g:NERDSpaceDelims = 1
+let g:NERDCustomDelimiters = { 'dosini': { 'left': '#' } }
+
 nmap <C-c> <plug>NERDCommenterToggle
 vmap <C-c> <plug>NERDCommenterToggle
+vmap <C-x> <plug>NERDCommenterSexy
 
-let g:NERDCustomDelimiters = { 'dosini': { 'left': '#' } }
 "}}}
 
 "{{{ NERDTree
 nmap <C-n> :NERDTreeToggle <CR>
+nmap <C-m> :NERDTreeFocus <CR>
 
 let g:NERDTreeGitStatusWithFlags = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -155,7 +164,6 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
     "\ "Ignored"   : "#808080"
     "\ }
 
-let g:NERDSpaceDelims = 1
 let g:NERDTreeIgnore = ['^node_modules$']
 
 " sync open file with NERDTree
@@ -322,6 +330,7 @@ let g:coc_global_extensions = [
     \ "coc-styled-components",
     \ "coc-solargraph",
     \ "coc-clangd"]
+
 " from readme
 " if hidden is not set, TextEdit might fail.
 set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
@@ -582,6 +591,7 @@ let g:rainbow_conf = {
 "}}}
 
 "{{{ General map
+
 " Duplicate line
 function Duplicate ()
   set clipboard=""
@@ -615,6 +625,13 @@ nnoremap <silent> <A-Right> :tabn<CR>
 
 noremap <A-Up> :m-2 <CR>
 noremap <A-Down> :m+ <CR>
+
+" Move window with arrow keys
+nnoremap <silent> <C-S-Left> :wincmd h<CR>
+nnoremap <silent> <C-S-Down> :wincmd j<CR>
+nnoremap <silent> <C-S-Up> :wincmd k<CR>
+nnoremap <silent> <C-S-Right> :wincmd l<CR>
+
 "}}}
 
 "{{{ General
@@ -624,12 +641,19 @@ syntax on
 set smartindent
 set autoindent
 set smarttab
-" set cindent
-" set softtabstop=4
-" set tabstop=4
+" Defaults for new files
+set expandtab
+set tabstop=4
+set shiftwidth=4
+" Split direction
 set splitbelow
 set splitright
-set foldmethod=marker
+
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+" set foldlevel=2
+
 filetype plugin on
 set cursorline
 set wildmenu

@@ -144,6 +144,7 @@ alias df='df -h'                                                # Human-readable
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
 alias clear="printf '\033[2J\033[3J\033[1;1H'; clear"
+alias cls="clear"
 alias play="ffplay -nostats -hide_banner -nodisp -autoexit"
 
 alias pacu='pamac checkupdates --aur -q'
@@ -156,7 +157,7 @@ alias paclg='pamac list -i | grep -e'
 
 alias nvimcfg="nvim ~/.config/nvim/init.vim"
 alias zshcfg="nvim ~/.zshrc"
-alias src="source ~/.zshrc"
+alias src="exec zsh"
 
 function mkcd { 
     mkdir $1

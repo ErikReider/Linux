@@ -62,7 +62,7 @@ echo ""
 ## Neovim
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
-    yay -S ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git
+    yay -S ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git the_silver_searcher bat
     sudo pacman -Syyu --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
     pip install cpplint neovim
     sudo npm install -g neovim
