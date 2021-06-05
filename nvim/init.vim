@@ -13,6 +13,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'lambdalisue/suda.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -27,6 +28,9 @@ Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/tagalong.vim'
 " Auto tabwidth and style detection
 Plug 'tpope/vim-sleuth'
+" Searching
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " Color Scheme
 Plug 'tomasiser/vim-code-dark'
@@ -89,6 +93,22 @@ Plug 'cofyc/vim-uncrustify', {'for': 'vala'}
 Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
 
 call plug#end()
+"}}}
+
+" {{{ suda.vim
+
+let g:suda_smart_edit = 1
+
+" }}}
+
+"{{{ FZF
+
+nnoremap <C-f> :FZF<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-i': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
 "}}}
 
 "{{{ vim-closetag
@@ -563,7 +583,12 @@ let g:rainbow_conf = {
 
 "{{{ General map
 " Duplicate line
-nmap <C-d> yyp
+function Duplicate ()
+  set clipboard=""
+  :normal yyp
+  set clipboard=unnamedplus
+endfunction
+nmap <C-d> :call Duplicate() <CR>
 " Open terminal
 map å :split term://zsh<CR>
 " reload file on ctrl+r
