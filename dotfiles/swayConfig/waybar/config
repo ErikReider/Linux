@@ -169,7 +169,7 @@
     "tooltip": false,
     "signal": 9,
     "exec": "~/.config/waybar/scripts/updates-pacman-aurhelper.sh",
-    "on-click": "alacritty -e $SHELL -c 'pamac checkupdates --aur -q; yay -Syyu; flatpak update; sudo snap refresh'; pkill -SIGRTMIN+9 waybar"
+    "on-click": "alacritty -e $SHELL -c '~/.config/waybar/scripts/arch_update.sh'; pkill -SIGRTMIN+9 waybar"
   },
   "custom/weather": {
     "format": "<span font_family='Weather Icons'>{icon}</span> {}",
