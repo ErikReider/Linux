@@ -34,6 +34,12 @@ Plug 'tpope/vim-sleuth'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" Better language syntax
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Better bufferline
+" Plug 'akinsho/nvim-bufferline.lua'
+
 " Color Scheme
 Plug 'tomasiser/vim-code-dark'
 
@@ -105,7 +111,7 @@ let g:suda_smart_edit = 1
 
 "{{{ FZF
 
-nnoremap <C-f> :FZF<CR>
+nnoremap <silent> <expr> <C-f> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
 nnoremap <A-S-f> :Ag<CR>
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:fzf_action = {
@@ -113,6 +119,8 @@ let g:fzf_action = {
   \ 'ctrl-i': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+" Prevent open in NERDTree
+" au BufEnter * if bufname('#') =~ 'NERD_tree' && bufname('%') !~ 'NERD_tree' && winnr('$') > 1 | b# | exe "normal! \<c-w>\<c-w>" | :blast | endif
 "}}}
 
 "{{{ vim-closetag
@@ -590,6 +598,12 @@ let g:rainbow_conf = {
 
 "}}}
 
+" {{{ bufferline
+
+let g:airline#extensions#tabline#enabled = 0
+
+" }}}
+
 "{{{ General map
 
 " Duplicate line
@@ -643,7 +657,7 @@ set autoindent
 set smarttab
 " Defaults for new files
 set expandtab
-set tabstop=4
+set tabstop=2
 set shiftwidth=4
 " Split direction
 set splitbelow
