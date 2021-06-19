@@ -8,3 +8,5 @@ touchpadWhitelist
 owm_config.json
 temp_devices.json
 .generated_settings/
+.zcompdump
+zsh/plugins
