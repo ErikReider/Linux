@@ -17,16 +17,15 @@ if [[ $change_to_bash_var = y ]]; then
     sudo chsh --shell=/bin/zsh $USER
 
     currentDir=$PWD
-    # Init ohmyzsh
     cd $HOME
-    rm -rf .oh-my-zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     # Remove provided configs and themes
-    rm -rf .oh-my-zsh/custom .oh-my-zsh-custom .zshrc
+    rm -rf zsh .zshrc
 
     ln -s $currentDir/zsh/.zshrc .zshrc
-    ln -s $currentDir/zsh/.oh-my-zsh-custom .
-    cd .oh-my-zsh-custom/plugins
+    ln -s $currentDir/zsh .
+
+    mkdir zsh/plugins
+    cd zsh/plugins
     ln -s /usr/share/zsh/plugins/* .
 
     cd $currentDir/
@@ -37,7 +36,6 @@ if [[ $change_to_bash_var = y ]]; then
         export EDITOR=/usr/bin/nvim
         sudo visudo
     fi
-    source ~/.zshrc
 fi
 echo ""
 ##
@@ -62,7 +60,7 @@ echo ""
 ## Neovim
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
-    yay -S ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git the_silver_searcher bat
+    yay -S ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git the_silver_searcher bat ripgrep
     sudo pacman -Syyu --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
     pip install cpplint neovim
     sudo npm install -g neovim
