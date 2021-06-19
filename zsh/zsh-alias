@@ -1,0 +1,47 @@
+alias _="sudo"
+
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
+
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
+alias -- -='cd -'
+alias 1='cd -'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
+alias 8='cd -8'
+alias 9='cd -9'
+
+alias md='mkdir -p'
+alias rd=rmdir
+
+alias cp="cp -i" # Confirm before overwriting something
+alias lsa="ls -a"
+alias df='df -h'     # Human-readable sizes
+alias free='free -m' # Show sizes in MB
+alias gitu='git add . && git commit && git push'
+alias clear="printf '\033[2J\033[3J\033[1;1H'; clear"
+alias cls="clear"
+alias play="ffplay -nostats -hide_banner -nodisp -autoexit"
+
+alias pacu='pamac checkupdates --aur -q'
+alias pacup='sudo pamac upgrade --aur'
+alias paci='sudo pamac install'
+alias pacr='sudo pamac remove'
+alias pacs='pamac search'
+alias pacl='pamac list -i'
+alias paclg='pamac list -i | grep -e'
+
+alias nvimcfg="nvim ~/.config/nvim/init.vim"
+alias zshcfg="nvim ~/.zshrc"
+alias src="exec zsh"
+
+alias ls='ls --color=auto'

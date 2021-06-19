@@ -1,0 +1,16 @@
+# autoload -Uz compinit
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zmodload -i zsh/complist
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Include hidden files.
+_comp_options+=(globdots)
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+# Case insensitive
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
