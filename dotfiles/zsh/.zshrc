@@ -20,8 +20,3 @@ zsh_add_file "zsh-git-bindings"
 zsh_add_plugin "plugins/zsh-autosuggestions"
 zsh_add_plugin "plugins/zsh-syntax-highlighting"
 zsh_add_plugin "plugins/zsh-history-substring-search"
-# Plugin Configs
-zsh_add_file "plugin-conf/zsh-autosuggestions"
-zsh_add_file "plugin-conf/zsh-syntax-highlighting"
-zsh_add_file "plugin-conf/zsh-history-substring-search"
-
