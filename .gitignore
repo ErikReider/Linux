@@ -2,11 +2,11 @@ __pycache__
 .vscode
 pack/
 autoload/
-nvim/plugged/
 settings
 touchpadWhitelist
 owm_config.json
 temp_devices.json
 .generated_settings/
 .zcompdump
-zsh/plugins
+dotfiles/zsh/plugins
+dotfiles/nvim/plugged/

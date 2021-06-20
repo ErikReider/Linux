@@ -9,8 +9,6 @@ nmap <C-d> :call Duplicate() <CR>
 map å :split term://zsh<CR>
 " reload file on ctrl+r
 map <F5> :checktime <CR> :CocRestart <CR>
-" Use ESC to exit insert mode in :term
-tnoremap <Esc> <C-\><C-n>
 " Use ESC to clear highlights
 map <esc><esc> :nohl<CR>
 " open init.vim on ,

@@ -16,7 +16,7 @@ if [[ $change_to_bash_var = y ]]; then
     yay -S zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
     sudo chsh --shell=/bin/zsh $USER
 
-    currentDir=$PWD
+    currentDir=$PWD/dotfiles
     cd $HOME
     # Remove provided configs and themes
     rm -rf zsh .zshrc
@@ -69,7 +69,7 @@ if [[ $vim_var = y ]]; then
     wget -P ~/.local/bin https://raw.githubusercontent.com/astoff/digestif/master/scripts/digestifi
     chmod +x ~/.local/bin/digestif
 
-    currentDir=$PWD
+    currentDir=$PWD/dotfiles
     cd ~/.config/
     rm -rf nvim
 

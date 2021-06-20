@@ -40,7 +40,7 @@ window:
   # - none: neither borders nor title bar
   # - transparent: title bar, transparent background and title bar buttons
   # - buttonless: title bar, transparent background, but no title bar buttons
-  decorations: none
+  decorations: full
 
   # Startup Mode (changes require restart)
   #
@@ -63,12 +63,36 @@ scrolling:
   multiplier: 3
 
 # Font configuration (changes require restart)
+
+font:
+  normal:
+    family: monospace
+    style: Regular
+
+  bold:
+    family: monospace
+    style: Bold
+
+  italic:
+    family: monospace
+    style: Italic
+
+  bold_italic:
+    family: monospace
+    style: Bold Italic
+
+  size: 11
+
 # font:
 # The normal (roman) font face to use.
 # Style can be specified to pick a specific face.
-# normal:
-# family: Iosevka
-# style: Light
+  # normal:
+    # family: monospace
+    # family: "Source Code Pro"
+    # family: "input"
+    # family: "fira"
+    # family: "Input Mono"
+# style: Regular
 # family: "Fira Code"
 # family: "Source Code Pro"
 # style: Retina
