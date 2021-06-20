@@ -2,7 +2,7 @@ __pycache__
 .vscode
 pack/
 autoload/
-plugged/
+nvim/plugged/
 settings
 touchpadWhitelist
 owm_config.json

@@ -44,7 +44,7 @@ echo ""
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]; then
     sudo pacman -S pacaur
-    yay -S pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim jq dart mailspring noisetorch-git
+    yay -S pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim-nightly-bin jq dart mailspring noisetorch-git
 
     sudo pacman -Syy --needed discord jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm alacritty manjaro-bluetooth yarn
 
@@ -74,7 +74,7 @@ if [[ $vim_var = y ]]; then
     rm -rf nvim
 
     ln -s $currentDir/nvim nvim
-    cd $currentDir/..
+    cd $currentDir
 
     sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
