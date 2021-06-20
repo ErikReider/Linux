@@ -20,6 +20,7 @@ source ~/.config/nvim/config/plugged/vim-latex-live-preview.vim
 source ~/.config/nvim/config/plugged/vim-prettier.vim
 source ~/.config/nvim/config/plugged/vim-startify.vim
 source ~/.config/nvim/config/plugged/indentLine.vim
+source ~/.config/nvim/config/plugged/airline.vim
 luafile ~/.config/nvim/config/plugged/treesitter.lua
 
 " NeoVim Settings
