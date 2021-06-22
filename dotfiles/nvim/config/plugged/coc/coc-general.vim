@@ -1,30 +1,10 @@
-let g:coc_global_extensions = [
-    \ 'coc-highlight',
-    \ 'coc-snippets',
-    \ 'coc-pairs',
-    \ 'coc-tsserver',
-    \ 'coc-eslint',
-    \ 'coc-prettier',
-    \ 'coc-json',
-    \ 'coc-python',
-    \ "coc-sh",
-    \ "coc-markdownlint",
-    \ "coc-flutter",
-    \ "coc-css",
-    \ "coc-html",
-    \ "coc-emmet",
-    \ "coc-xml",
-    \ "coc-svg",
-    \ "coc-react-refactor",
-    \ "coc-styled-components",
-    \ "coc-solargraph",
-    \ "coc-lua",
-    \ "coc-clangd"]
-
-" from readme
 " if hidden is not set, TextEdit might fail.
-set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
+set hidden
+" Better display for messages set cmdheight=2
+set cmdheight=2
+" You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
+set timeoutlen=500
 
 set completeopt=longest,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -83,8 +63,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
 nnoremap <silent> K :call CocAction('doHover')<CR>
 
@@ -104,8 +82,8 @@ augroup mygroup
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
@@ -113,10 +91,10 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Create mappings for function text object, requires document symbols feature of languageserver.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
+" xmap if <Plug>(coc-funcobj-i)
+" xmap af <Plug>(coc-funcobj-a)
+" omap if <Plug>(coc-funcobj-i)
+" omap af <Plug>(coc-funcobj-a)
 
 " Use `:Format` to format current buffer
 " command! -nargs=0 Format :call CocAction('format')
@@ -128,7 +106,7 @@ map <expr><C-M-b> CocHasProvider("format") ? '<Plug>(coc-format)' : ':call Custo
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
@@ -145,8 +123,8 @@ nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <space>ä  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <space>ö  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>

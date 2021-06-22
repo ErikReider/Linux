@@ -1,0 +1,10 @@
+{
+  "filetype": {
+    "typescriptreact": {
+      "run": {
+        "description": "run the project",
+        "command": "!yarn start"
+      }
+    }
+  }
+}

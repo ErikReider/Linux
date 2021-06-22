@@ -1,8 +1,10 @@
 " Init Plug
 source ~/.config/nvim/config/plug.vim
 
+" Coc
+source ~/.config/nvim/config/plugged/coc/coc.vim
+
 " Plug configs
-source ~/.config/nvim/config/plugged/coc.vim
 source ~/.config/nvim/config/plugged/css.vim
 source ~/.config/nvim/config/plugged/fzf.vim
 source ~/.config/nvim/config/plugged/gitgitter.vim

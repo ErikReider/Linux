@@ -12,13 +12,18 @@
     "vala": {
       "command": "vala-language-server",
       "filetypes": ["vala", "genie"]
-    },
-    "efm": {
-      "command": "efm-langserver",
-      "args": ["-c", "~/.config/efm-langserver/config.yaml"],
-      "filetypes": ["vim", "nvim", "eruby", "markdown"]
     }
   },
+  "cSpell.language": "en,sv",
+  "cSpell.dictionaries": ["swedish"],
+  "html-css-support.enabledLanguages": [
+    "html",
+    "vue",
+    "blade",
+    "htmldjango",
+    "typescriptreact",
+    "javascriptreact"
+  ],
   "tsserver.enableJavascript": true,
   "javascript.showUnused": true,
   "javascript.validate.enable": true,
