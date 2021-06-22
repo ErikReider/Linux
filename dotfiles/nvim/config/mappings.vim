@@ -7,10 +7,7 @@ endfunction
 nmap <C-d> :call Duplicate() <CR>
 
 " Closes on escape if not a terminal window
-function TerminalEscape ()
-    if split(expand("%"), ':')[-1] != $SHELL | :q! | endif
-endfunction
-tmap <Esc> <C-\><C-n>:call TerminalEscape() <CR>
+tmap <silent> <expr> <Esc> (split(expand("%"), ':')[-1] != $SHELL? "<C-\><C-n>:q!<CR>" : "<C-\><C-n>")
 
 " Opens selected link in xdg default browser
 " https://vim.fandom.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
@@ -34,8 +31,8 @@ map <silent> <home> g<home>
 map <silent> <End> g<End>
 
 " Switch tabs
-nnoremap <C-TAB> :tabn<CR>
-nnoremap <C-S-TAB> :tabp<CR>
+nmap <TAB> :tabn<CR>
+nmap <S-TAB> :tabp<CR>
 
 noremap <A-Up> :m-2 <CR>
 noremap <A-Down> :m+ <CR>
