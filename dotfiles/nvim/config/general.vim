@@ -11,7 +11,7 @@ set smarttab
 " Defaults for new files
 set expandtab
 set tabstop=4
-set shiftwidth=4
+set shiftwidth=2
 
 " Split direction
 set splitbelow
