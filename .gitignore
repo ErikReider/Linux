@@ -9,4 +9,4 @@ temp_devices.json
 .generated_settings/
 .zcompdump
 dotfiles/zsh/plugins
-dotfiles/nvim/plugged/
+dotfiles/nvim/plugged
