@@ -44,6 +44,9 @@ echo ""
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]; then
     sudo pacman -S --noconfirm --needed pacaur python-pip yay flatpak snapd
+
+    sudo systemctl enable --now snapd
+
     yay -S --noconfirm --needed pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim-nightly-bin jq dart mailspring noisetorch-git
 
     sudo pacman -S --noconfirm --needed discord npm alacritty manjaro-bluetooth yarn
