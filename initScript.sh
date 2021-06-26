@@ -43,10 +43,15 @@ echo ""
 ## Applications
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]; then
-    sudo pacman -S pacaur python-pip yay flatpak snapd
-    yay -S pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim-nightly-bin jq dart mailspring noisetorch-git
+    sudo pacman -S --noconfirm --needed pacaur python-pip yay flatpak snapd
+    yay -S --noconfirm --needed pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim-nightly-bin jq dart mailspring noisetorch-git
 
-    sudo pacman -Syy --needed discord jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm alacritty manjaro-bluetooth yarn
+    sudo pacman -S --noconfirm --needed discord npm alacritty manjaro-bluetooth yarn
+
+    read -p "Do you wish to install java?" install_java
+    if [[ $install_java = y ]]; then
+        sudo pacman -S --noconfirm --needed jre-openjdk jre-openjdk-headless jdk-openjdk
+    fi
 
     sudo flatpak install Spotify
 
