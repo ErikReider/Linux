@@ -43,7 +43,7 @@ echo ""
 ## Applications
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]; then
-    sudo pacman -S pacaur
+    sudo pacman -S pacaur python-pip yay flatpak snapd
     yay -S pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim-nightly-bin jq dart mailspring noisetorch-git
 
     sudo pacman -Syy --needed discord jdk-openjdk jdk11-openjdk jdk8-openjdk jre-openjdk jre-openjdk-headless jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless nodejs npm alacritty manjaro-bluetooth yarn
@@ -60,7 +60,7 @@ echo ""
 ## Neovim
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
-    yay -S ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git the_silver_searcher bat ripgrep efm-langserver vint
+    yay -S ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git the_silver_searcher bat ripgrep efm-langserver vint lua-format ueberzug
     sudo pacman -Syyu --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
     pip install cpplint neovim
     sudo npm install -g neovim
