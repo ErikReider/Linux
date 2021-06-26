@@ -43,17 +43,17 @@ echo ""
 ## Applications
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]; then
-    sudo pacman -S --noconfirm --needed pacaur python-pip yay flatpak snapd
+    sudo pacman -S --needed pacaur python-pip yay flatpak snapd
 
     sudo systemctl enable --now snapd
 
-    yay -S --noconfirm --needed pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim-nightly-bin jq dart mailspring noisetorch-git
+    yay -S --needed pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim-nightly-bin jq dart mailspring noisetorch-git
 
-    sudo pacman -S --noconfirm --needed discord npm alacritty manjaro-bluetooth yarn
+    sudo pacman -S --needed discord npm alacritty manjaro-bluetooth yarn
 
     read -p "Do you wish to install java?" install_java
     if [[ $install_java = y ]]; then
-        sudo pacman -S --noconfirm --needed jre-openjdk jre-openjdk-headless jdk-openjdk
+        sudo pacman -S --needed jre-openjdk jre-openjdk-headless jdk-openjdk
     fi
 
     sudo flatpak install Spotify
@@ -68,8 +68,8 @@ echo ""
 ## Neovim
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
-    yay -S --noconfirm --needed neovim-nightly-bin ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git the_silver_searcher bat ripgrep efm-langserver vint lua-format ueberzug
-    sudo pacman -S --noconfirm --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
+    yay -S --needed neovim-nightly-bin ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git the_silver_searcher bat ripgrep efm-langserver vint lua-format ueberzug
+    sudo pacman -S --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
     pip install cpplint neovim
     sudo npm install -g neovim
 
