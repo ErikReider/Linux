@@ -17,7 +17,7 @@ nnoremap <silent>gx :silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\|%")<CR><
 " open init.vim on F4 (split if buffer is selected)
 map <silent> <expr> <F3> expand('%') == '' ? ':e $MYVIMRC <cr>' : ':vsplit $MYVIMRC <cr>'
 " Source on F5
-map <F4> :checktime <CR> :so $MYVIMRC \| redraw! <CR> :CocRestart <CR>
+map <F4> :checktime <CR> :so $MYVIMRC \| redraw! <CR>
 
 " Use ESC to clear highlights
 map <esc><esc> :nohl<CR>

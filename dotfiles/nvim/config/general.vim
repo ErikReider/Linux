@@ -1,5 +1,8 @@
+" Show line number
 set number
-syntax on
+
+" Easier to read long lines
+set linebreak
 
 " Do smart autoindenting when starting a new line
 set smartindent

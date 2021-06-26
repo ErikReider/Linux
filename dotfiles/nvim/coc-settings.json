@@ -14,6 +14,25 @@
       "filetypes": ["vala", "genie"]
     }
   },
+  "Lua.workspace.library": {
+    "/usr/share/nvim/runtime/lua": true,
+    "/usr/share/nvim/runtime": true
+  },
+  "Lua.runtime.version": "LuaJIT",
+  "Lua.telemetry.enable": false,
+  "Lua.workspace.maxPreload": 2000,
+  "Lua.workspace.preloadFileSize": 1000,
+  "Lua.diagnostics.enable": true,
+  "Lua.diagnostics.globals": [
+    "hs",
+    "vim",
+    "it",
+    "describe",
+    "before_each",
+    "after_each"
+  ],
+  "Lua.diagnostics.disable": ["lowercase-global"],
+  "lua.checkForUpdates": "ask",
   "cSpell.language": "en,sv",
   "cSpell.dictionaries": ["swedish"],
   "html-css-support.enabledLanguages": [

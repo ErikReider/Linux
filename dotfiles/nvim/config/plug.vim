@@ -1,5 +1,5 @@
 if empty(glob('~/.config/nvim/plugged'))
-silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 autocmd VimEnter * PlugInstall --sync | source $MYVIMRC | call mkdp#util#install()
 endif
@@ -19,7 +19,8 @@ Plug 'p00f/nvim-ts-rainbow'
 " Indent indicators
 Plug 'Yggdroot/indentLine'
 " Start Screen
-Plug 'mhinz/vim-startify'
+Plug 'glepnir/dashboard-nvim'
+" Plug 'mhinz/vim-startify'
 " To save write-protected files
 Plug 'lambdalisue/suda.vim'
 " Coc LSP
@@ -62,6 +63,8 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'z0mbix/vim-shfmt', { 'for': ['sh', 'zsh', 'bash'] }
 " Vala uncrustify formatter
 Plug 'cofyc/vim-uncrustify', {'for': 'vala'}
+" Lua formatter
+Plug 'andrejlevkovitch/vim-lua-format', {'for': 'lua'}
 
 
 
@@ -93,6 +96,12 @@ Plug 'digitaltoad/vim-pug', {'for': 'pug'}
 "" LSP servers
 " Latex
 Plug 'astoff/digestif'
+
+
+
+" Completion sources
+" Lua nvim source
+Plug 'rafcamlet/coc-nvim-lua'
 
 
 

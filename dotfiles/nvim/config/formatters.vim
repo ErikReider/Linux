@@ -1,6 +1,8 @@
 function CustomFormatter()
     if (&ft == 'vala')
         :call Uncrustify('VALA')
+    elseif (&ft == 'lua')
+        :call LuaFormat()
     elseif (match([ 'sh', 'zsh', 'bash' ], &ft) == 0)
         :Shfmt -i 4
     else
