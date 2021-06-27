@@ -1,13 +1,13 @@
 local map = vim.api.nvim_set_keymap
 
 -- Duplicate line
-map('n', '<C-d>', ':exe \'set clipboard=""\' | exe \'normal yyp\' | exe \'set clipboard="unnamedplus"\'<CR>', {silent = true})
+map('n', '<C-d>', ':exe \'set clipboard=""\' | exe \'normal yyp\' | exe \'set clipboard=unnamedplus\'<CR>', {silent = true})
 
 -- Closes on escape if not a terminal window
 function _G.terminalNormalMode()
   local buffer = tostring(vim.api.nvim_eval("expand('%')"))
   local command = ""
-  if (vim.env.SHELL ~= string.sub(buffer, buffer:match'^.*():' + 1, buffer.len())) then
+  if (vim.env.SHELL ~= string.sub(buffer, buffer:match'^.*():' + 1, string.len(buffer))) then
     command = ":q!<CR>"
   end
   return vim.api.nvim_replace_termcodes("<C-\\><C-n>" .. command, true, true, true)
