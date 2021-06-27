@@ -48,7 +48,7 @@ vim.o.backup = false
 vim.o.writebackup = false
 
 -- Always show top tabline
-vim.o.showtabline = 2
+vim.o.showtabline=2
 
 vim.cmd("filetype plugin on")
 
@@ -64,10 +64,8 @@ vim.o.hlsearch = true
 -- Reloads open file on external modification
 vim.bo.autoread = true
 
--- always uses spaces instead of tab characters
--- vim.o.expandtab
 -- Yank to clipboard
-vim.o.clipboard = "unnamedplus"
+vim.cmd('set clipboard=unnamedplus')
 
 -- Select with mouse
 vim.o.mouse = "a"
