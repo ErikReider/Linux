@@ -2,7 +2,7 @@
 source ~/.config/nvim/config/plug.vim
 
 " NeoVim general settings
-source ~/.config/nvim/config/general.vim
+luafile ~/.config/nvim/config/general.lua
 source ~/.config/nvim/config/autoLoad.vim
 source ~/.config/nvim/config/setFiletype.vim
 source ~/.config/nvim/config/vimEnter.vim
