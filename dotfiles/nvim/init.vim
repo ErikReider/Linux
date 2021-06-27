@@ -24,4 +24,4 @@ for f in split(glob('~/.config/nvim/config/plugged/*.lua'), '\n')
 endfor
 
 " Other NeoVim settings
-source ~/.config/nvim/config/mappings.vim
+source ~/.config/nvim/config/mappings.lua
