@@ -13,4 +13,5 @@ vim.api.nvim_set_keymap('n', '<C-m>', ":NERDTreeFind <CR>", {})
 
 vim.api.nvim_set_var("NERDTreeGitStatusWithFlags", 1)
 vim.api.nvim_set_var("WebDevIconsUnicodeDecorateFolderNodes", 1)
+vim.api.nvim_set_var("NERDTreeShowHidden", 1)
 vim.api.nvim_set_var("NERDTreeIgnore", {'^node_modules$'})
