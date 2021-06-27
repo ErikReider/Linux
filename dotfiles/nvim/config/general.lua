@@ -24,7 +24,7 @@ vim.o.splitright = true
 -- Max nested folds
 vim.o.foldnestmax = 10
 -- Turn off auto folding on start
-vim.o.foldenable = true
+vim.o.foldenable = false
 -- vim.o.foldlevel=2
 
 -- Makes popup menu smaller
