@@ -48,7 +48,7 @@ function enableFunction() {
     list
     if [ "$source" == "" ]; then exit 1; fi
     disableFunction
-    pactl load-module module-loopback latency_msec=1 sink=@DEFAULT_SINK@ source=$source
+    pactl load-module module-loopback latency_msec=1 source=$source
 }
 
 case "$1" in
