@@ -8,9 +8,13 @@ function showHelp() {
     echo "  $(basename $0) -r, --remove     Unloads the loopback module"
 }
 
+function disableFunction() {
+    pactl unload-module module-loopback
+}
+
 function getActiveIndex() {
-    defaultDevice=$(pactl info | grep "Default $search" | awk '{print $3}')
-    allDevices=$(pactl list $type short | awk '{ print $1 " " $2 }')
+    defaultDevice=$(pactl info | grep "Default Source" | awk '{print $3}')
+    allDevices=$(pactl list sources short | awk '{ print $1 " " $2 }')
     for device in $allDevices; do
         if [[ $(echo $device | awk '{print $2}') == $defaultDevice ]]; then
             activeIndex=$(echo $device | awk '{print $1}')
@@ -20,41 +24,31 @@ function getActiveIndex() {
 }
 
 function list() {
-    if [ "$1" == "input" ]; then
-        type="sources"
-        search="Source"
-    elif [ "$1" == "output" ]; then
-        type="sinks"
-        search="Sink"
-    fi
-
     getActiveIndex
-    allDevices=$(pactl list $type short | awk '{print $1 " " $2}' | sed -n '/monitor/!p')
+    allDevices=$(pactl list sources short | awk '{print $1 " " $2}' |
+        sed -n '/monitor/!p')
+    devices=()
     for device in $allDevices; do
-        index=$(echo $device | awk '{print $1}')
-        if (($activeIndex == $index)); then device="*$device"; fi
-        echo "  Index: "${device//"Name: "/} | sed 's/\t/ /; s/alsa_output.//; s/alsa_input.//'
+        local index=$(echo $device | awk '{print $1}')
+        device=$(echo $device | awk '{print $2}')
+        if (($activeIndex == $index)); then
+            device="* $device"
+        else
+            device="  $device"
+        fi
+        devices+=(${device} " ")
     done
+
+    source=$(whiptail --menu "Select Input/Source" 0 0 0 \
+        ${devices[@]} 3>&1 1>&2 2>&3 |
+        awk -F " " '{ if ($2) {print $2} else {print $1} }')
 }
 
 function enableFunction() {
-    echo "Loopback module:"
-    #input
-    list "input"
-    read -p "Select Input/Source Index: " source_index
-    if [ "$source_index" == "" ]; then source_index=$activeIndex; fi
-    #output
-    list "output"
-    read -p "Select Output/Sink Index: " sink_index
-    if [ "$sink_index" == "" ]; then sink_index=$activeIndex; fi
-    #load module
-    pactl load-module module-loopback latency_msec=1 source=$source_index sink=$sink_index
-    echo "Input: $source_index Output: $sink_index"
-    echo "Loopback device created"
-}
-
-function disableFunction() {
-    pactl unload-module module-loopback
+    list
+    if [ "$source" == "" ]; then exit 1; fi
+    disableFunction
+    pactl load-module module-loopback latency_msec=1 sink=@DEFAULT@ source=$source
 }
 
 case "$1" in
