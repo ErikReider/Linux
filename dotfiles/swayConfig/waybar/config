@@ -10,6 +10,7 @@
     "cpu",
     "memory",
     "custom/weather",
+    "custom/media",
     "sway/mode"
   ],
   "modules-center": ["sway/workspaces"],
@@ -54,6 +55,18 @@
   "memory": {
     "interval": 10,
     "format": " {used:0.2f} GiB"
+  },
+  "custom/media": {
+    "escape": true,
+    "format": " {icon}{}",
+    "return-type": "json",
+    "format-icons": {
+      "Playing": " ",
+      "Paused": " "
+    },
+    "max-length": 35,
+    "exec": "playerctl metadata --format '{\"text\": \"{{title}}\", \"tooltip\": \"{{playerName}} : {{title}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause"
   },
   "backlight": {
     // "device": "acpi_video1",
