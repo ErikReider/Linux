@@ -13,7 +13,6 @@ if [[ $1 == "-i" ]]; then
         swayidle \
         wallutils \
         wlogout \
-        caffeinated \
         kanshi \
         grim \
         slurp \
@@ -38,7 +37,7 @@ if [[ $1 == "-i" ]]; then
         geocode-glib \
         pacdep
 
-    yay -S clipman aur/autotiling
+    yay -S clipman aur/autotiling caffeinated
 
     yay -S pod2man
 
