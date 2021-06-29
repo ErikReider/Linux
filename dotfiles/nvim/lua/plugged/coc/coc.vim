@@ -1,8 +1,8 @@
-source ~/.config/nvim/config/plugged/coc/coc-general.vim
+source ~/.config/nvim/lua/plugged/coc/coc-general.vim
 let g:coc_global_extensions = []
 
 " Source all .vim files
-for f in split(glob('~/.config/nvim/config/plugged/coc/configs/*.vim'), '\n')
+for f in split(glob('~/.config/nvim/lua/plugged/coc/configs/*.vim'), '\n')
     exe 'source' f
 endfor
 

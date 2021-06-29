@@ -1,6 +1,9 @@
 -- Show line number
 vim.o.number = true
 
+-- Key timeout eg. leader timeout
+vim.o.timeoutlen = 750
+
 -- Easier to read long lines
 vim.o.linebreak = true
 
@@ -28,7 +31,7 @@ vim.o.foldenable = false
 -- vim.o.foldlevel=2
 
 -- Makes popup menu smaller
-vim.o.pumheight = 10
+vim.o.pumheight = 30
 
 -- treat dash separated words as a word text object"
 vim.cmd('set iskeyword+=-')
@@ -48,7 +51,7 @@ vim.o.backup = false
 vim.o.writebackup = false
 
 -- Always show top tabline
-vim.o.showtabline=2
+vim.o.showtabline = 2
 
 vim.cmd("filetype plugin on")
 

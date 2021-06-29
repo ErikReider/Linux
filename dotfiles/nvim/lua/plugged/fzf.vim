@@ -23,4 +23,4 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-i': 'split',
-  \ 'ctrl-v': 'vsplit' }
+  \ 'ctrl-s': 'vsplit' }
