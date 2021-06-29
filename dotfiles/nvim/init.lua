@@ -9,7 +9,7 @@ vim.cmd("source ~/.config/nvim/lua/autoLoad.vim")
 vim.cmd("source ~/.config/nvim/lua/setFiletype.vim")
 vim.cmd("source ~/.config/nvim/lua/vimEnter.vim")
 vim.cmd("source ~/.config/nvim/lua/formatters.vim")
-vim.cmd("source ~/.config/nvim/lua/theme.vim")
+vim.cmd("luafile ~/.config/nvim/lua/theme.lua")
 
 -- Coc
 vim.cmd("source ~/.config/nvim/lua/plugged/coc/coc.vim")
