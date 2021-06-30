@@ -1,6 +1,8 @@
 #!/bin/bash
 IFS=$'\n'
 
+latency=50
+
 function showHelp() {
     # Display Help
     echo "Options:"
@@ -48,7 +50,7 @@ function enableFunction() {
     list
     if [ "$source" == "" ]; then exit 1; fi
     disableFunction
-    pactl load-module module-loopback latency_msec=1 source=$source
+    pactl load-module module-loopback latency_msec=$latency source=$source
 }
 
 case "$1" in
