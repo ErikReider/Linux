@@ -6,18 +6,30 @@ import json
 def listen_type(type: str):
     with pulsectl.Pulse(type) as pulse:
         def print_events(ev=None):
+            running = False
             if type == "sink":
-                li = pulseInfo.sink_input_list()
+                li = pulseInfo.sink_list()
+                for info in li:
+                    if info.state._value == "running":
+                        running = True
             else:
                 li = pulseInfo.source_output_list()
+                running = len(li) > 0
 
-            state = "RUNNING" if len(li) > 0 else "NOT RUNNING"
+            state = "RUNNING" if running else "NOT RUNNING"
             if "--json" in args:
                 names: list[str] = []
                 for e in li:
-                    name = e.proplist["media.name"]
-                    if "application.name" in e.proplist:
-                        name = e.proplist["application.name"]
+                    name= ""
+                    if type == "sink":
+                        if e.state._value != "running":
+                            continue
+                        name = e.name
+                    else:
+                        if "media.name" in e.proplist:
+                            name = e.proplist["media.name"]
+                        if "application.name" in e.proplist:
+                            name = e.proplist["application.name"]
                     names.append("• " + name)
 
                 state = json.dumps({
