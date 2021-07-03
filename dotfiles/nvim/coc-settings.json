@@ -33,6 +33,7 @@
   ],
   "Lua.diagnostics.disable": ["lowercase-global"],
   "lua.checkForUpdates": "ask",
+  "cSpellExt.enableDictionaries": ["swedish"],
   "cSpell.language": "en,sv",
   "cSpell.dictionaries": ["swedish"],
   "html-css-support.enabledLanguages": [
