@@ -20,7 +20,6 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'Yggdroot/indentLine'
 " Start Screen
 Plug 'glepnir/dashboard-nvim'
-" Plug 'mhinz/vim-startify'
 " To save write-protected files
 Plug 'lambdalisue/suda.vim'
 " Coc LSP
