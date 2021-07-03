@@ -57,5 +57,5 @@ map("n", "<M-S-Left>", ":vertical resize +2 <CR>", {silent = true, noremap = tru
 -- Better indenting
 map("v", "<", "<gv", {silent = true, noremap = true})
 map("v", ">", ">gv", {silent = true, noremap = true})
-map("", "<A-Left>", "<<", {silent = true, noremap = true})
-map("", "<A-Right>", ">>", {silent = true, noremap = true})
+map("", "<A-Left>", "<", {silent = true, noremap = false})
+map("", "<A-Right>", ">", {silent = true, noremap = false})
