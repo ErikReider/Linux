@@ -45,3 +45,8 @@ alias zshcfg="nvim ~/.zshrc"
 alias src="exec zsh"
 
 alias ls='ls --color=auto'
+
+# Disowns application
+function diso() {
+    2>/dev/null 1>&2 $1 &; disown
+}
