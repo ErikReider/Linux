@@ -19,12 +19,12 @@ map('t', '<Esc>', 'v:lua.terminalNormalMode()', {silent = true, expr = true})
 map("n", "gx", ':silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\\|%")<CR><CR>', {silent = true})
 
 -- open init.vim on F3 (split if buffer is selected)
-map("", "<F3>", "expand('%') == '' ? ':e $MYVIMRC <cr>' : ':vsplit $MYVIMRC <cr>'", {silent = true, expr = true})
+map("n", "<F3>", "expand('%') == '' ? ':e $MYVIMRC <cr>' : ':vsplit $MYVIMRC <cr>'", {silent = true, expr = true})
 -- Source on F4
-map("", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR>", {})
+map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR>", {})
 
 -- Use ESC to clear highlights
-map("", "<Esc><Esc>", ":nohl<CR>", {})
+map("n", "<Esc><Esc>", ":nohl<CR>", {})
 
 -- k/j and up/down will move virtual lines (lines that wrap)
 map("n", "j", "(v:count == 0 ? 'gj' : 'j')", {noremap = false, silent = true, expr = true})
@@ -57,5 +57,7 @@ map("n", "<M-S-Left>", ":vertical resize +2 <CR>", {silent = true, noremap = tru
 -- Better indenting
 map("v", "<", "<gv", {silent = true, noremap = true})
 map("v", ">", ">gv", {silent = true, noremap = true})
-map("", "<A-Left>", "<", {silent = true, noremap = false})
-map("", "<A-Right>", ">", {silent = true, noremap = false})
+map("v", "<A-Left>", "<", {silent = true, noremap = false})
+map("v", "<A-Right>", ">", {silent = true, noremap = false})
+map("", "<A-Left>", "<<", {silent = true, noremap = false})
+map("", "<A-Right>", ">>", {silent = true, noremap = false})
