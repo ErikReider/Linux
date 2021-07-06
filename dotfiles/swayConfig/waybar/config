@@ -19,6 +19,7 @@
     "custom/ArchUpdates",
     "custom/dunst",
     "custom/usingMic",
+    "custom/usingAudio",
     "pulseaudio",
     "bluetooth",
     "network#wifi",
@@ -45,8 +46,7 @@
   },
   "clock": {
     "format": "{:%a %d %b %H:%M}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "cpu": {
     "format": "<span font_family='Material Icons' rise='-4000' size='large'></span> {usage}%",
@@ -104,6 +104,14 @@
     },
     "return-type": "json",
     "exec": "python -u ~/.config/sway/scripts/pulse_events.py source --json"
+  },
+  "custom/usingAudio": {
+    "format": "{icon}",
+    "format-icons": {
+      "RUNNING": "  "
+    },
+    "return-type": "json",
+    "exec": "python -u ~/.config/sway/scripts/pulse_events.py sink --json"
   },
   "custom/airplane": {
     "format": "{icon}",
