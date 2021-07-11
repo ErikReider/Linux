@@ -12,27 +12,46 @@
     "vala": {
       "command": "vala-language-server",
       "filetypes": ["vala", "genie"]
+    },
+    "lua": {
+      "command": "lua-language-server",
+      "filetypes": ["lua"],
+      "rootPatterns": [".git/"],
+      "settings": {
+        "Lua": {
+          "telemetry": {
+            "enable": false
+          },
+          "workspace": {
+            "library": {
+              "/usr/share/nvim/runtime/lua": true,
+              "/usr/share/nvim/runtime/lua/vim/lsp": true
+            },
+            "maxPreload": 2000,
+            "preloadFileSize": 1000
+          },
+          "runtime": {
+            "version": "LuaJIT"
+          },
+          "diagnostics": {
+            "enable": true,
+            "globals": [
+              "hs",
+              "vim",
+              "it",
+              "describe",
+              "before_each",
+              "after_each"
+            ],
+            "disable": ["lowercase-global"]
+          },
+          "completion": {
+            "keywordSnippet": "Disable"
+          }
+        }
+      }
     }
   },
-  "Lua.workspace.library": {
-    "/usr/share/nvim/runtime/lua": true,
-    "/usr/share/nvim/runtime/lua/vim/lsp": true
-  },
-  "Lua.runtime.version": "LuaJIT",
-  "Lua.telemetry.enable": false,
-  "Lua.workspace.maxPreload": 2000,
-  "Lua.workspace.preloadFileSize": 1000,
-  "Lua.diagnostics.enable": true,
-  "Lua.diagnostics.globals": [
-    "hs",
-    "vim",
-    "it",
-    "describe",
-    "before_each",
-    "after_each"
-  ],
-  "Lua.diagnostics.disable": ["lowercase-global"],
-  "lua.checkForUpdates": "ask",
   "cSpellExt.enableDictionaries": ["swedish"],
   "cSpell.language": "en,sv",
   "cSpell.dictionaries": ["swedish"],
@@ -87,5 +106,17 @@
     "constructor": "  ",
     "value": "  ",
     "enumMember": "  "
-  }
+  },
+  "cSpell.userWords": [
+    "Energiportalen",
+    "Gatunamn",
+    "Solcellsteknik",
+    "Solelproduktion",
+    "XMPP",
+    "clippy",
+    "popupclose",
+    "popupopen",
+    "solelanläggningar",
+    "växelriktare"
+  ]
 }

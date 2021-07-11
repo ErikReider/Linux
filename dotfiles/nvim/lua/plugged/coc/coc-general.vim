@@ -76,7 +76,7 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Format file on ctrl+alt+b
-map <expr><C-M-b> CocHasProvider("format") ? '<Plug>(coc-format)' : ':call CustomFormatter()<cr>'
+map <expr><C-M-b> CocHasProvider("format") ? '<Plug>(coc-format)' : ':Format <cr>'
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
