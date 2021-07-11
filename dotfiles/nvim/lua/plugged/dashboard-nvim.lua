@@ -1,6 +1,3 @@
-vim.cmd(
-    "autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2")
-
 vim.g.dashboard_custom_header = {
     ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
     ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
@@ -62,4 +59,3 @@ vim.api.nvim_set_keymap("n", "<Leader>sl", ":<C-u>SessionLoad<CR>", {})
 vim.api.nvim_set_keymap("n", "<Leader>n", ":DashboardNewFile<CR>",
                         {noremap = true, silent = true})
 vim.highlight.create("DashboardHeader", {ctermfg = "red"}, false)
-
