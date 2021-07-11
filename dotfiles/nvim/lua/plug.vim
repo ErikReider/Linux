@@ -52,6 +52,8 @@ Plug 'gregsexton/MatchTag', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx'] }
 Plug 'alvan/vim-closetag'
 " CSS color highlighter
 Plug 'ap/vim-css-color', {'for': ['css', 'less', 'scss', 'sass']}
+" Formatter.nvim
+Plug 'mhartington/formatter.nvim'
 
 
 

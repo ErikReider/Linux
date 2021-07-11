@@ -154,10 +154,6 @@ let g:coc_global_extensions = add(g:coc_global_extensions, "coc-react-refactor")
 " https://www.npmjs.com/package/coc-styled-components
 let g:coc_global_extensions = add(g:coc_global_extensions, "coc-styled-components")
 
-" coc-lua: lua extension for coc
-" https://github.com/josa42/coc-lua
-let g:coc_global_extensions = add(g:coc_global_extensions, "coc-lua")
-
 " coc-clangd: clangd extension for coc.nvim
 " https://github.com/clangd/coc-clangd
 let g:coc_global_extensions = add(g:coc_global_extensions, "coc-clangd")
