@@ -8,9 +8,9 @@ function _G.openNerdTree()
     end
     return vim.api.nvim_replace_termcodes(command .. "<CR>", true, true, true)
 end
-vim.api.nvim_set_keymap('n', '<C-S-n>', 'v:lua.openNerdTree()',
+vim.api.nvim_set_keymap('n', '<C-n>', 'v:lua.openNerdTree()',
                         {silent = true, expr = true})
-vim.api.nvim_set_keymap('n', '<C-n>', ':NERDTreeToggle <CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<A-S-n>', ':NERDTreeToggle <CR>', {silent = true})
 vim.api.nvim_set_keymap('n', '<C-m>', ":NERDTreeFind <CR>", {silent = true})
 
 vim.api.nvim_set_var("NERDTreeGitStatusWithFlags", 1)
