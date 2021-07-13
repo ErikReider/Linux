@@ -34,8 +34,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'ryanoasis/vim-devicons'
-" Git in gutter
-Plug 'airblade/vim-gitgutter'
 " Comments
 Plug 'preservim/nerdcommenter'
 " Add surrounding (), [], {}, etc...
@@ -54,16 +52,22 @@ Plug 'alvan/vim-closetag'
 Plug 'ap/vim-css-color', {'for': ['css', 'less', 'scss', 'sass']}
 " Formatter.nvim
 Plug 'mhartington/formatter.nvim'
+" Neovim lua functions
+Plug 'nvim-lua/plenary.nvim'
 
 
 
 "" Git
+" Git in gutter
+Plug 'airblade/vim-gitgutter'
 " Git commands in vim like`Git diff`
 Plug 'tpope/vim-fugitive'
 " GBrowse to open current file in browser
 Plug 'tpope/vim-rhubarb'
 " GV to open git log, gb to open in browser
 Plug 'junegunn/gv.vim'
+" Call lazygit
+Plug 'kdheepak/lazygit.nvim'
 
 
 
