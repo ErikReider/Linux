@@ -48,5 +48,5 @@ alias ls='ls --color=auto'
 
 # Disowns application
 function diso() {
-    2>/dev/null 1>&2 $1 &; disown
+    2>/dev/null 1>&2 $@ &; disown
 }
