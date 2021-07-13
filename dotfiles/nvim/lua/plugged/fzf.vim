@@ -12,6 +12,8 @@ function OpenFiles()
 endfunction
 nnoremap <silent> <C-f> :call OpenFiles() <CR>
 
+nnoremap <silent> <A-f> :GFiles <CR>
+
 nnoremap <silent> <expr> <A-S-f> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Rg\<CR>"
 nnoremap <silent> <expr> <A-S-d> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":BLines\<CR>"
 nnoremap <silent> <expr> <A-S-w> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Windows\<CR>"
