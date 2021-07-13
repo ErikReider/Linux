@@ -54,6 +54,8 @@ Plug 'ap/vim-css-color', {'for': ['css', 'less', 'scss', 'sass']}
 Plug 'mhartington/formatter.nvim'
 " Neovim lua functions
 Plug 'nvim-lua/plenary.nvim'
+" Plugin to persist and toggle multiple terminals during an editing session
+Plug 'akinsho/nvim-toggleterm.lua'
 
 
 
@@ -66,8 +68,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " GV to open git log, gb to open in browser
 Plug 'junegunn/gv.vim'
-" Call lazygit
-Plug 'kdheepak/lazygit.nvim'
 
 
 

@@ -1,5 +1,3 @@
-local map = vim.api.nvim_set_keymap
-
 -- Duplicate line
 map('n', '<C-d>', ':exe \'set clipboard=""\' | exe \'normal yyp\' | exe \'set clipboard=unnamedplus\'<CR>', {silent = true})
 

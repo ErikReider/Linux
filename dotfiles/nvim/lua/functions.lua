@@ -1,3 +1,5 @@
+map = vim.api.nvim_set_keymap
+
 function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, {...})
     print(unpack(objects))
