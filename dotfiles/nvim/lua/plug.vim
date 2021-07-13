@@ -57,6 +57,16 @@ Plug 'mhartington/formatter.nvim'
 
 
 
+"" Git
+" Git commands in vim like`Git diff`
+Plug 'tpope/vim-fugitive'
+" GBrowse to open current file in browser
+Plug 'tpope/vim-rhubarb'
+" GV to open git log, gb to open in browser
+Plug 'junegunn/gv.vim'
+
+
+
 "" Formatters
 " Prettier (html, css, js, etc...)
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -70,8 +80,23 @@ Plug 'andrejlevkovitch/vim-lua-format', {'for': 'lua'}
 "" Syntax
 " i3 syntax highlighting
 Plug 'mboughaba/i3config.vim'
+" JSON comment syntax support
+Plug 'kevinoid/vim-jsonc'
+" C/C++ highlight
+Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'h', 'cpp', 'hpp']}
+" Better JS, JSX  syntax
+Plug 'MaxMEllon/vim-jsx-pretty', {'for': ['js','jsx']}
+Plug 'othree/yajs.vim', {'for': ['js', 'jsx']}
+" Better TS, TSX syntax
+Plug 'ianks/vim-tsx', {'for': ['ts','tsx']}
+Plug 'HerringtonDarkholme/yats.vim', {'for': ['ts', 'tsx']}
+Plug 'leafgarland/typescript-vim', {'for': ['ts', 'tsx']}
 " Vala
 Plug 'arrufat/vala.vim', {'for': 'vala'}
+" Python
+Plug 'vim-python/python-syntax', {'for': 'py'}
+" Dart / Flutter
+Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
 " Pug
 Plug 'digitaltoad/vim-pug', {'for': 'pug'}
 
