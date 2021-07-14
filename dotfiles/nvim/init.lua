@@ -31,4 +31,5 @@ iterDir("~/.config/nvim/lua/custom/*.lua",
 
 
 -- Other NeoVim settings
+vim.cmd("luafile ~/.config/nvim/lua/custom/gitWindow.lua")
 vim.cmd("luafile ~/.config/nvim/lua/mappings.lua")
