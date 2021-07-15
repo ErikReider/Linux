@@ -64,7 +64,7 @@ local function open_floating_window(options)
     -- create border window
     api.nvim_open_win(border_buffer, true, border_opts)
     -- highlight colors
-    vim.cmd('set winhl=Normal:Floating')
+    vim.cmd('set winhl=Normal:Floating,CursorLine:PmenuSel')
 
     -- create a unlisted scratch buffer
     buf = api.nvim_create_buf(false, true)
@@ -72,6 +72,10 @@ local function open_floating_window(options)
     api.nvim_buf_set_lines(buf, 0, -1, true, optionNames)
     -- create file window, enter the window, and use the options defined in opts
     api.nvim_open_win(buf, true, opts)
+
+    api.nvim_win_set_option(0, 'cursorline', true)
+
+    api.nvim_buf_set_option(buf, 'modifiable', false)
 
     api.nvim_buf_set_keymap(buf, "n", "<Esc>", ":close<CR>",
                             {silent = true, nowait = true, noremap = true})

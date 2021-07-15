@@ -55,7 +55,7 @@ vim.o.showtabline = 2
 
 vim.cmd("filetype plugin on")
 
-vim.o.cursorline = true
+vim.cmd("set cursorline")
 
 vim.o.wildmenu = true
 
