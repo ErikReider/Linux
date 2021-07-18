@@ -27,27 +27,63 @@ local FloatingWindow = {}
 
 local function constructor(class, options)
     local self = setmetatable({}, class)
-    self.options = options
 
-    local optionNames = {}
-    local maxStringLength = 0
-    for _, v in pairs(options) do
-        local str = v["title"]
-        local len = string.len(str)
-        if len > maxStringLength then maxStringLength = len end
-        table.insert(optionNames, str)
+    -- create a unlisted scratch buffer for the border
+    self.border_buffer = api.nvim_create_buf(false, true)
+
+    -- create a unlisted scratch buffer
+    self.buf = api.nvim_create_buf(false, true)
+
+    api.nvim_buf_set_keymap(self.buf, "n", "<Esc>", ":close<CR>",
+                            {silent = true, nowait = true, noremap = true})
+
+    set_buf_keymap(self.buf, "n", "<Enter>", callback,
+                   {silent = true, nowait = true, noremap = true})
+
+    self:setOptions(options)
+
+    return self
+end
+
+function FloatingWindow:init(options) return constructor(self, options) end
+
+function FloatingWindow:setOptions(options)
+    api.nvim_buf_set_var(self.buf, "options", options)
+    self.options = {}
+    self.optionNames = {}
+    self.maxStringLength = 0
+
+    if type(options) == "table" and table.maxn(options) > 0 then
+        self.options = options
+        for _, v in pairs(options) do
+            local str = v["title"]
+            local len = string.len(str)
+            if len > self.maxStringLength then
+                self.maxStringLength = len
+            end
+            table.insert(self.optionNames, str)
+        end
+        if self.maxStringLength < 30 then self.maxStringLength = 20 end
     end
-    if maxStringLength < 30 then maxStringLength = 20 end
+end
+
+function FloatingWindow:show(options)
+    if type(options) == "table" then self:setOptions(options) end
+
+    if table.maxn(self.options) <= 0 then
+        print("No options provided for floating window")
+        return
+    end
 
     -- height and width of inner window
-    local height = table.maxn(optionNames)
-    local width = maxStringLength
+    local height = table.maxn(self.optionNames)
+    local width = self.maxStringLength
 
     -- Center window
     local row = math.ceil(vim.o.lines - height) / 2
     local col = math.ceil(vim.o.columns - width) / 2
 
-    self.border_opts = {
+    local border_opts = {
         style = 'minimal',
         relative = 'editor',
         row = row - 1,
@@ -56,7 +92,7 @@ local function constructor(class, options)
         height = height + 2
     }
 
-    self.opts = {
+    local opts = {
         style = 'minimal',
         relative = 'editor',
         row = row,
@@ -69,45 +105,25 @@ local function constructor(class, options)
     local corner_chars = {'╭', '╮', '╰', '╯'}
     topleft, topright, botleft, botright = unpack(corner_chars)
 
-    self.border_lines = {topleft .. string.rep('─', width) .. topright}
+    local border_lines = {topleft .. string.rep('─', width) .. topright}
     local middle_line = '│' .. string.rep(' ', width) .. '│'
-    for _ = 1, height do table.insert(self.border_lines, middle_line) end
-    table.insert(self.border_lines,
-                 botleft .. string.rep('─', width) .. botright)
+    for _ = 1, height do table.insert(border_lines, middle_line) end
+    table.insert(border_lines, botleft .. string.rep('─', width) .. botright)
 
-    -- create a unlisted scratch buffer for the border
-    self.border_buffer = api.nvim_create_buf(false, true)
-
-    -- create a unlisted scratch buffer
-    self.buf = api.nvim_create_buf(false, true)
-    api.nvim_buf_set_var(self.buf, "options", options)
-
-    -- Adds the options
-    api.nvim_buf_set_lines(self.buf, 0, -1, true, optionNames)
-
-    api.nvim_buf_set_option(self.buf, 'modifiable', false)
-
-    api.nvim_buf_set_keymap(self.buf, "n", "<Esc>", ":close<CR>",
-                            {silent = true, nowait = true, noremap = true})
-
-    set_buf_keymap(self.buf, "n", "<Enter>", callback,
-                   {silent = true, nowait = true, noremap = true})
-
-    return self
-end
-
-function FloatingWindow:init(options) return constructor(self, options) end
-
-function FloatingWindow:show()
     -- set border_lines in the border buffer from start 0 to end -1 and strict_indexing false
-    api.nvim_buf_set_lines(self.border_buffer, 0, -1, true, self.border_lines)
+    api.nvim_buf_set_lines(self.border_buffer, 0, -1, true, border_lines)
     -- create border window
-    api.nvim_open_win(self.border_buffer, true, self.border_opts)
+    api.nvim_open_win(self.border_buffer, true, border_opts)
     -- highlight colors
     vim.cmd('set winhl=Normal:Floating,CursorLine:PmenuSel')
 
+    -- Adds the options
+    api.nvim_buf_set_option(self.buf, 'modifiable', true)
+    api.nvim_buf_set_lines(self.buf, 0, -1, true, self.optionNames)
+    api.nvim_buf_set_option(self.buf, 'modifiable', false)
+
     -- create file window, enter the window, and use the options defined in opts
-    api.nvim_open_win(self.buf, true, self.opts)
+    api.nvim_open_win(self.buf, true, opts)
 
     api.nvim_win_set_option(0, 'cursorline', true)
 

@@ -12,10 +12,7 @@ local function getRunAction()
     for _, tbl in pairs(f5RunOptions) do
         for _, ft in pairs(tbl.filetypes) do
             if ft == filetype then
-                return {
-                    runCMD = tbl.runCMD,
-                    buildCMD = tbl.buildCMD
-                }
+                return {runCMD = tbl.runCMD, buildCMD = tbl.buildCMD}
             end
         end
     end
@@ -39,8 +36,8 @@ local function getF5Table()
     return f5Table
 end
 
-local popup = require("floatingWindow")(getF5Table())
+local popup = require("floatingWindow")()
 
-function _G.F5Show() popup:show() end
+function _G.F5Show() popup:show(getF5Table()) end
 
 map("n", "<F5>", ":lua F5Show()<CR>", {noremap = true, silent = true})
