@@ -10,10 +10,6 @@ endfor
 " https://www.npmjs.com/package/coc-highlight
 let g:coc_global_extensions = add(g:coc_global_extensions, "coc-highlight")
 
-" coc-f5: bind F5 with different filetype and list the preset commands to run.
-" https://www.npmjs.com/package/coc-f5
-let g:coc_global_extensions = add(g:coc_global_extensions, "coc-f5")
-
 " coc-style-helper: Write styles easier in JSX, provide a powerful auxiliary development functions in style files like CSS, SASS
 " https://github.com/PLDaily/coc-style-helper
 let g:coc_global_extensions = add(g:coc_global_extensions, "coc-style-helper")

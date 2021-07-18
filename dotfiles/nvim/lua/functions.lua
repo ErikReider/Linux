@@ -9,3 +9,18 @@ function _G.iterDir(dir, callback)
     local table = vim.api.nvim_eval("split(glob('" .. dir .. "'), '\n')")
     for _, f in ipairs(table) do callback(f) end
 end
+
+function _G.disownCMD(cmd) return "!2>/dev/null 1>&2 " .. cmd .. " &; disown" end
+
+function _G.runCmdInTerm(cmd, tryStayOpen)
+    local open = tryStayOpen == true and "; exec $SHELL" or ""
+    return disownCMD("$TERM -e $SHELL -c \'" .. cmd .. open .. "\'")
+end
+
+function _G.splitString(str, delimiter)
+    matches = {}
+    for substring in string.gmatch((str .. delimiter), "(.-)" .. delimiter) do
+        table.insert(matches, substring)
+    end
+    return matches
+end

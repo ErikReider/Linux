@@ -1,5 +1,19 @@
 local api = vim.api
 
+local function set_buf_keymap(buf, mode, key, callback, options)
+    local callback_string
+    if type(callback) == "string" then
+        callback_string = callback
+    elseif type(callback) == "function" then
+        if not _G.set_keymap_index then _G.set_keymap_index = 1 end
+        local index = _G.set_keymap_index
+        _G.set_keymap_index = _G.set_keymap_index + 1
+        _G["set_keymap_callback_" .. index] = callback
+        callback_string = "v:lua set_keymap_callback_" .. index .. "()<CR>"
+    end
+    api.nvim_buf_set_keymap(buf, mode, key, callback_string, options)
+end
+
 local function callback()
     local buf = vim.api.nvim_get_current_buf()
     local options = api.nvim_buf_get_var(buf, "options")
@@ -9,8 +23,12 @@ local function callback()
     vim.cmd(option)
 end
 
---- open floating window with nice borders
-local function open_floating_window(options)
+local FloatingWindow = {}
+
+local function constructor(class, options)
+    local self = setmetatable({}, class)
+    self.options = options
+
     local optionNames = {}
     local maxStringLength = 0
     for _, v in pairs(options) do
@@ -29,7 +47,7 @@ local function open_floating_window(options)
     local row = math.ceil(vim.o.lines - height) / 2
     local col = math.ceil(vim.o.columns - width) / 2
 
-    local border_opts = {
+    self.border_opts = {
         style = 'minimal',
         relative = 'editor',
         row = row - 1,
@@ -38,7 +56,7 @@ local function open_floating_window(options)
         height = height + 2
     }
 
-    local opts = {
+    self.opts = {
         style = 'minimal',
         relative = 'editor',
         row = row,
@@ -51,43 +69,54 @@ local function open_floating_window(options)
     local corner_chars = {'╭', '╮', '╰', '╯'}
     topleft, topright, botleft, botright = unpack(corner_chars)
 
-    local border_lines = {topleft .. string.rep('─', width) .. topright}
+    self.border_lines = {topleft .. string.rep('─', width) .. topright}
     local middle_line = '│' .. string.rep(' ', width) .. '│'
-    for _ = 1, height do table.insert(border_lines, middle_line) end
-    table.insert(border_lines, botleft .. string.rep('─', width) .. botright)
+    for _ = 1, height do table.insert(self.border_lines, middle_line) end
+    table.insert(self.border_lines,
+                 botleft .. string.rep('─', width) .. botright)
 
     -- create a unlisted scratch buffer for the border
-    local border_buffer = api.nvim_create_buf(false, true)
+    self.border_buffer = api.nvim_create_buf(false, true)
 
+    -- create a unlisted scratch buffer
+    self.buf = api.nvim_create_buf(false, true)
+    api.nvim_buf_set_var(self.buf, "options", options)
+
+    -- Adds the options
+    api.nvim_buf_set_lines(self.buf, 0, -1, true, optionNames)
+
+    api.nvim_buf_set_option(self.buf, 'modifiable', false)
+
+    api.nvim_buf_set_keymap(self.buf, "n", "<Esc>", ":close<CR>",
+                            {silent = true, nowait = true, noremap = true})
+
+    set_buf_keymap(self.buf, "n", "<Enter>", callback,
+                   {silent = true, nowait = true, noremap = true})
+
+    return self
+end
+
+function FloatingWindow:init(options) return constructor(self, options) end
+
+function FloatingWindow:show()
     -- set border_lines in the border buffer from start 0 to end -1 and strict_indexing false
-    api.nvim_buf_set_lines(border_buffer, 0, -1, true, border_lines)
+    api.nvim_buf_set_lines(self.border_buffer, 0, -1, true, self.border_lines)
     -- create border window
-    api.nvim_open_win(border_buffer, true, border_opts)
+    api.nvim_open_win(self.border_buffer, true, self.border_opts)
     -- highlight colors
     vim.cmd('set winhl=Normal:Floating,CursorLine:PmenuSel')
 
-    -- create a unlisted scratch buffer
-    buf = api.nvim_create_buf(false, true)
-    api.nvim_buf_set_var(buf, "options", options)
-    api.nvim_buf_set_lines(buf, 0, -1, true, optionNames)
     -- create file window, enter the window, and use the options defined in opts
-    api.nvim_open_win(buf, true, opts)
+    api.nvim_open_win(self.buf, true, self.opts)
 
     api.nvim_win_set_option(0, 'cursorline', true)
-
-    api.nvim_buf_set_option(buf, 'modifiable', false)
-
-    api.nvim_buf_set_keymap(buf, "n", "<Esc>", ":close<CR>",
-                            {silent = true, nowait = true, noremap = true})
-    api.nvim_buf_set_keymap(buf, "n", "<Enter>",
-                            ":lua require('floatingWindow').callback()<CR>",
-                            {silent = true, nowait = true, noremap = true})
 
     -- use autocommand to ensure that the border_buffer closes at the same time as the main buffer
     local cmd = [[autocmd WinLeave <buffer> silent! execute 'hide']]
     vim.cmd(cmd)
     cmd = [[autocmd WinLeave <buffer> silent! execute 'silent bdelete! %s']]
-    vim.cmd(cmd:format(border_buffer))
+    vim.cmd(cmd:format(self.border_buffer))
 end
 
-return {open = open_floating_window, callback = callback}
+return setmetatable({__index = FloatingWindow},
+                    {__call = constructor, __index = FloatingWindow})

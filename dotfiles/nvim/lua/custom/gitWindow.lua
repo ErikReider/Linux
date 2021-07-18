@@ -1,10 +1,12 @@
 -- Open git options
-local gitWindowOptions = vim.inspect({
+local popup = require("floatingWindow")({
     {title = "LazyGit", action = "LazyGit"},
     {title = "Git Diff", action = "Gdiffsplit"},
     {title = "Git log", action = "GV"},
-    {title = "Open in browser", action = "GBrowse"},
-}, {newline = '', indent = ""})
-map("n", "<Leader>g",
-    ":lua require('floatingWindow').open(" .. gitWindowOptions .. ")<CR>",
+    {title = "Open in browser", action = "GBrowse"}
+})
+
+function _G.GitWindowShow() popup:show() end
+
+map("n", "<Leader>g", ":lua GitWindowShow()<CR>",
     {noremap = true, silent = true})
