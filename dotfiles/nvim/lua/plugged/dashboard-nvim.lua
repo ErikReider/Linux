@@ -57,10 +57,10 @@
 -- "                                                                               "
 -- }
 -- vim.highlight.create("DashboardHeader", {ctermfg = "red", guifg = "red"}, false)
-vim.g.dashboard_preview_command = "cowsay"
+vim.g.dashboard_preview_command = "cat"
 vim.g.dashboard_preview_pipeline = "lolcat"
-vim.g.dashboard_preview_file = "NeoVim"
-vim.g.dashboard_preview_file_height = 8
+vim.g.dashboard_preview_file = "~/.config/nvim/neovim_cowsay.cat"
+vim.g.dashboard_preview_file_height = 12
 vim.g.dashboard_preview_file_width = 28
 
 vim.g.dashboard_custom_section = {
