@@ -1,4 +1,10 @@
-function shFunc() return {exe = "shfmt", args = {}, stdin = true} end
+function shFunc()
+    return {
+        exe = "shfmt",
+        args = {"-i 4", vim.api.nvim_buf_get_name(0)},
+        stdin = true
+    }
+end
 
 require('formatter').setup({
     logging = false,
