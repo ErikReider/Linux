@@ -10,6 +10,11 @@ function _G.iterDir(dir, callback)
     for _, f in ipairs(table) do callback(f) end
 end
 
+function _G.tableContains(table, val)
+    for i = 1, #table do if table[i] == val then return true end end
+    return false
+end
+
 function _G.disownCMD(cmd) return "!2>/dev/null 1>&2 " .. cmd .. " &; disown" end
 
 function _G.runCmdInTerm(cmd, tryStayOpen)
