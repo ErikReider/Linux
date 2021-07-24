@@ -1,15 +1,14 @@
 -- Navigate to CWD on nerdtree open
-function _G.openNerdTree()
+function _G.toggleNerdTree()
     local command = ""
     if vim.g.NERDTree and vim.api.nvim_eval("g:NERDTree.IsOpen()") == 1 then
-        command = ":NERDTreeClose"
+        command = "NERDTreeClose"
     else
-        command = ":NERDTreeCWD"
+        command = "NERDTreeCWD"
     end
-    return vim.api.nvim_replace_termcodes(command .. "<CR>", true, true, true)
+    vim.cmd(command)
 end
-vim.api.nvim_set_keymap('n', '<C-n>', 'v:lua.openNerdTree()',
-                        {silent = true, expr = true})
+vim.api.nvim_set_keymap('n', '<C-n>', ':lua toggleNerdTree() <CR>', {silent = true})
 vim.api.nvim_set_keymap('n', '<A-S-n>', ':NERDTreeToggle <CR>', {silent = true})
 vim.api.nvim_set_keymap('n', '<C-m>', ":NERDTreeFind <CR>", {silent = true})
 
