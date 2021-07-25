@@ -59,7 +59,7 @@ local function getF5Table()
         })
     end
 
-    local currentFilePath = vim.api.nvim_eval("expand('%:p')")
+    local currentFilePath = vim.api.nvim_buf_get_name(0)
     if string.len(currentFilePath) > 0 then
         table.insert(f5Table, 1, {
             title = "Open File",
