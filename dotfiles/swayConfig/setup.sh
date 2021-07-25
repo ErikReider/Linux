@@ -55,7 +55,8 @@ if [[ $1 == "-i" ]]; then
         polkit-gnome \
         rofi-emoji \
         ttf-material-icons-git \
-        ttf-weather-icons
+        ttf-weather-icons \
+        avizo
 
     libtool --finish /usr/lib/rofi/
 fi
