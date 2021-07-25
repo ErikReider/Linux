@@ -1,9 +1,6 @@
 function shFunc()
-    return {
-        exe = "shfmt",
-        args = {"-i 4", vim.api.nvim_buf_get_name(0)},
-        stdin = true
-    }
+    vim.cmd("Shfmt -i 4")
+    return {exe = "echo", args = {}, stdin = false}
 end
 
 require('formatter').setup({

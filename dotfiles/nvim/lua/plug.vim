@@ -78,6 +78,8 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'cofyc/vim-uncrustify', {'for': 'vala'}
 " Lua formatter
 Plug 'andrejlevkovitch/vim-lua-format', {'for': 'lua'}
+" Shell script formatter
+Plug 'z0mbix/vim-shfmt', { 'for': ['sh', 'zsh', 'bash'] }
 
 
 
