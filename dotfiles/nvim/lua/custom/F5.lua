@@ -47,9 +47,17 @@ end
 
 local function getF5Table()
     local f5Table = {
-        {title = "Open Folder", action = disownCMD("xdg-open .")},
+        {title = "Open PWD Folder", action = disownCMD("xdg-open .")},
         {title = "Open Terminal", action = disownCMD("$TERM")}
     }
+
+    local currentFileFolderPath = vim.api.nvim_eval("expand('%:p:h')")
+    if string.len(currentFileFolderPath) > 0 then
+        table.insert(f5Table, 1, {
+            title = "Open File Folder",
+            action = disownCMD("xdg-open " .. currentFileFolderPath)
+        })
+    end
 
     local currentFilePath = vim.api.nvim_eval("expand('%:p')")
     if string.len(currentFilePath) > 0 then
