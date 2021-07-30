@@ -125,6 +125,9 @@ function FloatingWindow:show(options)
     -- create file window, enter the window, and use the options defined in opts
     api.nvim_open_win(self.buf, true, opts)
 
+    -- Reset cursor position
+    vim.api.nvim_win_set_cursor(0, {1, 0})
+
     api.nvim_win_set_option(0, 'cursorline', true)
 
     -- use autocommand to ensure that the border_buffer closes at the same time as the main buffer
