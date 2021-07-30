@@ -17,7 +17,8 @@
   "modules-right": [
     "tray",
     "custom/ArchUpdates",
-    "custom/dunst",
+    "custom/notification",
+    // "custom/dunst",
     "custom/usingMic",
     "custom/usingAudio",
     "pulseaudio",
@@ -96,6 +97,10 @@
     "interval": 15,
     "exec": "~/.config/waybar/scripts/dunst.sh",
     "on-click": "dunstctl set-paused toggle; pkill -SIGRTMIN+6 waybar"
+  },
+  "custom/notification": {
+    "format": "    ",
+    "on-click": "swaync-client -t"
   },
   "custom/usingMic": {
     "format": "{icon}",

@@ -49,14 +49,14 @@ if [[ $1 == "-i" ]]; then
         faba-icon-theme \
         waybar-git \
         xdg-desktop-portal-wlr-git \
-        dunst-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
         polkit-gnome \
         rofi-emoji \
         ttf-material-icons-git \
         ttf-weather-icons \
-        avizo
+        avizo \
+        swaync-git
 
     libtool --finish /usr/lib/rofi/
 fi
