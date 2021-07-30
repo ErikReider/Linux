@@ -1,22 +1,16 @@
 -- Open F5 options
 local f5RunOptions = {
     {
-        filetypes = {"typescriptreact", "javascriptreact"},
+        filetypes = {
+            "typescriptreact", "javascriptreact", "typescript", "javascript"
+        },
         hasFiles = {"node_modules", "package.json", "package-lock.json"},
-        run = "npm start",
-        runInTerminal = true,
-        build = "npm run build",
-        buildInTerminal = true
-    }
+        run = "!npm start",
+        build = "!npm run build"
+    }, {filetypes = {"markdown"}, run = "MarkdownPreview"}
 }
 local function getRunAction()
-    local ft = vim.api.nvim_eval("&filetype")
-    local val = {
-        run = "",
-        runInTerminal = false,
-        build = "",
-        buildInTerminal = false
-    }
+    local ft = vim.api.nvim_buf_get_option(0, "filetype")
     local lines = io.popen('ls -a'):lines()
     for _, option in pairs(f5RunOptions) do
         local filetypes = option.filetypes == nil and {} or option.filetypes
@@ -32,17 +26,12 @@ local function getRunAction()
                     end
                 end
                 if table.maxn(hasFiles) == table.maxn(foundFiles) then
-                    return {
-                        run = run,
-                        runInTerminal = option.runInTerminal == true,
-                        build = build,
-                        buildInTerminal = option.buildInTerminal == true
-                    }
+                    return {run = run, build = build}
                 end
             end
         end
     end
-    return val
+    return {run = "", build = ""}
 end
 
 local function getF5Table()
@@ -69,18 +58,20 @@ local function getF5Table()
 
     local action = getRunAction()
     if string.len(action.build) > 0 then
-        if action.buildInTerminal then
+        local text = "Build"
+        if action.build:sub(0, 1) == "!" then
             action.build = runCmdInTerm(action.build, true)
+            text = text .. " in terminal"
         end
-        table.insert(f5Table, 1,
-                     {title = "Build in terminal", action = action.build})
+        table.insert(f5Table, 1, {title = text, action = action.build})
     end
     if string.len(action.run) > 0 then
-        if action.runInTerminal then
+        local text = "Run"
+        if action.run:sub(0, 1) == "!" then
             action.run = runCmdInTerm(action.run, true)
+            text = text .. " in terminal"
         end
-        table.insert(f5Table, 1,
-                     {title = "Run in terminal", action = action.run})
+        table.insert(f5Table, 1, {title = text, action = action.run})
     end
 
     return f5Table
