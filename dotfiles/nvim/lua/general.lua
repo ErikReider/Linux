@@ -1,6 +1,9 @@
 -- Show line number
 vim.o.number = true
 
+-- always show signcolumns
+vim.o.signcolumn = "yes"
+
 -- Key timeout eg. leader timeout
 vim.o.timeoutlen = 750
 
