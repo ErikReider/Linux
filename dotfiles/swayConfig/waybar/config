@@ -18,7 +18,6 @@
     "tray",
     "custom/ArchUpdates",
     "custom/notification",
-    // "custom/dunst",
     "custom/usingMic",
     "custom/usingAudio",
     "pulseaudio",
@@ -86,20 +85,14 @@
     "format-plugged": "{icon} {capacity}% ",
     "format-icons": ["", "", "", "", ""]
   },
-  "custom/dunst": {
-    "signal": 6,
-    "format": "  {icon}{}  ",
-    "return-type": "json",
-    "format-icons": {
-      "true": "",
-      "false": ""
-    },
-    "interval": 15,
-    "exec": "~/.config/waybar/scripts/dunst.sh",
-    "on-click": "dunstctl set-paused toggle; pkill -SIGRTMIN+6 waybar"
-  },
   "custom/notification": {
-    "format": "    ",
+    "format": " {}<span foreground='red' size='10000'><sup>{icon}</sup></span> ",
+    "format-icons": {
+      "noti": "⏺"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync",
+    "exec": "~/GitHub/SwayNotificationCenter/build/src/swaync-client -s | ~/.config/waybar/scripts/swaync-client.sh",
     "on-click": "swaync-client -t"
   },
   "custom/usingMic": {
