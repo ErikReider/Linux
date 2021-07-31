@@ -92,7 +92,7 @@
     },
     "return-type": "json",
     "exec-if": "which swaync",
-    "exec": "~/GitHub/SwayNotificationCenter/build/src/swaync-client -s | ~/.config/waybar/scripts/swaync-client.sh",
+    "exec": "swaync-client -s | ~/.config/waybar/scripts/swaync-client.sh",
     "on-click": "swaync-client -t"
   },
   "custom/usingMic": {
