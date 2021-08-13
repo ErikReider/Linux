@@ -42,10 +42,6 @@ let g:coc_global_extensions = add(g:coc_global_extensions, "coc-prettier")
 " https://www.npmjs.com/package/coc-json
 let g:coc_global_extensions = add(g:coc_global_extensions, "coc-json")
 
-" coc-sh: sh extension for coc
-" https://github.com/josa42/coc-sh
-let g:coc_global_extensions = add(g:coc_global_extensions, "coc-sh")
-
 " coc-spell-checker: Spelling checker for " source code
 " https://github.com/iamcco/coc-spell-checker
 let g:coc_global_extensions = add(g:coc_global_extensions, "coc-spell-checker")
