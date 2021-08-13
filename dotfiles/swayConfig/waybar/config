@@ -90,9 +90,10 @@
     "format-icons": ["", "", "", "", ""]
   },
   "custom/notification": {
-    "format": " {}<span foreground='red' size='10000'><sup>{icon}</sup></span> ",
+    "tooltip": false,
+    "format": " <span rise='1000'>{}<span foreground='red'><sup>{icon}</sup></span></span> ",
     "format-icons": {
-      "noti": "⏺"
+      "noti": ""
     },
     "return-type": "json",
     "exec-if": "which swaync",
@@ -101,6 +102,7 @@
     "on-click-right": "swaync-client -d -sw"
   },
   "custom/usingMic": {
+    "tooltip": false,
     "format": "{icon}",
     "format-icons": {
       "RUNNING": "  "
@@ -109,6 +111,7 @@
     "exec": "python -u ~/.config/sway/scripts/pulse_events.py source --json"
   },
   "custom/usingAudio": {
+    "tooltip": false,
     "format": "{icon}",
     "format-icons": {
       "RUNNING": "  "
@@ -117,6 +120,7 @@
     "exec": "python -u ~/.config/sway/scripts/pulse_events.py sink --json"
   },
   "custom/airplane": {
+    "tooltip": false,
     "format": "{icon}",
     "return-type": "json",
     "max-length": 70,
