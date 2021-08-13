@@ -6,6 +6,10 @@ for f in split(glob('~/.config/nvim/lua/plugged/coc/configs/*.vim'), '\n')
     exe 'source' f
 endfor
 
+" coc-diagnostic: diagnostic-languageserver extension for CoC
+" https://github.com/iamcco/coc-diagnostic
+let g:coc_global_extensions = add(g:coc_global_extensions, "coc-diagnostic")
+
 " coc-highlight: Highlight extension for coc.nvim
 " https://www.npmjs.com/package/coc-highlight
 let g:coc_global_extensions = add(g:coc_global_extensions, "coc-highlight")
