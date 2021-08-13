@@ -60,7 +60,7 @@
   },
   "cSpellExt.enableDictionaries": ["swedish"],
   "cSpell.language": "en,sv",
-  "cSpell.dictionaries": ["swedish"],
+  "cSpell.dictionaries": ["english", "swedish"],
   "html-css-support.enabledLanguages": [
     "html",
     "vue",
@@ -112,17 +112,5 @@
     "constructor": "  ",
     "value": "  ",
     "enumMember": "  "
-  },
-  "cSpell.userWords": [
-    "Energiportalen",
-    "Gatunamn",
-    "Solcellsteknik",
-    "Solelproduktion",
-    "XMPP",
-    "clippy",
-    "popupclose",
-    "popupopen",
-    "solelanläggningar",
-    "växelriktare"
-  ]
+  }
 }
