@@ -27,7 +27,11 @@
     "clock"
   ],
   "custom/linux": {
-    "format": "<span font='14' font_family='Roboto'></span>",
+    "format": "<span font='20'>{}</span>",
+    "exec": "~/.config/waybar/scripts/systemIcon.sh",
+    "interval": "once",
+    "tooltip": false,
+    "return-type": "string",
     "on-click": "alacritty -e $SHELL -c 'neofetch; read'"
   },
   "sway/workspaces": {
