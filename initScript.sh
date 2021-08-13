@@ -47,7 +47,7 @@ if [[ $install_app_var = y ]]; then
 
     sudo systemctl enable --now snapd
 
-    yay -S --needed pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim-nightly-bin jq dart mailspring noisetorch-git
+    yay -S --needed pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim jq dart mailspring noisetorch-git hack-font-ligature-nerd-font-git
 
     sudo pacman -S --needed discord npm alacritty manjaro-bluetooth yarn
 
