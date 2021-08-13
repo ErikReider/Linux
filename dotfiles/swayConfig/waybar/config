@@ -97,7 +97,8 @@
     "return-type": "json",
     "exec-if": "which swaync",
     "exec": "swaync-client -s | ~/.config/waybar/scripts/swaync-client.sh",
-    "on-click": "swaync-client -t"
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw"
   },
   "custom/usingMic": {
     "format": "{icon}",
