@@ -9,6 +9,7 @@ if [[ $1 == "-i" ]]; then
         wdisplays \
         wf-recorder \
         grim \
+        grimshot \
         slurp \
         swayidle \
         wallutils \
