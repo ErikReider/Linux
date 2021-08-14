@@ -1,0 +1,20 @@
+# Fix Android Studio and its emulator
+_JAVA_AWT_WM_NONREPARENTING=1
+
+# QT_AUTO_SCREEN_SCALE_FACTOR=1
+
+# QT_QPA_PLATFORMTHEME="gnome"
+
+# Force to use Xwayland backend
+# QT_QPA_PLATFORM=xcb
+
+#Not tested: this should disable window decorations
+# QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+EDITOR=/usr/bin/nvim
+XDG_CURRENT_DESKTOP=sway
+# MOZ_ENABLE_WAYLAND=1
+#WINEDEBUG="-all"
+
+# RADV_PERFTEST=nggc
+AMD_VULKAN_ICD=RADV

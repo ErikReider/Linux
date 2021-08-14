@@ -10,6 +10,18 @@ fi
 echo ""
 ##
 
+## /etc Config Files
+read -p "Do you wish to symlink needed /etc config files? [y/n] " symlink_etc_var
+if [[ $symlink_etc_var = y ]]; then
+    currentDir=$PWD/dotfiles
+    cd /etc
+    sudo ln -s $currentDir/etc/* .
+
+    cd $currentDir/
+fi
+echo ""
+##
+
 ## ZSH
 read -p "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var = y ]]; then
