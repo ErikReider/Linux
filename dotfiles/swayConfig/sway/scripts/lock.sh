@@ -28,7 +28,7 @@ else
     # Locks after 300s, displays off after +300s. Lock screen before sleep
     swayidle -w \
         timeout 600 'loginctl lock-session' \
-        timeout 610 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"' \
+        timeout 1200 'systemctl suspend' \
         before-sleep 'loginctl lock-session'
+        # resume 'swaymsg "output * dpms on"' \
 fi
