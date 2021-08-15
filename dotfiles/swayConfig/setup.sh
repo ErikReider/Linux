@@ -1,8 +1,25 @@
 #!/bin/bash
 
 if [[ $1 == "-i" ]]; then
-    pamac install --no-upgrade \
-        wob \
+
+    yay -S \
+        autotiling \
+        sway-git \
+        wlroots-git \
+        wlsunset-git \
+        faba-icon-theme \
+        waybar-git \
+        xdg-desktop-portal-wlr-git \
+        swaylock-effects \
+        rofi-lbonn-wayland-git \
+        polkit-gnome \
+        rofi-emoji \
+        ttf-material-icons-git \
+        ttf-weather-icons \
+        avizo \
+        swaync-git \
+        swaysettings-git \
+        caffeinated \
         xss-lock \
         wl-clipboard \
         gammastep \
@@ -24,8 +41,6 @@ if [[ $1 == "-i" ]]; then
         pa-applet \
         ttf-roboto \
         brightnessctl \
-        gnome-applets \
-        network-manager-applet \
         blueberry \
         bluez-utils \
         playerctl \
@@ -37,27 +52,6 @@ if [[ $1 == "-i" ]]; then
         geoclue \
         geocode-glib \
         pacdep
-
-    yay -S clipman aur/autotiling caffeinated
-
-    yay -S pod2man
-
-    # AUR
-    yay -S \
-        sway-git \
-        wlroots-git \
-        wlsunset-git \
-        faba-icon-theme \
-        waybar-git \
-        xdg-desktop-portal-wlr-git \
-        swaylock-effects \
-        rofi-lbonn-wayland-git \
-        polkit-gnome \
-        rofi-emoji \
-        ttf-material-icons-git \
-        ttf-weather-icons \
-        avizo \
-        swaync-git
 
     libtool --finish /usr/lib/rofi/
 fi
