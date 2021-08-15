@@ -22,10 +22,43 @@ fi
 echo ""
 ##
 
+## Applications
+read -p "Do you wish to install all apps? [y/n] " install_app_var
+if [[ $install_app_var = y ]]; then
+
+    # Package managers
+    sudo pacman --needed -S pikaur python-pip yay flatpak snapd yarn nodejs-lts-fermium npm
+    sudo systemctl enable --now snapd
+
+    # Applications
+    yay --needed -S pamixer firefox chromium nautilus-copy-path jq mailspring noisetorch-git hack-font-ligature-nerd-font-git discord alacritty
+
+    read -p "Do you wish to install java?" install_java
+    if [[ $install_java = y ]]; then
+        yay --needed -S jre-openjdk jre-openjdk-headless jdk-openjdk jdk8-openjdk jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless 
+    fi
+
+    sudo flatpak install Spotify
+fi
+echo ""
+##
+
+## Dev Tools
+read -p "Do you wish to install dev tools? [y/n] " install_dev_tools
+if [[ $install_dev_tools = y ]]; then
+    yay --needed -S visual-studio-code-bin the_silver_searcher bat ripgrep fzf git lazygit
+
+    yay --needed -S dotnet-sdk dart typescript vala python python2 gcc clang meson cmake libsass sassc eslint
+
+    sudo snap install flutter --classic
+fi
+echo ""
+##
+
 ## ZSH
 read -p "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var = y ]]; then
-    yay -S zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
+    yay --needed -S zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
     sudo chsh --shell=/bin/zsh $USER
 
     currentDir=$PWD/dotfiles
@@ -52,39 +85,19 @@ fi
 echo ""
 ##
 
-## Applications
-read -p "Do you wish to install all apps? [y/n] " install_app_var
-if [[ $install_app_var = y ]]; then
-    sudo pacman -S --needed pacaur python-pip yay flatpak snapd
-
-    sudo systemctl enable --now snapd
-
-    yay -S --needed pamixer github-desktop-bin visual-studio-code-bin chromium nautilus-copy-path dotnet-sdk neovim jq dart mailspring noisetorch-git hack-font-ligature-nerd-font-git
-
-    sudo pacman -S --needed discord npm alacritty manjaro-bluetooth yarn
-
-    read -p "Do you wish to install java?" install_java
-    if [[ $install_java = y ]]; then
-        sudo pacman -S --needed jre-openjdk jre-openjdk-headless jdk-openjdk
-    fi
-
-    sudo flatpak install Spotify
-
-    pip install jedi
-
-    sudo snap install flutter --classic
-fi
-echo ""
-##
-
 ## Neovim
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
-    yay -S --needed scdoc
-    yay -S --needed neovim-nightly-bin ccls texlive-bibtexextra texlive-gantt texlive-pictures vala-language-server-git the_silver_searcher bat ripgrep efm-langserver vint lua-format ueberzug digestif lua-language-server lazygit
-    sudo pacman -S --needed texlive-core texlive-fontsextra texlive-latexextra texlive-science biber bash-language-server uncrustify shfmt python2
+    yay --needed -S ccls vala-language-server-git efm-langserver vint lua-format ueberzug digestif lua-language-server bash-language-server uncrustify shfmt prettier pyright omnisharp-roslyn
+
     pip install cpplint neovim
     sudo npm install -g neovim
+
+    read -p "Do you wish to install latex packages?" install_latex
+    if [[ $install_latex = y ]]; then
+        yay --needed -S scdoc
+        yay --needed -S texlive-bibtexextra texlive-gantt texlive-pictures texlive-core texlive-fontsextra texlive-latexextra texlive-science biber
+    fi
 
     currentDir=$PWD/dotfiles
     cd ~/.config/
@@ -94,15 +107,7 @@ if [[ $vim_var = y ]]; then
     cd $currentDir
 
     sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
-fi
-echo ""
-##
-
-## Firefox Theme
-read -p "Do you wish to install Firefox Gnome theme? [y/n] " install_theme_var
-if [[ $install_theme_var = y ]]; then
-    curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
+    nvim -es -u ~/.config/nvim/init.lua -i NONE -c "PlugInstall" -c "qa"
 fi
 echo ""
 ##
