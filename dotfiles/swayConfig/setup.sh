@@ -17,6 +17,7 @@ if [[ $1 == "-i" ]]; then
         ttf-material-icons-git \
         ttf-weather-icons \
         avizo \
+        swaytools \
         swaync-git \
         swaysettings-git \
         caffeinated \
@@ -38,7 +39,6 @@ if [[ $1 == "-i" ]]; then
         pipewire-media-session \
         otf-font-awesome \
         ttf-font-awesome \
-        pa-applet \
         ttf-roboto \
         brightnessctl \
         blueberry \
