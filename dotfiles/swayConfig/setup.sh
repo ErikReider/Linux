@@ -68,6 +68,8 @@ currentDir=$PWD
 cd ~/.config/
 dirs=("sway" "wayfire/wayfire.ini" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty" "xdg-desktop-portal-wlr" "wlogout")
 
+systemctl enable --now kanshi
+
 for item in ${dirs[@]}; do
     name=$(basename $item)
     rm -r ./$name
