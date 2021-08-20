@@ -4,7 +4,7 @@ if [[ "$1" == "--lock" ]]; then
         --daemonize \
         --ignore-empty-password \
         --show-failed-attempts \
-        --screenshots \
+        --image ~/.cache/wallpaper \
         --clock \
         --indicator \
         --indicator-radius 100 \
