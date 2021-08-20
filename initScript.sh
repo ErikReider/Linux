@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+currentDir=$(dirname $(readlink -f $0))
+cd $currentDir
+
 ## Flatpak theme override
 read -p "Do you wish to enable flatpatk theme override? [y/n] " flatpakTheme
 if [[ $flatpakTheme = y ]]; then
@@ -10,14 +13,20 @@ fi
 echo ""
 ##
 
-## /etc Config Files
-read -p "Do you wish to symlink needed /etc config files? [y/n] " symlink_etc_var
+## Needed Config Files
+read -p "Do you wish to symlink needed config files? [y/n] " symlink_etc_var
 if [[ $symlink_etc_var = y ]]; then
-    currentDir=$PWD/dotfiles
+    # Files in ./dotfiles/etc
     cd /etc
-    sudo ln -s $currentDir/etc/* .
+    sudo ln -s $currentDir/dotfiles/etc/* .
 
-    cd $currentDir/
+    # .pam_environment
+    cd $HOME
+    sudo ln -s $currentDir/dotfiles/.pam_environment
+
+    cd $currentDir/dotfiles
+    sudo chown root ./etc/*
+    cd $currentDir
 fi
 echo ""
 ##
@@ -33,9 +42,9 @@ if [[ $install_app_var = y ]]; then
     # Applications
     yay --needed -S pamixer firefox chromium nautilus-copy-path jq mailspring noisetorch-git hack-font-ligature-nerd-font-git discord alacritty
 
-    read -p "Do you wish to install java?" install_java
+    read -p "Do you wish to install java? [y/n]" install_java
     if [[ $install_java = y ]]; then
-        yay --needed -S jre-openjdk jre-openjdk-headless jdk-openjdk jdk8-openjdk jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless 
+        yay --needed -S jre-openjdk jre-openjdk-headless jdk-openjdk jdk8-openjdk jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless
     fi
 
     sudo flatpak install Spotify
@@ -61,19 +70,18 @@ if [[ $change_to_bash_var = y ]]; then
     yay --needed -S zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
     sudo chsh --shell=/bin/zsh $USER
 
-    currentDir=$PWD/dotfiles
     cd $HOME
     # Remove provided configs and themes
     rm -rf zsh .zshrc
 
-    ln -s $currentDir/zsh/.zshrc .zshrc
-    ln -s $currentDir/zsh .
+    ln -s $currentDir/dotfiles/zsh/.zshrc .zshrc
+    ln -s $currentDir/dotfiles/zsh .
 
     mkdir zsh/plugins
     cd zsh/plugins
     ln -s /usr/share/zsh/plugins/* .
 
-    cd $currentDir/
+    cd $currentDir
 
     # Set password feedback
     read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
@@ -99,11 +107,10 @@ if [[ $vim_var = y ]]; then
         yay --needed -S texlive-bibtexextra texlive-gantt texlive-pictures texlive-core texlive-fontsextra texlive-latexextra texlive-science biber
     fi
 
-    currentDir=$PWD/dotfiles
     cd ~/.config/
     rm -rf nvim
 
-    ln -s $currentDir/nvim nvim
+    ln -s $currentDir/dotfiles/nvim nvim
     cd $currentDir
 
     sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
