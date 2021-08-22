@@ -2,7 +2,8 @@
 
 if [[ $1 == "-i" ]]; then
 
-    yay -S \
+    yay --needed -S \
+        lsb-release \
         autotiling \
         sway-git \
         wlroots-git \
