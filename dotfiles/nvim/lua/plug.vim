@@ -23,7 +23,8 @@ Plug 'glepnir/dashboard-nvim'
 " To save write-protected files
 Plug 'lambdalisue/suda.vim'
 " Coc LSP
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Auto tabwidth and style detection
 Plug 'tpope/vim-sleuth'
 " Color Scheme
