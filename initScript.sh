@@ -35,9 +35,17 @@ echo ""
 read -p "Do you wish to install all apps? [y/n] " install_app_var
 if [[ $install_app_var = y ]]; then
 
+    sudo pacman -S git
+
+    # Install yay
+    cd /tmp
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+    cd $currrentDir
+
     # Package managers
-    sudo pacman --needed -S pikaur python-pip yay flatpak snapd yarn nodejs-lts-fermium npm
-    sudo systemctl enable --now snapd
+    sudo yay --needed -S pikaur python-pip flatpak yarn nodejs-lts-fermium npm
 
     # Applications
     yay --needed -S pamixer firefox chromium nautilus-copy-path jq mailspring noisetorch-git hack-font-ligature-nerd-font-git discord alacritty
@@ -58,8 +66,6 @@ if [[ $install_dev_tools = y ]]; then
     yay --needed -S visual-studio-code-bin the_silver_searcher bat ripgrep fzf git lazygit
 
     yay --needed -S dotnet-sdk dart typescript vala python python2 gcc clang meson cmake libsass sassc eslint
-
-    sudo snap install flutter --classic
 fi
 echo ""
 ##
