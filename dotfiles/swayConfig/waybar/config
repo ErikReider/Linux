@@ -27,7 +27,7 @@
     "clock"
   ],
   "custom/linux": {
-    "format": "<span font='20'>{}</span>",
+    "format": "<span font='16' font_family='NotoSansMono Nerd Font'>{}</span>",
     "exec": "~/.config/waybar/scripts/systemIcon.sh",
     "interval": "once",
     "tooltip": false,
