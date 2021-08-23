@@ -3,6 +3,7 @@
 if [[ $1 == "-i" ]]; then
 
     yay --needed -S \
+        wmname \
         lsb-release \
         autotiling \
         sway-git \
