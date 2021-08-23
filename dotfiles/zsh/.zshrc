@@ -2,9 +2,6 @@ setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
 stty stop undef
 
-# Remove paste highlight
-# zle_highlight=('paste:none')
-
 export ZDOTDIR="$HOME/zsh"
 
 source $ZDOTDIR/zsh-functions
