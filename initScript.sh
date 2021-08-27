@@ -16,10 +16,6 @@ echo ""
 ## Needed Config Files
 read -p "Do you wish to symlink needed config files? [y/n] " symlink_etc_var
 if [[ $symlink_etc_var = y ]]; then
-    # Files in ./dotfiles/etc
-    cd /etc
-    sudo ln -s $currentDir/dotfiles/etc/* .
-
     # .pam_environment
     cd $HOME
     sudo ln -s $currentDir/dotfiles/.pam_environment
