@@ -10,7 +10,6 @@
     "cpu",
     "memory",
     "custom/weather",
-    "custom/media",
     "sway/mode"
   ],
   "modules-center": ["sway/workspaces"],
@@ -102,7 +101,6 @@
     "on-click-right": "swaync-client -d -sw"
   },
   "custom/usingMic": {
-    "tooltip": false,
     "format": "{icon}",
     "format-icons": {
       "RUNNING": "  "
@@ -111,7 +109,6 @@
     "exec": "python -u ~/.config/sway/scripts/pulse_events.py source --json"
   },
   "custom/usingAudio": {
-    "tooltip": false,
     "format": "{icon}",
     "format-icons": {
       "RUNNING": "  "
