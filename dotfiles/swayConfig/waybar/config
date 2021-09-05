@@ -106,7 +106,9 @@
       "RUNNING": "  "
     },
     "return-type": "json",
-    "exec": "python -u ~/.config/sway/scripts/pulse_events.py source --json"
+    "exec-if": "which sway-audio-idle-inhibit",
+    "exec": "sway-audio-idle-inhibit --dry-print-source | xargs -I {} echo '{\"text\": \"{}\", \"tooltip\": \"\", \"alt\": \"{}\", \"class\": \"{}\"}'",
+    "escape": true
   },
   "custom/usingAudio": {
     "format": "{icon}",
@@ -114,7 +116,9 @@
       "RUNNING": "  "
     },
     "return-type": "json",
-    "exec": "python -u ~/.config/sway/scripts/pulse_events.py sink --json"
+    "exec-if": "which sway-audio-idle-inhibit",
+    "exec": "sway-audio-idle-inhibit --dry-print-sink | xargs -I {} echo '{\"text\": \"{}\", \"tooltip\": \"\", \"alt\": \"{}\", \"class\": \"{}\"}'",
+    "escape": true
   },
   "custom/airplane": {
     "tooltip": false,
