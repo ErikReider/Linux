@@ -89,6 +89,8 @@ Plug 'z0mbix/vim-shfmt', { 'for': ['sh', 'zsh', 'bash'] }
 "" Syntax
 " i3 syntax highlighting
 Plug 'mboughaba/i3config.vim'
+" Sway syntax highlighting
+Plug 'ajouellette/sway-vim-syntax'
 " JSON comment syntax support
 Plug 'kevinoid/vim-jsonc'
 " C/C++ highlight
