@@ -1,4 +1,4 @@
-# vim: filetype=i3config
+# vim: ft=sway
 # Read `man 5 sway` for a complete reference.
 
 include ~/.config/sway/sway.d/*.conf
