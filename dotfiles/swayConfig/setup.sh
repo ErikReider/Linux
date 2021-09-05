@@ -5,7 +5,7 @@ if [[ $1 == "-i" ]]; then
     yay --needed -S \
         wmname \
         lsb-release \
-        autotiling \
+        autotiling-rs-git \
         sway-git \
         wlroots-git \
         wlsunset-git \
