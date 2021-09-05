@@ -99,7 +99,7 @@ echo ""
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var = y ]]; then
     yay --needed -S scdoc
-    yay --needed -S ccls vala-language-server-git efm-langserver vint lua-format ueberzug digestif lua-language-server bash-language-server uncrustify shfmt prettier pyright omnisharp-roslyn lolcat
+    yay --needed -S ccls vala-language-server-git efm-langserver vint lua-format ueberzug digestif lua-language-server bash-language-server uncrustify shfmt prettier pyright omnisharp-roslyn-bin lolcat
 
     pip install cpplint neovim
     sudo npm install -g neovim
