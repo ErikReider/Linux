@@ -22,7 +22,7 @@ if [[ $1 == "-i" ]]; then
         swaytools \
         swaync-git \
         swaysettings-git \
-        caffeinated \
+        sway-audio-idle-inhibit-git \
         xss-lock \
         wl-clipboard \
         gammastep \
