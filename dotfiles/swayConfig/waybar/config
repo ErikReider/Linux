@@ -31,7 +31,8 @@
     "interval": "once",
     "tooltip": false,
     "return-type": "string",
-    "on-click": "alacritty -e $SHELL -c 'neofetch; read'"
+    "on-click": "alacritty -e $SHELL -c 'neofetch; read'",
+    "escape": true
   },
   "sway/workspaces": {
     "disable-scroll-wraparound": true,
@@ -98,7 +99,8 @@
     "exec-if": "which swaync",
     "exec": "swaync-client -s | ~/.config/waybar/scripts/swaync-client.sh",
     "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw"
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   },
   "custom/usingMic": {
     "format": "{icon}",
@@ -132,7 +134,8 @@
     },
     "exec": "~/.config/waybar/scripts/airplaneMode.sh",
     "on-click": "~/.config/waybar/scripts/airplaneMode.sh --toggle",
-    "signal": 8
+    "signal": 8,
+    "escape": true
   },
   "bluetooth": {
     "format": "{icon}",
@@ -185,20 +188,23 @@
   "custom/wallpaperRefresh": {
     "exec": "echo '  '",
     "tooltip": false,
-    "on-click": "~/.config/sway/scripts/randomWallpaper.sh --click"
+    "on-click": "~/.config/sway/scripts/randomWallpaper.sh --click",
+    "escape": true
   },
   "custom/headsetcontrol": {
     "interval": 60,
     "tooltip": false,
     "exec": "~/.config/waybar/scripts/headsetcontrol.sh",
-    "exec-if": "which headsetcontrol"
+    "exec-if": "which headsetcontrol",
+    "escape": true
   },
   "custom/ArchUpdates": {
     "interval": 600,
     "tooltip": false,
     "signal": 9,
     "exec": "~/.config/waybar/scripts/updates-pacman-aurhelper.sh",
-    "on-click": "alacritty -e $SHELL -c '~/.config/waybar/scripts/arch_update.sh'; pkill -SIGRTMIN+9 waybar"
+    "on-click": "alacritty -e $SHELL -c '~/.config/waybar/scripts/arch_update.sh'; pkill -SIGRTMIN+9 waybar",
+    "escape": true
   },
   "custom/weather": {
     "format": "<span font_family='Weather Icons'>{icon}</span> {}",
@@ -225,6 +231,7 @@
     "tooltip": false,
     "interval": 1200,
     "exec": "python ~/.config/waybar/scripts/openWeatherMap.py",
-    "return-type": "json"
+    "return-type": "json",
+    "escape": true
   }
 }
