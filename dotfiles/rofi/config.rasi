@@ -1,79 +1,81 @@
-/* vim:ft=css 
+/* vim: ft=css
 */
 configuration {
-    font: "Noto Sans Bold 13";
-    drun-display-format: "{name}";
-    disable-history: false;
-    fullscreen: false;
-    hide-scrollbar: true;
-    sidebar-mode: false;
+  font: "Noto Sans Bold 13";
+  drun-display-format: "{name}";
+  disable-history: false;
+  sidebar-mode: false;
 }
 
 * {
-    background-color: transparent;
-    background-alt: rgba(242, 242, 242, 0.08);
-    background: rgba(0, 0, 0, 0.8);
-    text-color: #ffffff;
-    spacing: 0;
-    width: 512px;
+  spacing: 0;
 }
 
 window {
-    border-radius: 8px;
-    background-color: @background;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  width: 512px;
 }
 
 inputbar {
-    background-color: rgba(242, 242, 242, 0.08);
-    margin: 14px;
-    border-radius: 8px;
-    border: 0 0 1px 0;
-    /* children: [prompt, entry]; */
-    children: [ entry];
+  background-color: rgba(242, 242, 242, 0.08);
+  margin: 14px;
+  border-radius: 8px;
+  border: 0 0 1px 0;
+  /* children: [prompt, entry]; */
+  children: [ entry ];
+  border: none;
 }
 
 prompt {
-    padding: 16px;
-    /* border: 0 1px 0 0; */
+  padding: 16px;
+  /* border: 0 1px 0 0; */
 }
 
 textbox {
-    background-color: transparent;
-    padding: 8px 16px;
-    blink: true;
+  background: transparent;
+  padding: 8px 16px;
+  blink: true;
 }
 
 entry {
-    expand: false;
-    padding: 10px;
+  text-color: white;
+  expand: false;
+  padding: 10px;
 }
 
 listview {
-    cycle: false;
-    margin: 0 0 -1px 0;
-    scrollbar: true;
-    dynamic: true;
+  lines: 8;
+  cycle: false;
+  scrollbar: true;
+  dynamic: true;
+  border: none;
 }
 
 scrollbar {
-    handle-color: rgba(46, 52, 63, 1);
+  handle-color: rgba(46, 52, 63, 1);
 }
 
-element {
-    border: 0 0 1px 0;
-    padding: 4px;
-    background-color: transparent;
+element alternate.normal,
+element alternate.normal,
+element normal.normal,
+element normal.normal {
+  border: 0 0 1px 0;
+  padding: 4px;
+  background-color: transparent;
+}
+
+element selected.normal,
+element selected.urgent {
+  background-color: rgba(242, 242, 242, 0.08);
 }
 
 element-text {
-    margin: 19px 0;
+  text-color: white;
+  margin: 19px 0;
 }
 
 element-icon {
-    size: 50px;
-    margin: 4px;
-}
-
-element selected {
-    background-color: @background-alt;
+  size: 50px;
+  margin: 4px;
 }
