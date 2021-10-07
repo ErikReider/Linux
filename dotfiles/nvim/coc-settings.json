@@ -69,6 +69,8 @@
     "typescriptreact",
     "javascriptreact"
   ],
+  "yank.limit": 3,
+  "flutter.provider.enableSnippet": true,
   "tsserver.enableJavascript": true,
   "javascript.showUnused": true,
   "javascript.validate.enable": true,
