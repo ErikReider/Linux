@@ -31,9 +31,9 @@ map("n", "<Up>", "(v:count == 0 ? 'g<Up>' : '<Up>')",
 map("", "<home>", "g<home>", {silent = true})
 map("", "<End>", "g<End>", {silent = true})
 
--- Switch tabs
-map("n", "<TAB>", ":tabn<CR>", {silent = true})
-map("n", "<S-TAB>", ":tabp<CR>", {silent = true})
+-- Shift up/down to move cursor +/- 5 lines
+map("", "<S-Up>", "5<Up>", {silent = true, noremap = true})
+map("", "<S-Down>", "5<Down>", {silent = true, noremap = true})
 
 -- Move line up or down
 map("n", "<A-Up>", ":m-2<CR>", {noremap = true, silent = true})
