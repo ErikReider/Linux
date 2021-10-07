@@ -5,7 +5,10 @@ set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 
-set completeopt=longest,menuone
+" To make sure coc uses compiled code (master branch)
+" let g:coc_force_debug = 1
+
+" set completeopt=longest,menuone
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -19,17 +22,7 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" <tab> to go to next snippet section
 let g:coc_snippet_next = '<tab>'
 
 " Use <c-space> to trigger completion.
