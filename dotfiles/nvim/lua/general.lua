@@ -60,6 +60,8 @@ vim.cmd("filetype plugin on")
 
 vim.cmd("set cursorline")
 
+vim.cmd("set nocompatible")
+
 vim.o.wildmenu = true
 
 vim.o.showmatch = true
