@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ "$1" == "--lock" ]]; then
     profilePic=$(~/.config/sway/scripts/generateRoundProfilePic.sh)
-    swaylock daemonize --effect-compose "192x192;$profilePic"
+    swaylock daemonize --effect-compose "96x96;$profilePic"
 else
     xset s off
     # Killall these prev processes
