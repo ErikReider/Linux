@@ -1,6 +1,12 @@
 -- Show line number
 vim.o.number = true
 
+-- Sets the command height to 2 rows
+vim.o.cmdheight = 2
+
+-- If this many milliseconds nothing is typed the swap file will be written to disk
+vim.o.updatetime = 300
+
 -- always show signcolumns
 vim.o.signcolumn = "yes"
 

@@ -18,3 +18,5 @@ autocmd FileType typescript :set makeprg=tsc
 autocmd BufNewFile,BufRead *.ts,*.tsx set filetype=typescriptreact
 autocmd BufNewFile,BufRead *.js,*.jsx set filetype=javascriptreact
 
+" Json files support comments
+autocmd BufNewFile,BufRead *.json set filetype=jsonc

@@ -1,9 +1,5 @@
 " if hidden is not set, TextEdit might fail.
 set hidden
-" Better display for messages set cmdheight=2
-set cmdheight=2
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
 
 " To make sure coc uses compiled code (master branch)
 " let g:coc_force_debug = 1

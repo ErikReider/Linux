@@ -1,4 +1,4 @@
-map = vim.api.nvim_set_keymap
+_G.map = vim.api.nvim_set_keymap
 
 function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, {...})
@@ -23,7 +23,7 @@ function _G.runCmdInTerm(cmd, tryStayOpen)
 end
 
 function _G.splitString(str, delimiter)
-    matches = {}
+    local matches = {}
     for substring in string.gmatch((str .. delimiter), "(.-)" .. delimiter) do
         table.insert(matches, substring)
     end
