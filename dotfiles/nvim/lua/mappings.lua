@@ -16,7 +16,7 @@ map("n", "<F3>",
 -- Source on F4
 map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR>", {})
 
--- Use ESC to clear highlights
+-- Use double ESC to clear highlights
 map("n", "<Esc><Esc>", ":nohl<CR>", {})
 
 -- k/j and up/down will move virtual lines (lines that wrap)
@@ -34,6 +34,9 @@ map("", "<End>", "g<End>", {silent = true})
 -- Shift up/down to move cursor +/- 5 lines
 map("", "<S-Up>", "5<Up>", {silent = true, noremap = true})
 map("", "<S-Down>", "5<Down>", {silent = true, noremap = true})
+-- Control up/down to scroll +/- 5 lines
+map("", "<C-Up>", "5<C-y>", {silent = true, noremap = true})
+map("", "<C-Down>", "5<C-e>", {silent = true, noremap = true})
 
 -- Move line up or down
 map("n", "<A-Up>", ":m-2<CR>", {noremap = true, silent = true})
