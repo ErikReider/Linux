@@ -150,7 +150,7 @@
     "tooltip": false
   },
   "network#wifi": {
-    "interface": "wlp*",
+    "interface": "wl*",
     "interval": 30,
     "format-wifi": "{icon}",
     "format-linked": "",
