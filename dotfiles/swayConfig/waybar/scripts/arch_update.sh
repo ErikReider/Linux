@@ -5,7 +5,7 @@ if hash paru 2>/dev/null; then
 elif hash yay 2>/dev/null; then
     cmd="yay"
 elif hash pikaur 2>/dev/null; then
-    cmd="yay"
+    cmd="pikaur"
 elif hash pacman 2>/dev/null; then
     cmd="pacman"
 fi
