@@ -27,7 +27,7 @@ alias cp="cp -i" # Confirm before overwriting something
 alias lsa="ls -a"
 alias df='df -h'     # Human-readable sizes
 alias du='du -h'     # Human-readable sizes
-alias diff='diff -y --color=always'     # Human-readable with colors
+# alias diff='diff -y --color=always'     # Human-readable with colors
 alias free='free -m' # Show sizes in MB
 alias gitu='git add . && git commit && git push'
 alias clear="printf '\033[2J\033[3J\033[1;1H'; clear"
