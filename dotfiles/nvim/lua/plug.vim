@@ -25,6 +25,8 @@ Plug 'lambdalisue/suda.vim'
 " Coc LSP
 " Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Floating terminals
+Plug 'numtostr/FTerm.nvim'
 " Auto tabwidth and style detection
 Plug 'tpope/vim-sleuth'
 " Color Scheme
