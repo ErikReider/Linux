@@ -22,11 +22,32 @@ Plug 'Yggdroot/indentLine'
 Plug 'glepnir/dashboard-nvim'
 " To save write-protected files
 Plug 'lambdalisue/suda.vim'
-" Coc LSP
-" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Floating terminals
 Plug 'numtostr/FTerm.nvim'
+" nvim lsp
+Plug 'neovim/nvim-lspconfig'
+" A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
+" Plug 'glepnir/lspsaga.nvim'
+Plug 'tami5/lspsaga.nvim'
+" A completion engine plugin for neovim written in Lua. 
+Plug 'hrsh7th/nvim-cmp'
+" nvim-cmp source for neovim builtin LSP client
+Plug 'hrsh7th/cmp-nvim-lsp'
+" nvim-cmp source for buffer words.
+Plug 'hrsh7th/cmp-buffer'
+" nvim-cmp source for filesystem paths.
+Plug 'hrsh7th/cmp-path'
+" luasnip completion source for nvim-cmp
+Plug 'saadparwaiz1/cmp_luasnip'
+" Snippet Engine for Neovim written in Lua.
+Plug 'L3MON4D3/LuaSnip'
+" A super powerful autopair for Neovim
+Plug 'windwp/nvim-autopairs'
+" Shows function signature (parameters)
+Plug 'ray-x/lsp_signature.nvim'
+" Automatically creates missing LSP diagnostics highlight groups
+Plug 'folke/lsp-colors.nvim'
+
 " Auto tabwidth and style detection
 Plug 'tpope/vim-sleuth'
 " Color Scheme
@@ -53,8 +74,6 @@ Plug 'gregsexton/MatchTag', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx'] }
 Plug 'alvan/vim-closetag'
 " CSS color highlighter
 Plug 'ap/vim-css-color', {'for': ['css', 'less', 'scss', 'sass']}
-" Formatter.nvim
-Plug 'mhartington/formatter.nvim'
 " Neovim lua functions
 Plug 'nvim-lua/plenary.nvim'
 " Plugin to persist and toggle multiple terminals during an editing session
@@ -73,18 +92,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " GV to open git log, gb to open in browser
 Plug 'junegunn/gv.vim'
-
-
-
-"" Formatters
-" Prettier (html, css, js, etc...)
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-" Vala uncrustify formatter
-Plug 'cofyc/vim-uncrustify', {'for': 'vala'}
-" Lua formatter
-Plug 'andrejlevkovitch/vim-lua-format', {'for': 'lua'}
-" Shell script formatter
-Plug 'z0mbix/vim-shfmt', { 'for': ['sh', 'zsh', 'bash'] }
 
 
 

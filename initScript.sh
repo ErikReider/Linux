@@ -61,7 +61,7 @@ read -p "Do you wish to install dev tools? [y/n] " install_dev_tools
 if [[ $install_dev_tools == y ]]; then
     yay --needed -S visual-studio-code-bin the_silver_searcher bat ripgrep fzf git lazygit
 
-    yay --needed -S dotnet-sdk dart typescript vala python python2 gcc clang meson cmake libsass sassc eslint
+    yay --needed -S dotnet-sdk dart typescript vala python python2 gcc clang meson cmake libsass sassc eslint rust cargo
 fi
 echo ""
 ##
@@ -99,7 +99,13 @@ echo ""
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var == y ]]; then
     yay --needed -S scdoc
-    yay --needed -S ccls vala-language-server-git efm-langserver vint lua-format ueberzug digestif lua-language-server bash-language-server uncrustify shfmt prettier pyright omnisharp-roslyn-bin lolcat
+    yay --needed -S vint ueberzug lolcat stylelint
+    # Lsps
+    yay --needed -S vala-language-server-git efm-langserver lua-language-server bash-language-server omnisharp-roslyn-bin typescript-language-server-bin pyright ccls vim-language-server rust-analyzer
+    sudo npm i -g stylelint-lsp vscode-langservers-extracted markdownlint-cli
+
+    # Formatters
+    yay --needed -S lua-format uncrustify shfmt prettier autopep8
 
     pip install cpplint neovim
     sudo npm install -g neovim
