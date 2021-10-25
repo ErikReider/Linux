@@ -1,6 +1,7 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 local nvim_lsp = require('lspconfig')
 local on_attach = require("LSP.on_attach")
+local util = require("lspconfig/util")
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -74,7 +75,18 @@ nvim_lsp.stylelint_lsp.setup({
         on_attach(client, bufnr)
     end,
     flags = {debounce_text_changes = 150},
+    capabilities = capabilities
+})
+
+nvim_lsp.emmet_ls.setup({
+    on_attach = on_attach,
+    flags = {debounce_text_changes = 150},
     capabilities = capabilities,
+    -- root_dir = util.root_pattern('./', '.git')
+    root_dir = function(fname)
+        return util.root_pattern('package.json', '.git')(fname) or
+                   util.path.dirname(fname)
+    end
 })
 
 -- CSharp

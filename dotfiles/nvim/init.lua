@@ -21,14 +21,12 @@ iterDir("~/.config/nvim/lua/plugged/*.vim",
 iterDir("~/.config/nvim/lua/plugged/*.lua",
         function(filename) vim.cmd("luafile " .. filename) end)
 
-
 -- Source all .vim files in custom
 iterDir("~/.config/nvim/lua/custom/*.vim",
         function(filename) vim.cmd("source " .. filename) end)
 -- Source all .lua files in custom
 iterDir("~/.config/nvim/lua/custom/*.lua",
         function(filename) vim.cmd("luafile " .. filename) end)
-
 
 -- Other NeoVim settings
 vim.cmd("luafile ~/.config/nvim/lua/mappings.lua")

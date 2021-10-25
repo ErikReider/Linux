@@ -102,7 +102,7 @@ if [[ $vim_var == y ]]; then
     yay --needed -S vint ueberzug lolcat stylelint
     # Lsps
     yay --needed -S vala-language-server-git efm-langserver lua-language-server bash-language-server omnisharp-roslyn-bin typescript-language-server-bin pyright ccls vim-language-server rust-analyzer
-    sudo npm i -g stylelint-lsp vscode-langservers-extracted markdownlint-cli
+    sudo npm i -g stylelint-lsp vscode-langservers-extracted markdownlint-cli emmet-ls
 
     # Formatters
     yay --needed -S lua-format uncrustify shfmt prettier autopep8
