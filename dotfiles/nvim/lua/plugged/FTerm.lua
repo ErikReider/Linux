@@ -2,6 +2,7 @@ require("FTerm").setup({
     border = 'single',
     auto_close = true,
     hl = 'Normal',
+    blend = 20,
     dimensions  = {
         height = 0.9,
         width = 0.9,
