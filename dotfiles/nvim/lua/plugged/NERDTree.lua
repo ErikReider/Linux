@@ -9,7 +9,6 @@ function _G.toggleNerdTree()
     vim.cmd(command)
 end
 vim.api.nvim_set_keymap('n', '<C-n>', ':lua toggleNerdTree() <CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<A-S-n>', ':NERDTreeToggle <CR>', {silent = true})
 vim.api.nvim_set_keymap('n', '<C-m>', ":NERDTreeFind <CR>", {silent = true})
 
 vim.api.nvim_set_var("NERDTreeGitStatusWithFlags", 1)

@@ -24,6 +24,7 @@ Plug 'glepnir/dashboard-nvim'
 Plug 'lambdalisue/suda.vim'
 " Floating terminals
 Plug 'numtostr/FTerm.nvim'
+
 " nvim lsp
 Plug 'neovim/nvim-lspconfig'
 " A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
@@ -47,6 +48,8 @@ Plug 'windwp/nvim-autopairs'
 Plug 'ray-x/lsp_signature.nvim'
 " Automatically creates missing LSP diagnostics highlight groups
 Plug 'folke/lsp-colors.nvim'
+" Vim plugin for automatically highlighting other uses of the word under the cursor.
+Plug 'RRethy/vim-illuminate'
 
 " Auto tabwidth and style detection
 Plug 'tpope/vim-sleuth'

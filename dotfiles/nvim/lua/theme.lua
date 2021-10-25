@@ -39,6 +39,14 @@ vim.highlight.create("LspReferenceWrite", {
     cterm="bold",
     gui="bold"
 }, false)
+vim.highlight.create("illuminatedWord", {
+    ctermbg = "darkgray",
+    guibg = "darkgray",
+    ctermfg = "white",
+    guifg = "white",
+    cterm="bold",
+    gui="bold"
+}, false)
 
 -- vim.cmd[[
 -- highlight LspDiagnosticsUnderlineError guifg=NONE guibg=NONE guisp=#fb4934 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
