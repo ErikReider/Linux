@@ -61,6 +61,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 " Comments
 Plug 'preservim/nerdcommenter'
 " Add surrounding (), [], {}, etc...
@@ -68,8 +69,8 @@ Plug 'tpope/vim-surround'
 " Changing tag name also changed matching tag
 Plug 'AndrewRadev/tagalong.vim'
 " Searching
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 " Bottom line and buffer line
 Plug 'vim-airline/vim-airline'
 " XML-like
