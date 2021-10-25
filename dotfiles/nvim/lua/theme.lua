@@ -5,9 +5,15 @@ vim.api.nvim_set_var("airline_theme", 'codedark')
 vim.cmd[[au TextYankPost * silent! lua vim.highlight.on_yank()]]
 
 -- Shows space and tab as characters
-vim.o.showbreak = "↪ "
-vim.o.list = true
-vim.o.listchars = "space:·,tab:⟶ ,nbsp:␣,trail:·,extends:⟩,precedes:⟨"
+vim.opt.showbreak = "↪ "
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("tab:⟶ ")
+vim.opt.listchars:append("nbsp:␣")
+vim.opt.listchars:append("trail:·")
+vim.opt.listchars:append("extends:⟩")
+vim.opt.listchars:append("precedes:⟨")
+
 vim.highlight.create("SpecialKey", {ctermfg = "darkgray", guifg = "darkgray"},
                      false)
 vim.highlight.create("NonText", {ctermfg = "darkgray", guifg = "darkgray"},

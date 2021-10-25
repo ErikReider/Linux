@@ -17,7 +17,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}
 " Treesitter rainbow
 Plug 'p00f/nvim-ts-rainbow'
 " Indent indicators
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 " Start Screen
 Plug 'glepnir/dashboard-nvim'
 " To save write-protected files
