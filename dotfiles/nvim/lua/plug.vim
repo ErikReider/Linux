@@ -144,7 +144,7 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 "" Other
 " Vim commands for Flutter, including hot-reload-on-save and more.
-Plug 'thosakwe/vim-flutter', {'for': 'dart'}
+Plug 'akinsho/flutter-tools.nvim', {'for': 'dart'}
 " LESS autocompile
 Plug 'plasticscafe/vim-less-autocompile', {'for': 'less'}
 

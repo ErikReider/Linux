@@ -9,7 +9,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local servers = {
     -- No configuration needed
-    "vimls", "vala_ls", "dartls", "cssls", "texlab", "pyright", "clangd"
+    "vimls", "vala_ls", "cssls", "texlab", "pyright", "clangd"
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -173,6 +173,30 @@ nvim_lsp.rust_analyzer.setup({
             cargo = {loadOutDirsFromCheck = true},
             procMacro = {enable = true}
         }
+    }
+})
+
+-- Flutter
+require("flutter-tools").setup({
+    ui = {border = "rounded"},
+    decorations = {statusline = {app_version = false, device = true}},
+    debugger = {enabled = false},
+    closing_tags = {
+        highlight = "Comment", -- highlight for the closing tag
+        prefix = "❯ ", -- character to use for close tag e.g. > Widget
+        enabled = true -- set to false to disable
+    },
+    dev_log = {
+        open_cmd = "tabedit" -- command to use to open the log buffer
+    },
+    outline = {
+        open_cmd = "30vnew", -- command to use to open the outline buffer
+        auto_open = false -- if true this will open the outline automatically when it is first populated
+    },
+    lsp = {
+        on_attach = on_attach,
+        capabilities = capabilities, -- e.g. lsp_status capabilities
+        settings = {showTodos = true, completeFunctionCalls = true}
     }
 })
 
