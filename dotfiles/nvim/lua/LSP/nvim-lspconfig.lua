@@ -61,21 +61,18 @@ function _G.goto_definition(new_tab)
                 return nil
             end
 
-            local uri = vim.uri_to_fname(result[1].uri)
+            local res = vim.tbl_islist(result) and result[1] or result
+
+            local uri = vim.uri_to_fname(res.uri)
             if new_tab and uri ~= vim.fn.expand("%:p") then
                 vim.cmd("tab drop " .. uri)
             end
 
-            if vim.tbl_islist(result) then
-                util.jump_to_location(result[1])
-
-                if #result > 1 then
-                    util.set_qflist(util.locations_to_items(result))
-                    api.nvim_command("copen")
-                    api.nvim_command("wincmd p")
-                end
-            else
-                util.jump_to_location(result)
+            util.jump_to_location(res)
+            if #result > 1 then
+                util.set_qflist(util.locations_to_items(result))
+                api.nvim_command("copen")
+                api.nvim_command("wincmd p")
             end
         end
     vim.lsp.buf.definition()
