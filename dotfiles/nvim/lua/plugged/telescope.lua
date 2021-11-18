@@ -44,7 +44,7 @@ require('telescope').setup {
             i = {
                 ["<C-h>"] = actions.which_key,
                 ["<esc>"] = actions.close,
-                ["<C-t>"] = actions.file_tab,
+                ["<Tab>"] = actions.file_tab,
                 ["<C-i>"] = actions.file_split,
                 ["<C-s>"] = actions.file_vsplit,
                 ["<C-Up>"] = actions.preview_scrolling_up,
