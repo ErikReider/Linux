@@ -21,6 +21,7 @@ if [[ $1 == "-i" ]]; then
         swaytools \
         swaync-git \
         swaysettings-git \
+        swayfloatingswitcher-git \
         sway-audio-idle-inhibit-git \
         xss-lock \
         wl-clipboard \
