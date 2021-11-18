@@ -11,8 +11,8 @@ vim.cmd("source ~/.config/nvim/lua/vimEnter.vim")
 vim.cmd("luafile ~/.config/nvim/lua/theme.lua")
 vim.cmd("source ~/.config/nvim/lua/neovide.vim")
 
--- Coc
-vim.cmd("source ~/.config/nvim/lua/plugged/coc/coc.vim")
+-- LSP
+vim.cmd("luafile ~/.config/nvim/lua/LSP/nvim-lspconfig.lua");
 
 -- Plug configs
 iterDir("~/.config/nvim/lua/plugged/*.vim",
@@ -21,14 +21,12 @@ iterDir("~/.config/nvim/lua/plugged/*.vim",
 iterDir("~/.config/nvim/lua/plugged/*.lua",
         function(filename) vim.cmd("luafile " .. filename) end)
 
-
 -- Source all .vim files in custom
 iterDir("~/.config/nvim/lua/custom/*.vim",
         function(filename) vim.cmd("source " .. filename) end)
 -- Source all .lua files in custom
 iterDir("~/.config/nvim/lua/custom/*.lua",
         function(filename) vim.cmd("luafile " .. filename) end)
-
 
 -- Other NeoVim settings
 vim.cmd("luafile ~/.config/nvim/lua/mappings.lua")

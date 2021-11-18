@@ -4,8 +4,8 @@ local lazygit = Terminal:new({
     dir = "git_dir",
     hidden = true,
     direction = "float",
-    float_opts = {winblend = 0}
+    float_opts = {winblend = 20}
 })
-function _lazygit_toggle() lazygit:toggle() end
+function _G.lazygit_toggle() lazygit:toggle() end
 
-vim.cmd("command! LazyGit lua _lazygit_toggle()")
+vim.cmd("command! LazyGit lua lazygit_toggle()")
