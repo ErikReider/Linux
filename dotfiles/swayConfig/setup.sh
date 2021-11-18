@@ -10,6 +10,7 @@ if [[ $1 == "-i" ]]; then
         wlroots-git \
         wlsunset-git \
         faba-icon-theme \
+        gammastep \
         xdg-desktop-portal-wlr-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
