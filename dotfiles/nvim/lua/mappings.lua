@@ -6,8 +6,8 @@ map('n', '<C-d>',
 -- Opens selected link in xdg default browser
 -- https://vim.fandom.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
 map("n", "gx",
-    ':silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\\|%")<CR><CR>',
-    {silent = true})
+    ':silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\\|%")<CR> 2> /dev/null >&2 & disown<CR>',
+    {silent = false})
 
 -- open init.vim on F3 (split if buffer is selected)
 map("n", "<F3>",
