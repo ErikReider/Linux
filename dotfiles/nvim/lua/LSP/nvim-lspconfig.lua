@@ -223,7 +223,7 @@ cmp.setup({
         end, {"i", "s"})
     },
     sources = {
-        {name = 'luasnip'}, {name = 'nvim_lsp'}, {name = 'path'},
+        {name = 'nvim_lsp'}, {name = 'luasnip'}, {name = 'path'},
         {name = 'buffer'}
     }
 })
@@ -241,16 +241,16 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
     })
 
 -- Adds auto insertion of "()" in cmp
-require("nvim-autopairs.completion.cmp").setup({
-    map_cr = true, --  map <CR> on insert mode
-    map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-    auto_select = true, -- automatically select the first item
-    insert = false, -- use insert confirm behavior instead of replace
-    map_char = { -- modifies the function or method delimiter by filetypes
-        all = '(',
-        tex = '{'
-    }
-})
+-- require("nvim-autopairs.completion.cmp").setup({
+    -- map_cr = true, --  map <CR> on insert mode
+    -- map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+    -- auto_select = true, -- automatically select the first item
+    -- insert = false, -- use insert confirm behavior instead of replace
+    -- map_char = { -- modifies the function or method delimiter by filetypes
+        -- all = '(',
+        -- tex = '{'
+    -- }
+-- })
 
 require("LSP.lua_snip")
 
