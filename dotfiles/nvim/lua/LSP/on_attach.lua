@@ -121,8 +121,8 @@ return function(client, bufnr)
                    '<cmd>Lspsaga diagnostic_jump_next<CR>', opts)
 
     -- Show diagnostics list
-    buf_set_keymap(true, "", 'n', '<space>q',
-                   '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap(true, "", 'n', '<A-S-w>',
+                   '<cmd>Telescope lsp_workspace_diagnostics<CR>', opts)
 
     -- Formatting
     buf_set_keymap(client.resolved_capabilities.document_formatting,

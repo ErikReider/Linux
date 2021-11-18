@@ -30,6 +30,7 @@ require('telescope').setup {
         keymaps = picker_options,
         highlights = picker_options,
         lsp_workspace_diagnostics = picker_options,
+        lsp_references = picker_options,
         lsp_code_actions = {
             winblend = 20,
             theme = "cursor",
@@ -88,10 +89,7 @@ map("n", "<A-f>", [[<cmd>lua telescopeGFiles()<CR>]], opts)
 map("n", "<A-S-f>", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]],
     opts)
 map("n", "<A-S-d>",
-    [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find<CR>]],
-    opts)
-map("n", "<A-S-w>",
-    [[<cmd>lua require("telescope.builtin").lsp_workspace_diagnostics()<CR>]],
+    [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>]],
     opts)
 map("n", "<A-S-b>", [[<cmd>lua require("telescope.builtin").buffers()<CR>]],
     opts)
