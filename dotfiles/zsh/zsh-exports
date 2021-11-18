@@ -42,8 +42,8 @@ export FZF_DEFAULT_OPTS='-e -i'
 
 # Auth
 if hash gnome-keyring-daemon 2>/dev/null; then
-    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
-    export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
+    eval $(/usr/bin/gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
 fi
 
 # Path
