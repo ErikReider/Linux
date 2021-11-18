@@ -52,7 +52,7 @@ if [[ $1 == "-i" ]]; then
         kitty \
         geoclue \
         geocode-glib \
-        pacdep
+        pacdep \
         gnome-keyring
 
     libtool --finish /usr/lib/rofi/
