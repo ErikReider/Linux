@@ -63,7 +63,7 @@ return function(client, bufnr)
     -- References
     buf_set_keymap(client.resolved_capabilities.find_references,
                    "finding references", 'n', 'gr',
-                   '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+                   '<cmd>Telescope lsp_references<CR>', opts)
 
     -- Show hover info
     buf_set_keymap(client.resolved_capabilities.hover, "hover", 'n', 'K',
