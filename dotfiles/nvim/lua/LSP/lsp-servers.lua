@@ -82,7 +82,6 @@ nvim_lsp.emmet_ls.setup({
     on_attach = on_attach,
     flags = {debounce_text_changes = 150},
     capabilities = capabilities,
-    -- root_dir = util.root_pattern('./', '.git')
     root_dir = function(fname)
         return util.root_pattern('package.json', '.git')(fname) or
                    util.path.dirname(fname)
