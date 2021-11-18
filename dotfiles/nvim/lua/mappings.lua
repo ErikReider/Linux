@@ -34,13 +34,19 @@ map("", "<End>", "g<End>", {silent = true})
 -- Shift up/down to move cursor +/- 5 lines
 map("", "<S-Up>", "5<Up>", {silent = true, noremap = true})
 map("", "<S-Down>", "5<Down>", {silent = true, noremap = true})
+map("i", "<S-Up>", "<C-O>5<Up>", {silent = true, noremap = true})
+map("i", "<S-Down>", "<C-O>5<Down>", {silent = true, noremap = true})
 -- Control up/down to scroll +/- 5 lines
 map("", "<C-Up>", "5<C-y>", {silent = true, noremap = true})
 map("", "<C-Down>", "5<C-e>", {silent = true, noremap = true})
+map("i", "<C-Up>", "<C-O>5<C-y>", {silent = true, noremap = true})
+map("i", "<C-Down>", "<C-O>5<C-e>", {silent = true, noremap = true})
 
 -- Move line up or down
 map("n", "<A-Up>", ":m-2<CR>", {noremap = true, silent = true})
 map("n", "<A-Down>", ":m+<CR>", {noremap = true, silent = true})
+map("i", "<A-Up>", "<C-O>:m-2<CR>", {noremap = true, silent = true})
+map("i", "<A-Down>", "<C-O>:m+<CR>", {noremap = true, silent = true})
 
 -- Move window with arrow keys (C-w)
 map("n", "<C-S-Left>", ":wincmd h <CR>", {silent = true, noremap = true})
