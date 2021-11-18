@@ -145,7 +145,7 @@
       "disabled": "<span foreground='#928374'></span>"
     },
     "tooltip-format": "{}",
-    "on-click": "blueberry",
+    "on-click": "systemsettings5 bluetooth",
     "on-click-right": "python3 ~/.config/waybar/scripts/bluetooth-toggle.py",
     "tooltip": false
   },
@@ -156,7 +156,7 @@
     "format-linked": "",
     "format-disconnected": "",
     "format-icons": ["", "", "", "", ""],
-    "on-click": "gnome-control-center wifi",
+    "on-click": "systemsettings5 kcm_networkmanagement",
     "on-click-right": "wifi toggle",
     "tooltip-format": "{}",
     "tooltip-format-wifi": "{signalStrength} {ipaddr}"
@@ -168,7 +168,7 @@
     "format-linked": "",
     "format-disconnected": "",
     "format-disabled": "",
-    "on-click": "gnome-control-center network",
+    "on-click": "systemsettings5 kcm_networkmanagement",
     "tooltip-format": "{}",
     "tooltip-format-ethernet": "{ipaddr}"
   },
@@ -182,7 +182,7 @@
     },
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
-    "on-click": " gnome-control-center sound",
+    "on-click": "systemsettings5 kcm_pulseaudio",
     "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
   },
   "custom/wallpaperRefresh": {
