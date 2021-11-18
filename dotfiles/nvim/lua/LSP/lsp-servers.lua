@@ -193,7 +193,24 @@ require("flutter-tools").setup({
         auto_open = false -- if true this will open the outline automatically when it is first populated
     },
     lsp = {
-        on_attach = on_attach,
+        on_attach = function(...)
+            local commands = require("flutter-tools.commands")
+            -- Hotreload on save
+            function _G.flutterHotReload()
+                if not commands.is_running() then
+                    vim.fn.execute(
+                        [[!kill -SIGUSR1 $(pgrep -f "[f]lutter_tool.*run")]])
+                end
+            end
+            vim.cmd([[
+            augroup hotReload
+                autocmd! BufWritePost *.dart lua flutterHotReload()
+                autocmd! BufWritePre *.dart lua vim.lsp.buf.formatting_sync()
+            augroup end
+            ]])
+
+            on_attach(...)
+        end,
         capabilities = capabilities, -- e.g. lsp_status capabilities
         settings = {showTodos = true, completeFunctionCalls = true}
     }
