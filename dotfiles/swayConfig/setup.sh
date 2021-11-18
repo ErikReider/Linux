@@ -9,6 +9,7 @@ if [[ $1 == "-i" ]]; then
         wlroots-git \
         wlsunset-git \
         gammastep \
+        waybar-git \
         xdg-desktop-portal-wlr-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
