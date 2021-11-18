@@ -66,3 +66,5 @@ luasnip.config.setup({
 
 luasnip.filetype_extend("javascriptreact", {"typescript"})
 luasnip.filetype_extend("typescriptreact", {"typescript"})
+
+require("LSP.customSnippets")
