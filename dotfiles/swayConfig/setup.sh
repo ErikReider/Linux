@@ -42,8 +42,8 @@ if [[ $1 == "-i" ]]; then
         ttf-font-awesome \
         ttf-roboto \
         brightnessctl \
-        blueberry \
         bluez-utils \
+        bluez \
         playerctl \
         appimagelauncher \
         libappimage \
