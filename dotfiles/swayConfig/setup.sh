@@ -1,7 +1,6 @@
 #!/bin/bash
 
 if [[ $1 == "-i" ]]; then
-
     yay --needed -S \
         wmname \
         lsb-release \
@@ -9,7 +8,6 @@ if [[ $1 == "-i" ]]; then
         sway-git \
         wlroots-git \
         wlsunset-git \
-        faba-icon-theme \
         gammastep \
         xdg-desktop-portal-wlr-git \
         swaylock-effects \
