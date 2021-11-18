@@ -77,6 +77,7 @@ if [[ $change_to_bash_var == y ]]; then
     rm -rf zsh .zshrc
 
     ln -s $currentDir/dotfiles/zsh/.zshrc .zshrc
+    ln -s $currentDir/dotfiles/zsh/.zprofile .zprofile
     ln -s $currentDir/dotfiles/zsh .
 
     mkdir zsh/plugins
