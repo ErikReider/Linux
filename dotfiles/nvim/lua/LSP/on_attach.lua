@@ -126,7 +126,10 @@ return function(client, bufnr)
 
     -- Formatting
     buf_set_keymap(client.resolved_capabilities.document_formatting,
-                   "formatting", 'n', '<C-M-b>',
-                   '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+                   "formatting", "n", "<C-M-b>",
+                   "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    buf_set_keymap(client.resolved_capabilities.document_formatting,
+                   "formatting", "i", "<C-M-b>",
+                   "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
 end
