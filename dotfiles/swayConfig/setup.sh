@@ -13,7 +13,7 @@ if [[ $1 == "-i" ]]; then
         xdg-desktop-portal-wlr-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
-        polkit-gnome \
+        polkit-kde-agent \
         rofi-emoji \
         ttf-material-icons-git \
         ttf-weather-icons \
@@ -53,6 +53,7 @@ if [[ $1 == "-i" ]]; then
         geoclue \
         geocode-glib \
         pacdep
+        gnome-keyring
 
     libtool --finish /usr/lib/rofi/
 fi
