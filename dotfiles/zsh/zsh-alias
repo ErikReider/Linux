@@ -26,7 +26,10 @@ alias rd=rmdir
 alias cp="cp -i" # Confirm before overwriting something
 alias rm="rm -i" # Confirm before overwriting something
 alias mv="mv -i" # Confirm before overwriting something
+alias ls="ls $LS_OPTIONS"
 alias lsa="ls -a"
+alias ll="ls -l"
+alias lla="ls -la"
 alias df='df -h'     # Human-readable sizes
 alias du='du -h'     # Human-readable sizes
 # alias diff='diff -y --color=always'     # Human-readable with colors
@@ -47,8 +50,6 @@ alias paclg='pamac list -i | grep -e'
 alias nvimcfg="nvim ~/.config/nvim/init.vim"
 alias zshcfg="nvim ~/.zshrc"
 alias src="exec zsh"
-
-alias ls='ls --color=auto'
 
 # Disowns application
 function diso() {
