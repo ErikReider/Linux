@@ -77,5 +77,5 @@ done
 # Kanshi
 mkdir ~/.config/kanshi
 touch ~/.config/kanshi/config
-echo "syntax is similar to 'man 5 sway-output'. Get outputs: 'swaymsg -t get_outputs'"
-echo "add 'XDG_CURRENT_DESKTOP=sway' to /etc/environment"
+echo "Please edit kanshi config for optimal output auto switching!"
+echo "Syntax is similar to 'man 5 sway-output'. Get outputs: 'swaymsg -t get_outputs'"
