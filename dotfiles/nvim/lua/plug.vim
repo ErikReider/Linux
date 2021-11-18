@@ -42,6 +42,8 @@ Plug 'hrsh7th/cmp-path'
 Plug 'saadparwaiz1/cmp_luasnip'
 " Snippet Engine for Neovim written in Lua.
 Plug 'L3MON4D3/LuaSnip'
+" Snippet Engine for Neovim written in Lua.
+Plug 'rafamadriz/friendly-snippets'
 " A super powerful autopair for Neovim
 Plug 'windwp/nvim-autopairs'
 " Shows function signature (parameters)
