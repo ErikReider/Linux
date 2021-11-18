@@ -56,14 +56,18 @@ function _G.goto_definition(new_tab)
             local log = require("vim.lsp.log")
             local api = vim.api
             if result == nil or vim.tbl_isempty(result) then
-                local _ =
-                    log.info() and log.info(ctx.method, 'No location found')
+                local _ = log.info() and
+                              log.info(ctx.method or "Nil", 'No location found')
                 return nil
             end
 
             local res = vim.tbl_islist(result) and result[1] or result
 
-            local uri = vim.uri_to_fname(res.uri)
+            if (res.uri or res.targetUri) == nil then
+                print("URI is nil...")
+                return nil
+            end
+            local uri = vim.uri_to_fname(res.uri or res.targetUri)
             if new_tab and uri ~= vim.fn.expand("%:p") then
                 vim.cmd("tab drop " .. uri)
             end
