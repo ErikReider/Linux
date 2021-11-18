@@ -4,7 +4,7 @@ local lazygit = Terminal:new({
     dir = "git_dir",
     hidden = true,
     direction = "float",
-    float_opts = {winblend = 20}
+    float_opts = {winblend = 20, border = "rounded"}
 })
 function _G.lazygit_toggle() lazygit:toggle() end
 
