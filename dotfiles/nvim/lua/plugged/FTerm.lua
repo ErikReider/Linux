@@ -1,5 +1,5 @@
 require("FTerm").setup({
-    border = 'single',
+    border = 'rounded',
     auto_close = true,
     hl = 'Normal',
     blend = 20,
