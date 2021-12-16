@@ -1,5 +1,3 @@
--- vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'} -- empty by default
-vim.g.nvim_tree_gitignore = 1 -- 0 by default
 vim.g.nvim_tree_git_hl = 1 -- 0 by default, will enable file highlight for git attributes (can be used without the icons).
 vim.g.nvim_tree_highlight_opened_files = 1 -- 0 by default, will enable folder and file icon highlight for opened files/directories.
 vim.g.nvim_tree_root_folder_modifier = ':~' -- This is the default. See :help filename-modifiers for more options
@@ -34,7 +32,7 @@ vim.g.nvim_tree_icons = {
     }
 }
 
-require("nvim-tree").setup {
+require("nvim-tree").setup({
     -- disables netrw completely
     disable_netrw = true,
     -- hijack netrw window on startup
@@ -47,19 +45,16 @@ require("nvim-tree").setup {
     auto_close = false,
     -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
     open_on_tab = false,
-    -- hijacks new directory buffers when they are opened.
-    update_to_buf_dir = {
-        -- enable the feature
-        enable = true,
-        -- allow to open the tree if it was previously closed
-        auto_open = true,
-        -- Ignore these files / directories
-        ignore_list = {'.git', 'node_modules', '.cache'}
-    },
     -- hijack the cursor in the tree to put it at the start of the filename
     hijack_cursor = false,
     -- updates the root directory of the tree on `DirChanged` (when you run `:cd` usually)
     update_cwd = true,
+    -- hijacks new directory buffers when they are opened.
+    update_to_buf_dir = {
+        enable = true,
+        -- allow to open the tree if it was previously closed
+        auto_open = true
+    },
     -- show lsp diagnostics in the signcolumn
     diagnostics = {
         enable = true,
@@ -67,14 +62,13 @@ require("nvim-tree").setup {
     },
     -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
     update_focused_file = {
-        -- enables the feature
         enable = false,
         -- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
         -- only relevant when `update_focused_file.enable` is true
         update_cwd = false,
         -- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
         -- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
-        ignore_list = {}
+        ignore_list = {'.git', 'node_modules', '.cache'}
     },
     -- configuration options for the system open command (`s` in the tree by default)
     system_open = {
@@ -83,7 +77,13 @@ require("nvim-tree").setup {
         -- the command arguments as a list
         args = {}
     },
-
+    filters = {
+        -- do not show `dotfiles` (files starting with a `.`)
+        dotfiles = false,
+        -- Ignore these files / directories
+        custom = {'.git', 'node_modules', '.cache'}
+    },
+    git = {enable = true, ignore = true, timeout = 500},
     view = {
         -- width of the window, can be either a number (columns) or a string in `%`, for left or right side placement
         width = 40,
@@ -101,9 +101,12 @@ require("nvim-tree").setup {
             custom_only = false,
             -- list of mappings to set on the tree manually
             list = {}
-        }
-    }
-}
+        },
+        number = false,
+        relativenumber = false
+    },
+    trash = {cmd = "trash", require_confirm = true}
+})
 
 map('n', '<C-n>', ':NvimTreeToggle <CR>', {silent = true})
 map('n', '<C-m>', ":NvimTreeFindFile <CR>", {silent = true})
