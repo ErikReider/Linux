@@ -64,7 +64,8 @@ luasnip.config.setup({
     end
 })
 
-luasnip.filetype_extend("javascriptreact", {"typescript"})
-luasnip.filetype_extend("typescriptreact", {"typescript"})
+luasnip.filetype_extend("javascriptreact", {"typescript", "javascript"})
+luasnip.filetype_extend("typescriptreact", {"typescript", "javascript"})
+luasnip.filetype_extend("dart", {"flutter"})
 
 require("LSP.customSnippets")
