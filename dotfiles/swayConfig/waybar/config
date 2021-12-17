@@ -6,7 +6,8 @@
   "modules-left": [
     "custom/linux",
     "custom/headsetcontrol",
-    "battery",
+    "battery#hid",
+    "battery#BAT",
     "cpu",
     "memory",
     "custom/weather",
@@ -77,7 +78,8 @@
     "format": "{percent}% {icon}",
     "format-icons": ["", ""]
   },
-  "battery": {
+  "battery#hid": {
+    "bat": "hidpp_battery_*",
     "states": {
       "warning": 30,
       "critical": 15
@@ -86,7 +88,19 @@
     "interval": 60,
     "format": "{icon} {capacity}%",
     "format-charging": "{icon} {capacity}% ",
-    "format-plugged": "{icon} {capacity}% ",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "battery#BAT": {
+    "bat": "BAT*",
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "full-at": 97,
+    "interval": 60,
+    "format": "{icon} {capacity}%",
+    "format-charging": "{icon} {capacity}% ",
+    "format-plugged": "{icon} {capacity}% ",
     "format-icons": ["", "", "", "", ""]
   },
   "custom/notification": {
