@@ -129,12 +129,6 @@ Plug 'digitaltoad/vim-pug', {'for': 'pug'}
 
 
 
-" Completion sources
-" Lua nvim source
-Plug 'rafcamlet/coc-nvim-lua'
-
-
-
 "" File preview
 " Markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
