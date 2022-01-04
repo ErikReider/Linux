@@ -121,6 +121,7 @@ nvim_lsp.jsonls.setup({
     flags = {debounce_text_changes = 150},
     capabilities = capabilities,
     cmd = {'vscode-json-language-server', '--stdio'},
+    filetypes = { "json", "jsonc" },
     settings = {
         json = {
             -- Schemas https://www.schemastore.org
