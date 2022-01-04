@@ -27,18 +27,17 @@ for _, v in ipairs({"SpecialKey", "NonText", "Whitespace"}) do
 end
 
 -- Word highlight
+vim.highlight.create("illuminate", {
+    ctermbg = "238",
+    guibg = "#444444",
+    cterm = "bold",
+    guisp = "#fabd2f",
+    gui = "bold"
+}, false)
 for _, v in ipairs({
     "LspReferenceText", "LspReferenceRead", "LspReferenceWrite",
     "illuminatedWord"
-}) do
-    vim.highlight.create(v, {
-        ctermbg = "238",
-        guibg = "#444444",
-        cterm = "bold",
-        guisp = "#fabd2f",
-        gui = "bold"
-    }, false)
-end
+}) do vim.highlight.link(v, "illuminate") end
 
 -- vim.cmd[[
 -- highlight LspDiagnosticsUnderlineError guifg=NONE guibg=NONE guisp=#fb4934 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl

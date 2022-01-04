@@ -110,3 +110,10 @@ map("n", "<A-S-w>", "<cmd>Telescope diagnostics<CR>", lsp_opts)
 -- Formatting
 map("i", "<C-M-b>", "<cmd>lua vim.lsp.buf.formatting()<CR>", lsp_opts)
 map("n", "<C-M-b>", "<cmd>lua vim.lsp.buf.formatting()<CR>", lsp_opts)
+-- Illuminate
+map('n', '<A-n>',
+    '<cmd>lua require("illuminate").next_reference{wrap=true}<cr>',
+    {noremap = true})
+map('n', '<A-S-n>',
+    '<cmd>lua require("illuminate").next_reference{reverse=true,wrap=true}<cr>',
+    {noremap = true})
