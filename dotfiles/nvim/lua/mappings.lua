@@ -69,3 +69,44 @@ map("v", "<A-Left>", "<", {silent = true, noremap = false})
 map("v", "<A-Right>", ">", {silent = true, noremap = false})
 map("n", "<A-Left>", "<<", {silent = true, noremap = false})
 map("n", "<A-Right>", ">>", {silent = true, noremap = false})
+
+-- LSP
+local lsp_opts = {noremap = true, silent = true}
+-- Go to definition
+map("n", "gd", "<cmd>lua goto_definition(true)<CR>", lsp_opts)
+map("n", "gs", "<cmd>lua goto_definition()<CR>", lsp_opts)
+map("n", "ga", ":Lspsaga preview_definition<CR>", lsp_opts)
+-- Go to type_definition
+map("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", lsp_opts)
+-- Go to implementation
+map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", lsp_opts)
+-- References
+map("n", "gr", "<cmd>Telescope lsp_references<CR>", lsp_opts)
+-- Show hover info
+map("n", "K", "<cmd>Lspsaga hover_doc<CR>", lsp_opts)
+-- Show method signature
+map("i", "<M-x>", "<cmd>Lspsaga signature_help<CR>", lsp_opts)
+map("n", "<M-x>", "<cmd>Lspsaga signature_help<CR>", lsp_opts)
+-- Workspace folder
+map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
+    lsp_opts)
+map("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
+    lsp_opts)
+map("n", "<space>wl",
+    "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+    lsp_opts)
+-- Rename
+map("n", "<F2>", ":Lspsaga rename<CR>", lsp_opts)
+-- Code Action
+map("n", "<leader>a", "<cmd>Lspsaga code_action<CR>", lsp_opts)
+-- Show error popup
+map("i", "<M-e>", "<cmd>Lspsaga show_line_diagnostics<CR>", lsp_opts)
+map("n", "<M-e>", "<cmd>Lspsaga show_line_diagnostics<CR>", lsp_opts)
+-- Next/Previous diagnostic
+map("n", "ög", "<cmd>Lspsaga diagnostic_jump_prev<CR>", lsp_opts)
+map("n", "äg", "<cmd>Lspsaga diagnostic_jump_next<CR>", lsp_opts)
+-- Show diagnostics list
+map("n", "<A-S-w>", "<cmd>Telescope diagnostics<CR>", lsp_opts)
+-- Formatting
+map("i", "<C-M-b>", "<cmd>lua vim.lsp.buf.formatting()<CR>", lsp_opts)
+map("n", "<C-M-b>", "<cmd>lua vim.lsp.buf.formatting()<CR>", lsp_opts)
