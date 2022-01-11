@@ -17,7 +17,6 @@
   "modules-right": [
     "tray",
     "custom/ArchUpdates",
-    "custom/usingMic",
     "custom/usingAudio",
     "pulseaudio",
     "bluetooth",
@@ -119,24 +118,17 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-  "custom/usingMic": {
-    "format": "{icon}",
-    "format-icons": {
-      "RUNNING": "  "
-    },
-    "return-type": "json",
-    "exec-if": "which sway-audio-idle-inhibit",
-    "exec": "sway-audio-idle-inhibit --dry-print-source | xargs -I {} echo '{\"text\": \"{}\", \"tooltip\": \"\", \"alt\": \"{}\", \"class\": \"{}\"}'",
-    "escape": true
-  },
   "custom/usingAudio": {
     "format": "{icon}",
     "format-icons": {
-      "RUNNING": "  "
+      "output": "  ",
+      "input": "  ",
+      "output-input": "   ",
+      "none": ""
     },
     "return-type": "json",
     "exec-if": "which sway-audio-idle-inhibit",
-    "exec": "sway-audio-idle-inhibit --dry-print-sink | xargs -I {} echo '{\"text\": \"{}\", \"tooltip\": \"\", \"alt\": \"{}\", \"class\": \"{}\"}'",
+    "exec": "~/Git/SwayAudioIdleInhibit/build/sway-audio-idle-inhibit --dry-print-both-waybar",
     "escape": true
   },
   "custom/airplane": {
