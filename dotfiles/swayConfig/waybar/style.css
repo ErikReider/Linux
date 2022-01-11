@@ -183,3 +183,7 @@ label:focus {
 #custom-headsetcontrol {
   /* font-family: "Font Awesome 5 Free"; */
 }
+
+#custom-notification {
+  font-family: "NotoSansMono Nerd Font";
+}
