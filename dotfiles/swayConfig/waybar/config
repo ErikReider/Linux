@@ -17,14 +17,14 @@
   "modules-right": [
     "tray",
     "custom/ArchUpdates",
-    "custom/notification",
     "custom/usingMic",
     "custom/usingAudio",
     "pulseaudio",
     "bluetooth",
     "network#wifi",
     "network#ethernet",
-    "clock"
+    "clock",
+    "custom/notification"
   ],
   "custom/linux": {
     "format": "<span font='16' font_family='NotoSansMono Nerd Font'>{}</span>",
@@ -105,13 +105,16 @@
   },
   "custom/notification": {
     "tooltip": false,
-    "format": " <span rise='1000'>{}<span foreground='red'><sup>{icon}</sup></span></span> ",
+    "format": "{icon}",
     "format-icons": {
-      "noti": ""
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": ""
     },
     "return-type": "json",
     "exec-if": "which swaync",
-    "exec": "swaync-client -s | ~/.config/waybar/scripts/swaync-client.sh",
+    "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
