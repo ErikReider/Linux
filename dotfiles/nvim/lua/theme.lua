@@ -39,8 +39,9 @@ for _, v in ipairs({
     "illuminatedWord"
 }) do vim.highlight.link(v, "illuminate") end
 
--- vim.cmd[[
--- highlight LspDiagnosticsUnderlineError guifg=NONE guibg=NONE guisp=#fb4934 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
--- highlight LspDiagnosticsUnderlineWarning guifg=NONE guibg=NONE guisp=#fabd2f gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
--- highlight LspDiagnosticsUnderlineInfo guifg=NONE guibg=NONE guisp=#83a598 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
--- ]]
+vim.highlight.create("DiagnosticUnderlineError",
+                     {gui = "undercurl", cterm = "undercurl"})
+vim.highlight.create("DiagnosticUnderlineWarn",
+                     {gui = "undercurl", cterm = "undercurl"})
+vim.highlight.create("DiagnosticUnderlineInfo",
+                     {gui = "undercurl", cterm = "undercurl"})
