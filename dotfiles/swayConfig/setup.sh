@@ -1,6 +1,7 @@
 #!/bin/bash
 
 if [[ $1 == "-i" ]]; then
+    sudo rm -rf ~/.cache/yay/wlroots-git
     yay --needed -S \
         wmname \
         lsb-release \
@@ -8,9 +9,8 @@ if [[ $1 == "-i" ]]; then
         autotiling-rs-git \
         sway-git \
         wlroots-git \
-        wlsunset-git \
         gammastep \
-        waybar-git \
+        waybar \
         xdg-desktop-portal-wlr-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
