@@ -70,10 +70,11 @@ Plug 'preservim/nerdcommenter'
 " Add surrounding (), [], {}, etc...
 Plug 'tpope/vim-surround'
 " Changing tag name also changed matching tag
-Plug 'AndrewRadev/tagalong.vim'
+Plug 'AndrewRadev/tagalong.vim', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx'] }
 " Searching
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 " Bottom line and buffer line
 Plug 'vim-airline/vim-airline'
 " XML-like
