@@ -63,35 +63,31 @@ scrolling:
   multiplier: 3
 
 # Font configuration (changes require restart)
-
 font:
   normal:
-    family: Hack Nerd Font Mono
+    family: Fira Code
     style: Regular
 
   bold:
-    family: Hack Nerd Font Mono
+    family: Fira Code
     style: Bold
 
   italic:
-    family: Hack Nerd Font Mono
+    family: Fira Code
     style: Italic
 
-  bold_italic:
-    family: Hack Nerd Font Mono
-    style: Bold Italic
-
-  size: 12
+  size: 12.0
+  ligatures: true
 
 # font:
 # The normal (roman) font face to use.
 # Style can be specified to pick a specific face.
-  # normal:
-    # family: monospace
-    # family: "Source Code Pro"
-    # family: "input"
-    # family: "fira"
-    # family: "Input Mono"
+# normal:
+# family: monospace
+# family: "Source Code Pro"
+# family: "input"
+# family: "fira"
+# family: "Input Mono"
 # style: Regular
 # family: "Fira Code"
 # family: "Source Code Pro"
