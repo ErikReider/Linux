@@ -9,7 +9,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local servers = {
     -- No configuration needed
-    "vimls", "vala_ls", "cssls", "texlab", "pyright", "clangd"
+    "vimls", "vala_ls", "cssls", "texlab", "pyright"
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -98,6 +98,14 @@ nvim_lsp.omnisharp.setup({
     }
 })
 
+-- Clangd
+nvim_lsp.clangd.setup({
+    on_attach = on_attach,
+    flags = {debounce_text_changes = 150},
+    capabilities = capabilities,
+    cmd = {"clangd", "-fallback-style=Google"}
+})
+
 -- Bash
 nvim_lsp.bashls.setup({
     on_attach = on_attach,
@@ -121,7 +129,7 @@ nvim_lsp.jsonls.setup({
     flags = {debounce_text_changes = 150},
     capabilities = capabilities,
     cmd = {'vscode-json-language-server', '--stdio'},
-    filetypes = { "json", "jsonc" },
+    filetypes = {"json", "jsonc"},
     settings = {
         json = {
             -- Schemas https://www.schemastore.org
