@@ -133,44 +133,38 @@ nvim_autopairs.setup({disable_filetype = {"TelescopePrompt", "vim"}})
 
 -- nvim-cmp
 local lsp_symbols = {
-    Text = "  ",
-    Method = "  ",
-    Function = "  ",
-    Constructor = "  ",
-    Field = "  ",
-    Variable = "[]",
-    Class = " פּ ",
-    Interface = " 蘒 ",
-    Module = "  ",
-    Property = "  ",
-    Unit = " 塞 ",
-    Value = "  ",
-    Enum = " 練 ",
-    Keyword = "  ",
-    Snippet = "  ",
-    Color = "  ",
-    File = "  ",
-    Reference = "  ",
-    Folder = "  ",
-    EnumMember = "  ",
-    Constant = "  ",
-    Struct = "  ",
-    Event = "  ",
-    Operator = "  ",
-    TypeParameter = "<>"
+    Text = "",
+    Method = "",
+    Function = "",
+    Constructor = "",
+    Field = "",
+    Variable = "",
+    Class = "",
+    Interface = "",
+    Module = "",
+    Property = "",
+    Unit = "",
+    Value = "",
+    Enum = "",
+    Keyword = "",
+    Snippet = "",
+    Color = "",
+    File = "",
+    Reference = "",
+    Folder = "",
+    EnumMember = "",
+    Constant = "",
+    Struct = "",
+    Event = "",
+    Operator = "",
+    TypeParameter = ""
 }
 cmp.setup({
     snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
     formatting = {
-        format = function(entry, vim_item)
-            vim_item.kind = lsp_symbols[vim_item.kind]
-            vim_item.menu = ({
-                nvim_lsp = "[LSP]",
-                luasnip = "[Snip]",
-                nvim_lua = "[Lua]",
-                latex_symbols = "[Latx]",
-                buffer = "[Buff]"
-            })[entry.source.name]
+        fields = {"kind", "abbr"},
+        format = function(_, vim_item)
+            vim_item.kind = lsp_symbols[vim_item.kind] or ""
             return vim_item
         end
     },
@@ -242,14 +236,14 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
 
 -- Adds auto insertion of "()" in cmp
 -- require("nvim-autopairs.completion.cmp").setup({
-    -- map_cr = true, --  map <CR> on insert mode
-    -- map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-    -- auto_select = true, -- automatically select the first item
-    -- insert = false, -- use insert confirm behavior instead of replace
-    -- map_char = { -- modifies the function or method delimiter by filetypes
-        -- all = '(',
-        -- tex = '{'
-    -- }
+-- map_cr = true, --  map <CR> on insert mode
+-- map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+-- auto_select = true, -- automatically select the first item
+-- insert = false, -- use insert confirm behavior instead of replace
+-- map_char = { -- modifies the function or method delimiter by filetypes
+-- all = '(',
+-- tex = '{'
+-- }
 -- })
 
 require("LSP.lua_snip")
