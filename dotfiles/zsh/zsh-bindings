@@ -1,4 +1,4 @@
-WORDCHARS=''
+WORDCHARS='*?_~=&;!#$%^<>|'
 zmodload zsh/terminfo
 bindkey -e
 bindkey '^[[7~' beginning-of-line # Home key
