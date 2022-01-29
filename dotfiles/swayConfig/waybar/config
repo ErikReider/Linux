@@ -17,6 +17,7 @@
   "modules-right": [
     "tray",
     "custom/ArchUpdates",
+    "custom/gamemode",
     "custom/usingAudio",
     "pulseaudio",
     "bluetooth",
@@ -45,6 +46,7 @@
     "format": "<span>{}</span>"
   },
   "tray": {
+    "reverse-direction": true,
     "icon-size": 24,
     "spacing": 10
   },
@@ -112,7 +114,7 @@
       "dnd-none": ""
     },
     "return-type": "json",
-    "exec-if": "which swaync",
+    "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
@@ -123,12 +125,23 @@
     "format-icons": {
       "output": "  ",
       "input": "  ",
-      "output-input": "   ",
+      "output-input": "    ",
       "none": ""
     },
     "return-type": "json",
     "exec-if": "which sway-audio-idle-inhibit",
-    "exec": "~/Git/SwayAudioIdleInhibit/build/sway-audio-idle-inhibit --dry-print-both-waybar",
+    "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+    "escape": true
+  },
+  "custom/gamemode": {
+    "format": "<span font_family='NotoSansMono Nerd Font' size='x-large'>{icon}</span>",
+    "format-icons": {
+      "active": "",
+      "inactive": ""
+    },
+    "return-type": "json",
+    "exec-if": "which python",
+    "exec": "python -u ~/.config/waybar/scripts/gamemode.py",
     "escape": true
   },
   "custom/airplane": {
