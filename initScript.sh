@@ -44,7 +44,7 @@ if [[ $install_app_var == y ]]; then
     sudo yay --needed -S pikaur python-pip flatpak yarn nodejs-lts-fermium npm
 
     # Applications
-    yay --needed -S pamixer firefox chromium nautilus-copy-path jq mailspring noisetorch-git hack-font-ligature-nerd-font-git discord alacritty
+    yay --needed -S pamixer firefox chromium nautilus-copy-path jq mailspring noisetorch-git hack-font-ligature-nerd-font-git discord alacritty ttf-fira-code
 
     read -p "Do you wish to install java? [y/n]" install_java
     if [[ $install_java == y ]]; then
