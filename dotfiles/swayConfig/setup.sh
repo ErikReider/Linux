@@ -6,6 +6,7 @@ if [[ $1 == "-i" ]]; then
         wmname \
         lsb-release \
         dbus-python \
+        autotiling \
         autotiling-rs-git \
         sway-git \
         wlroots-git \
