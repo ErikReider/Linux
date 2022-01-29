@@ -100,9 +100,9 @@ echo ""
 read -p "Do you wish to link vim config files? [y/n] " vim_var
 if [[ $vim_var == y ]]; then
     yay --needed -S scdoc
-    yay --needed -S vint ueberzug lolcat stylelint
+    yay --needed -S vint ueberzug lolcat stylelint vscode-codicons-git
     # Lsps
-    yay --needed -S vala-language-server-git efm-langserver lua-language-server bash-language-server omnisharp-roslyn-bin typescript-language-server-bin pyright ccls vim-language-server rust-analyzer
+    yay --needed -S vala-language-server efm-langserver lua-language-server bash-language-server omnisharp-roslyn-bin typescript-language-server-bin pyright ccls vim-language-server rust-analyzer
     sudo npm i -g stylelint-lsp vscode-langservers-extracted markdownlint-cli emmet-ls
 
     # Formatters
