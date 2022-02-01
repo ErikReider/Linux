@@ -24,6 +24,7 @@ if [[ $1 == "-i" ]]; then
         swaync-git \
         swaysettings-git \
         swayfloatingswitcher-git \
+        waybar-battery-module-git \
         sway-audio-idle-inhibit-git \
         xss-lock \
         wl-clipboard \

@@ -6,8 +6,7 @@
   "modules-left": [
     "custom/linux",
     "custom/headsetcontrol",
-    "battery#hid",
-    "battery#BAT",
+    "custom/battery",
     "cpu",
     "memory",
     "custom/weather",
@@ -79,30 +78,25 @@
     "format": "{percent}% {icon}",
     "format-icons": ["", ""]
   },
-  "battery#hid": {
-    "bat": "hidpp_battery_*",
-    "states": {
-      "warning": 30,
-      "critical": 15
+  "custom/battery": {
+    "escape": true,
+    "format": " {icon} {}",
+    "format-icons": {
+        "missing": "",
+        "empty": "",
+        "low": "",
+        "half": "",
+        "high": "",
+        "full": "",
+        "charging-empty": " ",
+        "charging-low": " ",
+        "charging-half": " ",
+        "charging-high": " ",
+        "charging-full": " "
     },
-    "full-at": 97,
-    "interval": 60,
-    "format": "{icon} {capacity}%",
-    "format-charging": "{icon} {capacity}% ",
-    "format-icons": ["", "", "", "", ""]
-  },
-  "battery#BAT": {
-    "bat": "BAT*",
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "full-at": 97,
-    "interval": 60,
-    "format": "{icon} {capacity}%",
-    "format-charging": "{icon} {capacity}% ",
-    "format-plugged": "{icon} {capacity}% ",
-    "format-icons": ["", "", "", "", ""]
+    "tooltip": true,
+    "return-type": "json",
+    "exec": "waybar-battery-module"
   },
   "custom/notification": {
     "tooltip": false,
