@@ -51,6 +51,11 @@ alias nvimcfg="nvim ~/.config/nvim/init.vim"
 alias zshcfg="nvim ~/.zshrc"
 alias src="exec zsh"
 
+if [[ $(uname -s) != "Darwin" ]]; then
+    # Non Mac OS
+    alias open="diso xdg-open"
+fi
+
 # Disowns application
 function diso() {
     $@ 2>/dev/null 1>&2 &
