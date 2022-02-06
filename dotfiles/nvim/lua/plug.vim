@@ -104,6 +104,8 @@ Plug 'junegunn/gv.vim'
 
 
 "" Syntax
+" Dockerfile syntax
+Plug 'ekalinin/Dockerfile.vim'
 " i3 syntax highlighting
 Plug 'mboughaba/i3config.vim'
 " Sway syntax highlighting
