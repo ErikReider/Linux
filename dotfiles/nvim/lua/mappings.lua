@@ -83,7 +83,7 @@ map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", lsp_opts)
 -- References
 map("n", "gr", "<cmd>Telescope lsp_references<CR>", lsp_opts)
 -- Show hover info
-map("n", "K", "<cmd>Lspsaga hover_doc<CR>", lsp_opts)
+map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
 -- Show method signature
 map("i", "<M-x>", "<cmd>Lspsaga signature_help<CR>", lsp_opts)
 map("n", "<M-x>", "<cmd>Lspsaga signature_help<CR>", lsp_opts)
