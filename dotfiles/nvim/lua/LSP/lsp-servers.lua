@@ -125,7 +125,10 @@ nvim_lsp.html.setup({
 
 -- JSON
 nvim_lsp.jsonls.setup({
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        on_attach(client, bufnr)
+    end,
     flags = {debounce_text_changes = 150},
     capabilities = capabilities,
     cmd = {'vscode-json-language-server', '--stdio'},
