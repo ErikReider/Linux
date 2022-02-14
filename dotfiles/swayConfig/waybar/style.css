@@ -2,7 +2,7 @@
   border: none;
   border-radius: 0;
   /* `otf-font-awesome` is required to be installed for icons */
-  font-family: Roboto, "Font Awesome 5 Free", Helvetica, Arial, sans-serif;
+  font-family: Roboto, "Font Awesome 6 Free", Helvetica, Arial, sans-serif;
   font-size: 17px;
   min-height: 0;
 }
@@ -181,7 +181,7 @@ label:focus {
 }
 
 #custom-headsetcontrol {
-  /* font-family: "Font Awesome 5 Free"; */
+  /* font-family: "Font Awesome 6 Free"; */
 }
 
 #custom-notification {
