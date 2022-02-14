@@ -105,6 +105,8 @@ Plug 'junegunn/gv.vim'
 
 
 "" Syntax
+" BSPWM sxhk syntax
+Plug 'kovetskiy/sxhkd-vim'
 " Dockerfile syntax
 Plug 'ekalinin/Dockerfile.vim'
 " i3 syntax highlighting
