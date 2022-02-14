@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Sleep
+export shouldSleep=true
+# Time until i3lock activates
+export lockTimer=900
+# Time until sleep after lock
+export sleepTimer=30
+
+# Mouse Settings
+export mouseSensitivity=-0.5
+export mouseNaturalScrolling=0
+export mouseAccereration=0
+# Touchpad Settings
+export touchpadNaturalScrolling=1
+export touchpadSensitivity=1
+export touchpadAccereration=0
