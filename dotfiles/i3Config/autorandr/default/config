@@ -1,0 +1,29 @@
+output DisplayPort-1
+off
+output DisplayPort-2
+off
+output DisplayPort-0
+crtc 0
+mode 2560x1440
+pos 1920x0
+primary
+rate 170.07
+x-prop-max_bpc 8
+x-prop-non_desktop 0
+x-prop-scaling_mode None
+x-prop-tearfree off
+x-prop-underscan off
+x-prop-underscan_hborder 0
+x-prop-underscan_vborder 0
+output HDMI-A-0
+crtc 1
+mode 1920x1080
+pos 0x180
+rate 60.00
+x-prop-max_bpc 8
+x-prop-non_desktop 0
+x-prop-scaling_mode None
+x-prop-tearfree off
+x-prop-underscan off
+x-prop-underscan_hborder 0
+x-prop-underscan_vborder 0

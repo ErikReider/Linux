@@ -1,10 +1,10 @@
 [bar/main]
 enable-ipc = true
 bottom = false
-monitor = ${env:MONITOR:DisplayPort-0}
+monitor = ${env:MONITOR}
 width = 100%
 height = 28
-dpi = 125
+dpi = 128
 background = #B3000000
 foreground = #eee
 line-color = ${bar/main.background}
@@ -27,12 +27,12 @@ font-7 = NotoSans-Symbols:size=9;3
 font-8 = TerminessTTF Nerd Font Mono:size=12:style=Medium;3
 font-9 = Weather Icons:size=12;4
 
-modules-left = i3 cpu memory temperature
-; modules-center = i3
-modules-right = headsetcontrol pulseaudio-control airplane bluetooth wireless-network lan updates-pacman-aurhelper battery date powermenu
+modules-left = headsetcontrol battery cpu memory temperature
+modules-center = i3
+modules-right = pulseaudio-control bluetooth wireless-network lan updates-pacman-aurhelper date
 
 ; override-redirect = false
-wm-restack = i3
+wm-restack = i3 bspwm
 
 tray-position = right
 tray-scale = 1.0
@@ -48,45 +48,6 @@ overline-size = 10
 overline-color = ${self.background}
 underline-size = 2
 underline-color = ${self.background}
-
-
-[bar/other]
-monitor = ${env:MONITOR:HDMI-A-0}
-bottom = false
-width = 100%
-height = ${bar/main.height}
-dpi = ${bar/main.dpi}
-; separator = ${bar/main.separator}
-
-scroll-up = i3wm-wsprev
-scroll-down = i3wm-wsnext
-
-background = ${bar/main.background}
-foreground = ${bar/main.foreground}
-
-line-color = ${bar/main.background}
-line-size = ${bar/main.line-size}
-
-font-0 = ${bar/main.font-0}
-font-1 = ${bar/main.font-1}
-font-2 = ${bar/main.font-2}
-font-3 = ${bar/main.font-3}
-font-4 = ${bar/main.font-4}
-font-5 = ${bar/main.font-5}
-font-6 = ${bar/main.font-6}
-font-7 = ${bar/main.font-7}
-font-8 = ${bar/main.font-8}
-font-9 = ${bar/main.font-8}
-
-spacing = ${bar/main.spacing}
-padding-right = ${bar/main.padding-right}
-padding-left = ${bar/main.padding-left}
-module-margin-left = ${bar/main.module-margin-left}
-module-margin-right = ${bar/main.module-margin-right}
-
-modules-left = ${bar/main.modules-left}
-modules-center = ${bar/main.modules-center}
-modules-right = ${bar/main.modules-right}
 
 
 [module/owm]
@@ -336,64 +297,6 @@ label-muted-foreground = #66
 # ramp-volume-3 = █
 
 
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted =  %mountpoint%: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = #66
-
-
-[module/powermenu]
-type = custom/menu
-; format-padding = 1
-label-open = 
-label-close = 
-label-separator = |
-#
-menu-0-0 = Log Out
-menu-0-0-foreground = #fba922
-menu-0-0-exec = menu-open-3
-#
-menu-0-1 = Reboot
-menu-0-1-foreground = #fba922
-menu-0-1-exec = menu-open-1
-#
-menu-0-2 = Power off
-menu-0-2-foreground = #fba922
-menu-0-2-exec = menu-open-2
-#
-#
-menu-1-0 = Cancel
-menu-1-0-foreground = #fba922
-menu-1-0-exec = menu-open-0
-#
-menu-1-1 = Reboot
-menu-1-1-foreground = #fba922
-menu-1-1-exec = reboot
-#
-#
-menu-2-0 = Power off
-menu-2-0-foreground = #fba922
-menu-2-0-exec = poweroff
-#
-menu-2-1 = Cancel
-menu-2-1-foreground = #fba922
-menu-2-1-exec = menu-open-0
-#
-#
-menu-3-0 = Log Out
-menu-3-0-foreground = #fba922
-menu-3-0-exec = pkill -KILL -u $USER
-#
-menu-3-1 = Cancel
-menu-3-1-foreground = #fba922
-menu-3-1-exec = menu-open-0
-
-
 
 [module/clock]
 type = internal/date
@@ -484,3 +387,127 @@ exec = python ~/.config/polybar/scripts/spotify.py -f '{play_pause} {song} - {ar
 format-underline = #1db954
 
 ; vim:ft=dosini
+
+[module/bspwm]
+type = internal/bspwm
+
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; But if you rename your bspwm monitors with bspc -n this option will no longer
+; behave correctly.
+; Default: true
+pin-workspaces = true
+
+; Output mode flags after focused state label
+; Default: false
+inline-mode = false
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = false
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
+ws-icon-0 = code;♚
+ws-icon-1 = office;♛
+ws-icon-2 = graphics;♜
+ws-icon-3 = mail;♝
+ws-icon-4 = web;♞
+ws-icon-default = ♟
+
+; Available tags:
+;   <label-monitor>
+;   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
+;   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
+; Default: <label-state>
+format = <label-state> <label-mode>
+
+; Available tokens:
+;   %name%
+; Default: %name%
+label-monitor = %name%
+
+; If any values for label-dimmed-N are defined, the workspace/mode
+; colors will get overridden with those values if the monitor is out of focus
+; To only override workspaces in a specific state, use:
+;   label-dimmed-focused
+;   label-dimmed-occupied
+;   label-dimmed-urgent
+;   label-dimmed-empty
+label-dimmed-foreground = #555
+label-dimmed-underline = ${bar/top.background}
+label-dimmed-focused-background = #f00
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon% %name%
+label-focused = %icon%
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+label-focused-underline = #fba922
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon% %name%
+label-occupied = %icon%
+label-occupied-underline = #555555
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon% %name%
+label-urgent = %icon%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-underline = #9b0a20
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon% %name%
+label-empty = %icon%
+label-empty-foreground = #55
+
+; The following labels will be used to indicate the layout/mode
+; for the focused workspace. Requires <label-mode>
+;
+; Available tokens:
+;   None
+;label-monocle = 
+;label-tiled = 
+;label-fullscreen = 
+;label-floating = 
+;label-pseudotiled = P
+;label-locked = 
+;label-locked-foreground = #bd2c40
+;label-sticky = 
+;label-sticky-foreground = #fba922
+;label-private = 
+;label-private-foreground = #bd2c40
+;label-marked = M
+
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 2
+label-separator-foreground = #ffb52a

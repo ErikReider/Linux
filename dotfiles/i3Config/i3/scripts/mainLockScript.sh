@@ -18,12 +18,27 @@ if [ "$shouldSleep" = true ]; then
     # Activate the idle listener with it's callbacks
     xidlehook --not-when-fullscreen --not-when-audio \
         --timer $lockTimer \
-            './dimAllDisplays.sh -d' \
-            './dimAllDisplays.sh' \
-        --timer 10 \
-            'loginctl lock-session' \
-            '' \
+        './dimAllDisplays.sh -d' \
+        './dimAllDisplays.sh' \
+        --timer 20 \
+        'loginctl lock-session' \
+        '' \
+        --timer 20 \
+        'xset dpms force off' \
+        '' \
         --timer $sleepTimer \
-            'xset dpms force off' \
-            '' &
+        'systemctl suspend' \
+        '' &
+else
+    # Activate the idle listener with it's callbacks
+    xidlehook --not-when-fullscreen --not-when-audio \
+        --timer $lockTimer \
+        './dimAllDisplays.sh -d' \
+        './dimAllDisplays.sh' \
+        --timer 20 \
+        'loginctl lock-session' \
+        '' \
+        --timer 20 \
+        'xset dpms force off' \
+        '' &
 fi

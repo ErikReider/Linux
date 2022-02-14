@@ -51,7 +51,7 @@ pip install pulsectl
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("i3" "picom" "polybar" "../rofi" "../dunst" "../kitty" "redshift" "xob" "touchegg" "../alacritty")
+dirs=("i3" "picom" "polybar" "autorandr" "../rofi" "../dunst" "../kitty" "redshift" "xob" "touchegg" "../alacritty")
 
 for item in ${dirs[@]}; do
     name=$(basename $item)
