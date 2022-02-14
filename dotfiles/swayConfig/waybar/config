@@ -73,16 +73,11 @@
     "exec": "playerctl metadata --format '{\"text\": \"{{title}}\", \"tooltip\": \"{{playerName}} : {{title}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
     "on-click": "playerctl play-pause"
   },
-  "backlight": {
-    // "device": "acpi_video1",
-    "format": "{percent}% {icon}",
-    "format-icons": ["", ""]
-  },
   "custom/battery": {
     "escape": true,
     "format": " {icon} {}",
     "format-icons": {
-        "missing": "",
+        "missing": " ",
         "empty": "",
         "low": "",
         "half": "",
