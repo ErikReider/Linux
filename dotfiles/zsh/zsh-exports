@@ -59,3 +59,5 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export PATH="$PATH:$HOME/flutter/bin"
 export PATH="$PATH:$HOME/.pub-cache/bin"
+
+export PATH="$PATH:$HOME/.cargo/bin"
