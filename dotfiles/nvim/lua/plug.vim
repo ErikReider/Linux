@@ -57,6 +57,7 @@ Plug 'RRethy/vim-illuminate'
 Plug 'tpope/vim-sleuth'
 " Color Scheme
 Plug 'tomasiser/vim-code-dark'
+Plug 'Mofiqul/vscode.nvim'
 " NERDTree
 " Plug 'scrooloose/nerdtree'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
