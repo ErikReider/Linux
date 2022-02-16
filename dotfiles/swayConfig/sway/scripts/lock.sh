@@ -9,10 +9,10 @@ else
     # Wait until the processes have been shut down
     while pgrep -u $UID -x swayidle >/dev/null; do sleep 1; done
 
-    # Locks after 300s, displays off after +300s. Lock screen before sleep
+    # Locks after 10min, suspends after 10min (20min). Lock screen before sleep
     swayidle -w \
         timeout 600 'loginctl lock-session' \
         timeout 1200 'systemctl suspend' \
-        before-sleep 'loginctl lock-session' \
+        before-sleep '~/.config/sway/scripts/lock.sh --lock' \
         lock '~/.config/sway/scripts/lock.sh --lock' &
 fi
