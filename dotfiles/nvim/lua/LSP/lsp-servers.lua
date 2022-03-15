@@ -9,7 +9,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local servers = {
     -- No configuration needed
-    "vimls", "vala_ls", "cssls", "texlab", "pyright"
+    "vimls", "vala_ls", "cssls", "texlab"
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -232,5 +232,19 @@ require("flutter-tools").setup({
     }
 })
 
+-- Pyright
+nvim_lsp.pyright.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        python = {
+            analysis = {
+                useLibraryCodeForTypes = true
+            }
+        }
+    }
+})
+
 -- Init efm server
 require("LSP.efm")
+
