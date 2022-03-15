@@ -60,6 +60,10 @@ nvim_lsp.tsserver.setup({
     end,
     flags = {debounce_text_changes = 150},
     capabilities = capabilities,
+    filetypes = {
+        "javascript", "javascriptreact", "javascript.jsx", "typescript",
+        "typescriptreact", "typescript.tsx"
+    },
     init_options = {
         hostInfo = "neovim",
         preferences = {
