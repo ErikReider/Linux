@@ -211,19 +211,26 @@ require("flutter-tools").setup({
     lsp = {
         on_attach = function(...)
             local commands = require("flutter-tools.commands")
+            vim.api.nvim_create_augroup("hotReload", {})
             -- Hotreload on save
-            function _G.flutterHotReload()
-                if not commands.is_running() then
-                    vim.fn.execute(
-                        [[!kill -SIGUSR1 $(pgrep -f "[f]lutter_tool.*run")]])
+            vim.api.nvim_create_autocmd("BufWritePost", {
+                group = "hotReload",
+                pattern = "*.dart",
+                callback = function()
+                    if not commands.is_running() then
+                        vim.fn.execute(
+                            [[!kill -SIGUSR1 $(pgrep -f "[f]lutter_tool.*run")]])
+                    end
                 end
-            end
-            vim.cmd([[
-            augroup hotReload
-                autocmd! BufWritePost *.dart lua flutterHotReload()
-                autocmd! BufWritePre *.dart lua vim.lsp.buf.formatting_sync()
-            augroup end
-            ]])
+            })
+            -- Format on save
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = "hotReload",
+                pattern = "*.dart",
+                callback = function()
+                    vim.lsp.buf.formatting_sync()
+                end
+            })
 
             on_attach(...)
         end,

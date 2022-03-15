@@ -13,12 +13,13 @@ vim.cmd("colorscheme vscode")
 vim.o.termguicolors = true
 
 -- Highlights yanked region
-vim.cmd [[
-augroup highlight_yank
-    autocmd!
-    au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=1000})
-augroup END
-]]
+vim.api.nvim_create_augroup("highlight_yank", {clear = true})
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = "highlight_yank",
+    callback = function()
+        vim.highlight.on_yank({higroup = 'IncSearch', timeout = 1000})
+    end
+})
 
 -- Shows space and tab as characters
 vim.opt.showbreak = "↪ "
