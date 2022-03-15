@@ -31,9 +31,13 @@ vim.opt.listchars:append("trail:·")
 vim.opt.listchars:append("extends:⟩")
 vim.opt.listchars:append("precedes:⟨")
 
-for _, v in ipairs({"SpecialKey", "NonText", "Whitespace"}) do
-    vim.highlight.create(v, {ctermfg = "240", guifg = "#585858"}, false)
-end
+for _, v in ipairs({
+    "SpecialKey", "NonText", "Whitespace", "IndentBlanklineChar",
+    "IndentBlanklineSpaceChar", "IndentBlanklineSpaceCharBlankline"
+}) do vim.highlight.create(v, {ctermfg = "239", guifg = "#4e4e4e"}, false) end
+
+vim.highlight.create("IndentBlanklineContextChar",
+                     {ctermfg = "249", guifg = "#b2b2b2"}, false)
 
 -- Word highlight
 vim.highlight.create("illuminate", {
