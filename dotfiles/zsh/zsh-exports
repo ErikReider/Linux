@@ -61,3 +61,7 @@ export PATH="$PATH:$HOME/flutter/bin"
 export PATH="$PATH:$HOME/.pub-cache/bin"
 
 export PATH="$PATH:$HOME/.cargo/bin"
+
+# Set number of cores GNU make should use
+export MAKEFLAGS="-j $(grep -c '^processor' /proc/cpuinfo)"
+export CMAKE_ARGS="-j $(grep -c '^processor' /proc/cpuinfo)"
