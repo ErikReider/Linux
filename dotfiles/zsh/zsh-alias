@@ -20,6 +20,8 @@ alias 7='cd -7'
 alias 8='cd -8'
 alias 9='cd -9'
 
+alias week="date +'%V'"
+
 alias md='mkdir -p'
 alias rd=rmdir
 
@@ -50,6 +52,9 @@ alias paclg='pamac list -i | grep -e'
 alias nvimcfg="nvim ~/.config/nvim/init.vim"
 alias zshcfg="nvim ~/.zshrc"
 alias src="exec zsh"
+
+# Combines jq and less with JSON syntax highlighting
+alias jqless="jq -C "." | less"
 
 if [[ $(uname -s) != "Darwin" ]]; then
     # Non Mac OS
