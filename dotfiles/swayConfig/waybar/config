@@ -163,9 +163,11 @@
   "network#wifi": {
     "interface": "wl*",
     "interval": 30,
+    "format": "{icon}",
     "format-wifi": "{icon}",
     "format-linked": "",
     "format-disconnected": "",
+    "format-disabled": "",
     "format-icons": ["", "", "", "", ""],
     "on-click": "systemsettings5 kcm_networkmanagement",
     "on-click-right": "wifi toggle",
