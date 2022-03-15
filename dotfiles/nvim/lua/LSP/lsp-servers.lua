@@ -182,6 +182,7 @@ nvim_lsp.jsonls.setup({
 
 nvim_lsp.rust_analyzer.setup({
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
         ["rust-analyzer"] = {
             assist = {importGranularity = "module", importPrefix = "by_self"},
