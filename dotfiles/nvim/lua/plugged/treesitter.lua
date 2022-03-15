@@ -8,7 +8,7 @@ config.setup({
     ensure_installed = "maintained",
     highlight = {
         enable = true,
-        disable = {""},
+        disable = {"vala"},
         additional_vim_regex_highlighting = false
     },
     rainbow = {
