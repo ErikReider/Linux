@@ -1,6 +1,5 @@
 local exclude = {"help", "terminal", "dashboard", "nerdtree"}
 require("indent_blankline").setup {
-    char = "|",
     filetype_exclude = exclude,
     buftype_exclude = exclude,
     space_char_blankline = " ",
