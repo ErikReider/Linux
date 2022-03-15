@@ -9,6 +9,7 @@ if [[ $1 == "-i" ]]; then
         autotiling \
         autotiling-rs-git \
         sway-git \
+        ibus \
         wlroots-git \
         gammastep \
         waybar \
