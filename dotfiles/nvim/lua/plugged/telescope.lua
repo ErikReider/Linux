@@ -9,7 +9,8 @@ local picker_options = {
     results_title = false,
     preview_title = false,
     prompt_prefix = "❯ ",
-    selection_caret = "❯ "
+    selection_caret = "❯ ",
+    no_ignore = true
 }
 
 require('telescope').setup {
@@ -44,7 +45,8 @@ require('telescope').setup {
             i = {
                 ["<C-h>"] = actions.which_key,
                 ["<esc>"] = actions.close,
-                ["<Tab>"] = actions.file_tab,
+                ["<C-u>"] = false,
+                ["<Tab>"] = actions.select_tab,
                 ["<C-i>"] = actions.file_split,
                 ["<C-s>"] = actions.file_vsplit,
                 ["<C-Up>"] = actions.preview_scrolling_up,
@@ -67,18 +69,9 @@ require('telescope').setup {
 require('telescope').load_extension('fzf')
 
 function _G.telescopeGFiles()
-    local _, ret = utils.get_os_command_output({
-        "git", "rev-parse", "--show-toplevel"
-    }, vim.loop.cwd())
-    local is_worktree = utils.get_os_command_output({
-        "git", "rev-parse", "--is-inside-work-tree"
-    }, vim.loop.cwd())
-
-    if ret == 0 or is_worktree[1] == "true" then
-        tele.git_files()
-    else
-        tele.find_files()
-    end
+    local opts = {}
+    local ok = pcall(require"telescope.builtin".git_files, opts)
+    if not ok then require"telescope.builtin".find_files(opts) end
 end
 
 local opts = {noremap = true, silent = true}
