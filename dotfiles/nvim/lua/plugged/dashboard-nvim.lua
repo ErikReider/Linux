@@ -22,9 +22,6 @@ vim.g.dashboard_custom_header = {
     "       `':::_:' -- '' -'-' `':_::::'`"
 }
 
-vim.highlight.create("DashboardHeader", {ctermfg = "white", guifg = "white"},
-                     false)
-
 vim.g.dashboard_custom_section = {
     a = {
         description = {" New File                  Leader n    "},

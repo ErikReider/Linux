@@ -1,7 +1,7 @@
 _G.map = vim.api.nvim_set_keymap
 
 function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, {...})
+    local objects = vim.tbl_map(vim.inspect, { ... })
     print(unpack(objects))
 end
 
@@ -31,7 +31,7 @@ function _G.splitString(str, delimiter)
 end
 
 function _G.tableMerge(t1, t2)
-    for k,v in pairs(t2) do
+    for k, v in pairs(t2) do
         if type(v) == "table" then
             if type(t1[k] or false) == "table" then
                 tableMerge(t1[k] or {}, t2[k] or {})
@@ -43,4 +43,9 @@ function _G.tableMerge(t1, t2)
         end
     end
     return t1
+end
+
+function _G.file_exists(name)
+    local f = io.open(name, "r")
+    if f ~= nil then io.close(f) return true else return false end
 end
