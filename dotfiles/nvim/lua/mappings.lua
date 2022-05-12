@@ -85,8 +85,8 @@ map("n", "gr", "<cmd>Telescope lsp_references<CR>", lsp_opts)
 -- Show hover info
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
 -- Show method signature
-map("i", "<M-x>", "<cmd>Lspsaga signature_help<CR>", lsp_opts)
-map("n", "<M-x>", "<cmd>Lspsaga signature_help<CR>", lsp_opts)
+map("i", "<M-x>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", lsp_opts)
+map("n", "<M-x>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", lsp_opts)
 -- Workspace folder
 map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
     lsp_opts)
