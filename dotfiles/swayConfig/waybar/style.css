@@ -21,11 +21,14 @@ window {
   background: rgba(0, 0, 0, 0.7);
 }
 
+/* All modules */
+window > box > box > widget > * {
+  margin: 0 4px;
+}
+
 window box > box {
-  /* margin: 4px 0; */
   padding: 0 5px;
   border-radius: 4px;
-  /* background-color: rgba(0, 0, 0, 0.7); */
 }
 
 .modules-left {
@@ -37,15 +40,6 @@ window box > box {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
 
 #workspaces button {
   /* padding: 0 10px; */
@@ -70,73 +64,6 @@ window#waybar.solo {
   box-shadow: inset 0 -2px #bd2c40;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#mpd,
-#window,
-#workspaces {
-  margin: 0 6px;
-  color: white;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-  margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-  margin-right: 0;
-}
-
-#clock {
-}
-
-#battery {
-  /* background-color: #ffffff; */
-  /* color: #000000; */
-}
-
-#battery.critical {
-  color: red;
-}
-
-#battery.warning {
-  color: yellow;
-}
-
-/* #battery.charging { */
-/* color: #ffffff; */
-/* background-color: #26a65b; */
-/* } */
-
-@keyframes blink {
-  to {
-    background-color: #ffffff;
-    color: #000000;
-  }
-}
-
-#battery.critical:not(.charging) {
-  background-color: #f53c3c;
-  color: #ffffff;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
 label:focus {
   background-color: #000000;
 }
@@ -158,8 +85,9 @@ label:focus {
   font-size: 22px;
 }
 
-#bluetooth.disabled {
-  color: #928374;
+#bluetooth.disabled,
+#bluetooth.off {
+  opacity: 0.4;
 }
 
 #network {
@@ -172,9 +100,9 @@ label:focus {
   /* font-family: TerminessTTF Nerd Font Mono; */
 }
 
-#network.disconnected.ethernet {
-    margin: 0;
-}
+/* #network.disconnected.ethernet { */
+/* margin: 0; */
+/* } */
 
 #pulseaudio.muted {
   opacity: 0.4;

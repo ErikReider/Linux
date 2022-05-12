@@ -6,7 +6,6 @@
   "modules-left": [
     "custom/linux",
     "custom/headsetcontrol",
-    "custom/battery",
     "cpu",
     "memory",
     "custom/weather",
@@ -18,13 +17,17 @@
     "custom/ArchUpdates",
     "custom/gamemode",
     "custom/usingAudio",
-    "pulseaudio",
     "bluetooth",
+    "upower",
+    "pulseaudio",
     "network#wifi",
     "network#ethernet",
     "clock",
     "custom/notification"
   ],
+  "upower": {
+    "tooltip": true
+  },
   "custom/linux": {
     "format": "<span font='16' font_family='NotoSansMono Nerd Font'>{}</span>",
     "exec": "~/.config/waybar/scripts/systemIcon.sh",
@@ -73,28 +76,8 @@
     "exec": "playerctl metadata --format '{\"text\": \"{{title}}\", \"tooltip\": \"{{playerName}} : {{title}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
     "on-click": "playerctl play-pause"
   },
-  "custom/battery": {
-    "escape": true,
-    "format": "{icon}{}",
-    "format-icons": {
-        "missing": "<span font_family='NotoSansMono Nerd Font'></span>",
-        "empty": "",
-        "low": "  ",
-        "half": "  ",
-        "high": "  ",
-        "full": "  ",
-        "charging-empty": "   ",
-        "charging-low": "   ",
-        "charging-half": "   ",
-        "charging-high": "   ",
-        "charging-full": "   "
-    },
-    "tooltip": true,
-    "return-type": "json",
-    "exec": "waybar-battery-module"
-  },
   "custom/notification": {
-    "tooltip": false,
+    "tooltip": true,
     "format": "{icon}",
     "format-icons": {
       "notification": "<span foreground='red'><sup></sup></span>",
@@ -112,9 +95,9 @@
   "custom/usingAudio": {
     "format": "{icon}",
     "format-icons": {
-      "output": "  ",
-      "input": "  ",
-      "output-input": "    ",
+      "output": "",
+      "input": "",
+      "output-input": " ",
       "none": ""
     },
     "return-type": "json",
@@ -122,17 +105,17 @@
     "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
     "escape": true
   },
-  "custom/gamemode": {
-    "format": "<span font_family='NotoSansMono Nerd Font' size='x-large'>{icon}</span>",
-    "format-icons": {
-      "active": "",
-      "inactive": ""
-    },
-    "return-type": "json",
-    "exec-if": "which python",
-    "exec": "python -u ~/.config/waybar/scripts/gamemode.py",
-    "escape": true
-  },
+  // "custom/gamemode": {
+    // "format": "<span font_family='NotoSansMono Nerd Font' size='x-large'>{icon}</span>",
+    // "format-icons": {
+      // "active": "",
+      // "inactive": ""
+    // },
+    // "return-type": "json",
+    // "exec-if": "which python",
+    // "exec": "python -u ~/.config/waybar/scripts/gamemode.py",
+    // "escape": true
+  // },
   "custom/airplane": {
     "tooltip": false,
     "format": "{icon}",
@@ -140,7 +123,7 @@
     "max-length": 70,
     "interval": "once",
     "format-icons": {
-      "disabled": "<span foreground='#928374'> ✈ </span>",
+      "disabled": "<span foreground='#928374'>✈</span>",
       "enabled": " ✈ "
     },
     "exec": "~/.config/waybar/scripts/airplaneMode.sh",
@@ -149,16 +132,15 @@
     "escape": true
   },
   "bluetooth": {
-    "format": "{icon}",
-    "interval": 30,
-    "format-icons": {
-      "enabled": "",
-      "disabled": "<span foreground='#928374'></span>"
-    },
-    "tooltip-format": "{}",
-    "on-click": "systemsettings5 bluetooth",
-    "on-click-right": "python3 ~/.config/waybar/scripts/bluetooth-toggle.py",
-    "tooltip": false
+    "format": "",
+    "format-on": "",
+    "format-connected": " {num_connections}",
+    "format-connected-battery": " {num_connections}",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "systemsettings5 kcm_bluetooth"
   },
   "network#wifi": {
     "interface": "wl*",
