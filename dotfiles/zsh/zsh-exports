@@ -65,5 +65,7 @@ export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$(python3 -m site --user-base)/bin:$PATH"
 
 # Set number of cores GNU make should use
-export MAKEFLAGS="-j $(grep -c '^processor' /proc/cpuinfo)"
-export CMAKE_ARGS="-j $(grep -c '^processor' /proc/cpuinfo)"
+nproc_cores=$((2*$(nproc)))
+export MAKEFLAGS="-j $nproc_cores"
+export CMAKE_ARGS="-j $nproc_cores"
+export NINJA_ARGS="-j $nproc_cores"
