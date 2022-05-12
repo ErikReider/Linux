@@ -9,7 +9,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local servers = {
     -- No configuration needed
-    "vimls", "vala_ls", "cssls", "texlab"
+    "vimls", "cssls", "texlab", "intelephense"
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -49,13 +49,22 @@ nvim_lsp.sumneko_lua.setup({
     }
 })
 
+nvim_lsp.vala_ls.setup({
+    on_attach = function(client, bufnr)
+        client.server_capabilities.document_formatting = true
+        on_attach(client, bufnr)
+    end,
+    flags = {debounce_text_changes = 150},
+    capabilities = capabilities,
+})
+
 -- TypeScript/JavaScript
 nvim_lsp.tsserver.setup({
     on_attach = function(client, bufnr)
         if client.config.flags then
             client.config.flags.allow_incremental_sync = true
         end
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
         on_attach(client, bufnr)
     end,
     flags = {debounce_text_changes = 150},
@@ -75,7 +84,7 @@ nvim_lsp.tsserver.setup({
 
 nvim_lsp.stylelint_lsp.setup({
     on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
         on_attach(client, bufnr)
     end,
     flags = {debounce_text_changes = 150},
@@ -130,7 +139,7 @@ nvim_lsp.html.setup({
 -- JSON
 nvim_lsp.jsonls.setup({
     on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
         on_attach(client, bufnr)
     end,
     flags = {debounce_text_changes = 150},
@@ -229,7 +238,7 @@ require("flutter-tools").setup({
                 group = "hotReload",
                 pattern = "*.dart",
                 callback = function()
-                    vim.lsp.buf.formatting_sync()
+                    vim.lsp.buf.format({ async = true })
                 end
             })
 

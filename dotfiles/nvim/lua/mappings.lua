@@ -108,8 +108,8 @@ map("n", "äg", "<cmd>Lspsaga diagnostic_jump_next<CR>", lsp_opts)
 -- Show diagnostics list
 map("n", "<A-S-w>", "<cmd>Telescope diagnostics<CR>", lsp_opts)
 -- Formatting
-map("i", "<C-M-b>", "<cmd>lua vim.lsp.buf.formatting()<CR>", lsp_opts)
-map("n", "<C-M-b>", "<cmd>lua vim.lsp.buf.formatting()<CR>", lsp_opts)
+map("i", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
+map("n", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
 -- Illuminate
 map('n', '<A-n>',
     '<cmd>lua require("illuminate").next_reference{wrap=true}<cr>',

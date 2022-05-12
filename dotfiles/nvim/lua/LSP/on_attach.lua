@@ -2,7 +2,7 @@
 -- after the language server attaches to the current buffer
 _G.clients = {}
 return function(client, bufnr)
-    clients[client.name] = client.resolved_capabilities
+    clients[client.name] = client.server_capabilities
     local function buf_set_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)
     end
