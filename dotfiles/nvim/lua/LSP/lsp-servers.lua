@@ -51,7 +51,7 @@ nvim_lsp.sumneko_lua.setup({
 
 nvim_lsp.vala_ls.setup({
     on_attach = function(client, bufnr)
-        client.server_capabilities.document_formatting = true
+        client.server_capabilities.document_formatting = false
         on_attach(client, bufnr)
     end,
     flags = {debounce_text_changes = 150},
