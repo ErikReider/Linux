@@ -82,7 +82,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'gregsexton/MatchTag', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx'] }
 Plug 'alvan/vim-closetag'
 " CSS color highlighter
-Plug 'ap/vim-css-color', {'for': ['css', 'less', 'scss', 'sass']}
+Plug 'norcalli/nvim-colorizer.lua'
 " Neovim lua functions
 Plug 'nvim-lua/plenary.nvim'
 " Plugin to persist and toggle multiple terminals during an editing session
