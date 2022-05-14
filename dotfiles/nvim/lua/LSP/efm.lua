@@ -6,9 +6,6 @@ local uncrustify = require("LSP.Diagnostics.uncrustify")
 local shfmt = require("LSP.Diagnostics.shfmt")
 
 local efm_languages = {
-    lua = {
-        {formatCommand = "lua-format -i", formatStdin = true, lintSeverity = 2}
-    },
     sh = {shfmt},
     zsh = {shfmt},
     bash = {shfmt},
