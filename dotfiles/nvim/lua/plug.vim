@@ -91,6 +91,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'akinsho/nvim-toggleterm.lua'
 " View package-info package information
 Plug 'vuki656/package-info.nvim'
+" Buffer title over split
+Plug 'b0o/incline.nvim'
 
 
 

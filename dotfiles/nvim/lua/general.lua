@@ -89,3 +89,5 @@ vim.o.colorcolumn = "80,100"
 
 -- Encoding
 vim.o.encoding = "UTF-8"
+
+vim.o.laststatus=3
