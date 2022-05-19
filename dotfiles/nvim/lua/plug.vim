@@ -24,6 +24,8 @@ Plug 'glepnir/dashboard-nvim'
 Plug 'lambdalisue/suda.vim'
 " Floating terminals
 Plug 'numtostr/FTerm.nvim'
+" .editorconfig support
+Plug 'gpanders/editorconfig.nvim'
 
 " nvim lsp
 Plug 'neovim/nvim-lspconfig'
