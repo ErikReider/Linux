@@ -52,6 +52,8 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'folke/lsp-colors.nvim'
 " Vim plugin for automatically highlighting other uses of the word under the cursor.
 Plug 'RRethy/vim-illuminate'
+" See LSP server startup status
+Plug 'j-hui/fidget.nvim'
 
 " Auto tabwidth and style detection
 Plug 'tpope/vim-sleuth'
