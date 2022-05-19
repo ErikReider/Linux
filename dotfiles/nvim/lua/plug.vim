@@ -76,8 +76,8 @@ Plug 'AndrewRadev/tagalong.vim', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
-" Bottom line and buffer line
-Plug 'vim-airline/vim-airline'
+" Bottom line and tab line
+Plug 'nvim-lualine/lualine.nvim'
 " XML-like
 Plug 'gregsexton/MatchTag', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx'] }
 Plug 'alvan/vim-closetag'
