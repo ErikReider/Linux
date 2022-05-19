@@ -7,8 +7,8 @@ function zsh_add_plugin() {
     PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
     if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then
         # For plugins
-        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" ||
-            zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" \
+            || zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
 
         # Source their config file
         if [ -f "$ZDOTDIR/plugin-conf/$PLUGIN_NAME" ]; then
@@ -20,4 +20,12 @@ function zsh_add_plugin() {
 function mkcd {
     mkdir $1
     cd $1
+}
+
+function tag_release {
+    if [ "$1" = "" ]; then
+        echo "Usage: tag_release TAG"
+    else
+        git shortlog $(git tag -l --sort=taggerdate | tail -1)..HEAD | git tag -a "$1" -F -
+    fi
 }
