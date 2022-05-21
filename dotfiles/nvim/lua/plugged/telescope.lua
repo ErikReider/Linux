@@ -70,14 +70,14 @@ require('telescope').load_extension('fzf')
 
 function _G.telescopeGFiles()
     local opts = {}
-    local ok = pcall(require"telescope.builtin".git_files, opts)
-    if not ok then require"telescope.builtin".find_files(opts) end
+    local ok = pcall(require("telescope.builtin").git_files, opts)
+    if not ok then require("telescope.builtin").find_files(opts) end
 end
 
-local opts = {noremap = true, silent = true}
-map("n", "<C-f>", [[<cmd>lua require("telescope.builtin").find_files()<CR>]],
+local opts = { noremap = true, silent = true }
+map("n", "<A-f>", [[<cmd>lua require("telescope.builtin").find_files()<CR>]],
     opts)
-map("n", "<A-f>", [[<cmd>lua telescopeGFiles()<CR>]], opts)
+map("n", "<C-f>", [[<cmd>lua telescopeGFiles()<CR>]], opts)
 
 map("n", "<A-S-f>", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]],
     opts)
