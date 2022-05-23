@@ -29,3 +29,13 @@ function tag_release {
         git shortlog $(git tag -l --sort=taggerdate | tail -1)..HEAD | git tag -a "$1" -F -
     fi
 }
+
+function man_preview {
+    if [[ -f $1 ]]; then
+        tmpPath=/tmp/$(basename $1).roff.tmp
+        scdoc <$1 >$tmpPath && man -l $tmpPath
+        rm -rf $tmpPath
+    else
+        echo "Man file doesn't exist..."
+    fi
+}
