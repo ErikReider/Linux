@@ -42,7 +42,7 @@ export FZF_DEFAULT_OPTS='-e -i'
 
 # Auth
 if hash gnome-keyring-daemon 2>/dev/null; then
-    eval $(/usr/bin/gnome-keyring-daemon --start)
+    eval $(/usr/bin/gnome-keyring-daemon --start 2>/dev/null)
     export SSH_AUTH_SOCK
 fi
 
