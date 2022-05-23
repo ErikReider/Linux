@@ -1,7 +1,10 @@
-local actions = require('telescope.actions')
+local actions = require("telescope.actions")
+local telescope = require("telescope")
 
-local picker_options = {
-    winblend = 20,
+local winblend = 20
+
+local dropdown_options = {
+    winblend = winblend,
     theme = "dropdown",
     show_line = false,
     results_title = false,
@@ -11,7 +14,26 @@ local picker_options = {
     no_ignore = true
 }
 
-require('telescope').setup {
+local side_options = {
+    winblend = winblend,
+    width = 0.8,
+    show_line = false,
+    results_title = "",
+    preview_title = "",
+    prompt_prefix = "❯ ",
+    selection_caret = "❯ ",
+    no_ignore = true
+}
+
+local cursor_options = {
+    winblend = winblend,
+    theme = "cursor",
+    show_line = false,
+    results_title = false,
+    preview_title = false
+}
+
+telescope.setup {
     extensions = {
         fzf = {
             fuzzy = true,
@@ -21,24 +43,20 @@ require('telescope').setup {
         }
     },
     pickers = {
-        find_files = tableMerge(picker_options, {
-            find_command = { "rg", "--hidden", "--files", "--no-ignore" }
+        find_files = tableMerge(side_options, {
+            find_command = { "rg", "--hidden", "--files", "--no-ignore" },
         }),
-        git_files = tableMerge(picker_options, { use_git_root = true }),
-        live_grep = picker_options,
-        buffers = picker_options,
-        oldfiles = picker_options,
-        keymaps = picker_options,
-        highlights = picker_options,
-        lsp_workspace_diagnostics = picker_options,
-        lsp_references = picker_options,
-        lsp_code_actions = {
-            winblend = 20,
-            theme = "cursor",
-            show_line = false,
-            results_title = false,
-            preview_title = false
-        }
+        git_files = tableMerge(side_options, {
+            use_git_root = true,
+        }),
+        live_grep = side_options,
+        buffers = side_options,
+        oldfiles = dropdown_options,
+        keymaps = dropdown_options,
+        highlights = dropdown_options,
+        lsp_workspace_diagnostics = dropdown_options,
+        lsp_references = side_options,
+        lsp_code_actions = cursor_options
     },
     defaults = {
         mappings = {
@@ -66,10 +84,13 @@ require('telescope').setup {
     }
 }
 
-require('telescope').load_extension('fzf')
+telescope.load_extension("fzf")
 
 function _G.telescopeGFiles(local_dir)
-    local opts = { use_git_root = not local_dir }
+    local opts = {
+        use_git_root = not local_dir,
+        prompt_title = "Git Files " .. (local_dir and "CWD" or "ROOT"),
+    }
     local ok = pcall(require("telescope.builtin").git_files, opts)
     if not ok then require("telescope.builtin").find_files() end
 end
