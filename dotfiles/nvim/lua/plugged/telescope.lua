@@ -48,6 +48,7 @@ telescope.setup {
         }),
         git_files = tableMerge(side_options, {
             use_git_root = true,
+            git_command = { "git", "ls-files", "--exclude-standard", "--cached", "--deduplicate" }
         }),
         live_grep = side_options,
         buffers = side_options,
