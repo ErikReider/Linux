@@ -118,7 +118,7 @@ lsp_signature.setup({
     shadow_blend = 36,
     shadow_guibg = 'Black',
     timer_interval = 200,
-    toggle_key = "<M-x>"
+    toggle_key = nil,
 })
 
 -- nvim-cmp
