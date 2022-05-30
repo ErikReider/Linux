@@ -24,9 +24,13 @@ function mkcd {
 
 function tag_release {
     if [ "$1" = "" ]; then
-        echo "Usage: tag_release TAG"
+        echo "Usage: tag_release TAG_NAME"
     else
-        git shortlog $(git tag -l --sort=taggerdate | tail -1)..HEAD | git tag -a "$1" -F -
+        # Check if any previous tags exist
+        if [[ $(git rev-parse --tags | wc -l) != 0 ]]; then
+            str=$(git tag -l --sort=taggerdate | tail -1)..HEAD
+        fi
+        git shortlog $str | git tag -a "$1" -F -
     fi
 }
 
