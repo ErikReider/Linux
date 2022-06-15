@@ -68,6 +68,13 @@ label:focus {
   background-color: #000000;
 }
 
+#gamemode {
+  opacity: 0.4;
+}
+#gamemode.running {
+  opacity: 1;
+}
+
 #cpu {
   /* font-family: "Material Icons"; */
   color: white;

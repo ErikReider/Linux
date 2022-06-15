@@ -15,7 +15,7 @@
   "modules-right": [
     "tray",
     "custom/ArchUpdates",
-    "custom/gamemode",
+    "gamemode",
     "custom/usingAudio",
     "bluetooth",
     "upower",
@@ -34,7 +34,7 @@
     "interval": "once",
     "tooltip": false,
     "return-type": "string",
-    "on-click": "alacritty -e $SHELL -c 'neofetch; read'",
+    "on-click": "kitty -e $SHELL -c 'neofetch; read'",
     "escape": true
   },
   "sway/workspaces": {
@@ -97,7 +97,7 @@
     "format-icons": {
       "output": "",
       "input": "",
-      "output-input": " ",
+      "output-input": "  ",
       "none": ""
     },
     "return-type": "json",
@@ -105,17 +105,16 @@
     "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
     "escape": true
   },
-  // "custom/gamemode": {
-    // "format": "<span font_family='NotoSansMono Nerd Font' size='x-large'>{icon}</span>",
-    // "format-icons": {
-      // "active": "",
-      // "inactive": ""
-    // },
-    // "return-type": "json",
-    // "exec-if": "which python",
-    // "exec": "python -u ~/.config/waybar/scripts/gamemode.py",
-    // "escape": true
-  // },
+  "gamemode": {
+    "tooltip": true,
+    "format": "{glyph}",
+    "format-alt": "{glyph} {count}",
+    "glyph": "",
+    "not-running-hide": true,
+    "use-icon": true,
+    "icon-name": "input-gaming-symbolic",
+    "icon-spacing": 6
+  },
   "custom/airplane": {
     "tooltip": false,
     "format": "{icon}",
@@ -140,7 +139,7 @@
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-    "on-click": "systemsettings5 kcm_bluetooth"
+    "on-click": "swaysettings -p bluetooth"
   },
   "network#wifi": {
     "interface": "wl*",
@@ -151,7 +150,7 @@
     "format-disconnected": "",
     "format-disabled": "",
     "format-icons": ["", "", "", "", ""],
-    "on-click": "systemsettings5 kcm_networkmanagement",
+    "on-click": "gnome-control-center wifi",
     "on-click-right": "wifi toggle",
     "tooltip-format": "{}",
     "tooltip-format-wifi": "{signalStrength} {ipaddr}"
@@ -163,7 +162,7 @@
     "format-linked": "",
     "format-disconnected": "",
     "format-disabled": "",
-    "on-click": "systemsettings5 kcm_networkmanagement",
+    "on-click": "gnome-control-center network",
     "tooltip-format": "{}",
     "tooltip-format-ethernet": "{ipaddr}"
   },
@@ -177,7 +176,7 @@
     },
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
-    "on-click": "systemsettings5 kcm_pulseaudio",
+    "on-click": "swaysettings -p sound",
     "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
   },
   "custom/wallpaperRefresh": {
@@ -198,7 +197,7 @@
     "tooltip": false,
     "signal": 9,
     "exec": "~/.config/waybar/scripts/updates-pacman-aurhelper.sh",
-    "on-click": "alacritty -e $SHELL -c '~/.config/waybar/scripts/arch_update.sh'; pkill -SIGRTMIN+9 waybar",
+    "on-click": "kitty -e $SHELL -c '~/.config/waybar/scripts/arch_update.sh'; pkill -SIGRTMIN+9 waybar",
     "escape": true
   },
   "custom/weather": {
