@@ -16,7 +16,7 @@ if [[ $1 == "-i" ]]; then
         xdg-desktop-portal-wlr-git \
         swaylock-effects \
         rofi-lbonn-wayland-git \
-        polkit-kde-agent \
+        polkit-gnome \
         rofi-emoji \
         ttf-material-icons-git \
         ttf-weather-icons \
