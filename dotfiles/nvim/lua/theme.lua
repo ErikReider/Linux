@@ -34,11 +34,8 @@ vim.opt.listchars:append("precedes:⟨")
 -- Word highlight
 vim.highlight.link("illuminate", "LspReferenceText", true)
 vim.highlight.link("illuminatedWord", "LspReferenceText", true)
-for _, v in ipairs({
-    "LspReferenceText", "LspReferenceRead", "LspReferenceWrite"
-}) do
-    vim.highlight.create("LspReferenceText",
-        { cterm = "bold", gui = "bold" }, false)
+for _, v in ipairs({ "LspReferenceText", "LspReferenceRead", "LspReferenceWrite" }) do
+    vim.highlight.create(v, { cterm = "bold", gui = "bold" }, false)
 end
 
 -- Underlines
