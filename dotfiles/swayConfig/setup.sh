@@ -58,7 +58,8 @@ if [[ $1 == "-i" ]]; then
         geoclue \
         geocode-glib \
         pacdep \
-        gnome-keyring
+        gnome-keyring \
+        xembed-sni-proxy-git
 
     libtool --finish /usr/lib/rofi/
 fi
