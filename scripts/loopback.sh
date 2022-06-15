@@ -1,7 +1,7 @@
 #!/bin/bash
 IFS=$'\n'
 
-latency=50
+latency=90
 
 function showHelp() {
     # Display Help
