@@ -1,6 +1,14 @@
 # vim: ft=sway
 # Read `man 5 sway` for a complete reference.
 
-include ~/.config/sway/sway.d/*.conf
+include ~/.config/sway/sway.d/01_general.conf
+include ~/.config/sway/sway.d/02_input.conf
+include ~/.config/sway/sway.d/03_workspace.conf
+include ~/.config/sway/sway.d/04_output.conf
+include ~/.config/sway/sway.d/07_visuals.conf
+include ~/.config/sway/sway.d/08_hotkeys.conf
+include ~/.config/sway/sway.d/09_bar.conf
+include ~/.config/sway/sway.d/10_exec.conf
+
 include ~/.config/sway/.generated_settings/*.conf
 
