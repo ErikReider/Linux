@@ -27,6 +27,8 @@ local efm_languages = {
     json = {prettier},
     html = {prettier},
     scss = {prettier},
+    less = {prettier},
+    sass = {prettier},
     css = {prettier},
     vala = {uncrustify.init("VALA")},
     python = {{formatCommand = "autopep8 --ignore E501 -", formatStdin = true}}
