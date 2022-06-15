@@ -34,6 +34,12 @@ function tag_release {
     fi
 }
 
+function git_todays_changelog {
+    if $(git rev-parse); then
+        git --no-pager shortlog --since "yesterday" --until "today" --all --show-pulls
+    fi
+}
+
 function man_preview {
     if [[ -f $1 ]]; then
         tmpPath=/tmp/$(basename $1).roff.tmp
