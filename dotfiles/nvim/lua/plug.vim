@@ -13,7 +13,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 "" Essential plugins
 " Treesitter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}
+" Treesitter with Vala fixes
+Plug 'Prince781/nvim-treesitter', {'branch': 'prince781/vala-use-different-grammar', 'do': ':TSUpdate'}
 " Treesitter rainbow
 Plug 'p00f/nvim-ts-rainbow'
 " Indent indicators
