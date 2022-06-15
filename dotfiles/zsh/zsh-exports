@@ -64,6 +64,8 @@ export PATH="$PATH:$HOME/.cargo/bin"
 
 export PATH="$(python3 -m site --user-base)/bin:$PATH"
 
+export CHROME_EXECUTABLE="/var/lib/flatpak/app/org.mozilla.firefox/current/active/files/lib/firefox/firefox"
+
 # Set number of cores GNU make should use
 nproc_cores=$((2*$(nproc)))
 export MAKEFLAGS="-j $nproc_cores"
