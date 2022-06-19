@@ -68,7 +68,7 @@ pip install pulsectl
 
 currentDir=$PWD
 cd ~/.config/
-dirs=("sway" "swaylock" "wayfire/wayfire.ini" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty" "xdg-desktop-portal-wlr" "wlogout")
+dirs=("sway" "swaylock" "wayfire/wayfire.ini" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty" "xdg-desktop-portal-wlr" "wlogout" "swaync")
 
 systemctl enable --now kanshi
 
