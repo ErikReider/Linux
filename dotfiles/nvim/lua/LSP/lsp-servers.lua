@@ -9,7 +9,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local servers = {
     -- No configuration needed
-    "vimls", "cssls", "texlab", "intelephense"
+    "vimls", "cssls", "texlab", "intelephense", "lemminx"
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {

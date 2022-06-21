@@ -10,6 +10,11 @@ local efm_languages = {
     zsh = {shfmt},
     bash = {shfmt},
     yaml = {prettier},
+    xml = {prettier},
+    svg = {prettier},
+    xsd  = {prettier},
+    xsl = {prettier},
+    xslt = {prettier},
     markdown = {
         prettier, {
             lintCommand = "markdownlint -s",
