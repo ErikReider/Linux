@@ -102,7 +102,7 @@ Plug 'b0o/incline.nvim'
 
 "" Git
 " Git in gutter
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 " Git commands in vim like`Git diff`
 Plug 'tpope/vim-fugitive'
 " GBrowse to open current file in browser

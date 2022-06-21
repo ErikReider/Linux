@@ -70,6 +70,10 @@ map("v", "<A-Right>", ">", {silent = true, noremap = false})
 map("n", "<A-Left>", "<<", {silent = true, noremap = false})
 map("n", "<A-Right>", ">>", {silent = true, noremap = false})
 
+-- Git
+map("n", "äh", ":Gitsigns next_hunk <CR>", { silent = true })
+map("n", "öh", ":Gitsigns prev_hunk <CR>", { silent = true })
+
 -- LSP
 local lsp_opts = {noremap = true, silent = true}
 -- Go to definition
