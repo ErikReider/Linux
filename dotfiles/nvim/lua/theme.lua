@@ -8,8 +8,9 @@ vim.g.vscode_italic_comment = 1
 -- Gets called when the GTK color-scheme changes
 require("custom.gsettings_watcher").init(function(style)
     vim.g.gtk_style = style
+    vim.o.background = style
     vim.g.vscode_style = style
-    vim.cmd("colorscheme vscode")
+    vim.cmd([[colorscheme vscode]])
 end)
 
 -- Highlights yanked region
