@@ -6,6 +6,11 @@ local util = require("lspconfig/util")
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- For nvim-ufo
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local servers = {
     -- No configuration needed

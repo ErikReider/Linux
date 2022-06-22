@@ -99,6 +99,10 @@ Plug 'akinsho/nvim-toggleterm.lua'
 Plug 'vuki656/package-info.nvim'
 " Buffer title over split
 Plug 'b0o/incline.nvim'
+" Promise & Async in Lua 
+Plug 'kevinhwang91/promise-async'
+" Not UFO in the sky, but an ultra fold in Neovim (nicer folds)
+Plug 'kevinhwang91/nvim-ufo'
 
 
 

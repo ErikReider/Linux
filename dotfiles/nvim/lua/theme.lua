@@ -46,3 +46,12 @@ vim.highlight.create("DiagnosticUnderlineWarn",
     { gui = "undercurl", cterm = "undercurl" })
 vim.highlight.create("DiagnosticUnderlineInfo",
     { gui = "undercurl", cterm = "undercurl" })
+
+vim.highlight.link("FoldColumn", "Comment", true)
+vim.highlight.create("Folded", {
+    ctermfg = "0",
+    ctermbg = "23",
+    guibg = "#2a3f57",
+    gui = "none",
+    cterm = "none"
+})
