@@ -61,7 +61,7 @@ nvim_lsp.vala_ls.setup({
         on_attach(client, bufnr)
     end,
     flags = {debounce_text_changes = 150},
-    capabilities = capabilities,
+    capabilities = capabilities
 })
 
 -- TypeScript/JavaScript
@@ -244,7 +244,7 @@ require("flutter-tools").setup({
                 group = "hotReload",
                 pattern = "*.dart",
                 callback = function()
-                    vim.lsp.buf.format({ async = true })
+                    vim.lsp.buf.format({async = true})
                 end
             })
 
@@ -259,15 +259,16 @@ require("flutter-tools").setup({
 nvim_lsp.pyright.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-    settings = {
-        python = {
-            analysis = {
-                useLibraryCodeForTypes = true
-            }
-        }
-    }
+    settings = {python = {analysis = {useLibraryCodeForTypes = true}}}
+})
+
+-- elixir-ls
+nvim_lsp.elixirls.setup({
+    cmd = { "/usr/lib/elixir-ls/language_server.sh" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {python = {analysis = {useLibraryCodeForTypes = true}}}
 })
 
 -- Init efm server
 require("LSP.efm")
-
