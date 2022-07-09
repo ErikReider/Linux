@@ -79,7 +79,7 @@ local lsp_opts = {noremap = true, silent = true}
 -- Go to definition
 map("n", "gd", "<cmd>lua goto_definition(true)<CR>", lsp_opts)
 map("n", "gs", "<cmd>lua goto_definition()<CR>", lsp_opts)
-map("n", "ga", ":Lspsaga preview_definition<CR>", lsp_opts)
+map("n", "ga", "<cmd>Lspsaga preview_definition<CR>", lsp_opts)
 -- Go to type_definition
 map("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", lsp_opts)
 -- Go to implementation
@@ -87,7 +87,7 @@ map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", lsp_opts)
 -- References
 map("n", "gr", "<cmd>Telescope lsp_references<CR>", lsp_opts)
 -- Show hover info
-map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
+map("n", "K", "<cmd>Lspsaga hover_doc<CR>", lsp_opts)
 -- Show method signature
 map("i", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>", lsp_opts)
 map("n", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>", lsp_opts)

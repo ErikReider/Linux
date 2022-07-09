@@ -32,8 +32,7 @@ Plug 'gpanders/editorconfig.nvim'
 " nvim lsp
 Plug 'neovim/nvim-lspconfig'
 " A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
-" Plug 'glepnir/lspsaga.nvim'
-Plug 'tami5/lspsaga.nvim'
+Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 " A completion engine plugin for neovim written in Lua. 
 Plug 'hrsh7th/nvim-cmp'
 " nvim-cmp source for neovim builtin LSP client

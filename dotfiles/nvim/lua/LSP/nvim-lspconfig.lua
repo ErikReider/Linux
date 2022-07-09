@@ -13,7 +13,8 @@ require('lspsaga').init_lsp_saga({
     -- infor_sign = '',
     -- dianostic_header_icon = '   ',
     -- code_action_icon = ' ',
-    code_action_prompt = {
+    code_action_num_shortcut = true,
+    code_action_lightbulb = {
         enable = true,
         sign = true,
         sign_priority = 20,
@@ -30,11 +31,10 @@ require('lspsaga').init_lsp_saga({
         scroll_down = '<C-f>',
         scroll_up = '<C-b>'
     },
-    code_action_keys = {quit = {'<c-c>', "<ESC>", "q"}, exec = '<CR>'},
-    rename_action_keys = {quit = {'<c-c>', "<ESC>"}, exec = '<CR>'},
+    code_action_keys = {quit = {"<c-c>", "<ESC>", "q"}, exec = '<CR>'},
+    -- rename_action_keys = {quit = {"<c-c>", "<ESC>"}, exec = '<CR>'},
     -- definition_preview_icon = '  '
-    border_style = "round",
-    rename_prompt_prefix = ''
+    border_style = "rounded"
 })
 
 -- Set completeopt to have a better completion experience
@@ -46,7 +46,7 @@ local signs = {
     DiagnosticSignWarn = "",
     DiagnosticSignHint = "💡",
     DiagnosticSignInfo = "",
-    LspSagaLightBulb = "💡",
+    LspSagaLightBulb = "💡"
 }
 for type, icon in pairs(signs) do
     vim.fn.sign_define(type, {text = icon, texthl = type, numhl = ""})
