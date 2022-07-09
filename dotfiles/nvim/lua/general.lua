@@ -85,7 +85,7 @@ vim.cmd('set clipboard=unnamedplus')
 vim.o.mouse = "a"
 
 -- Shows the 80 char line
-vim.o.colorcolumn = "80,100"
+vim.o.colorcolumn = "80,100,120"
 
 -- Encoding
 vim.o.encoding = "UTF-8"
