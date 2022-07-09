@@ -1,7 +1,7 @@
 vim.o.termguicolors = true
 
 -- Colors: https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
-vim.api.nvim_set_var("airline_theme", 'codedark')
+-- Colors2: https://www.ditig.com/256-colors-cheat-sheet
 
 -- Enable italic comment
 vim.g.vscode_italic_comment = 1
@@ -14,11 +14,11 @@ require("custom.gsettings_watcher").init(function(style)
 end)
 
 -- Highlights yanked region
-vim.api.nvim_create_augroup("highlight_yank", { clear = true })
+vim.api.nvim_create_augroup("highlight_yank", {clear = true})
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = "highlight_yank",
     callback = function()
-        vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+        vim.highlight.on_yank({higroup = 'IncSearch', timeout = 1000})
     end
 })
 
@@ -35,17 +35,18 @@ vim.opt.listchars:append("precedes:⟨")
 -- Word highlight
 vim.highlight.link("illuminate", "LspReferenceText", true)
 vim.highlight.link("illuminatedWord", "LspReferenceText", true)
-for _, v in ipairs({ "LspReferenceText", "LspReferenceRead", "LspReferenceWrite" }) do
-    vim.highlight.create(v, { cterm = "bold", gui = "bold" }, false)
+for _, v in
+    ipairs({"LspReferenceText", "LspReferenceRead", "LspReferenceWrite"}) do
+    vim.highlight.create(v, {cterm = "bold", gui = "bold"}, false)
 end
 
 -- Underlines
 vim.highlight.create("DiagnosticUnderlineError",
-    { gui = "undercurl", cterm = "undercurl" })
+                     {gui = "undercurl", cterm = "undercurl"})
 vim.highlight.create("DiagnosticUnderlineWarn",
-    { gui = "undercurl", cterm = "undercurl" })
+                     {gui = "undercurl", cterm = "undercurl"})
 vim.highlight.create("DiagnosticUnderlineInfo",
-    { gui = "undercurl", cterm = "undercurl" })
+                     {gui = "undercurl", cterm = "undercurl"})
 
 vim.highlight.link("FoldColumn", "Comment", true)
 vim.highlight.create("Folded", {
