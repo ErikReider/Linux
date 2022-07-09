@@ -23,33 +23,25 @@ require("nvim-tree").setup({
             custom_only = false,
             list = {
                 -- user mappings go here
-            },
-        },
+            }
+        }
     },
     renderer = {
+        add_trailing = false,
         group_empty = false,
         highlight_git = true,
         highlight_opened_files = "NvimTreeOpenedFile",
         root_folder_modifier = ":~",
         indent_markers = {
             enable = true,
-            icons = {
-                corner = "└ ",
-                edge = "│ ",
-                none = "  ",
-            },
+            icons = {corner = "└ ", edge = "│ ", none = "  "}
         },
         icons = {
             webdev_colors = true,
-            git_placement = "before",
+            git_placement = "after",
             padding = " ",
             symlink_arrow = " ➛ ",
-            show = {
-                file = true,
-                folder = true,
-                folder_arrow = true,
-                git = true,
-            },
+            show = {file = true, folder = true, folder_arrow = true, git = true},
             glyphs = {
                 default = "",
                 symlink = "",
@@ -61,7 +53,7 @@ require("nvim-tree").setup({
                     empty = "",
                     empty_open = "",
                     symlink = "",
-                    symlink_open = "",
+                    symlink_open = ""
                 },
                 git = {
                     unstaged = "✗",
@@ -70,53 +62,30 @@ require("nvim-tree").setup({
                     renamed = "➜",
                     untracked = "★",
                     deleted = "",
-                    ignored = "◌",
-                },
-            },
+                    ignored = "◌"
+                }
+            }
         },
-        special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+        special_files = {"Cargo.toml", "Makefile", "README.md", "readme.md"}
     },
-    hijack_directories = {
-        enable = true,
-        auto_open = true,
-    },
-    update_focused_file = {
-        enable = false,
-        update_cwd = false,
-        ignore_list = {},
-    },
+    hijack_directories = {enable = true, auto_open = true},
+    update_focused_file = {enable = false, update_cwd = false, ignore_list = {}},
     ignore_ft_on_setup = {},
-    system_open = {
-        cmd = "",
-        args = {},
-    },
+    system_open = {cmd = "", args = {}},
     diagnostics = {
         enable = false,
         show_on_dirs = false,
-        icons = {
-            hint = "",
-            info = "",
-            warning = "",
-            error = "",
-        },
+        icons = {hint = "", info = "", warning = "", error = ""}
     },
     filters = {
         dotfiles = false,
         custom = {},
-        exclude = { ".git", "node_modules", ".cache" },
+        exclude = {".git", "node_modules", ".cache"}
     },
-    git = {
-        enable = true,
-        ignore = false,
-        timeout = 400,
-    },
+    git = {enable = true, ignore = false, timeout = 400},
     actions = {
         use_system_clipboard = true,
-        change_dir = {
-            enable = true,
-            global = false,
-            restrict_above_cwd = false,
-        },
+        change_dir = {enable = true, global = false, restrict_above_cwd = false},
         open_file = {
             quit_on_open = false,
             resize_window = false,
@@ -124,16 +93,16 @@ require("nvim-tree").setup({
                 enable = true,
                 chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
                 exclude = {
-                    filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-                    buftype = { "nofile", "terminal", "help" },
-                },
-            },
-        },
+                    filetype = {
+                        "notify", "packer", "qf", "diff", "fugitive",
+                        "fugitiveblame"
+                    },
+                    buftype = {"nofile", "terminal", "help"}
+                }
+            }
+        }
     },
-    trash = {
-        cmd = "trash",
-        require_confirm = true,
-    },
+    trash = {cmd = "trash", require_confirm = true},
     log = {
         enable = false,
         truncate = false,
@@ -143,10 +112,10 @@ require("nvim-tree").setup({
             copy_paste = false,
             diagnostics = false,
             git = false,
-            profile = false,
-        },
-    },
+            profile = false
+        }
+    }
 })
 
-map('n', '<C-n>', ':NvimTreeToggle <CR>', { silent = true })
-map('n', '<C-b>', ":NvimTreeFindFile <CR>", { silent = true })
+map('n', '<C-n>', ':NvimTreeToggle <CR>', {silent = true})
+map('n', '<C-b>', ":NvimTreeFindFile <CR>", {silent = true})
