@@ -13,9 +13,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 "" Essential plugins
 " Treesitter
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}
-" Treesitter with Vala fixes
-Plug 'Prince781/nvim-treesitter', {'branch': 'prince781/vala-use-different-grammar', 'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}
 " Code context
 Plug 'nvim-treesitter/nvim-treesitter-context'
 " Treesitter rainbow
