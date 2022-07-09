@@ -1,5 +1,8 @@
 return {
-    lintCommand = "eslint_d --stdin --stdin-filename ${INPUT} -f unix",
+    lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
     lintStdin = true,
-    lintIgnoreExitCode = true
+    lintIgnoreExitCode = true,
+    lintFormats = {"%f:%l:%c: %m"},
+    formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+    formatStdin = true
 }
