@@ -44,11 +44,14 @@ telescope.setup {
     },
     pickers = {
         find_files = tableMerge(side_options, {
-            find_command = { "rg", "--hidden", "--files", "--no-ignore" },
+            find_command = {"rg", "--hidden", "--files", "--no-ignore"}
         }),
         git_files = tableMerge(side_options, {
             use_git_root = true,
-            git_command = { "git", "ls-files", "--exclude-standard", "--cached", "--deduplicate" }
+            git_command = {
+                "git", "ls-files", "--exclude-standard", "--cached",
+                "--deduplicate", "-o", "-m"
+            }
         }),
         live_grep = side_options,
         buffers = side_options,
@@ -90,26 +93,33 @@ telescope.load_extension("fzf")
 function _G.telescopeGFiles(local_dir)
     local opts = {
         use_git_root = not local_dir,
-        prompt_title = "Git Files " .. (local_dir and "CWD" or "ROOT"),
+        prompt_title = "Git Files " .. (local_dir and "CWD" or "ROOT")
     }
     local ok = pcall(require("telescope.builtin").git_files, opts)
     if not ok then require("telescope.builtin").find_files() end
 end
 
-local opts = { noremap = true, silent = true }
+local opts = {noremap = true, silent = true}
 -- Git files CWD
 map("n", "<C-f>", [[<cmd>lua telescopeGFiles(true)<CR>]], opts)
 -- Git files git-root
 map("n", "<A-d>", [[<cmd>lua telescopeGFiles(false)<CR>]], opts)
 -- All CWD files
-map("n", "<A-f>", [[<cmd>lua require("telescope.builtin").find_files()<CR>]], opts)
+map("n", "<A-f>", [[<cmd>lua require("telescope.builtin").find_files()<CR>]],
+    opts)
 -- Search for string inside of all files in CWD
-map("n", "<A-S-f>", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]], opts)
+map("n", "<A-S-f>", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]],
+    opts)
 -- Search for string inside buffer
-map("n", "<A-S-d>", [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>]], opts)
+map("n", "<A-S-d>",
+    [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>]],
+    opts)
 -- Search for open buffers
-map("n", "<A-S-b>", [[<cmd>lua require("telescope.builtin").buffers()<CR>]], opts)
+map("n", "<A-S-b>", [[<cmd>lua require("telescope.builtin").buffers()<CR>]],
+    opts)
 -- Lists previously open files
-map("n", "<A-S-h>", [[<cmd>lua require("telescope.builtin").oldfiles()<CR>]], opts)
+map("n", "<A-S-h>", [[<cmd>lua require("telescope.builtin").oldfiles()<CR>]],
+    opts)
 -- Lists normal mode keymappings
-map("n", "<A-S-m>", [[<cmd>lua require("telescope.builtin").keymaps()<CR>]], opts)
+map("n", "<A-S-m>", [[<cmd>lua require("telescope.builtin").keymaps()<CR>]],
+    opts)
