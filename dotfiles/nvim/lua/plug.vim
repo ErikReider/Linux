@@ -83,7 +83,11 @@ Plug 'AndrewRadev/tagalong.vim', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
-" Bottom line and tab line
+" Bufferline
+Plug 'romgrk/barbar.nvim'
+" Delete Neovim buffers without losing window layout
+Plug 'famiu/bufdelete.nvim'
+" Status line
 Plug 'nvim-lualine/lualine.nvim'
 " XML-like
 " CSS color highlighter

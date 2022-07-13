@@ -1,6 +1,6 @@
 local db = require("dashboard")
 db.hide_statusline = true
-db.hide_tabline = true
+db.hide_tabline = false
 
 db.custom_header = {
     "                                   ",

@@ -51,14 +51,14 @@ require("lualine").setup {
       }
     }
   },
-  tabline = {
-    lualine_a = {
-      {
-        "tabs",
-        mode = 2, -- Shows tab_nr + tab_name
-        max_length = function() return vim.o.columns end
-      }
-    },
-  },
+  -- tabline = {
+    -- lualine_a = {
+      -- {
+        -- "tabs",
+        -- mode = 2, -- Shows tab_nr + tab_name
+        -- max_length = function() return vim.o.columns end
+      -- }
+    -- },
+  -- },
   extensions = { "nvim-tree" }
 }

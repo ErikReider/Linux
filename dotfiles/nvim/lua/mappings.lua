@@ -14,10 +14,27 @@ map("n", "<F3>",
     "expand('%') == '' ? ':e $MYVIMRC <cr>' : ':vsplit $MYVIMRC <cr>'",
     {silent = true, expr = true})
 -- Source on F4
-map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR>", {})
+map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR> :Sleuth <CR>", {})
 
 -- Use double ESC to clear highlights
 map("n", "<Esc><Esc>", ":nohl<CR>", {})
+
+-- Bufferline
+local barbar_opts = { noremap = true, silent = true }
+map("n", "<C-PageUp>", ":BufferPrevious<CR>", barbar_opts)
+map("n", "<C-PageDown>", ":BufferNext<CR>", barbar_opts)
+map('n', '<M-S-Left>', '<Cmd>BufferMovePrevious<CR>', {})
+map('n', '<M-S-Right>', '<Cmd>BufferMoveNext<CR>', {})
+map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', barbar_opts)
+map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', barbar_opts)
+map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', barbar_opts)
+map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', barbar_opts)
+map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', barbar_opts)
+map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', barbar_opts)
+map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', barbar_opts)
+map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', barbar_opts)
+map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', barbar_opts)
+map('n', '<A-0>', '<Cmd>BufferLast<CR>', barbar_opts)
 
 -- k/j and up/down will move virtual lines (lines that wrap)
 map("n", "j", "(v:count == 0 ? 'gj' : 'j')",
@@ -47,20 +64,6 @@ map("n", "<A-Up>", ":m-2<CR>", {noremap = true, silent = true})
 map("n", "<A-Down>", ":m+<CR>", {noremap = true, silent = true})
 map("i", "<A-Up>", "<C-O>:m-2<CR>", {noremap = true, silent = true})
 map("i", "<A-Down>", "<C-O>:m+<CR>", {noremap = true, silent = true})
-
--- Move window with arrow keys (C-w)
-map("n", "<C-S-Left>", ":wincmd h <CR>", {silent = true, noremap = true})
-map("n", "<C-S-Down>", ":wincmd j <CR>", {silent = true, noremap = true})
-map("n", "<C-S-Up>", ":wincmd k <CR>", {silent = true, noremap = true})
-map("n", "<C-S-Right>", ":wincmd l <CR>", {silent = true, noremap = true})
-
--- Resize window (M = alt)
-map("n", "<M-S-Up>", ":resize -2 <CR>", {silent = true, noremap = true})
-map("n", "<M-S-Down>", ":resize +2 <CR>", {silent = true, noremap = true})
-map("n", "<M-S-Right>", ":vertical resize -2 <CR>",
-    {silent = true, noremap = true})
-map("n", "<M-S-Left>", ":vertical resize +2 <CR>",
-    {silent = true, noremap = true})
 
 -- Better indenting
 map("v", "<", "<gv", {silent = true, noremap = true})
