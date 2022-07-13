@@ -18,6 +18,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 " Treesitter rainbow
 Plug 'p00f/nvim-ts-rainbow'
+" Treesitter auto close tags
+Plug 'windwp/nvim-ts-autotag'
 " Indent indicators
 Plug 'lukas-reineke/indent-blankline.nvim'
 " Start Screen
@@ -76,7 +78,7 @@ Plug 'preservim/nerdcommenter'
 " Add surrounding (), [], {}, etc...
 Plug 'tpope/vim-surround'
 " Changing tag name also changed matching tag
-Plug 'AndrewRadev/tagalong.vim', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx'] }
+Plug 'AndrewRadev/tagalong.vim', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx', 'heex'] }
 " Searching
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -84,8 +86,6 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 " Bottom line and tab line
 Plug 'nvim-lualine/lualine.nvim'
 " XML-like
-Plug 'gregsexton/MatchTag', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx'] }
-Plug 'alvan/vim-closetag'
 " CSS color highlighter
 Plug 'norcalli/nvim-colorizer.lua'
 " Neovim lua functions

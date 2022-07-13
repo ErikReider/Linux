@@ -104,7 +104,11 @@ nvim_lsp.emmet_ls.setup({
     root_dir = function(fname)
         return util.root_pattern('package.json', '.git')(fname) or
                    util.path.dirname(fname)
-    end
+    end,
+    filetypes = {
+        'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss',
+        'less', "heex"
+    }
 })
 
 -- CSharp
@@ -139,7 +143,8 @@ nvim_lsp.html.setup({
     on_attach = on_attach,
     flags = {debounce_text_changes = 150},
     capabilities = capabilities,
-    cmd = {"vscode-html-language-server", "--stdio"}
+    cmd = {"vscode-html-language-server", "--stdio"},
+    filetypes = { "html", "heex" }
 })
 
 -- JSON
@@ -264,7 +269,7 @@ nvim_lsp.pyright.setup({
 
 -- elixir-ls
 nvim_lsp.elixirls.setup({
-    cmd = { "/usr/lib/elixir-ls/language_server.sh" },
+    cmd = {"/usr/lib/elixir-ls/language_server.sh"},
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {python = {analysis = {useLibraryCodeForTypes = true}}}
