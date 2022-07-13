@@ -102,11 +102,12 @@ if [[ $vim_var == y ]]; then
     yay --needed -S scdoc
     yay --needed -S vint ueberzug lolcat stylelint vscode-codicons-git
     # Lsps
-    yay --needed -S vala-language-server efm-langserver lua-language-server bash-language-server omnisharp-roslyn-bin typescript-language-server-bin pyright ccls vim-language-server rust-analyzer
-    sudo npm i -g stylelint-lsp vscode-langservers-extracted markdownlint-cli emmet-ls
+    yay --needed -S vala-language-server efm-langserver lua-language-server bash-language-server omnisharp-roslyn-bin typescript-language-server-bin pyright ccls vim-language-server rust-analyzer lemminx
+    sudo npm i -g --save-dev --save-exact stylelint-lsp vscode-langservers-extracted markdownlint-cli emmet-ls
 
     # Formatters
-    yay --needed -S lua-format uncrustify shfmt prettier autopep8
+    yay --needed -S lua-format uncrustify shfmt autopep8
+    sudo npm i -g --save-dev --save-exact prettier @prettier/plugin-xml
 
     pip install cpplint neovim
     sudo npm install -g neovim
