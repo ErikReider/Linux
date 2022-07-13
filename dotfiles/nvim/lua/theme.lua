@@ -33,8 +33,8 @@ vim.opt.listchars:append("extends:⟩")
 vim.opt.listchars:append("precedes:⟨")
 
 -- Word highlight
-vim.highlight.link("illuminate", "LspReferenceText", true)
-vim.highlight.link("illuminatedWord", "LspReferenceText", true)
+vim.api.nvim_set_hl(0, "illuminate", {link = "LspReferenceText"})
+vim.api.nvim_set_hl(0, "illuminatedWord", {link = "LspReferenceText"})
 for _, v in
     ipairs({"LspReferenceText", "LspReferenceRead", "LspReferenceWrite"}) do
     vim.highlight.create(v, {cterm = "bold", gui = "bold"}, false)
@@ -48,11 +48,6 @@ vim.highlight.create("DiagnosticUnderlineWarn",
 vim.highlight.create("DiagnosticUnderlineInfo",
                      {gui = "undercurl", cterm = "undercurl"})
 
-vim.highlight.link("FoldColumn", "Comment", true)
-vim.highlight.create("Folded", {
-    ctermfg = "0",
-    ctermbg = "23",
-    guibg = "#2a3f57",
-    gui = "none",
-    cterm = "none"
-})
+-- Nvim-tree fixes
+vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", {link = "NvimTreeEmptyFolderName"})
+vim.highlight.create("NvimTreeGitNew", {guifg = "#73c991"})
