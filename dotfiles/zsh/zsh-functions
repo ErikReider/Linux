@@ -24,7 +24,7 @@ function mkcd {
 
 function tag_release {
     if [ "$1" = "" ]; then
-        echo "Usage: tag_release TAG_NAME"
+        echo "Usage: tag_release TAG_NAME. Example: v0.6.2"
     else
         # Check if any previous tags exist
         if [[ $(git rev-parse --tags | wc -l) != 0 ]]; then
