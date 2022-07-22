@@ -65,6 +65,8 @@ Plug 'tpope/vim-sleuth'
 " Color Scheme
 Plug 'tomasiser/vim-code-dark'
 Plug 'Mofiqul/vscode.nvim'
+" Dims inactive windows
+Plug 'sunjon/Shade.nvim'
 " NERDTree
 " Plug 'scrooloose/nerdtree'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
