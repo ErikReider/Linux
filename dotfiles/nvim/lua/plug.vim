@@ -78,7 +78,7 @@ Plug 'preservim/nerdcommenter'
 " Add surrounding (), [], {}, etc...
 Plug 'tpope/vim-surround'
 " Changing tag name also changed matching tag
-Plug 'AndrewRadev/tagalong.vim', {'for': ['html', 'xml', 'js', 'jsx', 'ts', 'tsx', 'heex'] }
+Plug 'AndrewRadev/tagalong.vim'
 " Searching
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
