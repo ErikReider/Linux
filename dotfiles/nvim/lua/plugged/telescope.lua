@@ -3,20 +3,8 @@ local telescope = require("telescope")
 
 local winblend = 20
 
-local dropdown_options = {
+local flex_options = {
     winblend = winblend,
-    theme = "dropdown",
-    show_line = false,
-    results_title = false,
-    preview_title = false,
-    prompt_prefix = "❯ ",
-    selection_caret = "❯ ",
-    no_ignore = true
-}
-
-local side_options = {
-    winblend = winblend,
-    width = 0.8,
     show_line = false,
     results_title = "",
     preview_title = "",
@@ -33,7 +21,7 @@ local cursor_options = {
     preview_title = false
 }
 
-telescope.setup {
+telescope.setup({
     extensions = {
         fzf = {
             fuzzy = true,
@@ -43,23 +31,21 @@ telescope.setup {
         }
     },
     pickers = {
-        find_files = tableMerge(side_options, {
-            find_command = {"rg", "--hidden", "--files", "--no-ignore"}
-        }),
-        git_files = tableMerge(side_options, {
+        find_files = tableMerge(flex_options, {find_command = {"rg", "--files"}}),
+        git_files = tableMerge(flex_options, {
             use_git_root = true,
             git_command = {
                 "git", "ls-files", "--exclude-standard", "--cached",
                 "--deduplicate", "-o", "-m"
             }
         }),
-        live_grep = side_options,
-        buffers = side_options,
-        oldfiles = side_options,
-        keymaps = side_options,
-        highlights = side_options,
-        lsp_workspace_diagnostics = side_options,
-        lsp_references = side_options,
+        live_grep = flex_options,
+        buffers = flex_options,
+        oldfiles = flex_options,
+        keymaps = flex_options,
+        highlights = flex_options,
+        lsp_workspace_diagnostics = flex_options,
+        lsp_references = flex_options,
         lsp_code_actions = cursor_options
     },
     defaults = {
@@ -86,7 +72,7 @@ telescope.setup {
             }
         }
     }
-}
+})
 
 telescope.load_extension("fzf")
 
@@ -99,13 +85,23 @@ function _G.telescopeGFiles(local_dir)
     if not ok then require("telescope.builtin").find_files() end
 end
 
+function _G.telescopeFindFiles(git_ignore)
+    local opts = {
+        hidden = true,
+        no_ignore = not git_ignore,
+        no_ignore_parent = not git_ignore,
+        prompt_title = (git_ignore and "Git " or "") .. "Files"
+    }
+    require("telescope.builtin").find_files(opts)
+end
+
 local opts = {noremap = true, silent = true}
 -- Git files CWD
-map("n", "<C-f>", [[<cmd>lua telescopeGFiles(true)<CR>]], opts)
+map("n", "<C-f>", [[<cmd>lua telescopeFindFiles(true)<CR>]], opts)
 -- Git files git-root
 map("n", "<A-d>", [[<cmd>lua telescopeGFiles(false)<CR>]], opts)
 -- All CWD files
-map("n", "<A-f>", [[<cmd>lua require("telescope.builtin").find_files()<CR>]],
+map("n", "<A-f>", [[<cmd>lua telescopeFindFiles(false)<CR>]],
     opts)
 -- Search for string inside of all files in CWD
 map("n", "<A-S-f>", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]],
