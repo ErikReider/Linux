@@ -1,7 +1,7 @@
 _G.map = vim.api.nvim_set_keymap
 
 function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, { ... })
+    local objects = vim.tbl_map(vim.inspect, {...})
     print(unpack(objects))
 end
 
@@ -15,7 +15,7 @@ function _G.tableContains(table, val)
     return false
 end
 
-function _G.disownCMD(cmd) return "!2>/dev/null 1>&2 " .. cmd .. " &; disown" end
+function _G.disownCMD(cmd) return "!" .. cmd .. " 2>/dev/null >&2 &; disown" end
 
 function _G.runCmdInTerm(cmd, tryStayOpen)
     local open = tryStayOpen == true and "; exec $SHELL" or ""
@@ -47,5 +47,10 @@ end
 
 function _G.file_exists(name)
     local f = io.open(name, "r")
-    if f ~= nil then io.close(f) return true else return false end
+    if f ~= nil then
+        io.close(f)
+        return true
+    else
+        return false
+    end
 end
