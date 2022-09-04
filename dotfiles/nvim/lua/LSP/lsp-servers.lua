@@ -140,11 +140,15 @@ nvim_lsp.bashls.setup({
 
 -- HTML
 nvim_lsp.html.setup({
-    on_attach = on_attach,
+    on_attach = function(client, bufnr, ...)
+        client.server_capabilities.document_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
+        on_attach(client, bufnr, ...)
+    end,
     flags = {debounce_text_changes = 150},
     capabilities = capabilities,
     cmd = {"vscode-html-language-server", "--stdio"},
-    filetypes = { "html", "heex" }
+    filetypes = {"html", "heex"}
 })
 
 -- JSON
