@@ -31,7 +31,9 @@ telescope.setup({
         }
     },
     pickers = {
-        find_files = tableMerge(flex_options, {find_command = {"rg", "--files"}}),
+        find_files = tableMerge(flex_options, {
+            find_command = {"rg", "--hidden", "--files", "--glob", "!.git/"}
+        }),
         git_files = tableMerge(flex_options, {
             use_git_root = true,
             git_command = {
@@ -49,6 +51,17 @@ telescope.setup({
         lsp_code_actions = cursor_options
     },
     defaults = {
+        layout_strategy = "flex",
+        layout_config = {
+            height = 0.8,
+            width = 0.8,
+            flex = {
+                flip_columns = 133,
+                flip_lines = 50
+            },
+            horizontal = {mirror = false},
+            vertical = {mirror = false}
+        },
         mappings = {
             i = {
                 ["<C-h>"] = actions.which_key,
@@ -101,8 +114,7 @@ map("n", "<C-f>", [[<cmd>lua telescopeFindFiles(true)<CR>]], opts)
 -- Git files git-root
 map("n", "<A-d>", [[<cmd>lua telescopeGFiles(false)<CR>]], opts)
 -- All CWD files
-map("n", "<A-f>", [[<cmd>lua telescopeFindFiles(false)<CR>]],
-    opts)
+map("n", "<A-f>", [[<cmd>lua telescopeFindFiles(false)<CR>]], opts)
 -- Search for string inside of all files in CWD
 map("n", "<A-S-f>", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]],
     opts)
