@@ -20,7 +20,7 @@ local function callback()
     local r, _ = unpack(api.nvim_win_get_cursor(0))
     local option = options[r]["action"]
     vim.cmd(":close")
-    vim.cmd(option)
+    vim.cmd("silent " .. option)
 end
 
 local FloatingWindow = {}
