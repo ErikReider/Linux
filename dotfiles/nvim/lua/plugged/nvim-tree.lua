@@ -33,7 +33,7 @@ require("nvim-tree").setup({
         highlight_opened_files = "NvimTreeOpenedFile",
         root_folder_modifier = ":~",
         indent_markers = {
-            enable = true,
+            enable = false,
             icons = {corner = "└ ", edge = "│ ", none = "  "}
         },
         icons = {
@@ -56,13 +56,13 @@ require("nvim-tree").setup({
                     symlink_open = ""
                 },
                 git = {
-                    unstaged = "✗",
+                    unstaged = "M",
                     staged = "✓",
                     unmerged = "",
                     renamed = "➜",
                     untracked = "★",
                     deleted = "",
-                    ignored = "◌"
+                    ignored = ""
                 }
             }
         },
@@ -80,7 +80,7 @@ require("nvim-tree").setup({
     filters = {
         dotfiles = false,
         custom = {},
-        exclude = {".git", "node_modules", ".cache"}
+        exclude = {"^.git$", "node_modules", ".cache"}
     },
     git = {enable = true, ignore = false, timeout = 400},
     actions = {
