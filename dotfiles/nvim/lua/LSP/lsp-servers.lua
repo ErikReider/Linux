@@ -107,7 +107,7 @@ nvim_lsp.emmet_ls.setup({
     end,
     filetypes = {
         'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss',
-        'less', "heex"
+        'less', "heex", "htmldjango"
     }
 })
 
