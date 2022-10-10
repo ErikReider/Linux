@@ -118,7 +118,7 @@ lsp_signature.setup({
     shadow_blend = 36,
     shadow_guibg = 'Black',
     timer_interval = 200,
-    toggle_key = nil,
+    toggle_key = nil
 })
 
 -- nvim-cmp
@@ -154,7 +154,15 @@ cmp.setup({
     formatting = {
         fields = {"kind", "abbr"},
         format = function(_, vim_item)
+            -- Truncate text
+            local label = vim_item.abbr
+            local truncated_label = vim.fn.strcharpart(label, 0, 40)
+            if truncated_label ~= label then
+                vim_item.abbr = truncated_label .. "…"
+            end
+
             vim_item.kind = lsp_symbols[vim_item.kind] or ""
+            vim_item.menu = nil
             return vim_item
         end
     },
