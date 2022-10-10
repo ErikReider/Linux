@@ -113,6 +113,8 @@ local opts = {noremap = true, silent = true}
 map("n", "<C-f>", [[<cmd>lua telescopeFindFiles(true)<CR>]], opts)
 -- Git files git-root
 map("n", "<A-d>", [[<cmd>lua telescopeGFiles(false)<CR>]], opts)
+-- Git status files
+map("n", "<A-g>", [[<cmd>lua require("telescope.builtin").git_status()<CR>]], opts)
 -- All CWD files
 map("n", "<A-f>", [[<cmd>lua telescopeFindFiles(false)<CR>]], opts)
 -- Search for string inside of all files in CWD
