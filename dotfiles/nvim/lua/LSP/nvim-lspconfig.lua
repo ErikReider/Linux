@@ -246,4 +246,6 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
 
 require("LSP.lua_snip")
 
+require("LSP.mason")
+
 require("LSP.lsp-servers")

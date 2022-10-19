@@ -60,6 +60,11 @@ Plug 'RRethy/vim-illuminate'
 " See LSP server startup status
 Plug 'j-hui/fidget.nvim'
 
+" Lsp Installer
+Plug 'williamboman/mason.nvim'
+" Auto installs lsps
+Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'
+
 " Auto tabwidth and style detection
 Plug 'tpope/vim-sleuth'
 " Color Scheme

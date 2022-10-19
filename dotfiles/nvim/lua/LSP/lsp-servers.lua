@@ -13,7 +13,7 @@ capabilities.textDocument.foldingRange = {
 }
 local servers = {
     -- No configuration needed
-    "vimls", "cssls", "texlab", "intelephense", "lemminx"
+    "vimls", "cssls", "texlab", "intelephense", "lemminx", "dockerls"
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -174,7 +174,7 @@ nvim_lsp.rust_analyzer.setup({
     }
 })
 
--- Flutter
+-- Flutter (Configures dartls)
 require("flutter-tools").setup({
     ui = {border = "rounded"},
     decorations = {statusline = {app_version = false, device = true}},
