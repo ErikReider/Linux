@@ -46,6 +46,9 @@ if hash gnome-keyring-daemon 2>/dev/null; then
     export SSH_AUTH_SOCK
 fi
 
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Path
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"

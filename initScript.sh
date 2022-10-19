@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
+
+distroName=$(cat < /etc/os-release | grep "^ID" | awk -F= '{print $2}')
 
 currentDir=$(dirname $(readlink -f $0))
 cd $currentDir
@@ -9,8 +11,42 @@ if [[ $flatpakTheme == y ]]; then
     flatpak install flathub --system org.gtk.Gtk3theme.Adwaita-dark
     flatpak install flathub --user org.gtk.Gtk3theme.Adwaita-dark
     sudo flatpak override --filesystem=~/.themes
+    sudo flatpak override --filesystem=/usr/share/themes
 fi
 echo ""
+##
+
+## Fedora tweaks
+if [[ "$distroName" == "fedora" ]]; then
+    read -p "Do you wish to tweak Fedora (enable 3rd-party repos, install codecs, firmware, etc...)? [y/n] " tweakFedora
+    if [[ $tweakFedora == y ]]; then
+        # Enable rpmfusion
+        sudo rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+        sudo rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+        # Add flathub as flatpak repo
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        # Codecs
+        sudo dnf install gstreamer1-plugins-{bad-\*,good-\*,base,ugly-\*,ugly} gstreamer1-plugin-openh264 gstreamer1-libav mozilla-openh264
+        sudo dnf install lame\* --exclude=lame-devel
+        sudo dnf install libva libva-intel-driver libva-intel-hybrid-driver ffmpeg
+        sudo dnf install gstreamer1-vaapi intel-media-driver
+        sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+        sudo dnf groupupdate sound-and-video
+        sudo dnf group upgrade --with-optional Multimedia
+        sudo dnf config-manager --set-enabled fedora-cisco-openh264
+        # Enable thirdparty fedora repos
+        sudo dnf install fedora-workstation-repositories
+        # Update application data
+        sudo dnf groupupdate core
+        # Install extra drivers and libraries
+        sudo dnf install rpmfusion-free-release-tainted
+        sudo dnf install libdvdcss
+        # Install extra firmware utilities:
+        sudo dnf install rpmfusion-nonfree-release-tainted
+        sudo dnf install \*-firmware
+    fi
+    echo ""
+fi
 ##
 
 ## Needed Config Files
@@ -27,31 +63,61 @@ fi
 echo ""
 ##
 
-## Applications
-read -p "Do you wish to install all apps? [y/n] " install_app_var
-if [[ $install_app_var == y ]]; then
+## Package managers
+read -p "Do you wish to install all package managers? [y/n] " install_pkg_var
+if [[ $install_pkg_var == y ]]; then
+    source ./packages/packages-pkg_managers.sh
 
-    sudo pacman -S git
+    if [[ "$distroName" == "arch" ]]; then
+        # Install yay
+        cd /tmp
+        git clone https://aur.archlinux.org/yay.git
+        cd yay
+        makepkg -si
+        cd $currrentDir
 
-    # Install yay
-    cd /tmp
-    git clone https://aur.archlinux.org/yay.git
-    cd yay
-    makepkg -si
-    cd $currrentDir
-
-    # Package managers
-    sudo yay --needed -S pikaur python-pip flatpak yarn nodejs-lts-fermium npm
-
-    # Applications
-    yay --needed -S pamixer firefox chromium nautilus-copy-path jq mailspring noisetorch-git hack-font-ligature-nerd-font-git discord alacritty ttf-fira-code
-
-    read -p "Do you wish to install java? [y/n]" install_java
-    if [[ $install_java == y ]]; then
-        yay --needed -S jre-openjdk jre-openjdk-headless jdk-openjdk jdk8-openjdk jre11-openjdk jre11-openjdk-headless jre8-openjdk jre8-openjdk-headless
+        yay -S --needed "${common[@]}" "${arch[@]}"
+    elif [[ "$distroName" == "fedora" ]]; then
+        sudo dnf groupinstall "Development Tools"
+        sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
 
-    sudo flatpak install Spotify
+    # Install Brew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+echo ""
+##
+
+## Applications
+read -p "Do you wish to install all Applications? [y/n] " install_app_var
+if [[ $install_app_var == y ]]; then
+    source ./packages/packages-all_apps.sh
+
+    if [[ "$distroName" == "arch" ]]; then
+        yay -S --needed "${common[@]}" "${arch[@]}"
+    elif [[ "$distroName" == "fedora" ]]; then
+        # VSCode
+        sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+        dnf check-update
+
+        sudo dnf install "${common[@]}" "${fedora[@]}"
+    fi
+
+    if [ ${#fedoraRemove[@]} -gt 0 ]; then
+        sudo dnf remove "${fedoraRemove[@]}"
+    fi
+
+    # Install Nerd Font patched Fira Code fonts
+    cd /tmp && git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
+    cd nerd-fonts
+    git pull
+    git sparse-checkout add patched-fonts/FiraCode
+    ./install.sh --remove
+    ./install.sh
+    cd "$currentDir"
+
+    flatpak install Spotify mailspring io.github.shiftey.Deskto
 fi
 echo ""
 ##
@@ -59,9 +125,17 @@ echo ""
 ## Dev Tools
 read -p "Do you wish to install dev tools? [y/n] " install_dev_tools
 if [[ $install_dev_tools == y ]]; then
-    yay --needed -S visual-studio-code-bin the_silver_searcher bat ripgrep fzf git lazygit
+    source ./packages/packages-dev_tools.sh
 
-    yay --needed -S dotnet-sdk dart typescript vala python python2 gcc clang meson cmake libsass sassc eslint rust cargo
+    if [[ "$distroName" == "arch" ]]; then
+        yay -S --needed "${common[@]}" "${arch[@]}"
+    elif [[ "$distroName" == "fedora" ]]; then
+        sudo dnf copr enable atim/lazygit -y
+        sudo dnf copr enable agriffis/neovim-nightly
+        sudo dnf groupinstall "Development Tools"
+        sudo dnf groupinstall "RPM Development Tools"
+        sudo dnf install "${common[@]}" "${fedora[@]}"
+    fi
 fi
 echo ""
 ##
@@ -69,7 +143,15 @@ echo ""
 ## ZSH
 read -p "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var == y ]]; then
-    yay --needed -S zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
+    source ./packages/packages-zsh.sh
+
+    if [[ "$distroName" == "arch" ]]; then
+        yay -S --needed "${common[@]}" "${arch[@]}"
+    elif [[ "$distroName" == "fedora" ]]; then
+        sudo dnf install "${common[@]}" "${fedora[@]}"
+    fi
+    brew install "${brew[@]}"
+
     sudo chsh --shell=/bin/zsh $USER
 
     cd $HOME
@@ -80,9 +162,16 @@ if [[ $change_to_bash_var == y ]]; then
     ln -s $currentDir/dotfiles/zsh/.zprofile .zprofile
     ln -s $currentDir/dotfiles/zsh .
 
+    rm -rf zsh/plugins
     mkdir zsh/plugins
     cd zsh/plugins
-    ln -s /usr/share/zsh/plugins/* .
+    if [ -d "/usr/share/zsh/plugins" ]; then
+        ln -s /usr/share/zsh/plugins/* .
+    elif [ -d "/home/linuxbrew/.linuxbrew/share" ]; then
+        ln -s /home/linuxbrew/.linuxbrew/share/zsh-* .
+    else
+        ln -s /usr/share/zsh-* .
+    fi
 
     cd $currentDir
 
@@ -97,26 +186,23 @@ echo ""
 ##
 
 ## Neovim
-read -p "Do you wish to link vim config files? [y/n] " vim_var
+read -p "Do you wish to link NeoVim config files? [y/n] " vim_var
 if [[ $vim_var == y ]]; then
-    yay --needed -S scdoc
-    yay --needed -S vint ueberzug lolcat stylelint vscode-codicons-git
-    # Lsps
-    yay --needed -S vala-language-server efm-langserver lua-language-server bash-language-server omnisharp-roslyn-bin typescript-language-server-bin pyright ccls vim-language-server rust-analyzer lemminx
-    sudo npm i -g --save-dev --save-exact stylelint-lsp vscode-langservers-extracted markdownlint-cli emmet-ls
+    source ./packages/packages-nvim.sh
+
+    if [[ "$distroName" == "arch" ]]; then
+        pip install neovim
+        yay -S --needed "${common[@]}" "${arch[@]}"
+    elif [[ "$distroName" == "fedora" ]]; then
+        sudo dnf install "${common[@]}" "${fedora[@]}"
+    fi
 
     # Formatters
-    yay --needed -S lua-format uncrustify shfmt autopep8
     sudo npm i -g --save-dev --save-exact prettier @prettier/plugin-xml
 
-    pip install cpplint neovim
     sudo npm install -g neovim
 
-    read -p "Do you wish to install latex packages?" install_latex
-    if [[ $install_latex == y ]]; then
-        yay --needed -S scdoc
-        yay --needed -S texlive-bibtexextra texlive-gantt texlive-pictures texlive-core texlive-fontsextra texlive-latexextra texlive-science biber
-    fi
+    brew install dart-sdk
 
     cd ~/.config/
     rm -rf nvim
@@ -124,6 +210,7 @@ if [[ $vim_var == y ]]; then
     ln -s $currentDir/dotfiles/nvim nvim
     cd $currentDir
 
+    # Install Vim Plug
     sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     nvim -es -u ~/.config/nvim/init.lua -i NONE -c "PlugInstall" -c "qa"
 fi
