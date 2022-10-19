@@ -8,6 +8,7 @@ require('mason-tool-installer').setup {
     -- LSPs
     'vala-language-server',
     'bash-language-server',
+    'shellcheck',
     'efm',
     'lua-language-server',
     'vim-language-server',
