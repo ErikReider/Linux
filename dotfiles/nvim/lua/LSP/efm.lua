@@ -48,10 +48,6 @@ local efm_root_markers = {
 nvim_lsp.efm.setup({
     on_attach = require("LSP.on_attach"),
     flags = {debounce_text_changes = 150},
-    capabilities = (function()
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        return require('cmp_nvim_lsp').update_capabilities(capabilities)
-    end)(),
     cmd = {"efm-langserver"},
     filetypes = vim.tbl_keys(efm_languages),
     root_dir = nvim_lsp.util.root_pattern(unpack(efm_root_markers)),
