@@ -14,6 +14,8 @@ function zsh_add_plugin() {
         if [ -f "$ZDOTDIR/plugin-conf/$PLUGIN_NAME" ]; then
             zsh_add_file "plugin-conf/$PLUGIN_NAME"
         fi
+    else
+        echo "Failed to find $PLUGIN_NAME in $ZDOTDIR!..."
     fi
 }
 
