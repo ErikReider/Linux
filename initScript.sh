@@ -3,10 +3,10 @@
 distroName=$(cat < /etc/os-release | grep "^ID" | awk -F= '{print $2}')
 
 currentDir=$(dirname $(readlink -f $0))
-cd $currentDir
+cd "$currentDir"
 
 ## Flatpak theme override
-read -p "Do you wish to enable flatpatk theme override? [y/n] " flatpakTheme
+read -rp "Do you wish to enable flatpatk theme override? [y/n] " flatpakTheme
 if [[ $flatpakTheme == y ]]; then
     flatpak install flathub --system org.gtk.Gtk3theme.Adwaita-dark
     flatpak install flathub --user org.gtk.Gtk3theme.Adwaita-dark
@@ -18,11 +18,11 @@ echo ""
 
 ## Fedora tweaks
 if [[ "$distroName" == "fedora" ]]; then
-    read -p "Do you wish to tweak Fedora (enable 3rd-party repos, install codecs, firmware, etc...)? [y/n] " tweakFedora
+    read -rp "Do you wish to tweak Fedora (enable 3rd-party repos, install codecs, firmware, etc...)? [y/n] " tweakFedora
     if [[ $tweakFedora == y ]]; then
         # Enable rpmfusion
-        sudo rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-        sudo rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+        sudo rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm
+        sudo rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
         # Add flathub as flatpak repo
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         # Codecs
@@ -50,21 +50,21 @@ fi
 ##
 
 ## Needed Config Files
-read -p "Do you wish to symlink needed config files? [y/n] " symlink_etc_var
+read -rp "Do you wish to symlink needed config files? [y/n] " symlink_etc_var
 if [[ $symlink_etc_var == y ]]; then
     # .pam_environment
-    cd $HOME
-    sudo ln -s $currentDir/dotfiles/.pam_environment
+    cd "$HOME"
+    sudo ln -s "$currentDir"/dotfiles/.pam_environment
 
-    cd $currentDir/dotfiles
+    cd "$currentDir"/dotfiles
     sudo chown root ./etc/*
-    cd $currentDir
+    cd "$currentDir"
 fi
 echo ""
 ##
 
 ## Package managers
-read -p "Do you wish to install all package managers? [y/n] " install_pkg_var
+read -rp "Do you wish to install all package managers? [y/n] " install_pkg_var
 if [[ $install_pkg_var == y ]]; then
     source ./packages/packages-pkg_managers.sh
 
@@ -74,7 +74,7 @@ if [[ $install_pkg_var == y ]]; then
         git clone https://aur.archlinux.org/yay.git
         cd yay
         makepkg -si
-        cd $currrentDir
+        cd "$currentDir"
 
         yay -S --needed "${common[@]}" "${arch[@]}"
     elif [[ "$distroName" == "fedora" ]]; then
@@ -89,7 +89,7 @@ echo ""
 ##
 
 ## Applications
-read -p "Do you wish to install all Applications? [y/n] " install_app_var
+read -rp "Do you wish to install all Applications? [y/n] " install_app_var
 if [[ $install_app_var == y ]]; then
     source ./packages/packages-all_apps.sh
 
@@ -123,7 +123,7 @@ echo ""
 ##
 
 ## Dev Tools
-read -p "Do you wish to install dev tools? [y/n] " install_dev_tools
+read -rp "Do you wish to install dev tools? [y/n] " install_dev_tools
 if [[ $install_dev_tools == y ]]; then
     source ./packages/packages-dev_tools.sh
 
@@ -141,7 +141,7 @@ echo ""
 ##
 
 ## ZSH
-read -p "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
+read -rp "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var == y ]]; then
     source ./packages/packages-zsh.sh
 
@@ -152,15 +152,15 @@ if [[ $change_to_bash_var == y ]]; then
     fi
     brew install "${brew[@]}"
 
-    sudo chsh --shell=/bin/zsh $USER
+    sudo chsh --shell=/bin/zsh "$USER"
 
-    cd $HOME
+    cd "$HOME"
     # Remove provided configs and themes
     rm -rf zsh .zshrc
 
-    ln -s $currentDir/dotfiles/zsh/.zshrc .zshrc
-    ln -s $currentDir/dotfiles/zsh/.zprofile .zprofile
-    ln -s $currentDir/dotfiles/zsh .
+    ln -s "$currentDir"/dotfiles/zsh/.zshrc .zshrc
+    ln -s "$currentDir"/dotfiles/zsh/.zprofile .zprofile
+    ln -s "$currentDir"/dotfiles/zsh .
 
     rm -rf zsh/plugins
     mkdir zsh/plugins
@@ -173,10 +173,10 @@ if [[ $change_to_bash_var == y ]]; then
         ln -s /usr/share/zsh-* .
     fi
 
-    cd $currentDir
+    cd "$currentDir"
 
     # Set password feedback
-    read -p "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
+    read -rp "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
     if [[ $visudo_var == y ]]; then
         export EDITOR=/usr/bin/nvim
         sudo visudo
@@ -186,7 +186,7 @@ echo ""
 ##
 
 ## Neovim
-read -p "Do you wish to link NeoVim config files? [y/n] " vim_var
+read -rp "Do you wish to link NeoVim config files? [y/n] " vim_var
 if [[ $vim_var == y ]]; then
     source ./packages/packages-nvim.sh
 
@@ -207,8 +207,8 @@ if [[ $vim_var == y ]]; then
     cd ~/.config/
     rm -rf nvim
 
-    ln -s $currentDir/dotfiles/nvim nvim
-    cd $currentDir
+    ln -s "$currentDir"/dotfiles/nvim nvim
+    cd "$currentDir"
 
     # Install Vim Plug
     sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
