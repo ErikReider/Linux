@@ -6,7 +6,7 @@ _ver="1.7"
 version="$_ver-r6885.2289f452"
 release=1
 desc="i3-compatible window manager for Wayland"
-homepage="https://github.com/WillPower3309/swayfx/issues"
+homepage="https://github.com/WillPower3309/swayfx"
 architectures=("amd64")
 license=("MIT")
 provides=("sway=$_ver")
