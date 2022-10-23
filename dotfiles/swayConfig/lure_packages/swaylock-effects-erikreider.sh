@@ -35,4 +35,5 @@ build() {
 package() {
     cd "$srcdir/$_pkgname"
     DESTDIR="$pkgdir" ninja -C build install
+    sudo chmod a+s build/swaylock
 }
