@@ -41,8 +41,8 @@ package() {
     DESTDIR="$pkgdir" meson install -C build
 
     cd "$_pkgname"
-    install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
     for util in autoname-workspaces.py inactive-windows-transparency.py grimshot; do
-        install -Dm755 "contrib/$util" -t "$pkgdir/usr/share/$pkgname/scripts"
+        install -Dm755 "contrib/$util" -t "$pkgdir/usr/share/$_pkgname/scripts"
     done
 }
