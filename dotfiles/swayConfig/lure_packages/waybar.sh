@@ -18,6 +18,8 @@ build_deps=("
     "cmake"
     "scdoc"
     "wayland-protocols"
+    "upower"
+    "bluez"
 )
 build_deps_fedora=(
     "git"
@@ -41,6 +43,8 @@ build_deps_fedora=(
     "libappindicator-gtk3-devel"
     "libdbusmenu-gtk3-devel"
     "libmpdclient-devel"
+    "upower-devel"
+    "bluez"
 )
 
 deps=("
@@ -58,6 +62,8 @@ deps=("
     "libappindicator-gtk3"
     "libdbusmenu-gtk3"
     "libmpdclient"
+    "upower"
+    "bluez"
 )
 deps_fedora=(
     "gtkmm30"
@@ -72,6 +78,8 @@ deps_fedora=(
     "libappindicator-gtk3"
     "libdbusmenu-gtk3"
     "libmpdclient"
+    "upower"
+    "bluez"
 )
 
 sources=("git+https://github.com/Alexays/Waybar.git")
@@ -85,7 +93,7 @@ version() {
 build() {
     cd "$srcdir"
     pwd
-    meson setup --prefix /usr "$_pkgname" build
+    meson setup --prefix /usr -Drfkill=enabled "$_pkgname" build
     meson compile -C build
 }
 
