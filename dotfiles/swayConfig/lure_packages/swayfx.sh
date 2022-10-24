@@ -28,6 +28,7 @@ version() {
 
 build() {
     meson \
+        --prefix /usr \
         -Dsd-bus-provider=libsystemd \
         -Dwerror=false \
         "$_pkgname" build

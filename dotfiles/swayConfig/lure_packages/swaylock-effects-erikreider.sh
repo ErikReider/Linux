@@ -27,13 +27,12 @@ version() {
 }
 
 build() {
-    cd "$srcdir/$_pkgname"
-    meson build --prefix=/usr
-    ninja -C build
+    meson setup --prefix /usr "$_pkgname" build
+    meson compile -C build
 }
 
 package() {
-    cd "$srcdir/$_pkgname"
+    cd "$srcdir"
     DESTDIR="$pkgdir" ninja -C build install
     sudo chmod a+s build/swaylock
 }
