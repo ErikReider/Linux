@@ -29,7 +29,7 @@
     "tooltip": true
   },
   "custom/linux": {
-    "format": "<span font='16' font_family='NotoSansMono Nerd Font'>{}</span>",
+    "format": "<span font='13' font_family='FiraCode Nerd Font'>{}</span> ",
     "exec": "~/.config/waybar/scripts/systemIcon.sh",
     "interval": "once",
     "tooltip": false,
@@ -57,12 +57,12 @@
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "cpu": {
-    "format": "<span font_family='Material Icons' rise='-4000' size='large'></span> {usage}%",
+    "format": "<span size='x-large'></span> {usage}%",
     "interval": 1
   },
   "memory": {
     "interval": 10,
-    "format": " {used:0.2f} GiB"
+    "format": "<span font_family='FontAwesome'> {used:0.2f} GiB</span>"
   },
   "custom/media": {
     "escape": true,
