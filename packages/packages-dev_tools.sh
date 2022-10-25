@@ -7,6 +7,8 @@ export common=(
 "fzf"
 "git"
 "lazygit"
+"lazydocker"
+"docker"
 "vala"
 "python"
 "python3"

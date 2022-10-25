@@ -7,6 +7,8 @@ export common=(
 "discord"
 "kitty"
 "vlc"
+"file-roller"
+"neofetch"
 )
 export fedora=(
 "java-1.8.0-openjdk"

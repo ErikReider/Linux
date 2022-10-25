@@ -2,7 +2,7 @@
 
 distroName=$(cat < /etc/os-release | grep "^ID" | awk -F= '{print $2}')
 
-currentDir=$(dirname $(readlink -f $0))
+currentDir=$(dirname $(readlink -f "$0"))
 cd "$currentDir"
 
 ## Flatpak theme override
@@ -11,6 +11,8 @@ if [[ $flatpakTheme == y ]]; then
     flatpak install flathub --system org.gtk.Gtk3theme.Adwaita-dark
     flatpak install flathub --user org.gtk.Gtk3theme.Adwaita-dark
     sudo flatpak override --filesystem=~/.themes
+    sudo flatpak override --filesystem=~/themes
+    sudo flatpak override --filesystem=~/.local/share/themes
     sudo flatpak override --filesystem=/usr/share/themes
 fi
 echo ""
@@ -117,7 +119,7 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
     ./install.sh
     cd "$currentDir"
 
-    flatpak install Spotify mailspring io.github.shiftey.Deskto
+    flatpak install Spotify mailspring io.github.shiftey.Desktop ch.protonmail.protonmail-bridge
 fi
 echo ""
 ##
@@ -131,11 +133,18 @@ if [[ $install_dev_tools == y ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
     elif [[ "$distroName" == "fedora" ]]; then
         sudo dnf copr enable atim/lazygit -y
+        sudo dnf copr enable atim/lazydocker -y
         sudo dnf copr enable agriffis/neovim-nightly
         sudo dnf groupinstall "Development Tools"
         sudo dnf groupinstall "RPM Development Tools"
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
+
+    # Start docker daemon with system
+    sudo systemctl enable --now docker
+    # Add user to docker group
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
 fi
 echo ""
 ##
