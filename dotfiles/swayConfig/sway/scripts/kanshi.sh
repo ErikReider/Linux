@@ -1,4 +1,4 @@
-if $(pgrep -x kitty >/dev/null); then
+if $(pgrep -x kanshi >/dev/null); then
     kanshictl reload
 else
     kanshi
