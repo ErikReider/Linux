@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ $1 == "--lock" ]]; then
-    profilePic=$(~/.config/sway/scripts/generateRoundProfilePic.sh)
-    swaylock --daemonize --effect-compose "96x96;$profilePic"
+    profilePic=$(python3 ~/.config/sway/scripts/profilePicture.py)
+    swaylock --daemonize --indicator-image "$profilePic"
 else
     xset s off
     # Killall these prev processes
@@ -13,6 +13,6 @@ else
     swayidle -w \
         timeout 600 'loginctl lock-session' \
         timeout 1200 'systemctl suspend' \
-        before-sleep '~/.config/sway/scripts/lock.sh --lock' \
-        lock '~/.config/sway/scripts/lock.sh --lock' &
+        before-sleep "$HOME/.config/sway/scripts/lock.sh --lock" \
+        lock "$HOME/.config/sway/scripts/lock.sh --lock" &
 fi
