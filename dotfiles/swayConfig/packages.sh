@@ -1,0 +1,81 @@
+#!/bin/bash
+
+export common=(
+    "wmname"
+    "ibus"
+    "polkit-gnome"
+    "gnome-keyring"
+    "xdg-desktop-portal"
+    "kanshi"
+    "gammastep"
+    "wdisplays"
+    "kitty"
+    "geocode-glib"
+    "brightnessctl"
+    "playerctl"
+    "lxappearance"
+    "waybar"
+    "wl-clipboard"
+    "wf-recorder"
+    "grim"
+    "grimshot"
+    "slurp"
+    "wlogout"
+    "swappy"
+    "swayidle"
+    "wlroots"
+)
+
+export arch=(
+    "lsb-release"
+    "dbus-python"
+    "xdg-desktop-portal-wlr-git"
+    "geoclue"
+    "bluez"
+    "bluez-utils"
+    "ttf-roboto"
+    "swaync-git"
+    "rofi-lbonn-wayland-git"
+    "ttf-weather-icons"
+    "pacdep"
+    "sway-git"
+    "autotiling"
+    "swaylock-effects"
+    "swaysettings-git"
+    "rofi-emoji"
+    "ttf-material-icons-git"
+    "avizo"
+    "swaytools"
+    "swayfloatingswitcher-git"
+    "sway-audio-idle-inhibit-git"
+    "wallutils"
+    "otf-font-awesome"
+    "ttf-font-awesome"
+    "appimagelauncher"
+    "libappimage"
+    "xembed-sni-proxy-git"
+)
+
+export fedora=(
+    "redhat-lsb-core"
+    "dbus-python-devel"
+    "python3-dbus"
+    "xdg-desktop-portal-wlr"
+    "geoclue2"
+    "geoclue2-libs"
+    "gammastep-indicator"
+    "bluez"
+    "bluez-tools"
+    "google-roboto-fonts"
+    "SwayNotificationCenter"
+    "rofi-wayland"
+    "fontawesome-fonts"
+    "fontawesome5-fonts"
+    "fontawesome-free-fonts"
+    "material-icons-fonts"
+
+    # avizo
+    # swaytools
+    # swayfloatingswitcher-git
+    # wallutils
+)
