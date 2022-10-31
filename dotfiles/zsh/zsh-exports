@@ -47,7 +47,9 @@ if hash gnome-keyring-daemon 2>/dev/null; then
 fi
 
 # Set PATH, MANPATH, etc., for Homebrew.
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if hash brew 2>/dev/null; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 # Path
 export GEM_HOME="$HOME/gems"
