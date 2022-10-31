@@ -3,6 +3,7 @@
  */
 
 @define-color bg rgb(42, 42, 42);
+@define-color text-color white;
 @define-color border-color rgba(255, 255, 255, 0.15);
 @define-color bg-hover rgb(65, 65, 65);
 @define-color accent-color rgb(0, 128, 255);
@@ -13,11 +14,12 @@
   /* `otf-font-awesome` is required to be installed for icons */
   font-family: Roboto, "FontAwesome", Helvetica, Arial, sans-serif;
   font-size: 17px;
+  font-weight: bold;
   min-height: 0;
 }
 
 window#waybar {
-  color: white;
+  color: @text-color;
   transition-property: background-color;
   transition-property: color;
   transition-duration: 0.25s;
@@ -42,7 +44,7 @@ window > box {
 
 /* All modules */
 window > box > box > widget > * {
-  margin: 0 4px;
+  /* margin: 0 4px; */
 }
 
 window box > box {
@@ -60,12 +62,17 @@ window box > box {
   border-bottom-right-radius: 0;
 }
 
+window > box > box > widget button:insensitive {
+  color: @text-color;
+  font-weight: bold;
+}
+
 #workspaces button {
   /* padding: 0 10px; */
   background-color: transparent;
   /* Use box-shadow instead of border so the text isn't offset */
   box-shadow: inset 0 -3px transparent;
-  color: white;
+  color: @text-color;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -98,11 +105,6 @@ label:focus {
   opacity: 1;
 }
 
-#cpu {
-  /* font-family: "Material Icons"; */
-  color: white;
-}
-
 #backlight {
   background-color: #90b1b1;
 }
@@ -127,19 +129,10 @@ label:focus {
 #network.disconnected,
 #network.linked {
   opacity: 0.4;
-  /* font-family: TerminessTTF Nerd Font Mono; */
 }
-
-/* #network.disconnected.ethernet { */
-/* margin: 0; */
-/* } */
 
 #pulseaudio.muted {
   opacity: 0.4;
-}
-
-#custom-headsetcontrol {
-  /* font-family: "Font Awesome 6 Free"; */
 }
 
 #custom-notification {
