@@ -13,9 +13,10 @@ provides=("sway-audio-idle-inhibit=$_ver")
 conflicts=("sway-audio-idle-inhibit")
 
 build_deps=("gcc" "meson" "git")
+build_deps_fedora=("gcc" "meson" "git" "pulseaudio-libs-devel" "wayland-protocols-devel" "wayland-devel")
 
 deps=("wayland" "wayland-protocols" "libpulse")
-deps_fedora=("wayland-devel" "wayland-protocols-devel" "pulseaudio-libs")
+deps_fedora=("pulseaudio-libs")
 
 sources=("git+https://github.com/ErikReider/$_pkgname.git")
 checksums=("SKIP")
@@ -26,6 +27,7 @@ version() {
 }
 
 build() {
+    cd "$srcdir"
     meson \
         --prefix /usr \
         "$_pkgname" build
@@ -33,5 +35,6 @@ build() {
 }
 
 package() {
+    cd "$srcdir"
     DESTDIR="$pkgdir" meson install -C build
 }
