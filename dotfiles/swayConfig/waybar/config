@@ -11,7 +11,9 @@
     "custom/weather",
     "sway/mode"
   ],
-  "modules-center": ["sway/workspaces"],
+  "modules-center": [
+    "sway/workspaces"
+  ],
   "modules-right": [
     "tray",
     "custom/ArchUpdates",
@@ -57,12 +59,12 @@
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "cpu": {
-    "format": "<span size='x-large'></span> {usage}%",
+    "format": "<span font_family='Font Awesome 6 Free'></span> {usage}%",
     "interval": 1
   },
   "memory": {
     "interval": 10,
-    "format": "<span font_family='FontAwesome'> {used:0.2f} GiB</span>"
+    "format": "<span font_family='Font Awesome 6 Free'></span> {used:0.2f} GiB"
   },
   "custom/media": {
     "escape": true,
@@ -78,11 +80,11 @@
   },
   "custom/notification": {
     "tooltip": true,
-    "format": "{icon}",
+    "format": "<span size='x-large' font_family='FiraCode Nerd Font Mono'>{icon}</span>",
     "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
+      "notification": "",
       "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-notification": "",
       "dnd-none": ""
     },
     "return-type": "json",
@@ -149,7 +151,13 @@
     "format-linked": "",
     "format-disconnected": "",
     "format-disabled": "",
-    "format-icons": ["", "", "", "", ""],
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
     "on-click": "gnome-control-center wifi",
     "on-click-right": "wifi toggle",
     "tooltip-format": "{}",
@@ -158,7 +166,7 @@
   "network#ethernet": {
     "interface": "enp*",
     "interval": 30,
-    "format-ethernet": "",
+    "format-ethernet": "<span font_family='Font Awesome 6 Free'></span>",
     "format-linked": "",
     "format-disconnected": "",
     "format-disabled": "",
@@ -169,10 +177,14 @@
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-bluetooth": "{icon} {volume}%",
-    "format-bluetooth-muted": "{icon} {volume}%",
-    "format-muted": " {volume}%",
+    "format-bluetooth-muted": "{icon} <span font_family='Font Awesome 6 Free'></span>{volume}%",
+    "format-muted": "<span font_family='Font Awesome 6 Free'></span> {volume}%",
     "format-icons": {
-      "default": ["", "", ""]
+      "default": [
+        "<span font_family='Font Awesome 6 Free'></span>",
+        "<span font_family='Font Awesome 6 Free'></span>",
+        "<span font_family='Font Awesome 6 Free'></span>"
+      ]
     },
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
@@ -190,6 +202,7 @@
     "tooltip": false,
     "exec": "~/.config/waybar/scripts/headsetcontrol.sh",
     "exec-if": "which headsetcontrol",
+    "format": "{}",
     "escape": true
   },
   "custom/ArchUpdates": {
