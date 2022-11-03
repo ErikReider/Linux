@@ -13,7 +13,7 @@ license=("GPL3")
 provides=("$_pkgname_lower=$_ver")
 conflicts=("$_pkgname_lower")
 
-build_deps=("git" "meson" "rust" "cargo" "rust-glib-devel" "gtk-layer-shell-devel")
+build_deps=("git" "meson" "rust" "cargo" "gtk-layer-shell")
 build_deps_fedora=("git" "meson" "rust" "cargo" "rust-glib-devel" "gtk-layer-shell-devel" "pulseaudio-libs-devel" "glib2-devel" "gtk3-devel")
 
 deps=("gtk3" "gtk-layer-shell" "glib2" "gobject-introspection" "gtk-layer-shell" "libpulse")
