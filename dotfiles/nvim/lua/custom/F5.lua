@@ -39,6 +39,7 @@ end
 local function getF5Table()
     local f5Table = {
         {title = "Open PWD Folder", action = disownCMD("xdg-open .")},
+        {title = "Open LazyDocker", action = "LazyDocker"},
         {title = "Open Terminal", action = disownCMD("$TERM")}
     }
 
@@ -59,10 +60,8 @@ local function getF5Table()
 
         -- Check if in Git directory
         local function add_file_in_browser()
-            table.insert(f5Table, 2, {
-                title = "Open File In Browser",
-                action = "GBrowse"
-            })
+            table.insert(f5Table, 2,
+                         {title = "Open File In Browser", action = "GBrowse"})
         end
         local _, ret = utils.get_os_command_output({
             "git", "rev-parse", "--show-toplevel"
@@ -72,9 +71,7 @@ local function getF5Table()
             local is_worktree = utils.get_os_command_output({
                 "git", "rev-parse", "--is-inside-work-tree"
             }, vim.loop.cwd())
-            if is_worktree[1] == "true" then
-                add_file_in_browser()
-            end
+            if is_worktree[1] == "true" then add_file_in_browser() end
         else
             add_file_in_browser()
         end
