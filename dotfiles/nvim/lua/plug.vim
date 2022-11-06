@@ -113,6 +113,8 @@ Plug 'kevinhwang91/promise-async'
 Plug 'kevinhwang91/nvim-ufo'
 " Gain the power to move lines and blocks and auto-indent them!
 Plug 'fedepujol/move.nvim'
+" Peek lines just when you intend 
+Plug 'nacro90/numb.nvim'
 
 
 
