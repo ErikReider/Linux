@@ -81,7 +81,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 " Comments
-Plug 'preservim/nerdcommenter'
+Plug 'terrortylor/nvim-comment'
 " Add surrounding (), [], {}, etc...
 Plug 'tpope/vim-surround'
 " Changing tag name also changed matching tag
@@ -183,5 +183,7 @@ Plug 'akinsho/flutter-tools.nvim', {'for': 'dart'}
 Plug 'simrat39/rust-tools.nvim'
 " LESS autocompile
 Plug 'plasticscafe/vim-less-autocompile', {'for': 'less'}
+" Sets commentstring for JS/TS files
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 call plug#end()

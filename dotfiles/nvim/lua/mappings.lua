@@ -85,6 +85,10 @@ end, { desc = "Pick a window" })
 map("n", "äh", ":Gitsigns next_hunk <CR>", { silent = true })
 map("n", "öh", ":Gitsigns prev_hunk <CR>", { silent = true })
 
+-- Comments
+map("n", "<C-c>", ":CommentToggle<CR>", { silent = true, noremap = false})
+map("v", "<C-c>", ":CommentToggle<CR>", { silent = true, noremap = false})
+
 -- LSP
 local lsp_opts = {noremap = true, silent = true}
 -- Go to definition

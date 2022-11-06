@@ -18,7 +18,9 @@ config.setup({
             "typescriptreact", "svelte", "vue", "tsx", "jsx", "rescript", "xml",
             "php", "markdown", "glimmer", "handlebars", "hbs", "heex"
         }
-    }
+    },
+    -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+    context_commentstring = {enable = true, enable_autocmd = false}
 })
 
 require("treesitter-context").setup({
