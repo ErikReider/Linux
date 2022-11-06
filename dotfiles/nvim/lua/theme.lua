@@ -59,3 +59,6 @@ vim.api.nvim_set_hl(0, "IlluminatedWordWrite", {link = "LspReferenceWrite"})
 -- ipairs({"LspReferenceText", "LspReferenceRead", "LspReferenceWrite"}) do
 -- vim.highlight.create(v, {cterm = "bold", gui = "bold"}, false)
 -- end
+
+-- Custom colorcolumn color
+vim.api.nvim_set_hl(0, "VirtColumn", {link = "LineNr"})

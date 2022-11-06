@@ -119,6 +119,8 @@ Plug 'nacro90/numb.nvim'
 Plug 'ethanholz/nvim-lastplace'
 " Easily jump between NeoVim windows.
 Plug 's1n7ax/nvim-window-picker'
+" Display a line as the colorcolumn
+Plug 'xiyaowong/virtcolumn.nvim'
 
 
 "" Git

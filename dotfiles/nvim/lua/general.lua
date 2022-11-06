@@ -94,3 +94,6 @@ vim.o.laststatus=3
 
 -- Keep the line at the same position when creating splits
 vim.o.splitkeep = "screen"
+
+vim.g.virtcolumn_char = '▕' -- char to display the line
+vim.g.virtcolumn_priority = 10 -- priority of extmark
