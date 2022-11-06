@@ -75,6 +75,12 @@ map("v", "<A-Right>", ">", {silent = true, noremap = false})
 map("n", "<A-Left>", "<<", {silent = true, noremap = false})
 map("n", "<A-Right>", ">>", {silent = true, noremap = false})
 
+-- Switch windows
+vim.keymap.set("n", "<leader>w", function()
+    local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
+    vim.api.nvim_set_current_win(picked_window_id)
+end, { desc = "Pick a window" })
+
 -- Git
 map("n", "äh", ":Gitsigns next_hunk <CR>", { silent = true })
 map("n", "öh", ":Gitsigns prev_hunk <CR>", { silent = true })

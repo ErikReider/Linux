@@ -117,7 +117,8 @@ Plug 'fedepujol/move.nvim'
 Plug 'nacro90/numb.nvim'
 " Intelligently reopen files at your last edit position in Vim.
 Plug 'ethanholz/nvim-lastplace'
-
+" Easily jump between NeoVim windows.
+Plug 's1n7ax/nvim-window-picker'
 
 
 "" Git
