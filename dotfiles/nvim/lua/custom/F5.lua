@@ -39,7 +39,8 @@ end
 local function getF5Table()
     local f5Table = {
         {title = "Open PWD Folder", action = disownCMD("xdg-open .")},
-        {title = "Open LazyDocker", action = "LazyDocker"}
+        {title = "Open LazyDocker", action = "LazyDocker"},
+        {title = "Search for TODOs", action = "TodoTelescope"}
     }
 
     -- Switch between C/C++ Header and Implementation files
