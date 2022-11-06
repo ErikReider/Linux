@@ -123,6 +123,8 @@ Plug 'ethanholz/nvim-lastplace'
 Plug 's1n7ax/nvim-window-picker'
 " Display a line as the colorcolumn
 Plug 'xiyaowong/virtcolumn.nvim'
+" Allows quickly switching between header and implementation files for C/C++ in Neovim.
+Plug 'jakemason/ouroboros'
 
 
 "" Git

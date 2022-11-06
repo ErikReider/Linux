@@ -39,8 +39,19 @@ end
 local function getF5Table()
     local f5Table = {
         {title = "Open PWD Folder", action = disownCMD("xdg-open .")},
-        {title = "Open LazyDocker", action = "LazyDocker"},
+        {title = "Open LazyDocker", action = "LazyDocker"}
     }
+
+    -- Switch between C/C++ Header and Implementation files
+    for _, value in ipairs({"c", "h", "cpp", "hpp"}) do
+        if vim.bo.filetype == value then
+            table.insert(f5Table, {
+                title = "Open Header/Implementation file",
+                action = "Ouroboros"
+            })
+            break
+        end
+    end
 
     local currentFileFolderPath = vim.api.nvim_eval("expand('%:p:h')")
     if string.len(currentFileFolderPath) > 0 then
