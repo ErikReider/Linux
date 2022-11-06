@@ -115,6 +115,8 @@ Plug 'kevinhwang91/nvim-ufo'
 Plug 'fedepujol/move.nvim'
 " Peek lines just when you intend 
 Plug 'nacro90/numb.nvim'
+" Intelligently reopen files at your last edit position in Vim.
+Plug 'ethanholz/nvim-lastplace'
 
 
 
