@@ -14,6 +14,8 @@ call plug#begin('~/.config/nvim/plugged')
 "" Essential plugins
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}
+" Syntax aware text-objects, select, move, swap, and peek support
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Code context
 Plug 'nvim-treesitter/nvim-treesitter-context'
 " Treesitter rainbow
@@ -85,7 +87,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Comments
 Plug 'terrortylor/nvim-comment'
 " Add surrounding (), [], {}, etc...
-Plug 'tpope/vim-surround'
+Plug 'kylechui/nvim-surround'
 " Changing tag name also changed matching tag
 Plug 'AndrewRadev/tagalong.vim'
 " Searching
