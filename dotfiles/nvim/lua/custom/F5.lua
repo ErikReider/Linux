@@ -1,3 +1,5 @@
+local utils = require("telescope.utils")
+
 -- Open F5 options
 local f5RunOptions = {
     {
@@ -54,6 +56,28 @@ local function getF5Table()
             title = "Open File",
             action = disownCMD("xdg-open " .. currentFilePath)
         })
+
+        -- Check if in Git directory
+        local function add_file_in_browser()
+            table.insert(f5Table, 2, {
+                title = "Open File In Browser",
+                action = "GBrowse"
+            })
+        end
+        local _, ret = utils.get_os_command_output({
+            "git", "rev-parse", "--show-toplevel"
+        }, vim.loop.cwd())
+
+        if ret ~= 0 then
+            local is_worktree = utils.get_os_command_output({
+                "git", "rev-parse", "--is-inside-work-tree"
+            }, vim.loop.cwd())
+            if is_worktree[1] == "true" then
+                add_file_in_browser()
+            end
+        else
+            add_file_in_browser()
+        end
     end
 
     local action = getRunAction()
