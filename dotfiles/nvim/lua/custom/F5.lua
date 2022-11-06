@@ -40,7 +40,6 @@ local function getF5Table()
     local f5Table = {
         {title = "Open PWD Folder", action = disownCMD("xdg-open .")},
         {title = "Open LazyDocker", action = "LazyDocker"},
-        {title = "Open Terminal", action = disownCMD("$TERM")}
     }
 
     local currentFileFolderPath = vim.api.nvim_eval("expand('%:p:h')")
@@ -98,8 +97,6 @@ local function getF5Table()
     return f5Table
 end
 
-local Popup = require("floatingWindow")()
-
-function _G.F5Show() Popup:show(getF5Table()) end
+function _G.F5Show() showFloatingMenu(getF5Table()) end
 
 map("n", "<F5>", ":lua F5Show()<CR>", {noremap = true, silent = true})

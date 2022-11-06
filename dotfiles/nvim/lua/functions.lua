@@ -54,3 +54,33 @@ function _G.file_exists(name)
         return false
     end
 end
+
+function _G.showFloatingMenu(items)
+    if type(items) ~= "table" then
+        print("ITEMS NOT A TABLE!")
+        return
+    end
+    local keysArray = {}
+    local itemsArray = {}
+    local maxStringLength = 0
+    local length = 0
+    for _, item in pairs(items) do
+        table.insert(keysArray, item.title)
+        itemsArray[item.title] = item.action
+        local len = string.len(item.title)
+        if len > maxStringLength then maxStringLength = len end
+        length = length + 1
+    end
+    if maxStringLength < 30 then maxStringLength = 20 end
+
+    vim.ui.select(keysArray, {
+        prompt = "Options",
+        kind = "floatingwindow",
+        maxStringLength = maxStringLength,
+        entries = length
+    }, function(selected)
+        if selected == nil then return end
+        local option = itemsArray[selected]
+        vim.cmd("silent " .. option)
+    end)
+end

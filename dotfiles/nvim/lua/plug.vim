@@ -30,6 +30,8 @@ Plug 'lambdalisue/suda.vim'
 Plug 'numtostr/FTerm.nvim'
 " .editorconfig support
 Plug 'gpanders/editorconfig.nvim'
+" Neovim plugin to improve the default vim.ui interfaces
+Plug 'stevearc/dressing.nvim'
 
 " nvim lsp
 Plug 'neovim/nvim-lspconfig'
