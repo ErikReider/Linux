@@ -111,6 +111,8 @@ Plug 'b0o/incline.nvim'
 Plug 'kevinhwang91/promise-async'
 " Not UFO in the sky, but an ultra fold in Neovim (nicer folds)
 Plug 'kevinhwang91/nvim-ufo'
+" Gain the power to move lines and blocks and auto-indent them!
+Plug 'fedepujol/move.nvim'
 
 
 

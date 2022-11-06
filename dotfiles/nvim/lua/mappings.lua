@@ -60,10 +60,12 @@ map("i", "<C-Up>", "<C-O>5<C-y>", {silent = true, noremap = true})
 map("i", "<C-Down>", "<C-O>5<C-e>", {silent = true, noremap = true})
 
 -- Move line up or down
-map("n", "<A-Up>", ":m-2<CR>", {noremap = true, silent = true})
-map("n", "<A-Down>", ":m+<CR>", {noremap = true, silent = true})
-map("i", "<A-Up>", "<C-O>:m-2<CR>", {noremap = true, silent = true})
-map("i", "<A-Down>", "<C-O>:m+<CR>", {noremap = true, silent = true})
+map("n", "<A-Up>", ":MoveLine(-1)<CR>", { noremap = true, silent = true })
+map("n", "<A-Down>", ":MoveLine(1)<CR>", { noremap = true, silent = true })
+map("i", "<A-Up>", "<C-O>:MoveLine(-1)<CR>", {noremap = true, silent = true})
+map("i", "<A-Down>", "<C-O>:MoveLine(1)<CR>", {noremap = true, silent = true})
+map("v", "<A-Up>", ":MoveBlock(-1)<CR>", {noremap = true, silent = true})
+map("v", "<A-Down>", ":MoveBlock(1)<CR>", {noremap = true, silent = true})
 
 -- Better indenting
 map("v", "<", "<gv", {silent = true, noremap = true})
