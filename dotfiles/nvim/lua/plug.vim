@@ -177,6 +177,8 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 "" Other
 " Vim commands for Flutter, including hot-reload-on-save and more.
 Plug 'akinsho/flutter-tools.nvim', {'for': 'dart'}
+" Tools for better development in rust using neovim's builtin lsp
+Plug 'simrat39/rust-tools.nvim'
 " LESS autocompile
 Plug 'plasticscafe/vim-less-autocompile', {'for': 'less'}
 
