@@ -101,8 +101,8 @@ Plug 'famiu/bufdelete.nvim'
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
 " XML-like
-" CSS color highlighter
-Plug 'norcalli/nvim-colorizer.lua'
+" Super powerful color picker / colorizer plugin
+Plug 'uga-rosa/ccc.nvim'
 " Neovim lua functions
 Plug 'nvim-lua/plenary.nvim'
 " Plugin to persist and toggle multiple terminals during an editing session
