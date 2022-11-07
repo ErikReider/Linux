@@ -1,5 +1,5 @@
 local db = require("dashboard")
-db.hide_statusline = true
+db.hide_statusline = false
 db.hide_tabline = false
 
 db.custom_header = {
