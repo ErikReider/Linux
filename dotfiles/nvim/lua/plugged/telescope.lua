@@ -72,6 +72,8 @@ telescope.setup({
                 ["<C-s>"] = actions.file_vsplit,
                 ["<C-Up>"] = actions.preview_scrolling_up,
                 ["<C-Down>"] = actions.preview_scrolling_down,
+                ["<PageUp>"] = actions.preview_scrolling_up,
+                ["<PageDown>"] = actions.preview_scrolling_down,
                 ["<S-Up>"] = function(nr)
                     for _ = 1, 5, 1 do
                         actions.move_selection_previous(nr)
