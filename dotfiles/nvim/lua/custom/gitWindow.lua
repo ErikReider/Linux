@@ -9,6 +9,3 @@ function _G.GitWindowShow()
         {title = "Open in browser", action = "GBrowse"}
     })
 end
-
-map("n", "<Leader>g", ":lua GitWindowShow()<CR>",
-    {noremap = true, silent = true})

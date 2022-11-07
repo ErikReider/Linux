@@ -1,7 +1,6 @@
 local utils = require("telescope.utils")
 
--- Open F5 options
-local f5RunOptions = {
+local runOptions = {
     {
         filetypes = {
             "typescriptreact", "javascriptreact", "typescript", "javascript"
@@ -14,7 +13,7 @@ local f5RunOptions = {
 local function getRunAction()
     local ft = vim.api.nvim_buf_get_option(0, "filetype")
     local lines = io.popen('ls -a'):lines()
-    for _, option in pairs(f5RunOptions) do
+    for _, option in pairs(runOptions) do
         local filetypes = option.filetypes == nil and {} or option.filetypes
         if table.maxn(filetypes) > 0 and tableContains(filetypes, ft) then
             local run = option.run == nil and "" or option.run
@@ -36,8 +35,8 @@ local function getRunAction()
     return {run = "", build = ""}
 end
 
-local function getF5Table()
-    local f5Table = {
+local function getOptionsTable()
+    local optionsTable = {
         {title = "Open PWD Folder", action = disownCMD("xdg-open .")},
         {title = "Open LazyDocker", action = "LazyDocker"},
         {title = "Search for TODOs", action = "TodoTelescope"}
@@ -46,7 +45,7 @@ local function getF5Table()
     -- Switch between C/C++ Header and Implementation files
     for _, value in ipairs({"c", "h", "cpp", "hpp"}) do
         if vim.bo.filetype == value then
-            table.insert(f5Table, {
+            table.insert(optionsTable, {
                 title = "Open Header/Implementation file",
                 action = "Ouroboros"
             })
@@ -56,7 +55,7 @@ local function getF5Table()
 
     local currentFileFolderPath = vim.api.nvim_eval("expand('%:p:h')")
     if string.len(currentFileFolderPath) > 0 then
-        table.insert(f5Table, 1, {
+        table.insert(optionsTable, 1, {
             title = "Open File Folder",
             action = disownCMD("xdg-open " .. currentFileFolderPath)
         })
@@ -64,14 +63,14 @@ local function getF5Table()
 
     local currentFilePath = vim.api.nvim_buf_get_name(0)
     if string.len(currentFilePath) > 0 then
-        table.insert(f5Table, 1, {
+        table.insert(optionsTable, 1, {
             title = "Open File",
             action = disownCMD("xdg-open " .. currentFilePath)
         })
 
         -- Check if in Git directory
         local function add_file_in_browser()
-            table.insert(f5Table, 2,
+            table.insert(optionsTable, 2,
                          {title = "Open File In Browser", action = "GBrowse"})
         end
         local _, ret = utils.get_os_command_output({
@@ -88,6 +87,9 @@ local function getF5Table()
         end
     end
 
+    -- Open Cargo.tml
+    -- local has_cargo = require'rust-tools'.open_cargo_toml.open_cargo_toml() ~= nil
+
     local action = getRunAction()
     if string.len(action.build) > 0 then
         local text = "Build"
@@ -95,7 +97,7 @@ local function getF5Table()
             action.build = runCmdInTerm(action.build, true)
             text = text .. " in terminal"
         end
-        table.insert(f5Table, 1, {title = text, action = action.build})
+        table.insert(optionsTable, 1, {title = text, action = action.build})
     end
     if string.len(action.run) > 0 then
         local text = "Run"
@@ -103,12 +105,11 @@ local function getF5Table()
             action.run = runCmdInTerm(action.run, true)
             text = text .. " in terminal"
         end
-        table.insert(f5Table, 1, {title = text, action = action.run})
+        table.insert(optionsTable, 1, {title = text, action = action.run})
     end
 
-    return f5Table
+    return optionsTable
 end
 
-function _G.F5Show() showFloatingMenu(getF5Table()) end
-
-map("n", "<F5>", ":lua F5Show()<CR>", {noremap = true, silent = true})
+-- Open options window
+function _G.optionsWindowShow() showFloatingMenu(getOptionsTable()) end

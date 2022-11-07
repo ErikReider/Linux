@@ -19,6 +19,11 @@ map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR> :Sleuth <CR>",
 -- Use double ESC to clear highlights
 map("n", "<Esc><Esc>", ":nohl<CR>", {})
 
+-- Menus
+map("n", "<F5>", ":lua optionsWindowShow()<CR>", {noremap = true, silent = true})
+map("n", "<Leader>g", ":lua GitWindowShow()<CR>",
+    {noremap = true, silent = true})
+
 -- Bufferline
 local barbar_opts = { noremap = true, silent = true }
 map("n", "<C-PageUp>", ":BufferPrevious<CR>", barbar_opts)
