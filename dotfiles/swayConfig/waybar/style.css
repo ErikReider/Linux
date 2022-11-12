@@ -3,6 +3,7 @@
  */
 
 @define-color bg rgb(42, 42, 42);
+@define-color bg-hover rgb(65, 65, 65);
 @define-color text-color white;
 @define-color border-color rgba(255, 255, 255, 0.15);
 @define-color bg-hover rgb(65, 65, 65);
@@ -42,14 +43,19 @@ window > box {
     0 2px 6px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* All modules */
-window > box > box > widget > * {
-  /* margin: 0 4px; */
+/* All module containers */
+window box > box {
+  padding: 0 8px;
+  border-radius: 12px;
 }
 
-window box > box {
-  padding: 0 5px;
-  border-radius: 4px;
+/* All modules */
+window > box > box > widget > * {
+  padding: 0 8px;
+}
+
+window > box > box > widget > button:hover {
+  background: @bg-hover;
 }
 
 .modules-left {
