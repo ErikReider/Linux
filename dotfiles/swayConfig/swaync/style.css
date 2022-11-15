@@ -2,11 +2,11 @@
  * vim: ft=less
  */
 
-@define-color cc-bg rgb(42, 42, 42);
+@define-color cc-bg rgba(42, 42, 42, 0.8);
 
 @define-color noti-border-color rgba(255, 255, 255, 0.15);
-@define-color noti-bg rgb(55, 55, 55);
-@define-color noti-bg-hover rgb(65, 65, 65);
+@define-color noti-bg rgba(55, 55, 55, 0.8);
+@define-color noti-bg-hover rgba(65, 65, 65, 0.8);
 @define-color noti-bg-focus rgba(68, 68, 68, 0.6);
 @define-color noti-close-bg rgba(255, 255, 255, 0.1);
 @define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
@@ -14,20 +14,37 @@
 @define-color bg-selected rgb(0, 128, 255);
 
 .notification-row {
+  transition: all 200ms ease;
   outline: none;
   margin-bottom: 4px;
+  border-radius: 12px;
 }
 
-.notification-row:focus,
-.notification-row:hover {
-  background: @noti-bg-focus;
+.control-center .notification-row:focus,
+.control-center .notification-row:hover {
+  opacity: 1;
+  background: transparent;
+}
+
+.notification-row:focus .notification,
+.notification-row:hover .notification {
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 0px 3px @bg-selected;
+}
+
+.control-center .notification {
+  box-shadow: none;
+}
+
+.control-center .notification-row {
+  opacity: 0.5;
 }
 
 .notification {
+  transition: all 200ms ease;
   border-radius: 12px;
   margin: 6px 6px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
-    0 2px 6px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.5);
   padding: 0;
 }
 
@@ -208,7 +225,7 @@
 
 /* Window behind control center and on all other monitors */
 .blank-window {
-  background: alpha(black, 0.25);
+  background: transparent;
 }
 
 /*** Widgets ***/
