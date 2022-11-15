@@ -6,10 +6,12 @@ export common=(
 "luarocks"
 )
 export fedora=(
+"rust-fd-find"
 "lua-devel"
 "texlive-scheme-basic"
 )
 export arch=(
+"fd"
 "lua"
 "texlive-bibtexextra"
 "texlive-gantt"

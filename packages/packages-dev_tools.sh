@@ -25,6 +25,7 @@ export common=(
 "luarocks"
 )
 export fedora=(
+"rust-fd-find"
 "code"
 "dotnet"
 "rust-src"
@@ -38,6 +39,7 @@ export fedora=(
 "fd-find"
 )
 export arch=(
+"fd"
 "visual-studio-code-bin"
 "dotnet-sdk"
 "typescript"
