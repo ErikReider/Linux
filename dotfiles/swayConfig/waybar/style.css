@@ -2,17 +2,15 @@
  * vim: ft=less
  */
 
-@define-color bg rgb(42, 42, 42);
-@define-color bg-hover rgb(65, 65, 65);
+@define-color bg rgba(42, 42, 42, 0.8);
+@define-color bg-hover rgba(65, 65, 65, 0.8);
 @define-color text-color white;
-@define-color border-color rgba(255, 255, 255, 0.15);
-@define-color bg-hover rgb(65, 65, 65);
+@define-color text-color-disabled rgba(255, 255, 255, 0.4);
 @define-color accent-color rgb(0, 128, 255);
 
 * {
   border: none;
   border-radius: 0;
-  /* `otf-font-awesome` is required to be installed for icons */
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-size: 17px;
   font-weight: bold;
@@ -100,15 +98,11 @@ window > box > box > widget button:insensitive {
   box-shadow: inset 0 -2px #bd2c40;
 }
 
-label:focus {
-  background-color: #000000;
-}
-
 #gamemode {
-  opacity: 0.4;
+  color: @text-color-disabled;
 }
 #gamemode.running {
-  opacity: 1;
+  color: @text-color;
 }
 
 #backlight {
@@ -125,7 +119,7 @@ label:focus {
 
 #bluetooth.disabled,
 #bluetooth.off {
-  opacity: 0.4;
+  color: @text-color-disabled;
 }
 
 #network {
@@ -134,11 +128,11 @@ label:focus {
 
 #network.disconnected,
 #network.linked {
-  opacity: 0.4;
+  color: @text-color-disabled;
 }
 
 #pulseaudio.muted {
-  opacity: 0.4;
+  color: @text-color-disabled;
 }
 
 #custom-notification {
