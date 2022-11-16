@@ -15,4 +15,5 @@ export arch=(
 "flatpak"
 "yarn"
 "nodejs-lts-fermium"
+"lure-bin"
 )

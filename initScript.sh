@@ -82,6 +82,9 @@ if [[ $install_pkg_var == y ]]; then
     elif [[ "$distroName" == "fedora" ]]; then
         sudo dnf groupinstall "Development Tools"
         sudo dnf install "${common[@]}" "${fedora[@]}"
+
+        # Install LURE (Linux User REpository)
+        ./scripts/install_lure.sh
     fi
 
     # Install Brew
