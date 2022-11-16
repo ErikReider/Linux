@@ -14,7 +14,6 @@ export common=(
     "brightnessctl"
     "playerctl"
     "lxappearance"
-    "waybar"
     "wl-clipboard"
     "wf-recorder"
     "grim"
@@ -23,7 +22,6 @@ export common=(
     "wlogout"
     "swappy"
     "swayidle"
-    "wlroots"
 )
 
 export arch=(
@@ -39,16 +37,9 @@ export arch=(
     "rofi-lbonn-wayland-git"
     "ttf-weather-icons"
     "pacdep"
-    "sway-git"
-    "autotiling"
-    "swaylock-effects"
-    "swaysettings-git"
-    "rofi-emoji"
     "ttf-material-icons-git"
     "avizo"
     "swaytools"
-    "swayfloatingswitcher-git"
-    "sway-audio-idle-inhibit-git"
     "wallutils"
     "otf-font-awesome"
     "ttf-font-awesome"
@@ -73,11 +64,22 @@ export fedora=(
     "rofi-wayland"
     "fontawesome-fonts"
     "fontawesome5-fonts"
-    "fontawesome-free-fonts"
     "material-icons-fonts"
 
     # avizo
     # swaytools
-    # swayfloatingswitcher-git
     # wallutils
+)
+
+export lure=(
+    "autotiling"
+    "font-awesome"
+    "rofi-emoji"
+    "sway-audio-idle-inhibit"
+    "swayfloatingswitcher"
+    "swayfx"
+    "swaylock-effects-erikreider"
+    "swayosd"
+    "swaysettings"
+    "waybar"
 )
