@@ -37,6 +37,7 @@ export fedora=(
 "python3-neovim"
 "tree-sitter-cli"
 "fd-find"
+"act-clie"
 )
 export arch=(
 "fd"
@@ -45,4 +46,5 @@ export arch=(
 "typescript"
 "tree-sitter"
 "fd"
+"act-bin"
 )
