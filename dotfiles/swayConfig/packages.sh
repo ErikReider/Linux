@@ -72,14 +72,14 @@ export fedora=(
 )
 
 export lure=(
-    "autotiling"
+    "autotiling-git"
     "font-awesome"
     "rofi-emoji"
-    "sway-audio-idle-inhibit"
-    "swayfloatingswitcher"
-    "swayfx"
-    "swaylock-effects-erikreider"
-    "swayosd"
-    "swaysettings"
-    "waybar"
+    "sway-audio-idle-inhibit-git"
+    "swayfloatingswitcher-git"
+    "swayfx-git"
+    "swaylock-effects-erikreider-git"
+    "swayosd-git"
+    "swaysettings-git"
+    "waybar-git"
 )
