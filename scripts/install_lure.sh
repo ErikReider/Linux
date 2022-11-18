@@ -20,6 +20,4 @@ cat /tmp/lure/checksums.txt | grep "$sha" &> /dev/null || {
 
 sudo dnf install /tmp/lure/lure.rpm
 
-lure ar -n "self-repo" -u "https://github.com/ErikReider/lure-repo.git"
-
 echo "Done!"

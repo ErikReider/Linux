@@ -87,6 +87,8 @@ if [[ $install_pkg_var == y ]]; then
         ./scripts/install_lure.sh
     fi
 
+    lure ar -n "self-repo" -u "https://github.com/ErikReider/lure-repo.git"
+
     # Install Brew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
