@@ -6,7 +6,7 @@ require('mason-tool-installer').setup {
   ensure_installed = {
     -- you can turn off/on auto_update per tool
     -- LSPs
-    'vala-language-server',
+    { 'vala-language-server', version = "HEAD" },
     'bash-language-server',
     'shellcheck',
     'efm',
@@ -44,8 +44,6 @@ require('mason-tool-installer').setup {
 vim.api.nvim_create_autocmd('User', {
     pattern = 'MasonToolsUpdateCompleted',
     callback = function()
-        vim.schedule(function()
-            print 'mason-tool-installer has finished'
-        end)
-    end,
+        vim.schedule(function() print 'mason-tool-installer has finished' end)
+    end
 })
