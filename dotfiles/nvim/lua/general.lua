@@ -68,6 +68,9 @@ vim.cmd("set cursorline")
 
 vim.cmd("set nocompatible")
 
+-- Never allow the cursor to go below / over +5 rows from the bottom / top
+vim.o.scrolloff = 5
+
 vim.o.wildmenu = true
 
 vim.o.showmatch = true
