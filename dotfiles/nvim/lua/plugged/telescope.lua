@@ -139,3 +139,5 @@ map("n", "<A-S-h>", [[<cmd>lua require("telescope.builtin").oldfiles()<CR>]],
 -- Lists normal mode keymappings
 map("n", "<A-S-m>", [[<cmd>lua require("telescope.builtin").keymaps()<CR>]],
     opts)
+map("n", "<A-S-t>", [[<cmd>TodoTelescope<CR>]], opts)
+
