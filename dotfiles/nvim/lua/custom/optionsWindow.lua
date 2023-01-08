@@ -38,7 +38,6 @@ end
 local function getOptionsTable()
     local optionsTable = {
         {title = "Open PWD Folder", action = disownCMD("xdg-open .")},
-        {title = "Toggle LSP Lines", action = "lua require('lsp_lines').toggle()"},
         {title = "Open LazyDocker", action = "LazyDocker"},
         {title = "Search for TODOs", action = "TodoTelescope"}
     }

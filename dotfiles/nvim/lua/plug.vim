@@ -57,8 +57,6 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'windwp/nvim-autopairs'
 " Shows function signature (parameters)
 Plug 'ray-x/lsp_signature.nvim'
-" Renders diagnostics using virtual lines on top of the real line of code
-Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 " Automatically creates missing LSP diagnostics highlight groups
 Plug 'folke/lsp-colors.nvim'
 " Vim plugin for automatically highlighting other uses of the word under the cursor.
