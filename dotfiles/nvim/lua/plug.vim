@@ -180,7 +180,7 @@ Plug 'rhysd/conflict-marker.vim'
 
 "" File preview
 " Markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'toppair/peek.nvim', { 'do': 'deno task --quiet build:fast' }
 " HTML
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server', 'for': 'html'}
 " Latex

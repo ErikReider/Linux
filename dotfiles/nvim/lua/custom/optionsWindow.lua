@@ -8,7 +8,7 @@ local runOptions = {
         hasFiles = {"node_modules", "package.json", "package-lock.json"},
         run = "!npm start",
         build = "!npm run build"
-    }, {filetypes = {"markdown"}, run = "MarkdownPreview"}
+    }, {filetypes = {"markdown"}, run = "PeekOpenOrClose"}
 }
 local function getRunAction()
     local ft = vim.api.nvim_buf_get_option(0, "filetype")
