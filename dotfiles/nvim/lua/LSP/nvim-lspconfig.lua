@@ -171,6 +171,24 @@ vim.lsp.handlers["textDocument/hover"] =
 vim.lsp.handlers["textDocument/signatureHelp"] =
     vim.lsp.with(vim.lsp.handlers.signature_help, handler_win_config)
 
+vim.diagnostic.config({
+    -- disable virtual text
+    virtual_text = false,
+    -- show signs
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = ""
+    }
+})
+
 -- Adds auto insertion of "()" in cmp
 -- require("nvim-autopairs.completion.cmp").setup({
 -- map_cr = true, --  map <CR> on insert mode
