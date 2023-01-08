@@ -12,5 +12,8 @@ let g:tex_flavor = "latex"
 autocmd BufNewFile,BufRead *.ts,*.tsx set filetype=typescriptreact
 autocmd BufNewFile,BufRead *.js,*.jsx set filetype=javascriptreact
 
+" GLSL
+autocmd BufNewFile,BufRead *.glsl,*.vert,*.tesc,*.tese,*.geom,*.frag,*.comp,*.vs,*.fs set filetype=glsl
+
 " Json files support comments
 autocmd BufNewFile,BufRead *.json set filetype=jsonc
