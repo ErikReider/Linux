@@ -41,6 +41,8 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 " A completion engine plugin for neovim written in Lua. 
 Plug 'hrsh7th/nvim-cmp'
+" nvim-cmp comparator function for completion items that start with one or more underlines
+Plug 'lukas-reineke/cmp-under-comparator'
 " nvim-cmp source for neovim builtin LSP client
 Plug 'hrsh7th/cmp-nvim-lsp'
 " nvim-cmp source for buffer words.
