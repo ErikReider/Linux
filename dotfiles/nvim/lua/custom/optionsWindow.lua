@@ -40,8 +40,10 @@ local function getOptionsTable()
         {title = "Open PWD Folder", action = disownCMD("xdg-open .")},
         {title = "Open LazyDocker", action = "LazyDocker"},
         {title = "Search for TODOs", action = "TodoTelescope"},
-        {title = "Toggle inactive shade", action = "lua require('shade').toggle()"},
-        {title = "Edit color", action = "CccPick"}
+        {
+            title = "Toggle inactive shade",
+            action = "lua require('shade').toggle()"
+        }, {title = "Edit color", action = "CccPick"}
     }
 
     -- Switch between C/C++ Header and Implementation files

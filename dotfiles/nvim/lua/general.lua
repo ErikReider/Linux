@@ -93,7 +93,7 @@ vim.o.colorcolumn = "80,100,120"
 -- Encoding
 vim.o.encoding = "UTF-8"
 
-vim.o.laststatus=3
+vim.o.laststatus = 3
 
 -- Keep the line at the same position when creating splits
 vim.o.splitkeep = "screen"

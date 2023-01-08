@@ -9,8 +9,8 @@ function _G.lazygit_open()
 
     -- Supply Light theme if using light mode
     if style == "light" then
-        local light_conf = os.getenv("HOME")
-            .. "/.config/nvim/lazygit-light-config.yml"
+        local light_conf = os.getenv("HOME") ..
+                               "/.config/nvim/lazygit-light-config.yml"
         if file_exists(light_conf) then table.insert(configs, light_conf) end
     end
 
@@ -18,7 +18,7 @@ function _G.lazygit_open()
         cmd = "lazygit --use-config-file=" .. table.concat(configs, ","),
         dir = "git_dir",
         persist_size = false,
-        direction = "float",
+        direction = "float"
     })
     lazygit:open()
 end

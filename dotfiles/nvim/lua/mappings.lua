@@ -14,7 +14,8 @@ map("n", "<F3>",
     "expand('%') == '' ? ':e $MYVIMRC <cr>' : ':vsplit $MYVIMRC <cr>'",
     {silent = true, expr = true})
 -- Source on F4
-map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR> :Sleuth <CR>", {})
+map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR> :Sleuth <CR>",
+    {})
 
 -- Use double ESC to clear highlights
 map("n", "<Esc><Esc>", ":nohl<CR>", {})
@@ -25,7 +26,7 @@ map("n", "<Leader>g", ":lua GitWindowShow()<CR>",
     {noremap = true, silent = true})
 
 -- Bufferline
-local barbar_opts = { noremap = true, silent = true }
+local barbar_opts = {noremap = true, silent = true}
 map("n", "<C-PageUp>", ":BufferPrevious<CR>", barbar_opts)
 map("n", "<C-PageDown>", ":BufferNext<CR>", barbar_opts)
 map('n', '<M-S-Left>', '<Cmd>BufferMovePrevious<CR>', {})
@@ -65,8 +66,8 @@ map("i", "<C-Up>", "<C-O>5<C-y>", {silent = true, noremap = true})
 map("i", "<C-Down>", "<C-O>5<C-e>", {silent = true, noremap = true})
 
 -- Move line up or down
-map("n", "<A-Up>", ":MoveLine(-1)<CR>", { noremap = true, silent = true })
-map("n", "<A-Down>", ":MoveLine(1)<CR>", { noremap = true, silent = true })
+map("n", "<A-Up>", ":MoveLine(-1)<CR>", {noremap = true, silent = true})
+map("n", "<A-Down>", ":MoveLine(1)<CR>", {noremap = true, silent = true})
 map("i", "<A-Up>", "<C-O>:MoveLine(-1)<CR>", {noremap = true, silent = true})
 map("i", "<A-Down>", "<C-O>:MoveLine(1)<CR>", {noremap = true, silent = true})
 map("v", "<A-Up>", ":MoveBlock(-1)<CR>", {noremap = true, silent = true})
@@ -82,17 +83,18 @@ map("n", "<A-Right>", ">>", {silent = true, noremap = false})
 
 -- Switch windows
 vim.keymap.set("n", "<leader>w", function()
-    local picked_window_id = require('window-picker').pick_window() or vim.api.nvim_get_current_win()
+    local picked_window_id = require('window-picker').pick_window() or
+                                 vim.api.nvim_get_current_win()
     vim.api.nvim_set_current_win(picked_window_id)
-end, { desc = "Pick a window" })
+end, {desc = "Pick a window"})
 
 -- Git
-map("n", "äh", ":Gitsigns next_hunk <CR>", { silent = true })
-map("n", "öh", ":Gitsigns prev_hunk <CR>", { silent = true })
+map("n", "äh", ":Gitsigns next_hunk <CR>", {silent = true})
+map("n", "öh", ":Gitsigns prev_hunk <CR>", {silent = true})
 
 -- Comments
-map("n", "<C-c>", ":CommentToggle<CR>", { silent = true, noremap = false})
-map("v", "<C-c>", ":CommentToggle<CR>", { silent = true, noremap = false})
+map("n", "<C-c>", ":CommentToggle<CR>", {silent = true, noremap = false})
+map("v", "<C-c>", ":CommentToggle<CR>", {silent = true, noremap = false})
 
 -- LSP
 local lsp_opts = {noremap = true, silent = true}
@@ -107,8 +109,10 @@ map("n", "gr", "<cmd>Telescope lsp_references<CR>", lsp_opts)
 -- Show hover info
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
 -- Show method signature
-map("i", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>", lsp_opts)
-map("n", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>", lsp_opts)
+map("i", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>",
+    lsp_opts)
+map("n", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>",
+    lsp_opts)
 -- Workspace folder
 map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
     lsp_opts)
@@ -132,6 +136,7 @@ map("n", "<A-S-w>", "<cmd>Telescope diagnostics<CR>", lsp_opts)
 -- Formatting
 map("i", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
 map("n", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
+map("v", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
 -- Illuminate
 map('n', '<A-n>',
     '<cmd>lua require("illuminate").next_reference{wrap=true}<cr>',

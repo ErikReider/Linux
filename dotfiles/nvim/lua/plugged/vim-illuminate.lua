@@ -1,18 +1,10 @@
 require('illuminate').configure({
     -- providers: provider used to get references in the buffer, ordered by priority
-    providers = {
-        'lsp',
-        'treesitter',
-        'regex',
-    },
+    providers = {'lsp', 'treesitter', 'regex'},
     -- delay: delay in milliseconds
     delay = 100,
     -- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
-    filetypes_denylist = {
-        'dirvish',
-        'fugitive',
-        'TelescopePrompt'
-    },
+    filetypes_denylist = {'dirvish', 'fugitive', 'TelescopePrompt'},
     -- filetypes_allowlist: filetypes to illuminate, this is overriden by filetypes_denylist
     filetypes_allowlist = {},
     -- modes_denylist: modes to not illuminate, this overrides modes_allowlist
@@ -28,5 +20,5 @@ require('illuminate').configure({
     -- Use :echom synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
     providers_regex_syntax_allowlist = {},
     -- under_cursor: whether or not to illuminate under the cursor
-    under_cursor = true,
+    under_cursor = true
 })

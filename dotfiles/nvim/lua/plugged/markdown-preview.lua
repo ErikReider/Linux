@@ -1,5 +1,4 @@
 -- map("n", "<C-M-p>", "<Plug>MarkdownPreviewToggle", {}0
-
 -- set to 1, nvim will open the preview window after entering the markdown buffer
 -- default: 0
 vim.g.mkdp_auto_start = 0

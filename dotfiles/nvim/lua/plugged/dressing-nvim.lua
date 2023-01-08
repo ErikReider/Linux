@@ -33,7 +33,7 @@ require("dressing").setup({
             -- Window transparency (0-100)
             winblend = 10,
             -- Change default highlight groups (see :help winhl)
-            winhighlight = "",
+            winhighlight = ""
         },
 
         -- Set to `false` to disable
@@ -103,7 +103,7 @@ require("dressing").setup({
                 -- Window transparency (0-100)
                 winblend = 10,
                 -- Change default highlight groups (see :help winhl)
-                winhighlight = "",
+                winhighlight = ""
             },
 
             -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)

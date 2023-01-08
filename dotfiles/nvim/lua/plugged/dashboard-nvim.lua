@@ -3,8 +3,7 @@ db.hide_statusline = false
 db.hide_tabline = false
 
 db.custom_header = {
-    '',
-    '  ________________________________ ',
+    '', '  ________________________________ ',
     '/ It’s not a bug — it’s an       \\',
     '\\ undocumented feature.          /',
     '  -------------------------------- ',
@@ -12,9 +11,7 @@ db.custom_header = {
     '         \\  (oo)\\_______         ',
     '           (__)\\       )\\/\\     ',
     '                ||----w |          ',
-    '                ||     ||          ',
-    '',
-    '',
+    '                ||     ||          ', '', ''
 }
 
 -- db.custom_header = {
@@ -52,7 +49,6 @@ db.custom_center = {
         shortcut = "Alt shift f "
     }
 }
-
 
 local utils = require("telescope.utils")
 

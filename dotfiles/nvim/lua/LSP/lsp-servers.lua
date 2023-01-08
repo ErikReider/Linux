@@ -203,7 +203,7 @@ require("rust-tools").setup({
             right_align_padding = 7,
             -- The color of the hints
             highlight = "Comment"
-        },
+        }
     }
 })
 

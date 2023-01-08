@@ -1,14 +1,8 @@
 require("incline").setup({
     highlight = {
         groups = {
-            InclineNormal = {
-                default = true,
-                group = "NormalFloat"
-            },
-            InclineNormalNC = {
-                default = true,
-                group = "BufferInactive"
-            }
+            InclineNormal = {default = true, group = "NormalFloat"},
+            InclineNormalNC = {default = true, group = "BufferInactive"}
         }
     },
     ignore = {
@@ -29,12 +23,12 @@ require("incline").setup({
     end,
     window = {
         margin = {
-            horizontal = { left = 1, right = 1 },
-            vertical = { bottom = 1, top = 1 }
+            horizontal = {left = 1, right = 1},
+            vertical = {bottom = 1, top = 1}
         },
-        padding = { left = 1, right = 1 },
+        padding = {left = 1, right = 1},
         padding_char = " ",
-        placement = { horizontal = "right", vertical = "top" },
+        placement = {horizontal = "right", vertical = "top"},
         width = "fit",
         zindex = 50
     }
