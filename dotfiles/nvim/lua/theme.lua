@@ -62,3 +62,8 @@ vim.api.nvim_set_hl(0, "IlluminatedWordWrite", {link = "LspReferenceWrite"})
 
 -- Custom colorcolumn color
 vim.api.nvim_set_hl(0, "VirtColumn", {link = "LineNr"})
+vim.api.nvim_set_hl(0, "ConflictMarkerBegin", {bg = "#2f7366", blend = 100})
+vim.api.nvim_set_hl(0, "ConflictMarkerOurs", {bg = "#25403B"})
+vim.api.nvim_set_hl(0, "ConflictMarkerTheirs", {bg = "#25394B"})
+vim.api.nvim_set_hl(0, "ConflictMarkerEnd", {bg = "#2F628F"})
+vim.api.nvim_set_hl(0, "ConflictMarkerCommonAncestorsHunk", {bg = "#754a81"})

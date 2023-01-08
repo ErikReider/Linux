@@ -171,6 +171,8 @@ Plug 'vim-python/python-syntax', {'for': 'py'}
 Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
 " Pug
 Plug 'digitaltoad/vim-pug', {'for': 'pug'}
+" Highlight Git conflicts
+Plug 'rhysd/conflict-marker.vim'
 
 
 
