@@ -37,8 +37,6 @@ Plug 'stevearc/dressing.nvim'
 
 " nvim lsp
 Plug 'neovim/nvim-lspconfig'
-" A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
-Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 " A completion engine plugin for neovim written in Lua. 
 Plug 'hrsh7th/nvim-cmp'
 " nvim-cmp comparator function for completion items that start with one or more underlines

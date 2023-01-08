@@ -107,7 +107,7 @@ map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", lsp_opts)
 -- References
 map("n", "gr", "<cmd>Telescope lsp_references<CR>", lsp_opts)
 -- Show hover info
-map("n", "K", "<cmd>Lspsaga hover_doc<CR>", lsp_opts)
+map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
 -- Show method signature
 map("i", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>", lsp_opts)
 map("n", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>", lsp_opts)
@@ -120,15 +120,15 @@ map("n", "<space>wl",
     "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
     lsp_opts)
 -- Rename
-map("n", "<F2>", ":Lspsaga rename<CR>", lsp_opts)
+map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", lsp_opts)
 -- Code Action
-map("n", "<leader>a", "<cmd>Lspsaga code_action<CR>", lsp_opts)
+map("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", lsp_opts)
 -- Show error popup
-map("i", "<M-e>", "<cmd>Lspsaga show_line_diagnostics<CR>", lsp_opts)
-map("n", "<M-e>", "<cmd>Lspsaga show_line_diagnostics<CR>", lsp_opts)
+map("i", "<M-e>", "<cmd>lua vim.diagnostic.open_float()<CR>", lsp_opts)
+map("n", "<M-e>", "<cmd>lua vim.diagnostic.open_float()<CR>", lsp_opts)
 -- Next/Previous diagnostic
-map("n", "ög", "<cmd>Lspsaga diagnostic_jump_prev<CR>", lsp_opts)
-map("n", "äg", "<cmd>Lspsaga diagnostic_jump_next<CR>", lsp_opts)
+map("n", "ög", "<cmd>lua vim.diagnostic.goto_prev()<CR>", lsp_opts)
+map("n", "äg", "<cmd>lua vim.diagnostic.goto_next()<CR>", lsp_opts)
 -- Show diagnostics list
 map("n", "<A-S-w>", "<cmd>Telescope diagnostics<CR>", lsp_opts)
 -- Formatting
