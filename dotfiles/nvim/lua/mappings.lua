@@ -97,13 +97,11 @@ map("v", "<C-c>", ":CommentToggle<CR>", { silent = true, noremap = false})
 -- LSP
 local lsp_opts = {noremap = true, silent = true}
 -- Go to definition
-map("n", "gd", "<cmd>lua goto_definition(true)<CR>", lsp_opts)
-map("n", "gs", "<cmd>lua goto_definition()<CR>", lsp_opts)
-map("n", "ga", "<cmd>Lspsaga preview_definition<CR>", lsp_opts)
+map("n", "gs", "<cmd>Telescope lsp_definitions<CR>", lsp_opts)
 -- Go to type_definition
-map("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", lsp_opts)
+map("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>", lsp_opts)
 -- Go to implementation
-map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", lsp_opts)
+map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", lsp_opts)
 -- References
 map("n", "gr", "<cmd>Telescope lsp_references<CR>", lsp_opts)
 -- Show hover info

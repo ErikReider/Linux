@@ -17,41 +17,6 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(type, {text = icon, texthl = type, numhl = ""})
 end
 
--- Go to definition
-function _G.goto_definition(new_tab)
-    -- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
-    vim.lsp.handlers["textDocument/definition"] =
-        function(_, result, ctx)
-            local util = vim.lsp.util
-            local log = require("vim.lsp.log")
-            local api = vim.api
-            if result == nil or vim.tbl_isempty(result) then
-                local _ = log.info() and
-                              log.info(ctx.method or "Nil", 'No location found')
-                return nil
-            end
-
-            local res = vim.tbl_islist(result) and result[1] or result
-
-            if (res.uri or res.targetUri) == nil then
-                print("URI is nil...")
-                return nil
-            end
-            local uri = vim.uri_to_fname(res.uri or res.targetUri)
-            if new_tab and uri ~= vim.fn.expand("%:p") then
-                vim.cmd("tab drop " .. uri)
-            end
-
-            util.jump_to_location(res)
-            if #result > 1 then
-                util.set_qflist(util.locations_to_items(result))
-                api.nvim_command("copen")
-                api.nvim_command("wincmd p")
-            end
-        end
-    vim.lsp.buf.definition()
-end
-
 -- nvim-autopairs
 nvim_autopairs.setup({disable_filetype = {"TelescopePrompt", "vim"}})
 
@@ -193,15 +158,18 @@ cmp.setup({
     }
 })
 
--- Customizing how diagnostics are displayed
-vim.lsp.handlers['textDocument/publishDiagnostics'] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        -- Replace virtual_text with lsp_lines.nvim
-        virtual_text = false,
-        signs = true,
-        underline = true,
-        update_in_insert = false
-    })
+-- Customizing how diagnostics and handlers are displayed
+local handler_win_config = {
+    border = "rounded",
+    focusable = true,
+    max_width = 80,
+    max_height = 30
+}
+vim.lsp.handlers["textDocument/hover"] =
+    vim.lsp.with(vim.lsp.handlers.hover, handler_win_config)
+
+vim.lsp.handlers["textDocument/signatureHelp"] =
+    vim.lsp.with(vim.lsp.handlers.signature_help, handler_win_config)
 
 -- Adds auto insertion of "()" in cmp
 -- require("nvim-autopairs.completion.cmp").setup({
