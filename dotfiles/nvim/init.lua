@@ -9,7 +9,7 @@ vim.cmd("source ~/.config/nvim/lua/autoLoad.vim")
 vim.cmd("source ~/.config/nvim/lua/setFiletype.vim")
 vim.cmd("source ~/.config/nvim/lua/vimEnter.vim")
 vim.cmd("luafile ~/.config/nvim/lua/theme.lua")
-vim.cmd("source ~/.config/nvim/lua/neovide.vim")
+vim.cmd("luafile ~/.config/nvim/lua/neovide.lua")
 
 -- LSP
 vim.cmd("luafile ~/.config/nvim/lua/LSP/nvim-lspconfig.lua");
