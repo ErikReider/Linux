@@ -1,12 +1,10 @@
-local Terminal = require('toggleterm.terminal').Terminal
-function _G.lazydocker_open()
-    local lazydocker = Terminal:new({
-        cmd = "lazydocker",
-        dir = "git_dir",
-        persist_size = false,
-        direction = "float"
-    })
-    lazydocker:open()
-end
+local fterm = require("FTerm")
 
-vim.cmd("command! LazyDocker lua lazydocker_open()")
+local window = fterm:new({
+    cmd = "lazydocker",
+    dimensions = {height = 0.9, width = 0.9}
+})
+
+vim.api.nvim_create_user_command("LazyDocker", function() window:toggle() end,
+                                 {})
+

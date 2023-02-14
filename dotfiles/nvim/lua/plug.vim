@@ -110,8 +110,6 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'uga-rosa/ccc.nvim'
 " Neovim lua functions
 Plug 'nvim-lua/plenary.nvim'
-" Plugin to persist and toggle multiple terminals during an editing session
-Plug 'akinsho/nvim-toggleterm.lua'
 " View package-info package information
 Plug 'vuki656/package-info.nvim'
 " Buffer title over split
