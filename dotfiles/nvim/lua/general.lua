@@ -10,8 +10,10 @@ vim.o.updatetime = 300
 -- always show signcolumns
 vim.o.signcolumn = "yes"
 
+-- Set <leader> key
+vim.g.mapleader = " "
 -- Key timeout eg. leader timeout
-vim.o.timeoutlen = 750
+vim.o.timeoutlen = 1500
 
 -- Easier to read long lines
 vim.o.linebreak = true

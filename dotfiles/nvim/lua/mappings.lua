@@ -104,7 +104,9 @@ map("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>", lsp_opts)
 -- Go to implementation
 map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", lsp_opts)
 -- References
-map("n", "gr", "<cmd>Telescope lsp_references<CR>", lsp_opts)
+map("n", "gr",
+    "<cmd>lua require('telescope.builtin').lsp_references({jump_type = 'never'})<CR>",
+    lsp_opts)
 -- Show hover info
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
 -- Show method signature
@@ -113,17 +115,17 @@ map("i", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>",
 map("n", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>",
     lsp_opts)
 -- Workspace folder
-map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
-    lsp_opts)
-map("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
-    lsp_opts)
-map("n", "<space>wl",
-    "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-    lsp_opts)
+-- map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
+--     lsp_opts)
+-- map("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
+--     lsp_opts)
+-- map("n", "<space>wl",
+--     "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+--     lsp_opts)
 -- Rename
 map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", lsp_opts)
 -- Code Action
-map("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", lsp_opts)
+map("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", lsp_opts)
 -- Show error popup
 map("i", "<M-e>", "<cmd>lua vim.diagnostic.open_float()<CR>", lsp_opts)
 map("n", "<M-e>", "<cmd>lua vim.diagnostic.open_float()<CR>", lsp_opts)

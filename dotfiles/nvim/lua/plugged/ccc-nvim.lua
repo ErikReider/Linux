@@ -64,3 +64,5 @@ ccc.setup({
         ["9"] = function() ccc.set_percent(90) end
     }
 })
+
+map("n", "<leader>c", [[<cmd>CccPick<CR>]], {noremap = true, silent = true})

@@ -59,8 +59,8 @@ telescope.setup({
     defaults = {
         layout_strategy = "flex",
         layout_config = {
-            height = 0.8,
-            width = 0.8,
+            height = 0.9,
+            width = 0.9,
             flex = {flip_columns = 133, flip_lines = 50},
             horizontal = {mirror = false},
             vertical = {mirror = false}
@@ -115,30 +115,33 @@ function _G.telescopeFindFiles(git_ignore)
 end
 
 local opts = {noremap = true, silent = true}
--- Git files CWD
-map("n", "<C-f>", [[<cmd>lua telescopeFindFiles(true)<CR>]], opts)
--- Git files git-root
-map("n", "<A-d>", [[<cmd>lua telescopeGFiles(false)<CR>]], opts)
--- Git status files
-map("n", "<A-g>", [[<cmd>lua require("telescope.builtin").git_status()<CR>]],
-    opts)
+-- All CWD files (except gitignored)
+map("n", "<Leader>f", [[<cmd>lua telescopeFindFiles(true)<CR>]], opts)
 -- All CWD files
-map("n", "<A-f>", [[<cmd>lua telescopeFindFiles(false)<CR>]], opts)
+map("n", "<Leader>F", [[<cmd>lua telescopeFindFiles(false)<CR>]], opts)
+-- Git files git-root
+map("n", "<Leader>G", [[<cmd>lua telescopeGFiles(false)<CR>]], opts)
+-- Git status files
+map("n", "<Leader>g", [[<cmd>lua require("telescope.builtin").git_status()<CR>]],
+    opts)
 -- Search for string inside of all files in CWD
-map("n", "<A-S-f>", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]],
+map("n", "<Leader>s", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]],
     opts)
 -- Search for string inside buffer
-map("n", "<A-S-d>",
+map("n", "<Leader>S",
     [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>]],
     opts)
 -- Search for open buffers
-map("n", "<A-S-b>", [[<cmd>lua require("telescope.builtin").buffers()<CR>]],
+map("n", "<Leader>b", [[<cmd>lua require("telescope.builtin").buffers()<CR>]],
     opts)
 -- Lists previously open files
-map("n", "<A-S-h>", [[<cmd>lua require("telescope.builtin").oldfiles()<CR>]],
+map("n", "<Leader>h", [[<cmd>lua require("telescope.builtin").oldfiles()<CR>]],
     opts)
 -- Lists normal mode keymappings
-map("n", "<A-S-m>", [[<cmd>lua require("telescope.builtin").keymaps()<CR>]],
+map("n", "<Leader>m", [[<cmd>lua require("telescope.builtin").keymaps()<CR>]],
     opts)
-map("n", "<A-S-t>", [[<cmd>TodoTelescope<CR>]], opts)
+map("n", "<Leader>t", [[<cmd>TodoTelescope<CR>]], opts)
 
+-- Search for DAP breakpoints
+map("n", "<Leader>B", [[<cmd>lua require("telescope").extensions.dap.list_breakpoints()<CR>]],
+    opts)
