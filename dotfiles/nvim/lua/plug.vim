@@ -76,8 +76,8 @@ Plug 'jay-babu/mason-nvim-dap.nvim'
 " Auto tabwidth and style detection
 Plug 'tpope/vim-sleuth'
 " Color Scheme
-Plug 'tomasiser/vim-code-dark'
 Plug 'Mofiqul/vscode.nvim'
+Plug 'folke/tokyonight.nvim'
 " Dims inactive windows
 Plug 'sunjon/Shade.nvim'
 " NERDTree
@@ -119,7 +119,7 @@ Plug 'kevinhwang91/promise-async'
 " Not UFO in the sky, but an ultra fold in Neovim (nicer folds)
 Plug 'kevinhwang91/nvim-ufo'
 " Gain the power to move lines and blocks and auto-indent them!
-Plug 'fedepujol/move.nvim'
+Plug 'ur4ltz/move.nvim'
 " Peek lines just when you intend 
 Plug 'nacro90/numb.nvim'
 " Intelligently reopen files at your last edit position in Vim.

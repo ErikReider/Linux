@@ -31,6 +31,21 @@ require("custom.gsettings_watcher").init(function(style)
             LspReferenceText = lspRef,
             LspReferenceRead = lspRef,
             LspReferenceWrite = lspRef,
+            IlluminatedWordText = {link = "LspReferenceText"},
+            IlluminatedWordRead = {link = "LspReferenceRead"},
+            IlluminatedWordWrite = {link = "LspReferenceWrite"},
+
+            -- Custom colorcolumn color
+            VirtColumn = {link = "LineNr"},
+            -- Make floating window title more visible
+            FloatTitle = {link = "Normal"},
+            -- 
+            -- TODO: Use vscode colors
+            ConflictMarkerBegin = {bg = "#2f7366", blend = 100},
+            ConflictMarkerOurs = {bg = "#25403B"},
+            ConflictMarkerTheirs = {bg = "#25394B"},
+            ConflictMarkerEnd = {bg = "#2F628F"},
+            ConflictMarkerCommonAncestorsHunk = {bg = "#754a81"},
 
             -- Line Number diagnostic highlights
             DiagnosticLineNrError = {
@@ -57,29 +72,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Shows space and tab as characters
 vim.opt.showbreak = "↪ "
 vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:⟶ ")
 vim.opt.listchars:append("nbsp:␣")
 vim.opt.listchars:append("trail:·")
 vim.opt.listchars:append("extends:⟩")
 vim.opt.listchars:append("precedes:⟨")
-
--- Word highlight
-vim.api.nvim_set_hl(0, "IlluminatedWordText", {link = "LspReferenceText"})
-vim.api.nvim_set_hl(0, "IlluminatedWordRead", {link = "LspReferenceRead"})
-vim.api.nvim_set_hl(0, "IlluminatedWordWrite", {link = "LspReferenceWrite"})
--- for _, v in
--- ipairs({"LspReferenceText", "LspReferenceRead", "LspReferenceWrite"}) do
--- vim.highlight.create(v, {cterm = "bold", gui = "bold"}, false)
--- end
-
--- Custom colorcolumn color
-vim.api.nvim_set_hl(0, "VirtColumn", {link = "LineNr"})
--- Make floating window title more visible
-vim.api.nvim_set_hl(0, "FloatTitle", {link = "Normal"})
--- 
-vim.api.nvim_set_hl(0, "ConflictMarkerBegin", {bg = "#2f7366", blend = 100})
-vim.api.nvim_set_hl(0, "ConflictMarkerOurs", {bg = "#25403B"})
-vim.api.nvim_set_hl(0, "ConflictMarkerTheirs", {bg = "#25394B"})
-vim.api.nvim_set_hl(0, "ConflictMarkerEnd", {bg = "#2F628F"})
-vim.api.nvim_set_hl(0, "ConflictMarkerCommonAncestorsHunk", {bg = "#754a81"})
+vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]

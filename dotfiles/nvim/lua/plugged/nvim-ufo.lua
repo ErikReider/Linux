@@ -1,8 +1,3 @@
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-vim.o.foldcolumn = "1"
-vim.o.foldlevel = 99 -- feel free to decrease the value
-vim.o.foldenable = true
-
 -- tell the sever the capability of foldingRange
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.foldingRange = {

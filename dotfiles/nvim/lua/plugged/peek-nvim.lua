@@ -14,9 +14,9 @@ peek.setup({
     -- that has to pass before starting new render
 })
 
-vim.api.nvim_create_user_command('PeekOpen', peek.open, {})
-vim.api.nvim_create_user_command('PeekClose', peek.close, {})
-vim.api.nvim_create_user_command('PeekOpenOrClose', function()
+vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
+vim.api.nvim_create_user_command("PeekClose", peek.close, {})
+vim.api.nvim_create_user_command("PeekOpenOrClose", function()
     if peek.is_open() then
         peek.close()
     else

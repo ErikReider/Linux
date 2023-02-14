@@ -8,7 +8,7 @@ vim.o.cmdheight = 1
 vim.o.updatetime = 300
 
 -- always show signcolumns
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = "yes:1"
 
 -- Set <leader> key
 vim.g.mapleader = " "
@@ -34,7 +34,10 @@ vim.o.shiftwidth = 2
 vim.o.splitbelow = true
 vim.o.splitright = true
 
--- Use Treesitter method in its file
+-- Folding
+vim.o.foldcolumn = "auto:1"
+vim.o.foldlevel = 99 -- feel free to decrease the value
+vim.o.foldenable = true
 -- Max nested folds
 vim.o.foldnestmax = 10
 -- Turn off auto folding on start
@@ -43,9 +46,6 @@ vim.o.foldenable = false
 
 -- Makes popup menu smaller
 vim.o.pumheight = 30
-
--- treat dash separated words as a word text object"
-vim.cmd('set iskeyword+=-')
 
 -- Support 256 colors
 vim.cmd('set t_Co=256')
@@ -100,5 +100,5 @@ vim.o.laststatus = 3
 -- Keep the line at the same position when creating splits
 vim.o.splitkeep = "screen"
 
-vim.g.virtcolumn_char = '▕' -- char to display the line
+vim.g.virtcolumn_char = '▏' -- char to display the line
 vim.g.virtcolumn_priority = 10 -- priority of extmark
