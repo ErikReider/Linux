@@ -133,6 +133,10 @@ Plug 'jakemason/ouroboros'
 " Highlight, list and search todo comments in your projects
 Plug 'folke/todo-comments.nvim'
 
+" Hydra
+Plug 'anuvyklack/hydra.nvim'
+Plug 'mrjones2014/smart-splits.nvim'
+Plug 'sindrets/winshift.nvim'
 
 
 "" NVIM DAP
