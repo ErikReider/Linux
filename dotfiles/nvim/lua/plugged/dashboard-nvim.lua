@@ -1,20 +1,16 @@
-local db = require("dashboard")
-db.hide_statusline = false
-db.hide_tabline = false
-
-db.custom_header = {
-    '', '  ________________________________ ',
-    '/ It’s not a bug — it’s an       \\',
-    '\\ undocumented feature.          /',
-    '  -------------------------------- ',
-    '        \\   ^__^                  ',
-    '         \\  (oo)\\_______         ',
-    '           (__)\\       )\\/\\     ',
-    '                ||----w |          ',
-    '                ||     ||          ', '', ''
+local custom_header = {
+    "", "  ________________________________ ",
+    "/ It’s not a bug — it’s an       \\",
+    "\\ undocumented feature.          /",
+    "  -------------------------------- ",
+    "        \\   ^__^                  ",
+    "         \\  (oo)\\_______         ",
+    "           (__)\\       )\\/\\     ",
+    "                ||----w |          ",
+    "                ||     ||          ", "", ""
 }
 
--- db.custom_header = {
+-- local custom_header = {
 --     "                                   ",
 --     "         ((##           (((        ",
 --     "       ((((###(         (((((      ",
@@ -31,31 +27,13 @@ db.custom_header = {
 --     "         ,,,           ////        ", "", ""
 -- }
 
-db.custom_center = {
-    {
-        icon = " ",
-        desc = "New File                  ",
-        action = "DashboardNewFile",
-        shortcut = "Leader n    "
-    }, {
-        icon = " ",
-        desc = "Find File                 ",
-        action = "lua telescopeGFiles(true)",
-        shortcut = "Ctrl f      "
-    }, {
-        icon = " ",
-        desc = "Find Word                 ",
-        action = "Telescope live_grep",
-        shortcut = "Alt shift f "
-    }
-}
-
 local utils = require("telescope.utils")
+local footer = {}
 
 local function get_dashboard_git_status()
     local git_cmd = {"git", "status", "-s", "--", "."}
     local output = utils.get_os_command_output(git_cmd)
-    db.custom_footer = {"Git status:", unpack(output)}
+    return {"Git status:", unpack(output)}
 end
 
 local _, ret = utils.get_os_command_output({
@@ -67,10 +45,51 @@ if ret ~= 0 then
         "git", "rev-parse", "--is-inside-work-tree"
     }, vim.loop.cwd())
     if is_worktree[1] == "true" then
-        get_dashboard_git_status()
+        footer = get_dashboard_git_status()
     else
-        db.custom_footer = {"Not in a git directory"}
+        footer = {"Not in a git directory"}
     end
 else
-    get_dashboard_git_status()
+    footer = get_dashboard_git_status()
 end
+
+require("dashboard").setup({
+    theme = "doom",
+    config = {
+        header = custom_header,
+        center = {
+            -- TODO: Use correct mappings
+            {
+                icon = " ",
+                icon_hi = "Title",
+                desc = "New File",
+                desc_hi = "String",
+                key = "Leader n",
+                key_hi = "Number",
+                action = "newfile"
+            }, {
+                icon = " ",
+                icon_hi = "Title",
+                desc = "Find File",
+                desc_hi = "String",
+                key = "Ctrl f",
+                key_hi = "Number",
+                action = "lua telescopeGFiles(true)"
+            }, {
+                icon = " ",
+                icon_hi = "Title",
+                desc = "Find Word",
+                desc_hi = "String",
+                key = "Alt shift f",
+                key_hi = "Number",
+                action = "Telescope live_grep"
+            }
+        },
+        footer = footer -- your footer
+    },
+    hide = {
+        statusline = false, -- hide statusline default is true
+        tabline = false, -- hide the tabline
+        winbar = false -- hide winbar
+    }
+})
