@@ -8,12 +8,14 @@ require("custom.gsettings_watcher").init(function(style)
     vim.g.gtk_style = style
     vim.o.background = style
     vim.g.vscode_style = style
+
     vim.cmd([[colorscheme vscode]])
 
-    local c = require("vscode.colors")
-    local isDark = vim.o.background == 'dark'
+    local colors = require("vscode.colors").get_colors()
+    local isDark = vim.o.background == "dark"
     local lspRef = {
-        bg = isDark and c.vscPopupHighlightGray or c.vscPopupHighlightLightBlue,
+        bg = isDark and colors.vscPopupHighlightGray or
+            colors.vscPopupHighlightLightBlue,
         bold = true
     }
     require("vscode").setup({
@@ -25,9 +27,20 @@ require("custom.gsettings_watcher").init(function(style)
             -- this supports the same val table as vim.api.nvim_set_hl
             -- use colors from this colorscheme by requiring vscode.colors!
 
+            -- LSP Reference word highlight
             LspReferenceText = lspRef,
             LspReferenceRead = lspRef,
-            LspReferenceWrite = lspRef
+            LspReferenceWrite = lspRef,
+
+            -- Line Number diagnostic highlights
+            DiagnosticLineNrError = {
+                bg = "#51202A",
+                fg = colors.vscRed,
+                bold = true
+            },
+            DiagnosticLineNrWarn = {bg = "#51412A", fg = colors.vscYellow, bold = true},
+            DiagnosticLineNrInfo = {bg = "#1E535D", fg = "#00FFFF", bold = true},
+            DiagnosticLineNrHint = {bg = "#1E205D", fg = "#0000FF", bold = true}
         }
     })
 end)

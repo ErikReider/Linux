@@ -7,14 +7,13 @@ local lsp_signature = require("lsp_signature")
 vim.o.completeopt = 'menu,menuone,noinsert'
 
 -- Gutter diagnostic signs
-local signs = {
-    DiagnosticSignError = "❌",
-    DiagnosticSignWarn = "",
-    DiagnosticSignHint = "💡",
-    DiagnosticSignInfo = ""
-}
+local signs = {Error = "❌", Warn = "", Hint = "💡", Info = ""}
 for type, icon in pairs(signs) do
-    vim.fn.sign_define(type, {text = icon, texthl = type, numhl = ""})
+    vim.fn.sign_define("DiagnosticSign" .. type, {
+        text = "",
+        texthl = "DiagnosticSign" .. type,
+        numhl = "DiagnosticLineNr" .. type
+    })
 end
 
 -- nvim-autopairs
