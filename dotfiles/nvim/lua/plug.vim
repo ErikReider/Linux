@@ -70,6 +70,8 @@ Plug 'j-hui/fidget.nvim'
 Plug 'williamboman/mason.nvim'
 " Auto installs lsps
 Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'
+" Auto installs DAP debuggers
+Plug 'jay-babu/mason-nvim-dap.nvim'
 
 " Auto tabwidth and style detection
 Plug 'tpope/vim-sleuth'
@@ -96,6 +98,7 @@ Plug 'AndrewRadev/tagalong.vim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
+Plug 'nvim-telescope/telescope-dap.nvim'
 " Bufferline
 Plug 'romgrk/barbar.nvim'
 " Delete Neovim buffers without losing window layout
@@ -131,6 +134,14 @@ Plug 'xiyaowong/virtcolumn.nvim'
 Plug 'jakemason/ouroboros'
 " Highlight, list and search todo comments in your projects
 Plug 'folke/todo-comments.nvim'
+
+
+
+"" NVIM DAP
+" Debug Adapter Protocol client implementation for Neovim
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'Weissle/persistent-breakpoints.nvim'
 
 
 "" Git

@@ -93,6 +93,7 @@ telescope.setup({
 })
 
 telescope.load_extension("fzf")
+telescope.load_extension('dap')
 
 function _G.telescopeGFiles(local_dir)
     local opts = {

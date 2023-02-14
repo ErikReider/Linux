@@ -43,7 +43,11 @@ local function getOptionsTable()
         {
             title = "Toggle inactive shade",
             action = "lua require('shade').toggle()"
-        }, {title = "Edit color", action = "CccPick"}
+        }, {title = "Edit color", action = "CccPick"},
+        {
+            title = "Toggle Debug Windows",
+            action = "DapUiToggleWindows"
+        }
     }
 
     -- Switch between C/C++ Header and Implementation files
@@ -93,6 +97,12 @@ local function getOptionsTable()
 
     -- Open Cargo.tml
     -- local has_cargo = require'rust-tools'.open_cargo_toml.open_cargo_toml() ~= nil
+
+    -- Launch Debug
+    if vim.fn.filereadable(".vscode/launch.json") == 1 then
+        require("dap.ext.vscode").load_launchjs()
+        table.insert(optionsTable, 1, {title = "Debug", action = "Telescope dap configurations"})
+    end
 
     local action = getRunAction()
     if string.len(action.build) > 0 then

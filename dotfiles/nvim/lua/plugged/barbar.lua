@@ -18,7 +18,7 @@ require("bufferline").setup {
     clickable = true,
 
     -- Excludes buffers from the tabline
-    -- exclude_ft = {"javascript"},
+    exclude_ft = {"dap-repl"},
     -- exclude_name = {"package.json"},
 
     -- Enable/disable icons
