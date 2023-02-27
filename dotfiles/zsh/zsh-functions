@@ -1,24 +1,3 @@
-# Function to source files if they exist
-function zsh_add_file() {
-    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
-}
-
-function zsh_add_plugin() {
-    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then
-        # For plugins
-        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" \
-            || zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
-
-        # Source their config file
-        if [ -f "$ZDOTDIR/plugin-conf/$PLUGIN_NAME" ]; then
-            zsh_add_file "plugin-conf/$PLUGIN_NAME"
-        fi
-    else
-        echo "Failed to find $PLUGIN_NAME in $ZDOTDIR!..."
-    fi
-}
-
 function mkcd {
     mkdir $1
     cd $1
@@ -44,9 +23,9 @@ function git_todays_changelog {
 
 function man_preview {
     if [[ -f $1 ]]; then
-        tmpPath=/tmp/$(basename $1).roff.tmp
-        scdoc <$1 >$tmpPath && man -l $tmpPath
-        rm -rf $tmpPath
+        tmpPath=/tmp/$(basename "$1").roff.tmp
+        scdoc <"$1" >"$tmpPath" && man -l "$tmpPath"
+        rm -rf "$tmpPath"
     else
         echo "Man file doesn't exist..."
     fi

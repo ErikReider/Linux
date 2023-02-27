@@ -4,16 +4,35 @@ stty stop undef
 
 export ZDOTDIR="$HOME/zsh"
 
-source $ZDOTDIR/zsh-functions
+if ! [ -f "$ZDOTDIR/antigen.zsh" ]; then
+    # Install Antigen ZSH plugin manager if not installed
+    curl -L git.io/antigen >"$ZDOTDIR/antigen.zsh"
+fi
 
-zsh_add_file "zsh-exports"
-zsh_add_file "zsh-alias"
-zsh_add_file "zsh-bindings"
-zsh_add_file "zsh-completions"
-zsh_add_file "zsh-prompt"
-zsh_add_file "zsh-git-bindings"
+source "$ZDOTDIR/antigen.zsh"
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
 
 # Plugins
-zsh_add_plugin "plugins/zsh-autosuggestions"
-zsh_add_plugin "plugins/zsh-syntax-highlighting"
-zsh_add_plugin "plugins/zsh-history-substring-search"
+antigen bundle git
+antigen bundle zsh-interactive-cd
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Tell Antigen that you're done.
+antigen apply
+
+source "$ZDOTDIR/zsh-functions"
+source "$ZDOTDIR/zsh-exports"
+source "$ZDOTDIR/zsh-alias"
+source "$ZDOTDIR/zsh-bindings"
+source "$ZDOTDIR/zsh-completions"
+source "$ZDOTDIR/zsh-prompt"
+
+# Plugin config
+source "$ZDOTDIR/plugin-conf/zsh-autosuggestions"
+source "$ZDOTDIR/plugin-conf/zsh-history-substring-search"

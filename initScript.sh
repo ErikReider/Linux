@@ -181,7 +181,6 @@ if [[ $change_to_bash_var == y ]]; then
     elif [[ "$distroName" == "fedora" ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
-    brew install "${brew[@]}"
 
     sudo chsh --shell=/bin/zsh "$USER"
 
@@ -192,19 +191,6 @@ if [[ $change_to_bash_var == y ]]; then
     ln -s "$currentDir"/dotfiles/zsh/.zshrc .zshrc
     ln -s "$currentDir"/dotfiles/zsh/.zprofile .zprofile
     ln -s "$currentDir"/dotfiles/zsh .
-
-    rm -rf zsh/plugins
-    mkdir zsh/plugins
-    cd zsh/plugins
-    if [ -d "/usr/share/zsh/plugins" ]; then
-        ln -s /usr/share/zsh/plugins/* .
-    elif [ -d "/home/linuxbrew/.linuxbrew/share" ]; then
-        ln -s /home/linuxbrew/.linuxbrew/share/zsh-* .
-    else
-        ln -s /usr/share/zsh-* .
-    fi
-
-    cd "$currentDir"
 
     # Set password feedback
     read -rp "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var

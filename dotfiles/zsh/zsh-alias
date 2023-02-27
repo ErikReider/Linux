@@ -27,6 +27,9 @@ alias rd=rmdir
 
 alias week='echo Week number: $(date -u +%V)'
 
+alias lazg='lazygit'
+alias lazd='lazydocker'
+
 alias cp="cp -i" # Confirm before overwriting something
 alias rm="rm -i" # Confirm before overwriting something
 alias mv="mv -i" # Confirm before overwriting something
@@ -65,6 +68,6 @@ fi
 
 # Disowns application
 function diso() {
-    $@ 2>/dev/null 1>&2 &
+    "$@" 2>/dev/null 1>&2 &
     disown
 }
