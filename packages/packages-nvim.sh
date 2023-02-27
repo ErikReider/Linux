@@ -4,6 +4,7 @@ export common=(
 "scdoc"
 "uncrustify"
 "luarocks"
+"unzip"
 )
 export fedora=(
 "rust-fd-find"
