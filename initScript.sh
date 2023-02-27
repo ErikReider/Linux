@@ -162,11 +162,14 @@ if [[ $install_dev_tools == y ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
 
+    # install deno
+    curl -fsSL https://deno.land/x/install/install.sh | sh
+
     # Start docker daemon with system
     sudo systemctl enable --now docker
     # Add user to docker group
     sudo groupadd docker
-    sudo usermod -aG docker $USER
+    sudo usermod -aG docker "$USER"
 fi
 echo ""
 ##
