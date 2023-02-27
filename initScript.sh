@@ -56,10 +56,23 @@ read -rp "Do you wish to symlink needed config files? [y/n] " symlink_etc_var
 if [[ $symlink_etc_var == y ]]; then
     # .pam_environment
     cd "$HOME"
-    sudo ln -s "$currentDir"/dotfiles/.pam_environment
+    ln -si "$currentDir/dotfiles/.pam_environment" .
 
+    # ~/.config/environment.d/*
+    if ! [ -d "$HOME/.config/environment.d/" ] then
+        mkdir "$HOME/.config/environment.d/"
+    fi
+    cd "$HOME/.config/environment.d/"
+    ln -si "$currentDir/dotfiles/environment.d/"* .
+
+    # /etc
     cd "$currentDir"/dotfiles
-    sudo chown root ./etc/*
+    sudo chown root ./etc/*/*
+    # /etc/sysctl.d/*
+    [ -d "/etc/sysctl.d/" ] || sudo mkdir /etc/sysctl.d/
+    cd /etc/sysctl.d/
+    sudo ln -si "$currentDir/dotfiles/etc/sysctl.d/"* .
+
     cd "$currentDir"
 fi
 echo ""
