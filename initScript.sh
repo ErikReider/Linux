@@ -59,19 +59,17 @@ if [[ $symlink_etc_var == y ]]; then
     ln -si "$currentDir/dotfiles/.pam_environment" .
 
     # ~/.config/environment.d/*
-    if ! [ -d "$HOME/.config/environment.d/" ] then
+    if ! [ -d "$HOME/.config/environment.d/" ]; then
         mkdir "$HOME/.config/environment.d/"
     fi
     cd "$HOME/.config/environment.d/"
     ln -si "$currentDir/dotfiles/environment.d/"* .
 
-    # /etc
-    cd "$currentDir"/dotfiles
-    sudo chown root ./etc/*/*
     # /etc/sysctl.d/*
     [ -d "/etc/sysctl.d/" ] || sudo mkdir /etc/sysctl.d/
     cd /etc/sysctl.d/
-    sudo ln -si "$currentDir/dotfiles/etc/sysctl.d/"* .
+    sudo cp -ir "$currentDir/dotfiles/etc/sysctl.d/"* .
+    sudo chown root ./*
 
     cd "$currentDir"
 fi
