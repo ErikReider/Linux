@@ -206,6 +206,8 @@ echo ""
 ## Neovim
 read -rp "Do you wish to link NeoVim config files? [y/n] " vim_var
 if [[ $vim_var == y ]]; then
+    cd "$currentDir"
+    source ./packages/packages-nvim.sh
     source ./packages/packages-nvim.sh
 
     if [[ "$distroName" == "arch" ]]; then

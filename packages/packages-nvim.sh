@@ -7,7 +7,7 @@ export common=(
 "unzip"
 )
 export fedora=(
-"rust-fd-find"
+"fd-find"
 "lua-devel"
 "texlive-scheme-basic"
 )

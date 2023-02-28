@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! command -v lure &>/dev/null; then
+if command -v lure &>/dev/null; then
     lure up
     exit 0
 fi

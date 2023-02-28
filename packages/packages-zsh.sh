@@ -5,6 +5,7 @@ export common=(
     "fzf"
 )
 export fedora=(
+    "util-linux-user"
 )
 export arch=(
 )

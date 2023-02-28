@@ -25,7 +25,7 @@ export common=(
 "luarocks"
 )
 export fedora=(
-"rust-fd-find"
+"fd-find"
 "code"
 "dotnet"
 "rust-src"
@@ -37,7 +37,7 @@ export fedora=(
 "python3-neovim"
 "tree-sitter-cli"
 "fd-find"
-"act-clie"
+"act-cli"
 )
 export arch=(
 "fd"
