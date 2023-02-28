@@ -30,12 +30,15 @@ if [[ "$distroName" == "fedora" ]]; then
         # Codecs
         sudo dnf install gstreamer1-plugins-{bad-\*,good-\*,base,ugly-\*,ugly} gstreamer1-plugin-openh264 gstreamer1-libav mozilla-openh264
         sudo dnf install lame\* --exclude=lame-devel
-        sudo dnf install libva libva-intel-driver libva-intel-hybrid-driver ffmpeg
+        sudo dnf install libva libva-utils libva-intel-driver libva-intel-hybrid-driver ffmpeg
         sudo dnf install gstreamer1-vaapi intel-media-driver
         sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
         sudo dnf groupupdate sound-and-video
         sudo dnf group upgrade --with-optional Multimedia
         sudo dnf config-manager --set-enabled fedora-cisco-openh264
+        # Codecs in Mesa
+        sudo dnf swap --enablerepo=rpmfusion-free-updates-testing mesa-va-drivers mesa-va-drivers-freeworld
+        sudo dnf swap --enablerepo=rpmfusion-free-updates-testing mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
         # Enable thirdparty fedora repos
         sudo dnf install fedora-workstation-repositories
         # Update application data
