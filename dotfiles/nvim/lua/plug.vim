@@ -210,5 +210,7 @@ Plug 'simrat39/rust-tools.nvim'
 Plug 'plasticscafe/vim-less-autocompile', {'for': 'less'}
 " Sets commentstring for JS/TS files
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+" Neovim plugin for toggling booleans, etc.
+Plug 'nat-418/boole.nvim'
 
 call plug#end()
