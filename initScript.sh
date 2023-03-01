@@ -143,11 +143,26 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
         dnf check-update
 
         sudo dnf install "${common[@]}" "${fedora[@]}"
+
+        if [ ${#fedoraRemove[@]} -gt 0 ]; then
+            sudo dnf remove "${fedoraRemove[@]}"
+        fi
+
+        # Setup MS fonts
+        sudo dnf install curl cabextract xorg-x11-font-utils fontconfig
+        sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
     fi
 
-    if [ ${#fedoraRemove[@]} -gt 0 ]; then
-        sudo dnf remove "${fedoraRemove[@]}"
-    fi
+    sudo fc-cache -v
+
+    # GTK Defaults
+    gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
+    gsettings set org.gnome.desktop.interface font-antialiasing "rgba"
+    gsettings set org.gnome.desktop.interface font-hinting "slight"
+    gsettings set org.gnome.desktop.interface font-name "Clear Sans 11"
+    gsettings set org.gnome.desktop.interface document-font-name "Clear Sans 11"
+    gsettings set org.gnome.desktop.wm.preferences titlebar-font "Clear Sans Bold 11"
+    gsettings set org.gnome.desktop.interface monospace-font-name "FiraCode Nerd Font weight=450 10"
 
     # Install Nerd Font patched Fira Code fonts
     cd /tmp && git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts

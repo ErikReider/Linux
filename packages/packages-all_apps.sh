@@ -17,6 +17,11 @@ export fedora=(
 "java-1.8.0-openjdk"
 "java-11-openjdk"
 "java-latest-openjdk"
+"intel-clear-sans-fonts"
+"liberation-fonts"
+"liberation-mono-fonts"
+"liberation-sans-fonts"
+"liberation-serif-fonts"
 )
 export arch=(
 "sushi"
@@ -29,6 +34,7 @@ export arch=(
 "jre11-openjdk"
 "jdk-openjdk"
 "jre-openjdk"
+"ttf-clear-sans"
 )
 
 export fedoraRemove=(
