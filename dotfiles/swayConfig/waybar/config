@@ -44,7 +44,7 @@
     "disable-scroll": false,
     "all-outputs": false,
     "enable-bar-scroll": true,
-    "format": "{value}"
+    "format": "<span font_family='FiraCode Nerd Font'>{value}</span>"
   },
   "sway/mode": {
     "format": "<span>{}</span>"
@@ -80,12 +80,16 @@
   },
   "custom/notification": {
     "tooltip": true,
-    "format": "<span size='x-large' font_family='FiraCode Nerd Font Mono'>{icon}</span>",
+    "format": "{icon}",
     "format-icons": {
       "notification": "",
       "none": "",
       "dnd-notification": "",
-      "dnd-none": ""
+      "dnd-none": "",
+      "inhibited-notification": "",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "",
+      "dnd-inhibited-none": ""
     },
     "return-type": "json",
     "exec-if": "which swaync-client",

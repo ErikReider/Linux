@@ -3,6 +3,8 @@
 
   "positionX": "right",
   "positionY": "top",
+  "control-center-positionX": "none",
+  "control-center-positionY": "top",
   "control-center-margin-top": 8,
   "control-center-margin-bottom": 8,
   "control-center-margin-right": 8,
@@ -28,15 +30,21 @@
   "script-fail-notify": true,
 
   "widgets": [
+    "inhibitors",
     "title",
     "dnd",
     "mpris",
     "notifications"
   ],
   "widget-config": {
+    "inhibitors": {
+      "text": "Inhibitors",
+      "button-text": "Clear All",
+      "clear-all-button": true
+    },
     "title": {
       "text": "Notifications",
-      "clear-all-button": true,
+      "clear-all-button": false,
       "button-text": "Clear All"
     },
     "dnd": {
