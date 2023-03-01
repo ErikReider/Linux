@@ -24,6 +24,12 @@ map("n", "<Esc><Esc>", ":nohl<CR>", {})
 map("n", "<F5>", ":lua optionsWindowShow()<CR>", {noremap = true, silent = true})
 map("n", "<F6>", ":lua GitWindowShow()<CR>", {noremap = true, silent = true})
 
+-- Pasting without overriding clipboard!
+map("x", "<Leader>p", "\"_dP", {noremap = true, silent = true})
+
+-- Substitute word under cursor
+map("n", "<Leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {})
+
 -- Bufferline
 local barbar_opts = {noremap = true, silent = true}
 map("n", "<C-PageUp>", ":BufferPrevious<CR>", barbar_opts)
