@@ -72,7 +72,12 @@ if [[ $symlink_etc_var == y ]]; then
     [ -d "/etc/sysctl.d/" ] || sudo mkdir /etc/sysctl.d/
     cd /etc/sysctl.d/
     sudo cp -ir "$currentDir/dotfiles/etc/sysctl.d/"* .
-    sudo chown root ./*
+
+    # /etc/dnf/dnf.conf
+    if [ -f "/etc/dnf/dnf.conf" ]; then
+        cd /etc/dnf/
+        sudo cp -ib "$currentDir/dotfiles/etc/dnf/dnf.conf" .
+    fi
 
     cd "$currentDir"
 fi
