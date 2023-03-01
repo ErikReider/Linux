@@ -5,6 +5,8 @@ image=~/.cache/wallpaper
 
 ignore-empty-password
 
+clock
+
 indicator
 indicator-caps-lock
 indicator-radius=60
@@ -25,15 +27,14 @@ ring-wrong-color=FF0000FF
 
 separator-color=00000000
 
-text-color=00000000
-text-clear-color=00000000
+text-color=FFFFFFFF
 text-clear-color=00000000
 text-wrong-color=00000000
 text-ver-color=00000000
 text-caps-lock-color=00000000
 
-inside-color=00000000
-inside-clear-color=00000000
-inside-caps-lock-color=00000000
-inside-ver-color=00000000
-inside-wrong-color=00000000
+inside-color=00000066
+inside-clear-color=00000066
+inside-caps-lock-color=00000066
+inside-ver-color=00000066
+inside-wrong-color=00000066
