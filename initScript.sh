@@ -250,6 +250,29 @@ fi
 echo ""
 ##
 
+## Gaming
+read -rp "Do you wish to install Gaming software? [y/n] " install_gaming_tools
+if [[ $install_gaming_tools == y ]]; then
+    source ./packages/packages-gaming.sh
+
+    if [[ "$distroName" == "arch" ]]; then
+        yay -S --needed "${common[@]}" "${arch[@]}"
+    elif [[ "$distroName" == "fedora" ]]; then
+        read -rp "Use mesa-git? [y/n] " use_mesa_git
+        if [[ $use_mesa_git == y ]]; then
+            sudo dnf copr enable xxmitsu/mesa-git -y
+            sudo dnf update
+            sudo dnf swap mesa-va-drivers-freeworld mesa-va-drivers
+            sudo dnf swap mesa-vdpau-drivers-freeworld mesa-vdpau-drivers
+        fi
+        sudo dnf install "${common[@]}" "${fedora[@]}"
+    fi
+
+    flatpak install "${flatpak[@]}"
+fi
+echo ""
+##
+
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 echo ""
 echo "Done! 😊"
