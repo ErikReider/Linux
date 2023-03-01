@@ -173,7 +173,8 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
     ./install.sh
     cd "$currentDir"
 
-    flatpak install Spotify mailspring io.github.shiftey.Desktop ch.protonmail.protonmail-bridge
+    flatpak install "${flatpak[@]}"
+    flatpak install "${flatpak_beta[@]}"
 fi
 echo ""
 ##
