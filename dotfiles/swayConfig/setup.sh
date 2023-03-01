@@ -46,3 +46,6 @@ touch ~/.config/kanshi/config
 echo "Please edit kanshi config for optimal output auto switching!"
 echo "Syntax is similar to 'man 5 sway-output'. Get outputs: 'swaymsg -t get_outputs'"
 printf "\nPLEASE NOTE THAT PAM NEEDS TO BE CONFIGURED ON FINGERPRINT EQUIPT LAPTOPS FOR LOCKSCREEN TO NOT REQUIRE BOTH PASSWORD AND FINGERPRINT AUTH!"
+
+echo "Please setup ibus to use default system keyboard language."
+ibus-setup & disown

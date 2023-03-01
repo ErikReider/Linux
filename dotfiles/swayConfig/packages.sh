@@ -10,6 +10,7 @@ export common=(
     "gammastep"
     "wdisplays"
     "kitty"
+    "qt5ct"
     "geocode-glib"
     "brightnessctl"
     "playerctl"
@@ -31,7 +32,6 @@ export arch=(
     "geoclue"
     "bluez"
     "bluez-utils"
-    "qt5ct"
     "ttf-roboto"
     "swaync-git"
     "rofi-lbonn-wayland-git"
@@ -60,11 +60,17 @@ export fedora=(
     "bluez-tools"
     "qt5-qtconfiguration"
     "google-roboto-fonts"
-    "SwayNotificationCenter"
     "rofi-wayland"
     "fontawesome-fonts"
     "fontawesome5-fonts"
     "material-icons-fonts"
+    # Wallpapers
+    "verne-backgrounds-extras-gnome"
+    "verne-backgrounds-gnome"
+    "schroedinger-cat-backgrounds-extras-gnome"
+    "schroedinger-cat-backgrounds-gnome"
+    "deepin-wallpapers"
+    "adapta-backgrounds"
 
     # avizo
     # swaytools
@@ -78,8 +84,10 @@ export lure=(
     "sway-audio-idle-inhibit-git"
     "swayfloatingswitcher-git"
     "swayfx-git"
+    "swaync-git"
     "swaylock-effects-erikreider-git"
     "swayosd-git"
+    "swayscratchpad-git"
     "swaysettings-git"
     "waybar-git"
 )
