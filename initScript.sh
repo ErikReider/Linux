@@ -138,7 +138,7 @@ if [[ $install_app_var == y ]]; then
         sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
-        sudo dnf copr enable nickavem/adw-gtk3
+        sudo dnf copr enable nickavem/adw-gtk3 -y
 
         dnf check-update
 
@@ -173,8 +173,8 @@ if [[ $install_dev_tools == y ]]; then
     elif [[ "$distroName" == "fedora" ]]; then
         sudo dnf copr enable atim/lazygit -y
         sudo dnf copr enable atim/lazydocker -y
-        sudo dnf copr enable agriffis/neovim-nightly
-        sudo dnf copr enable rubemlrm/act-cli
+        sudo dnf copr enable agriffis/neovim-nightly -y
+        sudo dnf copr enable rubemlrm/act-cli -y
         sudo dnf groupinstall "Development Tools"
         sudo dnf groupinstall "RPM Development Tools"
         sudo dnf install "${common[@]}" "${fedora[@]}"
@@ -212,13 +212,6 @@ if [[ $change_to_bash_var == y ]]; then
     ln -s "$currentDir"/dotfiles/zsh/.zshrc .zshrc
     ln -s "$currentDir"/dotfiles/zsh/.zprofile .zprofile
     ln -s "$currentDir"/dotfiles/zsh .
-
-    # Set password feedback
-    read -rp "Copy this 'Defaults pwfeedback', paste it to the top of the file. Understood? [y/n] " visudo_var
-    if [[ $visudo_var == y ]]; then
-        export EDITOR=/usr/bin/nvim
-        sudo visudo
-    fi
 fi
 echo ""
 ##

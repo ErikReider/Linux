@@ -23,6 +23,7 @@ export common=(
 "go"
 "jsonrpc-glib"
 "luarocks"
+"mold"
 )
 export fedora=(
 "fd-find"
@@ -38,6 +39,11 @@ export fedora=(
 "tree-sitter-cli"
 "fd-find"
 "act-cli"
+"qt5-qdbusviewer"
+
+"gtk4-devel"
+"gtk3-devel"
+"gtk2-devel"
 )
 export arch=(
 "fd"

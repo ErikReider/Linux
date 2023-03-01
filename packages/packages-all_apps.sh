@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export common=(
-"firefox"
 "chromium"
 "jq"
 "discord"
@@ -9,6 +8,8 @@ export common=(
 "vlc"
 "file-roller"
 "neofetch"
+"distrobox"
+"gparted"
 )
 export fedora=(
 "sushi"
@@ -31,5 +32,8 @@ export arch=(
 )
 
 export fedoraRemove=(
+"firefox"
 "fedora-bookmarks"
+"libreoffice"
+"libreoffice-*"
 )

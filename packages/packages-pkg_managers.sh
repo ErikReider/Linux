@@ -9,6 +9,7 @@ export fedora=(
 "yarnpkg"
 "yarnpkg"
 "nodejs"
+"dnfdragora"
 )
 export arch=(
 "python-pip"
