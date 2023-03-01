@@ -27,6 +27,13 @@ if [[ "$distroName" == "fedora" ]]; then
         sudo rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
         # Add flathub as flatpak repo
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        # Add flathub beta as flatpak repo
+        flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+        # Reinstall flatpaks with flathub repo
+        sudo flatpak install --reinstall flathub $(flatpak list --app-runtime=org.fedoraproject.Platform --columns=application | tail -n +1 )
+        # Remove fedora flatpak repo
+        sudo flatpak remote-delete fedora
+        sudo flatpak remote-delete fedora-testing
         # Codecs
         sudo dnf install gstreamer1-plugins-{bad-\*,good-\*,base,ugly-\*,ugly} gstreamer1-plugin-openh264 gstreamer1-libav mozilla-openh264
         sudo dnf install lame\* --exclude=lame-devel
