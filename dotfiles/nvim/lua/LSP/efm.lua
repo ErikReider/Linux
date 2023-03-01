@@ -2,7 +2,6 @@ local nvim_lsp = require('lspconfig')
 
 local prettier = require("LSP.Diagnostics.prettier")
 local eslint = require("LSP.Diagnostics.eslint")
-local uncrustify = require("LSP.Diagnostics.uncrustify")
 local shfmt = require("LSP.Diagnostics.shfmt")
 
 local efm_languages = {
@@ -37,13 +36,11 @@ local efm_languages = {
     less = {prettier},
     sass = {prettier},
     css = {prettier},
-    vala = {uncrustify.init("VALA")},
     python = {{formatCommand = "autopep8 --ignore E501 -", formatStdin = true}}
     -- latex = {{}},
 }
 local efm_root_markers = {
-    "package.json", "yarn.lock", "package-lock.json", ".git/", ".zshrc",
-    ".uncrustify.cfg"
+    "package.json", "yarn.lock", "package-lock.json", ".git/", ".zshrc"
 }
 nvim_lsp.efm.setup({
     on_attach = require("LSP.on_attach"),

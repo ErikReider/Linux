@@ -14,6 +14,7 @@ require("mason-tool-installer").setup({
         'bash-language-server',
         'shellcheck',
         'efm',
+        'clangd',
         'lua-language-server',
         'vim-language-server',
         -- TODO: Use rust-tools

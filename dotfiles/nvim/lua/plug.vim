@@ -127,7 +127,7 @@ Plug 'ethanholz/nvim-lastplace'
 " Easily jump between NeoVim windows.
 Plug 's1n7ax/nvim-window-picker'
 " Display a line as the colorcolumn
-Plug 'xiyaowong/virtcolumn.nvim'
+" Plug 'xiyaowong/virtcolumn.nvim'
 " Allows quickly switching between header and implementation files for C/C++ in Neovim.
 Plug 'jakemason/ouroboros'
 " Highlight, list and search todo comments in your projects

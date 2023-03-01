@@ -27,7 +27,7 @@ end
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-nvim_lsp.sumneko_lua.setup({
+nvim_lsp.lua_ls.setup({
     on_attach = on_attach,
     flags = {debounce_text_changes = 150},
     capabilities = capabilities,
@@ -55,10 +55,7 @@ nvim_lsp.sumneko_lua.setup({
 })
 
 nvim_lsp.vala_ls.setup({
-    on_attach = function(client, bufnr)
-        client.server_capabilities.document_formatting = false
-        on_attach(client, bufnr)
-    end,
+    on_attach = on_attach,
     flags = {debounce_text_changes = 150},
     capabilities = capabilities
 })

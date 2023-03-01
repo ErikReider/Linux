@@ -11,7 +11,10 @@ require("nvim-tree").setup({
     sort_by = "name",
     update_cwd = true,
     view = {
-        width = 30,
+        width = {
+            min = 30,
+            max = 100
+        },
         hide_root_folder = false,
         side = "left",
         preserve_window_proportions = false,
@@ -65,7 +68,9 @@ require("nvim-tree").setup({
                 }
             }
         },
-        special_files = {"Cargo.toml", "Makefile", "README.md", "readme.md"}
+        special_files = {
+            "Cargo.toml", "Makefile", "README.md", "readme.md", ".gitignore"
+        }
     },
     hijack_directories = {enable = true, auto_open = true},
     update_focused_file = {enable = false, update_cwd = false, ignore_list = {}},
