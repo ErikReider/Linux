@@ -132,6 +132,8 @@ Plug 's1n7ax/nvim-window-picker'
 Plug 'jakemason/ouroboros'
 " Highlight, list and search todo comments in your projects
 Plug 'folke/todo-comments.nvim'
+" Extensible Neovim Scrollbar
+Plug 'petertriho/nvim-scrollbar'
 
 " Hydra
 Plug 'anuvyklack/hydra.nvim'
