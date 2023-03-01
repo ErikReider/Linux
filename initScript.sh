@@ -2,7 +2,7 @@
 
 distroName=$(cat < /etc/os-release | grep "^ID" | awk -F= '{print $2}')
 
-currentDir=$(dirname $(readlink -f "$0"))
+currentDir="$(dirname "$(readlink -f "$0")")"
 cd "$currentDir"
 
 ## Flatpak theme override
@@ -30,7 +30,7 @@ if [[ "$distroName" == "fedora" ]]; then
         # Add flathub beta as flatpak repo
         flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
         # Reinstall flatpaks with flathub repo
-        sudo flatpak install --reinstall flathub $(flatpak list --app-runtime=org.fedoraproject.Platform --columns=application | tail -n +1 )
+        sudo flatpak install --reinstall flathub "$(flatpak list --app-runtime=org.fedoraproject.Platform --columns=application | tail -n +1 )"
         # Remove fedora flatpak repo
         sudo flatpak remote-delete fedora
         sudo flatpak remote-delete fedora-testing
@@ -99,7 +99,8 @@ echo ""
 ## Package managers
 read -rp "Do you wish to install all package managers? [y/n] " install_pkg_var
 if [[ $install_pkg_var == y ]]; then
-    source ./packages/packages-pkg_managers.sh
+    cd "$currentDir"
+    source "$currentDir/packages/packages-pkg_managers.sh"
 
     if [[ "$distroName" == "arch" ]]; then
         # Install yay
@@ -115,13 +116,10 @@ if [[ $install_pkg_var == y ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
 
         # Install LURE (Linux User REpository)
-        ./scripts/install_lure.sh
+        "$currentDir/scripts/install_lure.sh"
     fi
 
     lure ar -n "self-repo" -u "https://github.com/ErikReider/lure-repo.git"
-
-    # Install Brew
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 echo ""
 ##
@@ -129,7 +127,8 @@ echo ""
 ## Applications
 read -rp "Do you wish to install all Applications? [y/n] " install_app_var
 if [[ $install_app_var == y ]]; then
-    source ./packages/packages-all_apps.sh
+    cd "$currentDir"
+    source "$currentDir/packages/packages-all_apps.sh"
 
     if [[ "$distroName" == "arch" ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
@@ -165,7 +164,8 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
     gsettings set org.gnome.desktop.interface monospace-font-name "FiraCode Nerd Font weight=450 10"
 
     # Install Nerd Font patched Fira Code fonts
-    cd /tmp && git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
+    cd /tmp
+    git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
     cd nerd-fonts
     git pull
     git sparse-checkout add patched-fonts/FiraCode
@@ -182,7 +182,8 @@ echo ""
 ## Dev Tools
 read -rp "Do you wish to install dev tools? [y/n] " install_dev_tools
 if [[ $install_dev_tools == y ]]; then
-    source ./packages/packages-dev_tools.sh
+    cd "$currentDir"
+    source "$currentDir/packages/packages-dev_tools.sh"
 
     if [[ "$distroName" == "arch" ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
@@ -196,7 +197,7 @@ if [[ $install_dev_tools == y ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
 
-    # install deno
+    # Install deno
     curl -fsSL https://deno.land/x/install/install.sh | sh
 
     # Start docker daemon with system
@@ -211,7 +212,8 @@ echo ""
 ## ZSH
 read -rp "Do you wish to switch to ZSH? [y/n] " change_to_bash_var
 if [[ $change_to_bash_var == y ]]; then
-    source ./packages/packages-zsh.sh
+    cd "$currentDir"
+    source "$currentDir/packages/packages-zsh.sh"
 
     if [[ "$distroName" == "arch" ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
@@ -236,8 +238,7 @@ echo ""
 read -rp "Do you wish to link NeoVim config files? [y/n] " vim_var
 if [[ $vim_var == y ]]; then
     cd "$currentDir"
-    source ./packages/packages-nvim.sh
-    source ./packages/packages-nvim.sh
+    source "$currentDir/packages/packages-nvim.sh"
 
     if [[ "$distroName" == "arch" ]]; then
         pip install neovim
@@ -269,7 +270,7 @@ echo ""
 ## Gaming
 read -rp "Do you wish to install Gaming software? [y/n] " install_gaming_tools
 if [[ $install_gaming_tools == y ]]; then
-    source ./packages/packages-gaming.sh
+    source "$currentDir/packages/packages-gaming.sh"
 
     if [[ "$distroName" == "arch" ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
