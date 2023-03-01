@@ -71,8 +71,7 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 
 export PATH="$HOME/.deno/bin:$PATH"
 
-py_user_base=$(python3 -m site --user-base)
-export PATH="$py_user_base/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 export CHROME_EXECUTABLE="/var/lib/flatpak/app/org.mozilla.firefox/current/active/files/lib/firefox/firefox"
 
