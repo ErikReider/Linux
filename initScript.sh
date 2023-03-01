@@ -197,6 +197,9 @@ if [[ $install_dev_tools == y ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
 
+    # Install Flutter
+    "$currentDir/scripts/install_flutter.sh"
+
     # Install deno
     curl -fsSL https://deno.land/x/install/install.sh | sh
 
