@@ -79,6 +79,11 @@ if [[ $symlink_etc_var == y ]]; then
         sudo cp -ib "$currentDir/dotfiles/etc/dnf/dnf.conf" .
     fi
 
+    # ~/.config/MangoHud/*
+    [ -d "$HOME/.config/MangoHud" ] || mkdir "$HOME/.config/MangoHud"
+    cd "$HOME/.config/MangoHud"
+    ln -si "$currentDir/dotfiles/MangoHud/"* .
+
     cd "$currentDir"
 fi
 echo ""
