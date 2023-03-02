@@ -213,8 +213,8 @@
     "interval": 600,
     "tooltip": false,
     "signal": 9,
-    "exec": "~/.config/waybar/scripts/updates-pacman-aurhelper.sh",
-    "on-click": "kitty -e $SHELL -c '~/.config/waybar/scripts/arch_update.sh'; pkill -SIGRTMIN+9 waybar",
+    "exec": "~/.config/waybar/scripts/check-for-updates.sh",
+    "on-click": "kitty -e $SHELL -c '~/.config/waybar/scripts/update_system.sh'; pkill -SIGRTMIN+9 waybar",
     "escape": true
   },
   "custom/weather": {
