@@ -11,9 +11,6 @@ fi
 
 source "$ZDOTDIR/antigen.zsh"
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
-
 # Plugins
 antigen bundle git
 antigen bundle zsh-interactive-cd
