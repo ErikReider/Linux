@@ -51,6 +51,8 @@ if hash brew 2>/dev/null; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
 # Path
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
@@ -76,7 +78,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export CHROME_EXECUTABLE="/var/lib/flatpak/app/org.mozilla.firefox/current/active/files/lib/firefox/firefox"
 
 # Set number of cores GNU make should use
-nproc_cores=$((2*$(nproc)))
+nproc_cores=$((2 * $(nproc)))
 export MAKEFLAGS="-j $nproc_cores"
 export CMAKE_ARGS="-j $nproc_cores"
 export NINJA_ARGS="-j $nproc_cores"
