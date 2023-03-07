@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-distroName=$(cat < /etc/os-release | grep "^ID" | awk -F= '{print $2}')
+distroName=$(cat </etc/os-release | grep "^ID" | awk -F= '{print $2}')
 
 currentDir="$(dirname "$(readlink -f "$0")")"
 cd "$currentDir"
@@ -19,7 +19,7 @@ echo ""
 ##
 
 ## Fedora tweaks
-if [[ "$distroName" == "fedora" ]]; then
+if [[ $distroName == "fedora" ]]; then
     read -rp "Do you wish to tweak Fedora (enable 3rd-party repos, install codecs, firmware, etc...)? [y/n] " tweakFedora
     if [[ $tweakFedora == y ]]; then
         # Enable rpmfusion
@@ -30,7 +30,7 @@ if [[ "$distroName" == "fedora" ]]; then
         # Add flathub beta as flatpak repo
         flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
         # Reinstall flatpaks with flathub repo
-        sudo flatpak install --reinstall flathub "$(flatpak list --app-runtime=org.fedoraproject.Platform --columns=application | tail -n +1 )"
+        sudo flatpak install --reinstall flathub "$(flatpak list --app-runtime=org.fedoraproject.Platform --columns=application | tail -n +1)"
         # Remove fedora flatpak repo
         sudo flatpak remote-delete fedora
         sudo flatpak remote-delete fedora-testing
@@ -102,7 +102,7 @@ if [[ $install_pkg_var == y ]]; then
     cd "$currentDir"
     source "$currentDir/packages/packages-pkg_managers.sh"
 
-    if [[ "$distroName" == "arch" ]]; then
+    if [[ $distroName == "arch" ]]; then
         # Install yay
         cd /tmp
         git clone https://aur.archlinux.org/yay.git
@@ -111,7 +111,7 @@ if [[ $install_pkg_var == y ]]; then
         cd "$currentDir"
 
         yay -S --needed "${common[@]}" "${arch[@]}"
-    elif [[ "$distroName" == "fedora" ]]; then
+    elif [[ $distroName == "fedora" ]]; then
         sudo dnf groupinstall "Development Tools"
         sudo dnf install "${common[@]}" "${fedora[@]}"
 
@@ -130,13 +130,14 @@ if [[ $install_app_var == y ]]; then
     cd "$currentDir"
     source "$currentDir/packages/packages-all_apps.sh"
 
-    if [[ "$distroName" == "arch" ]]; then
+    if [[ $distroName == "arch" ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
-    elif [[ "$distroName" == "fedora" ]]; then
+    elif [[ $distroName == "fedora" ]]; then
         # VSCode
         sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+        sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
+        sudo dnf copr enable principis/NoiseTorch -y
         sudo dnf copr enable nickavem/adw-gtk3 -y
 
         dnf check-update
@@ -156,7 +157,7 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 
     # GTK Defaults
     gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
-    gsettings set org.gnome.desktop.interface font-antialiasing "rgba"
+    gsettings set org.gnome.desktop.interface font-antialiasing "greyscale"
     gsettings set org.gnome.desktop.interface font-hinting "slight"
     gsettings set org.gnome.desktop.interface font-name "Clear Sans 11"
     gsettings set org.gnome.desktop.interface document-font-name "Clear Sans 11"
@@ -185,9 +186,9 @@ if [[ $install_dev_tools == y ]]; then
     cd "$currentDir"
     source "$currentDir/packages/packages-dev_tools.sh"
 
-    if [[ "$distroName" == "arch" ]]; then
+    if [[ $distroName == "arch" ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
-    elif [[ "$distroName" == "fedora" ]]; then
+    elif [[ $distroName == "fedora" ]]; then
         sudo dnf copr enable atim/lazygit -y
         sudo dnf copr enable atim/lazydocker -y
         sudo dnf copr enable agriffis/neovim-nightly -y
@@ -218,9 +219,9 @@ if [[ $change_to_bash_var == y ]]; then
     cd "$currentDir"
     source "$currentDir/packages/packages-zsh.sh"
 
-    if [[ "$distroName" == "arch" ]]; then
+    if [[ $distroName == "arch" ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
-    elif [[ "$distroName" == "fedora" ]]; then
+    elif [[ $distroName == "fedora" ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
 
@@ -243,10 +244,10 @@ if [[ $vim_var == y ]]; then
     cd "$currentDir"
     source "$currentDir/packages/packages-nvim.sh"
 
-    if [[ "$distroName" == "arch" ]]; then
+    if [[ $distroName == "arch" ]]; then
         pip install neovim
         yay -S --needed "${common[@]}" "${arch[@]}"
-    elif [[ "$distroName" == "fedora" ]]; then
+    elif [[ $distroName == "fedora" ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
 
@@ -275,9 +276,9 @@ read -rp "Do you wish to install Gaming software? [y/n] " install_gaming_tools
 if [[ $install_gaming_tools == y ]]; then
     source "$currentDir/packages/packages-gaming.sh"
 
-    if [[ "$distroName" == "arch" ]]; then
+    if [[ $distroName == "arch" ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
-    elif [[ "$distroName" == "fedora" ]]; then
+    elif [[ $distroName == "fedora" ]]; then
         read -rp "Use mesa-git? [y/n] " use_mesa_git
         if [[ $use_mesa_git == y ]]; then
             sudo dnf copr enable xxmitsu/mesa-git -y

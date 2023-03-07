@@ -24,6 +24,7 @@ export common=(
 "jsonrpc-glib"
 "luarocks"
 "mold"
+"gucharmap"
 )
 export fedora=(
 "fd-find"
@@ -40,10 +41,10 @@ export fedora=(
 "fd-find"
 "act-cli"
 "qt5-qdbusviewer"
-
 "gtk4-devel"
 "gtk3-devel"
 "gtk2-devel"
+"gh"
 )
 export arch=(
 "fd"
@@ -53,4 +54,5 @@ export arch=(
 "tree-sitter"
 "fd"
 "act-bin"
+"github-cli"
 )

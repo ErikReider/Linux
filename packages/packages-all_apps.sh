@@ -10,6 +10,8 @@ export common=(
 "neofetch"
 "distrobox"
 "gparted"
+"mpv"
+"noisetorch"
 )
 export fedora=(
 "sushi"
@@ -17,6 +19,11 @@ export fedora=(
 "java-1.8.0-openjdk"
 "java-11-openjdk"
 "java-latest-openjdk"
+"google-roboto-fonts"
+"fontawesome-fonts"
+"fontawesome5-fonts-all"
+"fontawesome5-fonts"
+"material-icons-fonts"
 "intel-clear-sans-fonts"
 "liberation-fonts"
 "liberation-mono-fonts"

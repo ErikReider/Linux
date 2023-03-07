@@ -59,11 +59,7 @@ export fedora=(
     "bluez"
     "bluez-tools"
     "qt5-qtconfiguration"
-    "google-roboto-fonts"
     "rofi-wayland"
-    "fontawesome-fonts"
-    "fontawesome5-fonts"
-    "material-icons-fonts"
     # Wallpapers
     "verne-backgrounds-extras-gnome"
     "verne-backgrounds-gnome"
@@ -79,7 +75,7 @@ export fedora=(
 
 export lure=(
     "autotiling-git"
-    "font-awesome"
+    # "font-awesome" # Due to issues in CSGO console font rendering. A fontconfig should probably fix?
     "rofi-emoji"
     "sway-audio-idle-inhibit-git"
     "swayfloatingswitcher-git"

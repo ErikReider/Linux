@@ -2,7 +2,6 @@
 
 export common=(
 "git"
-"npm"
 )
 export fedora=(
 "python3-pip"
@@ -10,6 +9,7 @@ export fedora=(
 "yarnpkg"
 "nodejs"
 "dnfdragora"
+"nodejs-npm"
 )
 export arch=(
 "python-pip"
@@ -17,4 +17,5 @@ export arch=(
 "yarn"
 "nodejs-lts-fermium"
 "lure-bin"
+"npm"
 )
