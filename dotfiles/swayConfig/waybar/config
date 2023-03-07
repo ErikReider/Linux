@@ -31,7 +31,7 @@
     "tooltip": true
   },
   "custom/linux": {
-    "format": "<span font='13' font_family='FiraCode Nerd Font'>{}</span> ",
+    "format": "<span font_family='FiraCode Nerd Font'>{}</span> ",
     "exec": "~/.config/waybar/scripts/systemIcon.sh",
     "interval": "once",
     "tooltip": false,
@@ -47,7 +47,7 @@
     "format": "<span font_family='FiraCode Nerd Font'>{value}</span>"
   },
   "sway/mode": {
-    "format": "<span>{}</span>"
+    "format": "{}"
   },
   "tray": {
     "reverse-direction": true,
@@ -59,12 +59,12 @@
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "cpu": {
-    "format": "<span font_family='Font Awesome 6 Free'></span> {usage}%",
+    "format": "󰍛 {usage}%",
     "interval": 1
   },
   "memory": {
     "interval": 10,
-    "format": "<span font_family='Font Awesome 6 Free'></span> {used:0.2f} GiB"
+    "format": " {used:0.2f} GiB"
   },
   "custom/media": {
     "escape": true,
@@ -170,7 +170,7 @@
   "network#ethernet": {
     "interface": "enp*",
     "interval": 30,
-    "format-ethernet": "<span font_family='Font Awesome 6 Free'></span>",
+    "format-ethernet": "",
     "format-linked": "",
     "format-disconnected": "",
     "format-disabled": "",
@@ -181,13 +181,13 @@
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-bluetooth": "{icon} {volume}%",
-    "format-bluetooth-muted": "{icon} <span font_family='Font Awesome 6 Free'></span>{volume}%",
-    "format-muted": "<span font_family='Font Awesome 6 Free'></span> {volume}%",
+    "format-bluetooth-muted": "{icon} {volume}%",
+    "format-muted": " {volume}%",
     "format-icons": {
       "default": [
-        "<span font_family='Font Awesome 6 Free'></span>",
-        "<span font_family='Font Awesome 6 Free'></span>",
-        "<span font_family='Font Awesome 6 Free'></span>"
+        "",
+        "",
+        ""
       ]
     },
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",

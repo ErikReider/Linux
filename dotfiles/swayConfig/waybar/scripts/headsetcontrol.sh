@@ -13,7 +13,7 @@ if [[ $headetResult != *"Unavailable"* ]]; then
     elif [[ $charge == "Charging" ]]; then
         charge=""
     fi
-    echo " $charge"
+    echo " $charge"
 else
     echo
 fi

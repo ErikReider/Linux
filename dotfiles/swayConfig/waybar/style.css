@@ -11,7 +11,7 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
   font-size: 17px;
   font-weight: bold;
   min-height: 0;
@@ -123,6 +123,7 @@ window > box > box > widget button:insensitive {
 }
 
 #network {
+  font-family: "Material Icons Round", "FontAwesome";
   font-size: 22px;
 }
 
@@ -133,8 +134,4 @@ window > box > box > widget button:insensitive {
 
 #pulseaudio.muted {
   color: @text-color-disabled;
-}
-
-#custom-notification {
-  font-family: "NotoSansMono Nerd Font";
 }
