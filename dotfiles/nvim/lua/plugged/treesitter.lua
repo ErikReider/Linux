@@ -20,7 +20,16 @@ config.setup({
         }
     },
     -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-    context_commentstring = {enable = true, enable_autocmd = false},
+    context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+        config = {
+            css = { __default = '// %s', __multiline = '// %s' },
+            scss = { __default = '// %s', __multiline = '// %s' },
+            c = { __default = '// %s', __multiline = '// %s' },
+            cpp = { __default = '// %s', __multiline = '// %s' },
+        }
+    },
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     textobjects = {
         select = {
