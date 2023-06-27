@@ -11,13 +11,23 @@
 @define-color noti-close-bg rgba(255, 255, 255, 0.1);
 @define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
 
+@define-color mpris-album-art-overlay rgba(0, 0, 0, 0.55);
+@define-color mpris-button-hover rgba(0, 0, 0, 0.50);
+
 @define-color bg-selected rgb(0, 128, 255);
+
+.testing {
+  background-color: red;
+}
 
 .notification-row {
   transition: all 200ms ease;
   outline: none;
   margin-bottom: 4px;
   border-radius: 12px;
+}
+.notification-row:hover {
+  background: transparent;
 }
 
 .control-center .notification-row:focus,
@@ -28,8 +38,9 @@
 
 .notification-row:focus .notification,
 .notification-row:hover .notification {
-  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 0px 0px 3px @bg-selected;
+  /* box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.5); */
+  /* box-shadow: 0px 0px 0px 3px @bg-selected; */
+  box-shadow: none;
 }
 
 .control-center .notification {
@@ -44,7 +55,8 @@
   transition: all 200ms ease;
   border-radius: 12px;
   margin: 6px 6px;
-  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.5); */
+  box-shadow: none;
   padding: 0;
 }
 
@@ -130,11 +142,11 @@
 
 /* add bottom border radius to eliminate clipping */
 .notification-action:first-child {
-  border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 12px;
 }
 
 .notification-action:last-child {
-  border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 12px;
   border-right: 1px solid @noti-border-color;
 }
 
@@ -177,8 +189,8 @@
   border-radius: 12px;
   background-clip: border-box;
   padding: 4px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
-    0 2px 6px 2px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7), 0 2px 6px 2px rgba(0, 0, 0, 0.3); */
+  box-shadow: none;
 }
 
 .control-center-list {
@@ -251,10 +263,25 @@
   /* The parent to all players */
 }
 .widget-mpris-player {
-  padding: 8px;
-  margin: 8px;
-  background-color: @noti-bg;
+  padding: 16px;
+  margin: 16px;
+  background-color: @mpris-album-art-overlay;
   border-radius: 12px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.widget-mpris-album-art {
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+}
+.widget-mpris-player button:hover {
+  /* The media player buttons (play, pause, next, etc...) */
+  background: @noti-bg-hover;
+}
+.widget-mpris > box > button {
+  /* Change player side buttions */
+}
+.widget-mpris > box > button:disabled {
+  /* Change player side buttions insensitive */
 }
 .widget-mpris-title {
   font-weight: bold;
@@ -285,27 +312,30 @@
 .widget-menubar>box>.menu-button-bar>button {
   border: none;
   background: transparent;
+  background: red;
 }
 
 /* .AnyName { Name defined in config after #
-  background-color: @noti-bg;
-  padding: 8px;
-  margin: 8px;
-  border-radius: 12px;
-}
-
-.AnyName>button {
-  background: transparent;
-  border: none;
-}
-
-.AnyName>button:hover {
-  background-color: @noti-bg-hover;
-} */
+ *   background-color: @noti-bg;
+ *   padding: 8px;
+ *   margin: 8px;
+ *   border-radius: 12px;
+ * }
+ * 
+ * .AnyName>button {
+ *   background: transparent;
+ *   border: none;
+ * }
+ * 
+ * .AnyName>button:hover {
+ *   background-color: @noti-bg-hover;
+ * }
+ */
 
 .topbar-buttons>button { /* Name defined in config after # */
   border: none;
   background: transparent;
+  background: blue;
 }
 
 /* Volume widget */

@@ -1,6 +1,6 @@
 # vim: ft=dosini
 
-fade-in=0.2
+# fade-in=0.2
 image=~/.cache/wallpaper
 
 ignore-empty-password

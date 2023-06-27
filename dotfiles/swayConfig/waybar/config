@@ -1,8 +1,8 @@
 // vim: ft=jsonc
 {
-  "layer": "bottom",
+  "layer": "top",
   "position": "top",
-  "height": 31,
+  "margin": 6,
   "modules-left": [
     "custom/linux",
     "custom/headsetcontrol",

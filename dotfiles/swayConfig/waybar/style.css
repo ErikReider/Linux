@@ -2,8 +2,8 @@
  * vim: ft=less
  */
 
-@define-color bg rgba(42, 42, 42, 0.8);
-@define-color bg-hover rgba(65, 65, 65, 0.8);
+@define-color bg rgba(42, 42, 42, 0.7);
+@define-color bg-hover rgba(65, 65, 65, 0.7);
 @define-color text-color white;
 @define-color text-color-disabled rgba(255, 255, 255, 0.4);
 @define-color accent-color rgb(0, 128, 255);
@@ -34,11 +34,7 @@ window {
 
 window > box {
   background: @bg;
-  margin: 8px;
-  border-radius: 12px;
   background-clip: border-box;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
-    0 2px 6px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* All module containers */

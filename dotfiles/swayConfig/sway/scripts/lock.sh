@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ $1 == "--lock" ]]; then
     profilePic=$(python3 ~/.config/sway/scripts/profilePicture.py)
-    swaylock --indicator-image "$profilePic"
+    swaylock --daemonize --indicator-image "$profilePic"
 else
     xset s off
     # Killall these prev processes
