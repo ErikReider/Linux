@@ -13,7 +13,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 "" Essential plugins
 " Treesitter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}
+" Locked to commit due to Dart lag, https://github.com/nvim-treesitter/nvim-treesitter/issues/4945
+Plug 'nvim-treesitter/nvim-treesitter', {'commit': '33eb472', 'do': ':TSUpdate all'}
 " Syntax aware text-objects, select, move, swap, and peek support
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Code context
@@ -64,7 +65,7 @@ Plug 'folke/lsp-colors.nvim'
 " Vim plugin for automatically highlighting other uses of the word under the cursor.
 Plug 'RRethy/vim-illuminate'
 " See LSP server startup status
-Plug 'j-hui/fidget.nvim'
+Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
 
 " Lsp Installer
 Plug 'williamboman/mason.nvim'

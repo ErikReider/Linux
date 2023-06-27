@@ -1,5 +1,57 @@
 _G.map = vim.api.nvim_set_keymap
 
+---Get the MASON LSP executable path
+---@param name string The name of the LSP (ex: "elixir-ls").
+---@param default string the default path to use if LSP wasn't found.
+---@return string string The LSPs path.
+function _G.get_lsp_path(name, default)
+    local path = path_join(vim.fn.stdpath("data"), "mason", "bin", name)
+    if file_exists(path) then
+        return path
+    end
+    return default
+end
+
+---Split string into a table of strings using a separator.
+---@param inputString string The string to split.
+---@param sep string The separator to use.
+---@return table table A table of strings.
+function _G.split(inputString, sep)
+  local fields = {}
+
+  local pattern = string.format("([^%s]+)", sep)
+  local _ = string.gsub(inputString, pattern, function(c)
+    fields[#fields + 1] = c
+  end)
+
+  return fields
+end
+
+---Joins arbitrary number of paths together.
+---@param ... string The paths to join.
+---@return string
+function _G.path_join(...)
+    local args = {...}
+    if #args == 0 then return "" end
+
+    local path_separator = "/"
+    local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1
+    if is_windows == true then
+      path_separator = "\\"
+    end
+
+    local all_parts = {}
+    if type(args[1]) == "string" and args[1]:sub(1, 1) == path_separator then
+        all_parts[1] = ""
+    end
+
+    for _, arg in ipairs(args) do
+        arg_parts = split(arg, path_separator)
+        vim.list_extend(all_parts, arg_parts)
+    end
+    return table.concat(all_parts, path_separator)
+end
+
 function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, {...})
     print(unpack(objects))
@@ -45,8 +97,8 @@ function _G.tableMerge(t1, t2)
     return t1
 end
 
-function _G.file_exists(name)
-    local f = io.open(name, "r")
+function _G.file_exists(path)
+    local f = io.open(path, "r")
     if f ~= nil then
         io.close(f)
         return true

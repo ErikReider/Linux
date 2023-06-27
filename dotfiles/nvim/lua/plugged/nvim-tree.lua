@@ -4,9 +4,6 @@ require("nvim-tree").setup({
     hijack_cursor = false,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
-    ignore_buffer_on_setup = false,
-    open_on_setup = false,
-    open_on_setup_file = false,
     open_on_tab = false,
     sort_by = "name",
     update_cwd = true,
@@ -74,7 +71,6 @@ require("nvim-tree").setup({
     },
     hijack_directories = {enable = true, auto_open = true},
     update_focused_file = {enable = false, update_cwd = false, ignore_list = {}},
-    ignore_ft_on_setup = {},
     system_open = {cmd = "", args = {}},
     diagnostics = {
         enable = false,

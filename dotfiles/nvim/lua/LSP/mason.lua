@@ -24,7 +24,7 @@ require("mason-tool-installer").setup({
         'json-lsp',
         'dockerfile-language-server',
         'emmet-ls',
-        'elixir-ls',
+        { 'elixir-ls', version = "v0.14.2" },
         'lemminx',
         'typescript-language-server',
         'stylelint-lsp',
@@ -44,6 +44,8 @@ require("mason-tool-installer").setup({
         'shfmt',
         -- TODO: Prettierd Plugins https://github.com/fsouza/prettierd#additional-plugins
         'prettierd',
+        'clang-format',
+        'rustfmt'
 
         -- LuaFormatter on
     },

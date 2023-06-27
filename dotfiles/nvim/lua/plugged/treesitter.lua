@@ -28,10 +28,11 @@ config.setup({
         enable = true,
         enable_autocmd = false,
         config = {
-            css = { __default = '// %s', __multiline = '// %s' },
-            scss = { __default = '// %s', __multiline = '// %s' },
-            c = { __default = '// %s', __multiline = '// %s' },
-            cpp = { __default = '// %s', __multiline = '// %s' },
+            css = {__default = '// %s', __multiline = '// %s'},
+            scss = {__default = '// %s', __multiline = '// %s'},
+            c = {__default = '// %s', __multiline = '// %s'},
+            cpp = {__default = '// %s', __multiline = '// %s'},
+            glsl = {__default = '// %s', __multiline = '// %s'}
         }
     },
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects

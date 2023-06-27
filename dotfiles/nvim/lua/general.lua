@@ -37,12 +37,11 @@ vim.o.splitright = true
 -- Folding
 vim.o.foldcolumn = "auto:1"
 vim.o.foldlevel = 99 -- feel free to decrease the value
+vim.o.foldlevelstart = 99 -- feel free to decrease the value
+-- Turn on auto folding on start
 vim.o.foldenable = true
 -- Max nested folds
 vim.o.foldnestmax = 10
--- Turn off auto folding on start
-vim.o.foldenable = false
--- vim.o.foldlevel=2
 
 -- Makes popup menu smaller
 vim.o.pumheight = 30

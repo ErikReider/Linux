@@ -21,23 +21,31 @@ require("bufferline").setup {
     exclude_ft = {"dap-repl"},
     -- exclude_name = {"package.json"},
 
-    -- Enable/disable icons
-    -- if set to "numbers", will show buffer index in the tabline
-    -- if set to "both", will show buffer index and icons in the tabline
-    icons = true,
+    -- Configure icons on the bufferline.
+    icons = {
+        button = "",
+        modified = {
+            button = "●"
+        },
+        filetype = { enabled = true },
+        pinned = {
+            button = "車"
+        },
+        separator = {
+            left = ""
+        },
+        inactive = {
+            separator = {
+                left = ""
+            }
+        },
+    },
 
     -- If set, the icon color will follow its corresponding buffer
     -- highlight group. By default, the Buffer*Icon group is linked to the
     -- Buffer* group (see Highlighting below). Otherwise, it will take its
     -- default value as defined by devicons.
     icon_custom_colors = false,
-
-    -- Configure icons on the bufferline.
-    icon_separator_active = "",
-    icon_separator_inactive = "",
-    icon_close_tab = "",
-    icon_close_tab_modified = "●",
-    icon_pinned = "車",
 
     -- If true, new buffers will be inserted at the start/end of the list.
     -- Default is to insert after current buffer.
