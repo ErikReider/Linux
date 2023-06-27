@@ -1,3 +1,5 @@
+local vscode = require("vscode")
+
 vim.o.termguicolors = true
 
 -- Colors: https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
@@ -9,7 +11,6 @@ require("custom.gsettings_watcher").init(function(style)
     vim.o.background = style
     vim.g.vscode_style = style
 
-    vim.cmd([[colorscheme vscode]])
 
     local colors = require("vscode.colors").get_colors()
     local isDark = vim.o.background == "dark"
@@ -18,7 +19,8 @@ require("custom.gsettings_watcher").init(function(style)
             colors.vscPopupHighlightLightBlue,
         bold = true
     }
-    require("vscode").setup({
+
+    vscode.setup({
         transparent = false,
         italic_comments = true,
         disable_nvimtree_bg = false,
@@ -39,7 +41,7 @@ require("custom.gsettings_watcher").init(function(style)
             VirtColumn = {link = "LineNr"},
             -- Make floating window title more visible
             FloatTitle = {link = "Normal"},
-            -- 
+
             -- TODO: Use vscode colors
             ConflictMarkerBegin = {bg = "#2f7366", blend = 100},
             ConflictMarkerOurs = {bg = "#25403B"},
@@ -58,6 +60,8 @@ require("custom.gsettings_watcher").init(function(style)
             DiagnosticLineNrHint = {bg = "#1E205D", fg = "#0000FF", bold = true}
         }
     })
+
+    vscode.load()
 end)
 
 -- Highlights yanked region
