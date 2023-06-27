@@ -20,6 +20,11 @@ require("custom.gsettings_watcher").init(function(style)
         bold = true
     }
 
+    local lspInlayHint = {
+        bg = isDark and "#3d3d3d" or "#c6c6c6",
+        fg = isDark and "#ffffff" or "#333333",
+    }
+
     vscode.setup({
         transparent = false,
         italic_comments = true,
@@ -36,6 +41,9 @@ require("custom.gsettings_watcher").init(function(style)
             IlluminatedWordText = {link = "LspReferenceText"},
             IlluminatedWordRead = {link = "LspReferenceRead"},
             IlluminatedWordWrite = {link = "LspReferenceWrite"},
+
+            -- LSP InlineHint
+            LspInlayHint = lspInlayHint,
 
             -- Custom colorcolumn color
             VirtColumn = {link = "LineNr"},

@@ -204,6 +204,4 @@ require("LSP.lua_snip")
 
 require("LSP.mason")
 
-require("LSP.lsp-inlayhints-nvim")
-
 require("LSP.lsp-servers")

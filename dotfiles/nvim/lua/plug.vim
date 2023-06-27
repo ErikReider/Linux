@@ -56,8 +56,6 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 " A super powerful autopair for Neovim
 Plug 'windwp/nvim-autopairs'
-" Partial implementation of LSP inlay hint.
-Plug 'lvimuser/lsp-inlayhints.nvim'
 " Shows function signature (parameters)
 Plug 'ray-x/lsp_signature.nvim'
 " Automatically creates missing LSP diagnostics highlight groups

@@ -40,6 +40,7 @@ nvim_lsp.lua_ls.setup({
                 -- Setup your lua path
                 path = runtime_path
             },
+            hint = {enable = true},
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
                 globals = {"vim"}
@@ -80,6 +81,32 @@ nvim_lsp.tsserver.setup({
         preferences = {
             includeCompletionsWithSnippetText = true,
             includeCompletionsForImportStatements = true
+        }
+    },
+    settings = {
+        typescript = {
+            inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true
+            }
+        },
+        javascript = {
+            inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true
+            }
         }
     }
 })
@@ -252,7 +279,7 @@ nvim_lsp.pyright.setup({
 
 -- elixir-ls
 nvim_lsp.elixirls.setup({
-    cmd = {"/usr/lib/elixir-ls/language_server.sh"},
+    cmd = {get_lsp_path("elixir-ls", "/usr/lib/elixir-ls/language_server.sh")},
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {python = {analysis = {useLibraryCodeForTypes = true}}}
