@@ -18,8 +18,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Code context
 Plug 'nvim-treesitter/nvim-treesitter-context'
-" Treesitter rainbow
-Plug 'p00f/nvim-ts-rainbow'
+" Rainbow delimiters for Neovim through Tree-sitter
+Plug 'HiPhish/nvim-ts-rainbow2'
 " Treesitter auto close tags
 Plug 'windwp/nvim-ts-autotag'
 " Indent indicators

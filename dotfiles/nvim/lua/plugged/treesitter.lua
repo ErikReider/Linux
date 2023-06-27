@@ -8,8 +8,12 @@ config.setup({
     highlight = {enable = true, additional_vim_regex_highlighting = false},
     rainbow = {
         enable = true,
-        extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-        max_file_lines = nil -- Do not enable for files with more than 1000 lines, int
+        -- list of languages you want to disable the plugin for
+        disable = {},
+        -- Which query to use for finding delimiters
+        query = "rainbow-parens",
+        -- Highlight the entire buffer all at once: TODO: Change this to local?
+        strategy = require("ts-rainbow").strategy.global
     },
     autotag = {
         enable = true,
