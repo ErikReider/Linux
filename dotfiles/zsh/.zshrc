@@ -12,9 +12,13 @@ fi
 source "$ZDOTDIR/antigen.zsh"
 
 # Plugins
-antigen bundle git
 antigen bundle zsh-interactive-cd
 antigen bundle command-not-found
+
+antigen bundle git
+antigen bundle docker-compose
+antigen bundle docker
+
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
