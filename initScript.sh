@@ -195,6 +195,7 @@ if [[ $install_dev_tools == y ]]; then
         sudo dnf copr enable rubemlrm/act-cli -y
         sudo dnf groupinstall "Development Tools"
         sudo dnf groupinstall "RPM Development Tools"
+        sudo dnf group install c-development
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
 
@@ -256,7 +257,7 @@ if [[ $vim_var == y ]]; then
 
     sudo npm install -g neovim
 
-    brew install dart-sdk
+    # brew install dart-sdk
 
     cd ~/.config/
     rm -rf nvim

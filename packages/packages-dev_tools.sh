@@ -25,6 +25,7 @@ export common=(
 "luarocks"
 "mold"
 "gucharmap"
+"elixir"
 )
 export fedora=(
 "fd-find"
@@ -45,6 +46,7 @@ export fedora=(
 "gtk3-devel"
 "gtk2-devel"
 "gh"
+"elixir-doc"
 )
 export arch=(
 "fd"

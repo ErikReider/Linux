@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export common=(
-"chromium"
 "jq"
 "discord"
 "kitty"
@@ -10,10 +9,13 @@ export common=(
 "neofetch"
 "distrobox"
 "gparted"
+"headsetcontrol"
 "mpv"
 "noisetorch"
+"nvtop"
 )
 export fedora=(
+"chromium-freeworld"
 "sushi"
 "adw-gtk3"
 "java-1.8.0-openjdk"
@@ -31,6 +33,7 @@ export fedora=(
 "liberation-serif-fonts"
 )
 export arch=(
+"chromium"
 "sushi"
 "pamixer"
 "nautilus-copy-path"
@@ -42,6 +45,7 @@ export arch=(
 "jdk-openjdk"
 "jre-openjdk"
 "ttf-clear-sans"
+"v4l2loopback-dkms"
 )
 
 # TODO: Install native rpm instead...

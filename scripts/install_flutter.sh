@@ -46,4 +46,12 @@ tar -xf "$fname" -C "$destination"
 info "Cleaning up"
 rm "$fname"
 
+info "Setting Android Studio path to flatpak"
+
+read -rp "Do you want to install Android Studio through FlatHub? [y/n] " flatpak
+if [[ $flatpak == y ]]; then
+    flatpak install com.google.AndroidStudio
+    flutter config --android-studio-dir="/var/lib/flatpak/app/com.google.AndroidStudio/current/active/files/extra/"
+fi
+
 info "Done!"
