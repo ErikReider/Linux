@@ -2,17 +2,16 @@ local utils = require("telescope.utils")
 
 local runOptions = {
     {
-        filetypes = {
-            "typescriptreact", "javascriptreact", "typescript", "javascript"
-        },
-        hasFiles = {"node_modules", "package.json", "package-lock.json"},
+        filetypes = { "typescriptreact", "javascriptreact", "typescript", "javascript" },
+        hasFiles = { "node_modules", "package.json", "package-lock.json" },
         run = "!npm start",
         build = "!npm run build"
-    }, {filetypes = {"markdown"}, run = "PeekOpenOrClose"}
+    },
+    { filetypes = { "markdown" }, run = "PeekOpenOrClose" }
 }
 local function getRunAction()
     local ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local lines = io.popen('ls -a'):lines()
+    local lines = io.popen("ls -a"):lines()
     for _, option in pairs(runOptions) do
         local filetypes = option.filetypes == nil and {} or option.filetypes
         if table.maxn(filetypes) > 0 and tableContains(filetypes, ft) then
@@ -22,73 +21,57 @@ local function getRunAction()
             if string.len(run) > 0 or string.len(build) > 0 then
                 local foundFiles = {}
                 for file in lines do
-                    if tableContains(hasFiles, file) then
-                        table.insert(foundFiles, file)
-                    end
+                    if tableContains(hasFiles, file) then table.insert(foundFiles, file) end
                 end
                 if table.maxn(hasFiles) == table.maxn(foundFiles) then
-                    return {run = run, build = build}
+                    return { run = run, build = build }
                 end
             end
         end
     end
-    return {run = "", build = ""}
+    return { run = "", build = "" }
 end
 
-local function getOptionsTable()
+local Module = {};
+
+function Module.getOptionsTable()
     local optionsTable = {
-        {title = "Open PWD Folder", action = disownCMD("xdg-open .")},
-        {title = "Open LazyDocker", action = "LazyDocker"},
-        {title = "Search for TODOs", action = "TodoTelescope"},
-        {
-            title = "Toggle inactive shade",
-            action = "lua require('shade').toggle()"
-        }, {title = "Edit color", action = "CccPick"},
-        {
-            title = "Toggle Debug Windows",
-            action = "DapUiToggleWindows"
-        }
+        { title = "Open PWD Folder", action = disownCMD("xdg-open .") },
+        { title = "Open LazyDocker", action = "LazyDocker" },
+        { title = "Search for TODOs", action = "TodoTelescope" },
+        { title = "Toggle inactive shade", action = "lua require('shade').toggle()" },
+        { title = "Edit color", action = "CccPick" },
+        { title = "Toggle Debug Windows", action = "DapUiToggleWindows" }
     }
 
     -- Switch between C/C++ Header and Implementation files
-    for _, value in ipairs({"c", "h", "cpp", "hpp"}) do
+    for _, value in ipairs({ "c", "h", "cpp", "hpp" }) do
         if vim.bo.filetype == value then
-            table.insert(optionsTable, {
-                title = "Open Header/Implementation file",
-                action = "Ouroboros"
-            })
+            table.insert(optionsTable, { title = "Open Header/Implementation file", action = "Ouroboros" })
             break
         end
     end
 
     local currentFileFolderPath = vim.api.nvim_eval("expand('%:p:h')")
     if string.len(currentFileFolderPath) > 0 then
-        table.insert(optionsTable, 1, {
-            title = "Open File Folder",
-            action = disownCMD("xdg-open " .. currentFileFolderPath)
-        })
+        table.insert(optionsTable, 1,
+                     { title = "Open File Folder", action = disownCMD("xdg-open " .. currentFileFolderPath) })
     end
 
     local currentFilePath = vim.api.nvim_buf_get_name(0)
     if string.len(currentFilePath) > 0 then
-        table.insert(optionsTable, 1, {
-            title = "Open File",
-            action = disownCMD("xdg-open " .. currentFilePath)
-        })
+        table.insert(optionsTable, 1,
+                     { title = "Open File", action = disownCMD("xdg-open " .. currentFilePath) })
 
         -- Check if in Git directory
         local function add_file_in_browser()
-            table.insert(optionsTable, 2,
-                         {title = "Open File In Browser", action = "GBrowse"})
+            table.insert(optionsTable, 2, { title = "Open File In Browser", action = "GBrowse" })
         end
-        local _, ret = utils.get_os_command_output({
-            "git", "rev-parse", "--show-toplevel"
-        }, vim.loop.cwd())
+        local _, ret = utils.get_os_command_output({ "git", "rev-parse", "--show-toplevel" }, vim.loop.cwd())
 
         if ret ~= 0 then
-            local is_worktree = utils.get_os_command_output({
-                "git", "rev-parse", "--is-inside-work-tree"
-            }, vim.loop.cwd())
+            local is_worktree = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" },
+                                                            vim.loop.cwd())
             if is_worktree[1] == "true" then add_file_in_browser() end
         else
             add_file_in_browser()
@@ -101,7 +84,7 @@ local function getOptionsTable()
     -- Launch Debug
     if vim.fn.filereadable(".vscode/launch.json") == 1 then
         require("dap.ext.vscode").load_launchjs()
-        table.insert(optionsTable, 1, {title = "Debug", action = "Telescope dap configurations"})
+        table.insert(optionsTable, 1, { title = "Debug", action = "Telescope dap configurations" })
     end
 
     local action = getRunAction()
@@ -111,7 +94,7 @@ local function getOptionsTable()
             action.build = runCmdInTerm(action.build, true)
             text = text .. " in terminal"
         end
-        table.insert(optionsTable, 1, {title = text, action = action.build})
+        table.insert(optionsTable, 1, { title = text, action = action.build })
     end
     if string.len(action.run) > 0 then
         local text = "Run"
@@ -119,11 +102,13 @@ local function getOptionsTable()
             action.run = runCmdInTerm(action.run, true)
             text = text .. " in terminal"
         end
-        table.insert(optionsTable, 1, {title = text, action = action.run})
+        table.insert(optionsTable, 1, { title = text, action = action.run })
     end
 
     return optionsTable
 end
 
 -- Open options window
-function _G.optionsWindowShow() showFloatingMenu(getOptionsTable()) end
+function Module.show() showFloatingMenu(Module.getOptionsTable()) end
+
+return Module

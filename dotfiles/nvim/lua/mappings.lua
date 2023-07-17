@@ -20,10 +20,6 @@ map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR> :Sleuth <CR>",
 -- Use double ESC to clear highlights
 map("n", "<Esc><Esc>", ":nohl<CR>", {})
 
--- Menus
-map("n", "<F5>", ":lua optionsWindowShow()<CR>", {noremap = true, silent = true})
-map("n", "<F6>", ":lua GitWindowShow()<CR>", {noremap = true, silent = true})
-
 -- Pasting without overriding clipboard!
 map("x", "<Leader>p", "\"_dP", {noremap = true, silent = true})
 
@@ -48,16 +44,12 @@ map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', barbar_opts)
 map('n', '<A-0>', '<Cmd>BufferLast<CR>', barbar_opts)
 
 -- k/j and up/down will move virtual lines (lines that wrap)
-map("n", "j", "(v:count == 0 ? 'gj' : 'j')",
-    {noremap = false, silent = true, expr = true})
-map("n", "k", "(v:count == 0 ? 'gk' : 'k')",
-    {noremap = false, silent = true, expr = true})
-map("n", "<Down>", "(v:count == 0 ? 'g<Down>' : '<Down>')",
-    {noremap = false, silent = true, expr = true})
-map("n", "<Up>", "(v:count == 0 ? 'g<Up>' : '<Up>')",
-    {noremap = false, silent = true, expr = true})
-map("", "<home>", "g<home>", {silent = true})
-map("", "<End>", "g<End>", {silent = true})
+map("n", "j", "gj", {desc = "Move up one display line"})
+map("n", "k", "gk", {desc = "Move down one display line" })
+map("n", "<Down>", "g<Down>", {desc = "Move up one display line"})
+map("n", "<Up>", "g<Up>", {desc = "Move down one display line"})
+map("", "<Home>", "g<Home>", {desc = "Move to the start of the display line"})
+map("", "<End>", "g<End>", {desc = "Move to the end of the display line"})
 
 -- Shift up/down to move cursor +/- 5 lines
 map("", "<S-Up>", "5<Up>", {silent = true, noremap = true})
@@ -81,17 +73,10 @@ map("v", "<A-Down>", ":MoveBlock(1)<CR>", {noremap = true, silent = true})
 -- Better indenting
 map("v", "<", "<gv", {silent = true, noremap = true})
 map("v", ">", ">gv", {silent = true, noremap = true})
-map("v", "<A-Left>", "<", {silent = true, noremap = false})
-map("v", "<A-Right>", ">", {silent = true, noremap = false})
+map("v", "<A-Left>", "<gv", {silent = true, noremap = false})
+map("v", "<A-Right>", ">gv", {silent = true, noremap = false})
 map("n", "<A-Left>", "<<", {silent = true, noremap = false})
 map("n", "<A-Right>", ">>", {silent = true, noremap = false})
-
--- Switch windows
-vim.keymap.set("n", "<leader>w", function()
-    local picked_window_id = require('window-picker').pick_window() or
-                                 vim.api.nvim_get_current_win()
-    vim.api.nvim_set_current_win(picked_window_id)
-end, {desc = "Pick a window"})
 
 -- Git
 map("n", "äh", ":Gitsigns next_hunk <CR>", {silent = true})

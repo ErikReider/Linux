@@ -5,8 +5,9 @@ local function change_theme(style_result)
     -- Color scheme
     local style = "dark"
     if type(style_result) == "string" then
-        if string.find(style_result, "light") or
-            string.find(style_result, "default") then style = "light" end
+        if string.find(style_result, "light") or string.find(style_result, "default") then
+            style = "light"
+        end
     end
     theme_func(style)
 end
@@ -15,9 +16,7 @@ end
 local function gsettings_watcher()
     local function on_stdout(_, data, _) change_theme(data[1]) end
 
-    vim.fn.jobstart(
-        "gsettings monitor org.gnome.desktop.interface color-scheme",
-        {on_stdout = on_stdout})
+    vim.fn.jobstart("gsettings monitor org.gnome.desktop.interface color-scheme", { on_stdout = on_stdout })
 end
 
 function M.init(func)
@@ -29,8 +28,7 @@ function M.init(func)
         local installed_result = installed_handle:read("*a")
         installed_handle:close()
         if installed_result ~= "" then
-            local handle = io.popen(
-                               "gsettings get org.gnome.desktop.interface color-scheme")
+            local handle = io.popen("gsettings get org.gnome.desktop.interface color-scheme")
             if handle ~= nil then
                 local result = handle:read("*a")
                 handle:close()
