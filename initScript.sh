@@ -75,6 +75,13 @@ if [[ $symlink_etc_var == y ]]; then
     cd "$HOME/.config/environment.d/"
     ln -si "$currentDir/dotfiles/environment.d/"* .
 
+    # ~/.local/share/applications/*
+    if ! [ -d "$HOME/.local/share/applications/" ]; then
+        mkdir "$HOME/.local/share/applications/"
+    fi
+    cd "$HOME/.local/share/applications/"
+    ln -si "$currentDir/dotfiles/applications/"* .
+
     # /etc/sysctl.d/*
     [ -d "/etc/sysctl.d/" ] || sudo mkdir /etc/sysctl.d/
     cd /etc/sysctl.d/
