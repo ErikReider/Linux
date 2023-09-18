@@ -12,7 +12,6 @@ local servers = {
     -- No configuration needed
     "vimls",
     "cssls",
-    "texlab",
     "intelephense",
     "lemminx",
     "dockerls"
@@ -57,6 +56,38 @@ nvim_lsp.lua_ls.setup({
         }
     }
 })
+
+nvim_lsp.texlab.setup {
+    on_attach = on_attach,
+    flags = { debounce_text_changes = 150 },
+    capabilities = capabilities,
+    settings = {
+        texlab = {
+            auxDirectory = ".",
+            bibtexFormatter = "texlab",
+            build = {
+                args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+                executable = "latexmk",
+                forwardSearchAfter = true,
+                onSave = true
+            },
+            chktex = { onEdit = false, onOpenAndSave = false },
+            diagnosticsDelay = 300,
+            formatterLineLength = 80,
+            forwardSearch = {
+                executable = "evince-synctex",
+                args = {
+                    "-f",
+                    "%l",
+                    "%p",
+                    [[nvim-texlabconfig -file %f -line %l -server ]] .. vim.v.servername
+                }
+            },
+            latexFormatter = "latexindent",
+            latexindent = { modifyLineBreaks = false }
+        }
+    }
+}
 
 nvim_lsp.vala_ls.setup({
     on_attach = on_attach,

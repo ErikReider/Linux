@@ -212,6 +212,9 @@ if [[ $install_dev_tools == y ]]; then
     # Install deno
     curl -fsSL https://deno.land/x/install/install.sh | sh
 
+    # Install Evince PDF line following for LaTeX
+    pip3 install --user https://github.com/efoerster/evince-synctex/archive/master.zip
+
     # Start docker daemon with system
     sudo systemctl enable --now docker
     # Add user to docker group

@@ -47,6 +47,8 @@ export fedora=(
 "gtk2-devel"
 "gh"
 "elixir-doc"
+"latexmk"
+"texlive-collection-binextra"
 )
 export arch=(
 "fd"
@@ -57,4 +59,5 @@ export arch=(
 "fd"
 "act-bin"
 "github-cli"
+"texlive-binextra"
 )

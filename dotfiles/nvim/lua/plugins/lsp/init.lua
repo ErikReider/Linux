@@ -392,6 +392,7 @@ return {
                         "stylelint-lsp",
                         "pyright",
                         "omnisharp",
+                        "texlab",
 
                         -- Linters
                         -- TODO: Linters
@@ -407,7 +408,7 @@ return {
                         -- TODO: Prettierd Plugins https://github.com/fsouza/prettierd#additional-plugins
                         "prettierd",
                         "clang-format",
-                        "rustfmt"
+                        "latexindent",
                     },
                     auto_update = false
                 }

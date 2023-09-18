@@ -48,5 +48,12 @@ return {
         "xuhdev/vim-latex-live-preview",
         ft = "tex",
         config = function() vim.g.livepreview_cursorhold_recompile = 0 end
+    },
+    -- Latex: Forward and Inverse Search for Texlab and neovim
+    {
+        "f3fora/nvim-texlabconfig",
+        config = function() require("texlabconfig").setup({}) end,
+        ft = { "tex", "bib" }, -- Lazy-load on filetype
+        build = "go build"
     }
 }
