@@ -7,6 +7,7 @@ return {
               { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "NvimTree Toggle" },
               { "<C-b>", "<cmd>NvimTreeFindFile<CR>", desc = "NvimTree Find File" },
         },
+        lazy = false,
         opts = {
             auto_reload_on_write = true,
             disable_netrw = false,
@@ -24,18 +25,11 @@ return {
                 number = false,
                 relativenumber = false,
                 signcolumn = "yes",
-                mappings = {
-                    custom_only = false,
-                    list = {
-                        -- user mappings go here
-                    }
-                }
             },
             renderer = {
                 add_trailing = false,
                 group_empty = false,
                 highlight_git = true,
-                highlight_opened_files = "NvimTreeOpenedFile",
                 root_folder_modifier = ":~",
                 indent_markers = { enable = false, icons = { corner = "└ ", edge = "│ ", none = "  " } },
                 icons = {
