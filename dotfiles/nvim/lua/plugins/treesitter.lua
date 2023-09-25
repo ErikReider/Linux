@@ -29,7 +29,7 @@ return {
             end
         },
         -- Rainbow delimiters for Neovim through Tree-sitter
-        "HiPhish/nvim-ts-rainbow2",
+        "HiPhish/rainbow-delimiters.nvim",
         -- Treesitter auto close tags
         "windwp/nvim-ts-autotag"
     },
@@ -49,7 +49,7 @@ return {
                 -- Which query to use for finding delimiters
                 query = "rainbow-parens",
                 -- Highlight the entire buffer all at once: TODO: Change this to local?
-                strategy = require("ts-rainbow").strategy.global
+                strategy = require("rainbow-delimiters").strategy.global
             },
             autotag = {
                 enable = true,
