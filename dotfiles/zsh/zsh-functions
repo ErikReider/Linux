@@ -25,7 +25,7 @@ function man_preview {
     if [[ -f $1 ]]; then
         tmpPath=/tmp/$(basename "$1").roff.tmp
         scdoc <"$1" >"$tmpPath" && man -l "$tmpPath"
-        rm -rf "$tmpPath"
+        rm -f "$tmpPath"
     else
         echo "Man file doesn't exist..."
     fi

@@ -1,4 +1,5 @@
 # autoload -Uz compinit
+autoload -Uz bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zmodload -i zsh/complist
