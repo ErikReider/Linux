@@ -119,7 +119,7 @@ window > box > box > widget button:insensitive {
 }
 
 #network {
-  font-family: "Material Icons Round", "FontAwesome";
+  font-family: "Material Icons Round", "Font Awesome 6 Free";
   font-size: 22px;
 }
 
@@ -130,4 +130,18 @@ window > box > box > widget button:insensitive {
 
 #pulseaudio.muted {
   color: @text-color-disabled;
+}
+
+#privacy {
+    padding: 0;
+    border-radius: 50px;
+}
+
+#privacy > box {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 6px;
+    color: @text-color;
 }

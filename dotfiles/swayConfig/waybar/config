@@ -18,7 +18,7 @@
     "tray",
     "custom/ArchUpdates",
     "gamemode",
-    "custom/usingAudio",
+    "privacy",
     "bluetooth",
     "upower",
     "pulseaudio",
@@ -97,6 +97,21 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
+  },
+  "privacy": {
+    "icon-spacing": 2,
+    "icon-size": 18,
+    "modules": [
+      {
+        "type": "screenshare"
+      },
+      {
+        "type": "audio-out"
+      },
+      {
+        "type": "audio-in"
+      }
+    ]
   },
   "custom/usingAudio": {
     "format": "{icon}",
