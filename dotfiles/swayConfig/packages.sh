@@ -23,6 +23,7 @@ export common=(
     "wlogout"
     "swappy"
     "swayidle"
+    "udiskie"
 )
 
 export arch=(
