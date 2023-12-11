@@ -1,7 +1,7 @@
 /* vim: ft=css
 */
 configuration {
-  font: "Noto Sans Bold 13";
+  font: "Clear Sans 14";
   drun-display-format: "{name}";
   disable-history: false;
   sidebar-mode: false;
@@ -12,16 +12,16 @@ configuration {
 }
 
 window {
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 8px;
+  background-color: rgba(32, 32, 32, 0.8);
+  border-color: rgb(93, 93, 93);
+  border-radius: 12px;
   width: 512px;
 }
 
 inputbar {
   background-color: rgba(242, 242, 242, 0.08);
   margin: 14px;
-  border-radius: 8px;
-  border: 0 0 1px 0;
+  border-radius: 12px;
   /* children: [prompt, entry]; */
   children: [ entry ];
   border: none;
@@ -34,6 +34,7 @@ prompt {
 
 textbox {
   background: transparent;
+  color: white;
   padding: 8px 16px;
   blink: true;
 }
@@ -45,7 +46,9 @@ entry {
 }
 
 listview {
+  fixed-height: false;
   lines: 8;
+  spacing: 6px;
   cycle: false;
   scrollbar: true;
   dynamic: true;
@@ -53,29 +56,37 @@ listview {
 }
 
 scrollbar {
-  handle-color: rgba(46, 52, 63, 1);
+  handle-color: rgba(242, 242, 242, 0.08);
+  handle-width: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+element {
+  margin: 0 0 0 8px;
 }
 
 element alternate.normal,
 element alternate.normal,
 element normal.normal,
 element normal.normal {
-  border: 0 0 1px 0;
-  padding: 4px;
+  /* border: 0 0 1px 0; */
+  /* padding: 4px; */
   background-color: transparent;
 }
 
 element selected.normal,
 element selected.urgent {
   background-color: rgba(242, 242, 242, 0.08);
+  border-radius: 12px;
 }
 
 element-text {
-  text-color: white;
-  margin: 19px 0;
+  color: white;
+  vertical-align: 0.5;
 }
 
 element-icon {
-  size: 50px;
+  size: 48px;
   margin: 4px;
 }
