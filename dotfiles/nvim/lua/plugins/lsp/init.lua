@@ -109,6 +109,22 @@ return {
                         snippet = { expand = function(args)
                             luasnip.lsp_expand(args.body)
                         end },
+                        enabled = function()
+                            -- disable completion in comments
+                            local context = require "cmp.config.context"
+                            -- keep command mode completion enabled when cursor is in a comment
+                            if vim.api.nvim_get_mode().mode == "c" then
+                                return true
+                            else
+                                local disabled = false
+                                disabled = disabled or
+                                               (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt")
+                                disabled = disabled or (vim.fn.reg_recording() ~= "")
+                                disabled = disabled or (vim.fn.reg_executing() ~= "")
+                                disabled = disabled or context.in_treesitter_capture("comment") or context.in_syntax_group("Comment")
+                                return not disabled
+                            end
+                        end,
                         sorting = {
                             comparators = {
                                 cmp.config.compare.offset,
@@ -367,6 +383,7 @@ return {
             -- Auto installs lsps
             {
                 "WhoIsSethDaniel/mason-tool-installer.nvim",
+                lazy = false,
                 dependencies = { { "williamboman/mason.nvim", opts = {} } },
                 opts = { -- a list of all tools you want to ensure are installed upon
                     -- start; they should be the names Mason uses for each tool
