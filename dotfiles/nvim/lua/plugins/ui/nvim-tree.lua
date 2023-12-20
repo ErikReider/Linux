@@ -19,7 +19,6 @@ return {
             update_cwd = true,
             view = {
                 width = { min = 30, max = 100 },
-                hide_root_folder = false,
                 side = "left",
                 preserve_window_proportions = false,
                 number = false,

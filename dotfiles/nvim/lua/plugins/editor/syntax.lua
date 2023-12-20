@@ -19,6 +19,9 @@ return {
             -- Include text after begin and end markers
             vim.g.conflict_marker_begin = "^<<<<<<< .*$"
             vim.g.conflict_marker_end = "^>>>>>>> .*$"
+
+            map("n", "äj", ":ConflictMarkerNextHunk <CR>", { silent = true })
+            map("n", "öj", ":ConflictMarkerPrevHunk <CR>", { silent = true })
         end
     }
 }

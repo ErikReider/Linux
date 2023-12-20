@@ -43,12 +43,6 @@ return {
             vim.g.bracey_refresh_on_save = 1
         end
     },
-    -- Latex
-    {
-        "xuhdev/vim-latex-live-preview",
-        ft = "tex",
-        config = function() vim.g.livepreview_cursorhold_recompile = 0 end
-    },
     -- Latex: Forward and Inverse Search for Texlab and neovim
     {
         "f3fora/nvim-texlabconfig",
