@@ -8,7 +8,26 @@ return {
         -- Syntax aware text-objects, select, move, swap, and peek support
         "nvim-treesitter/nvim-treesitter-textobjects",
         -- Sets commentstring for JS/TS files
-        "JoosepAlviste/nvim-ts-context-commentstring",
+        {
+            "JoosepAlviste/nvim-ts-context-commentstring",
+            -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+            main = "ts_context_commentstring",
+            opts = function()
+                local c_comment_string = { __default = "// %s", __multiline = "// %s" }
+                return {
+                    enable = true,
+                    enable_autocmd = false,
+                    languages = {
+                        -- css = c_comment_string,
+                        -- scss = c_comment_string,
+                        c = c_comment_string,
+                        cpp = c_comment_string,
+                        vala = c_comment_string,
+                        glsl = c_comment_string
+                    }
+                };
+            end
+        },
         -- Code context
         {
             "nvim-treesitter/nvim-treesitter-context",
@@ -37,7 +56,8 @@ return {
         -- vim.cmd("set foldmethod=expr")
         -- vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
 
-        local c_comment_string = { __default = "// %s", __multiline = "// %s" }
+        -- Skip backwards compatibility routines and speed up loading.
+        vim.g.skip_ts_context_commentstring_module = true
 
         require("nvim-treesitter.configs").setup({
             ensure_installed = "all",
@@ -76,19 +96,6 @@ return {
                     "htmldjango",
                     "elixir",
                     "heex"
-                }
-            },
-            -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-            context_commentstring = {
-                enable = true,
-                enable_autocmd = false,
-                config = {
-                    css = c_comment_string,
-                    scss = c_comment_string,
-                    c = c_comment_string,
-                    cpp = c_comment_string,
-                    vala = c_comment_string,
-                    glsl = c_comment_string
                 }
             },
             -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
