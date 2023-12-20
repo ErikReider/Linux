@@ -11,7 +11,7 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-family: FontAwesome, "Clear Sans";
   font-size: 17px;
   font-weight: bold;
   min-height: 0;
@@ -29,11 +29,12 @@ window#waybar.hidden {
 }
 
 window {
-  background: transparent;
+  background: @bg;
+  border-radius: 12px;
 }
 
 window > box {
-  background: @bg;
+  background: transparent;
   background-clip: border-box;
 }
 
