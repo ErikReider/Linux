@@ -51,6 +51,8 @@ return {
             { "akinsho/flutter-tools.nvim", ft = "dart" },
             -- Tools for better development in rust using neovim"s builtin lsp
             "simrat39/rust-tools.nvim",
+            -- Java eclipse tools
+            "mfussenegger/nvim-jdtls",
 
             --
             -- Nvim cmp
@@ -410,6 +412,7 @@ return {
                         "pyright",
                         "omnisharp",
                         "texlab",
+                        "jdtls",
 
                         -- Linters
                         -- TODO: Linters

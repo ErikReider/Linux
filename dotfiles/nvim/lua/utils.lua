@@ -12,6 +12,16 @@ function _G.get_lsp_path(name, default)
     return default
 end
 
+---Get the LSP capabilities
+function _G.get_lsp_capabilities()
+    -- Add additional capabilities supported by nvim-cmp
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    -- For nvim-ufo
+    capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
+    return capabilities
+end
+
 ---Split string into a table of strings using a separator.
 ---@param inputString string The string to split.
 ---@param sep string The separator to use.

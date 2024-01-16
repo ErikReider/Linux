@@ -3,11 +3,7 @@ local nvim_lsp = require("lspconfig")
 local on_attach = require("plugins.lsp.on_attach")
 local util = require("lspconfig/util")
 
--- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
--- For nvim-ufo
-capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
+local capabilities = get_lsp_capabilities()
 local servers = {
     -- No configuration needed
     "vimls",
@@ -314,6 +310,8 @@ nvim_lsp.elixirls.setup({
     on_attach = on_attach,
     capabilities = capabilities
 })
+
+-- Java setup in ftplugins dir
 
 -- Init efm server
 require("plugins.lsp.efm")
