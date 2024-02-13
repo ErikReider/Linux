@@ -61,7 +61,6 @@
   "promise-async": { "branch": "main", "commit": "94f6f03c6c1e2aab551aacdf0c1e597a7269abb6" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "47404636a34580db1636dc0cf35027bdf77abba5" },
   "rust-tools.nvim": { "branch": "master", "commit": "0cc8adab23117783a0292a0c8a2fbed1005dc645" },
-  "silicon.nvim": { "branch": "main", "commit": "e0b7d78545470ef72ca6c0cef3980b8a779f4385" },
   "smart-splits.nvim": { "branch": "master", "commit": "c970c7a3cc7ba635fd73d43c81b40f04c00f5058" },
   "suda.vim": { "branch": "master", "commit": "8b0fc3711760195aba104e2d190cff9af8267052" },
   "sway-vim-syntax": { "branch": "master", "commit": "0aa0626eebdd3fae97bb7c876035008d34d5f3cc" },
