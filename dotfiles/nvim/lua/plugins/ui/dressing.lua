@@ -9,16 +9,16 @@ return {
                 -- Default prompt string
                 default_prompt = "Input:",
                 -- Can be 'left', 'right', or 'center'
-                prompt_align = "left",
+                prompt_align = "center",
                 -- When true, <Esc> will close the modal
-                insert_only = true,
+                insert_only = false,
                 -- When true, input will start in insert mode.
-                start_in_insert = true,
+                start_in_insert = false,
                 -- These are passed to nvim_open_win
                 -- anchor = "SW",
                 border = "rounded",
                 -- 'editor' and 'win' will default to being centered
-                relative = "cursor",
+                relative = "editor",
                 -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
                 prefer_width = 40,
                 width = nil,
@@ -34,7 +34,7 @@ return {
                 },
                 -- Set to `false` to disable
                 mappings = {
-                    n = { ["<Esc>"] = "Close", ["<CR>"] = "Confirm" },
+                    n = { ["<Esc>"] = "Close", ["<CR>"] = "Confirm", ["<C-c>"] = "Close" },
                     i = {
                         ["<C-c>"] = "Close",
                         ["<CR>"] = "Confirm",
