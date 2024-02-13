@@ -26,5 +26,11 @@ return {
     -- GBrowse to open current file in browser
     "tpope/vim-rhubarb",
     -- GV to open git log, gb to open in browser
-    "junegunn/gv.vim"
+    "junegunn/gv.vim",
+
+    {
+        "aurum77/live-server.nvim",
+        cmd = { "LiveServer", "LiveServerStart", "LiveServerStop", "LiveServerInstall" },
+        build = function() require("live_server.util").install() end
+    }
 }
