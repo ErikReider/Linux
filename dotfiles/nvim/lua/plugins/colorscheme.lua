@@ -1,6 +1,7 @@
 return {
     {
         "Mofiqul/vscode.nvim",
+        lazy = false,
         config = function()
             local vscode = require("vscode")
 
