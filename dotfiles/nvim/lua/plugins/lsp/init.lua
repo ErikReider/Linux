@@ -120,10 +120,12 @@ return {
                             else
                                 local disabled = false
                                 disabled = disabled or
-                                               (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt")
+                                               (vim.api.nvim_get_option_value("buftype", { buf = 0 }) ==
+                                                   "prompt")
                                 disabled = disabled or (vim.fn.reg_recording() ~= "")
                                 disabled = disabled or (vim.fn.reg_executing() ~= "")
-                                disabled = disabled or context.in_treesitter_capture("comment") or context.in_syntax_group("Comment")
+                                disabled = disabled or context.in_treesitter_capture("comment") or
+                                               context.in_syntax_group("Comment")
                                 return not disabled
                             end
                         end,
@@ -404,7 +406,7 @@ return {
                         "html-lsp",
                         "json-lsp",
                         "dockerfile-language-server",
-                        "emmet-ls",
+                        "emmet-language-server",
                         "elixir-ls",
                         "lemminx",
                         "typescript-language-server",
@@ -414,11 +416,12 @@ return {
                         "texlab",
                         "jdtls",
 
+                        -- Linters/Formatters
+                        "biome", -- Linter and formatter that replaces prettierd and eslint_d
                         -- Linters
                         -- TODO: Linters
                         "vint",
                         "markdownlint",
-                        "eslint_d",
                         "cpplint",
 
                         -- Formatters

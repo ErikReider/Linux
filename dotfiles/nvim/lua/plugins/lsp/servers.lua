@@ -109,6 +109,7 @@ nvim_lsp.tsserver.setup({
         "typescript.tsx"
     },
     init_options = {
+        provideFormatter = false,
         hostInfo = "neovim",
         preferences = { includeCompletionsWithSnippetText = true, includeCompletionsForImportStatements = true }
     },
@@ -140,6 +141,18 @@ nvim_lsp.tsserver.setup({
     }
 })
 
+-- Biome: Web project toolchain
+nvim_lsp.biome.setup({
+    on_attach = on_attach,
+    flags = { debounce_text_changes = 150 },
+    capabilities = capabilities,
+    cmd = { "biome", "lsp-proxy" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescript.tsx", "typescriptreact" },
+    root_dir = util.root_pattern("biome.json"),
+    single_file_support = false,
+    default_config = { root_dir = [[root_pattern('biome.json')]] }
+})
+
 nvim_lsp.stylelint_lsp.setup({
     on_attach = function(client, bufnr)
         client.server_capabilities.document_formatting = false
@@ -149,7 +162,7 @@ nvim_lsp.stylelint_lsp.setup({
     capabilities = capabilities
 })
 
-nvim_lsp.emmet_ls.setup({
+nvim_lsp.emmet_language_server.setup({
     on_attach = on_attach,
     flags = { debounce_text_changes = 150 },
     capabilities = capabilities,
@@ -157,15 +170,16 @@ nvim_lsp.emmet_ls.setup({
         return util.root_pattern("package.json", ".git")(fname) or util.path.dirname(fname)
     end,
     filetypes = {
-        "html",
-        "typescriptreact",
-        "javascriptreact",
         "css",
+        "eruby",
+        "html",
+        "htmldjango",
+        "javascriptreact",
+        "less",
+        "pug",
         "sass",
         "scss",
-        "less",
-        "heex",
-        "htmldjango"
+        "typescriptreact"
     }
 })
 
@@ -213,6 +227,7 @@ nvim_lsp.jsonls.setup({
         client.server_capabilities.document_formatting = false
         on_attach(client, bufnr)
     end,
+    init_options = { provideFormatter = false },
     flags = { debounce_text_changes = 150 },
     capabilities = capabilities,
     cmd = { "vscode-json-language-server", "--stdio" },
