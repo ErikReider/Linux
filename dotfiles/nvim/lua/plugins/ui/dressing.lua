@@ -13,7 +13,7 @@ return {
                 -- When true, <Esc> will close the modal
                 insert_only = false,
                 -- When true, input will start in insert mode.
-                start_in_insert = false,
+                start_in_insert = true,
                 -- These are passed to nvim_open_win
                 -- anchor = "SW",
                 border = "rounded",
