@@ -29,12 +29,14 @@ window#waybar.hidden {
 }
 
 window {
-  background: @bg;
-  border-radius: 12px;
+  background: transparent;
+  border-radius: 0;
 }
 
 window > box {
-  background: transparent;
+  margin: 6px;
+  border-radius: 12px;
+  background: @bg;
   background-clip: border-box;
 }
 

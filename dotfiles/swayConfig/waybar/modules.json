@@ -1,0 +1,243 @@
+{
+  "upower": {
+    "tooltip": true
+  },
+  "custom/linux": {
+    "format": "<span font_family='FiraCode Nerd Font'>{}</span> ",
+    "exec": "~/.config/waybar/scripts/systemIcon.sh",
+    "interval": "once",
+    "tooltip": false,
+    "return-type": "string",
+    "on-click": "kitty -e $SHELL -c 'neofetch; read'",
+    "escape": true
+  },
+  "sway/workspaces": {
+    "disable-scroll-wraparound": true,
+    "disable-scroll": false,
+    "all-outputs": false,
+    "enable-bar-scroll": true,
+    "format": "<span font_family='FiraCode Nerd Font'>{value}</span>"
+  },
+  "hyprland/workspaces": {
+    "sort-by-number": true,
+    "disable-scroll-wraparound": true,
+    "disable-scroll": false,
+    "all-outputs": false,
+    "enable-bar-scroll": true,
+    "format": "<span font_family='FiraCode Nerd Font'>{name}</span>"
+  },
+  "sway/mode": {
+    "format": "{}"
+  },
+  "tray": {
+    "reverse-direction": true,
+    "icon-size": 24,
+    "spacing": 10
+  },
+  "clock": {
+    "format": "{:%a %d %b %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "interval": 1
+  },
+  "memory": {
+    "interval": 10,
+    "format": " {used:0.2f} GiB"
+  },
+  "custom/media": {
+    "escape": true,
+    "format": " {icon}{}",
+    "return-type": "json",
+    "format-icons": {
+      "Playing": " ",
+      "Paused": " "
+    },
+    "max-length": 35,
+    "exec": "playerctl metadata --format '{\"text\": \"{{title}}\", \"tooltip\": \"{{playerName}} : {{title}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause"
+  },
+  "custom/notification": {
+    "tooltip": true,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "",
+      "none": "",
+      "dnd-notification": "",
+      "dnd-none": "",
+      "inhibited-notification": "",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "privacy": {
+    "icon-spacing": 2,
+    "icon-size": 18,
+    "modules": [
+      {
+        "type": "screenshare"
+      },
+      {
+        "type": "audio-out"
+      },
+      {
+        "type": "audio-in"
+      }
+    ]
+  },
+  "custom/usingAudio": {
+    "format": "{icon}",
+    "format-icons": {
+      "output": "",
+      "input": "",
+      "output-input": "  ",
+      "none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which sway-audio-idle-inhibit",
+    "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+    "escape": true
+  },
+  "gamemode": {
+    "tooltip": true,
+    "format": "{glyph}",
+    "format-alt": "{glyph} {count}",
+    "glyph": "",
+    "not-running-hide": true,
+    "use-icon": true,
+    "icon-name": "input-gaming-symbolic",
+    "icon-spacing": 6
+  },
+  "custom/airplane": {
+    "tooltip": false,
+    "format": "{icon}",
+    "return-type": "json",
+    "max-length": 70,
+    "interval": "once",
+    "format-icons": {
+      "disabled": "<span foreground='#928374'>✈</span>",
+      "enabled": " ✈ "
+    },
+    "exec": "~/.config/waybar/scripts/airplaneMode.sh",
+    "on-click": "~/.config/waybar/scripts/airplaneMode.sh --toggle",
+    "signal": 8,
+    "escape": true
+  },
+  "bluetooth": {
+    "format": "",
+    "format-on": "",
+    "format-connected": " {num_connections}",
+    "format-connected-battery": " {num_connections}",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "swaysettings -p bluetooth"
+  },
+  "network#wifi": {
+    "interface": "wl*",
+    "interval": 30,
+    "format": "{icon}",
+    "format-wifi": "{icon}",
+    "format-linked": "",
+    "format-disconnected": "",
+    "format-disabled": "",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "on-click": "gnome-control-center wifi",
+    "on-click-right": "wifi toggle",
+    "tooltip-format": "{}",
+    "tooltip-format-wifi": "{signalStrength} {ipaddr}"
+  },
+  "network#ethernet": {
+    "interface": "enp*",
+    "interval": 30,
+    "format-ethernet": "",
+    "format-linked": "",
+    "format-disconnected": "",
+    "format-disabled": "",
+    "on-click": "gnome-control-center network",
+    "tooltip-format": "{}",
+    "tooltip-format-ethernet": "{ipaddr}"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-bluetooth-muted": "{icon} {volume}%",
+    "format-muted": " {volume}%",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+    "on-click": "swaysettings -p sound",
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  },
+  "custom/wallpaperRefresh": {
+    "exec": "echo '  '",
+    "tooltip": false,
+    "on-click": "~/.config/sway/scripts/randomWallpaper.sh --click",
+    "escape": true
+  },
+  "custom/headsetcontrol": {
+    "interval": 60,
+    "tooltip": false,
+    "exec": "~/.config/waybar/scripts/headsetcontrol.sh",
+    "exec-if": "which headsetcontrol",
+    "format": "{}",
+    "escape": true
+  },
+  "custom/ArchUpdates": {
+    "interval": 600,
+    "tooltip": false,
+    "signal": 9,
+    "exec": "~/.config/waybar/scripts/check-for-updates.sh",
+    "on-click": "kitty -e $SHELL -c '~/.config/waybar/scripts/update_system.sh'; pkill -SIGRTMIN+9 waybar",
+    "escape": true
+  },
+  "custom/weather": {
+    "format": "<span font_family='Weather Icons'>{icon}</span> {}",
+    "format-icons": {
+      "01d": "",
+      "01n": "",
+      "02d": "",
+      "02n": "",
+      "03d": "",
+      "03n": "",
+      "04d": "",
+      "04n": "",
+      "09d": "",
+      "09n": "",
+      "10d": "",
+      "10n": "",
+      "11d": "",
+      "11n": "",
+      "13d": "",
+      "13n": "",
+      "50d": "",
+      "50n": ""
+    },
+    "tooltip": false,
+    "interval": 1200,
+    "exec": "python ~/.config/waybar/scripts/openWeatherMap.py",
+    "return-type": "json",
+    "escape": true
+  }
+}
