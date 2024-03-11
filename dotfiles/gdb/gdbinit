@@ -1,0 +1,21 @@
+set debuginfod enabled on
+set logging file gdb.output
+set logging on
+
+# saves the command history between sessions
+set history save off
+# if the screen is too long, you won't
+set pagination off
+# displays values of classes, structs etc. nicely
+set print pretty on
+# you won't need to confirm commands
+set confirm off
+
+# Exit automatically when program exits normally
+python
+def exit_event(event):
+  if hasattr (event, 'exit_code') and event.exit_code == 0:
+    gdb.execute("quit")
+
+gdb.events.exited.connect(exit_event)
+end

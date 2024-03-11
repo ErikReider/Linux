@@ -206,6 +206,10 @@ if [[ $install_dev_tools == y ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
 
+    # Symlink GDB config file
+    cd "$HOME/.config"
+    ln -si "$currentDir/dotfiles/gdb" .
+
     # Install Flutter
     "$currentDir/scripts/install_flutter.sh"
 
