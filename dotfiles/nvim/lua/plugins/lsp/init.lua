@@ -69,6 +69,8 @@ return {
                     "hrsh7th/cmp-buffer",
                     -- nvim-cmp source for filesystem paths.
                     "hrsh7th/cmp-path",
+                    -- nvim-cmp source for vim's cmdline
+                    "hrsh7th/cmp-cmdline",
                     -- luasnip completion source for nvim-cmp
                     "saadparwaiz1/cmp_luasnip"
                 },
@@ -208,6 +210,21 @@ return {
                             { name = "path" },
                             { name = "buffer", option = { keyword_pattern = [[\k\+]] } }
                         }
+                    })
+                    -- Completions for / search based on current buffer:
+                    -- `/` cmdline setup.
+                    cmp.setup.cmdline("/", {
+                        mapping = cmp.mapping.preset.cmdline(),
+                        sources = { { name = "buffer" } }
+                    })
+
+                    -- Completions for command mode:
+                    -- `:` cmdline setup.
+                    cmp.setup.cmdline(":", {
+                        mapping = cmp.mapping.preset.cmdline(),
+                        sources = cmp.config.sources({ { name = "path" } }, {
+                            { name = "cmdline", option = { ignore_cmds = { "Man", "!" } } }
+                        })
                     })
                 end
             },
