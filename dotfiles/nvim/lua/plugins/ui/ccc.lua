@@ -29,8 +29,8 @@ return {
                     input = true,
                     output = true,
                     pattern = {
-                        [picker.css_rgb] = { input.rgb, output.rgb },
-                        [picker.css_name] = { input.rgb, output.rgb },
+                        [picker.css_rgb] = { input.rgb, output.css_rgb },
+                        [picker.css_name] = { input.rgb, output.css_rgb },
                         [picker.hex] = { input.rgb, output.hex },
                         [picker.css_hsl] = { input.hsl, output.css_hsl },
                         [picker.css_hwb] = { input.hwb, output.css_hwb },

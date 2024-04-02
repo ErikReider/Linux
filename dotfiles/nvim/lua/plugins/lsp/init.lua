@@ -22,6 +22,10 @@ return {
             vim.lsp.handlers["textDocument/signatureHelp"] =
                 vim.lsp.with(vim.lsp.handlers.signature_help, handler_win_config)
 
+            vim.lsp.set_log_level("off")
+            -- For debugging:
+            -- vim.lsp.set_log_level("debug")
+
             vim.diagnostic.config({
                 -- disable virtual text
                 virtual_text = false,
@@ -200,7 +204,9 @@ return {
                                 fallback()
                             end, { "i", "s" }),
                             ["<ESC>"] = cmp.mapping(function(fallback)
-                                luasnip.unlink_current()
+                                if luasnip.get_active_snip() ~= nil then
+                                    luasnip.unlink_current()
+                                end
                                 fallback()
                             end, { "i", "s" })
                         }),
@@ -211,6 +217,7 @@ return {
                             { name = "buffer", option = { keyword_pattern = [[\k\+]] } }
                         }
                     })
+
                     -- Completions for / search based on current buffer:
                     -- `/` cmdline setup.
                     cmp.setup.cmdline("/", {
@@ -396,7 +403,7 @@ return {
                 end
             },
             -- See LSP server startup status
-            { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+            { "j-hui/fidget.nvim", opts = {} },
 
             --
             -- Lsp Installer
@@ -459,9 +466,11 @@ return {
                 dependencies = {
                     -- Debug Adapter Protocol client implementation for Neovim
                     "mfussenegger/nvim-dap",
-                    { "rcarriga/nvim-dap-ui", config = function()
-                        require("plugins.lsp.dapui")
-                    end },
+                    {
+                        "rcarriga/nvim-dap-ui",
+                        config = function() require("plugins.lsp.dapui") end,
+                        dependencies = { "nvim-neotest/nvim-nio" }
+                    },
                     {
                         "Weissle/persistent-breakpoints.nvim",
                         config = function()

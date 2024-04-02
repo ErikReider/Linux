@@ -7,7 +7,7 @@ map('n', '<C-d>',
 -- https://vim.fandom.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
 map("n", "gx",
     ':silent !xdg-open <C-R>=escape("<C-R><C-F>", "#?&;\\|%")<CR> 2> /dev/null >&2 & disown<CR>',
-    {silent = false})
+    {silent = true})
 
 -- open init.vim on F3 (split if buffer is selected)
 map("n", "<F3>",
@@ -15,10 +15,10 @@ map("n", "<F3>",
     {silent = true, expr = true})
 -- Source on F4
 map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR> :Sleuth <CR>",
-    {})
+    {silent = true})
 
 -- Use double ESC to clear highlights
-map("n", "<Esc><Esc>", ":nohl<CR>", {})
+map("n", "<Esc><Esc>", ":nohl<CR>", {silent = true})
 
 -- Pasting without overriding clipboard!
 map("x", "<Leader>p", "\"_dP", {noremap = true, silent = true})

@@ -4,8 +4,6 @@ return {
 
     -- Auto tabwidth and style detection
     "tpope/vim-sleuth",
-    -- .editorconfig support
-    "gpanders/editorconfig.nvim",
     -- To save write-protected files
     { "lambdalisue/suda.vim", config = function() vim.g.suda_smart_edit = 0 end },
     -- Allows quickly switching between header and implementation files for C/C++ in Neovim.
