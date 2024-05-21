@@ -47,7 +47,8 @@ function Module.getOptionsTable()
     -- Switch between C/C++ Header and Implementation files
     for _, value in ipairs({ "c", "h", "cpp", "hpp" }) do
         if vim.bo.filetype == value then
-            table.insert(optionsTable, { title = "Open Header/Implementation file", action = "Ouroboros" })
+            table.insert(optionsTable,
+                         { title = "Open Header/Implementation file", action = "ClangdSwitchSourceHeader" })
             break
         end
     end
