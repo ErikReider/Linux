@@ -28,6 +28,10 @@ local efm_languages = {
     json = { prettier },
     html = { prettier },
     htmldjango = { prettier },
+    scss = { prettier },
+    less = { prettier },
+    sass = { prettier },
+    css = { prettier },
     -- Biome
     javascript = {biome_formatter},
     javascriptreact = {biome_formatter},
@@ -35,10 +39,6 @@ local efm_languages = {
     typescript = {biome_formatter},
     typescriptreact = {biome_formatter},
     ["typescript.tsx"] = {biome_formatter},
-    scss = { biome_formatter },
-    less = { biome_formatter },
-    sass = { biome_formatter },
-    css = { biome_formatter },
     python = { { formatCommand = "autopep8 --ignore E501 -", formatStdin = true } }
     -- latex = {{}},
 }
