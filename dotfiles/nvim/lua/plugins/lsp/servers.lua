@@ -10,7 +10,9 @@ local servers = {
     "cssls",
     "intelephense",
     "lemminx",
-    "dockerls"
+    "dockerls",
+    "mesonlsp",
+    "neocmake"
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
