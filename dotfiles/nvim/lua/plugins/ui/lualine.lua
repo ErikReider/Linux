@@ -35,7 +35,10 @@ return {
                         "encoding",
                         { "fileformat", symbols = { unix = "", dos = "", mac = "" } }
                     },
-                    lualine_y = { "filetype" },
+                    lualine_y = {
+                        { _G.get_indentation_string, on_click = _G.show_indentation_popup },
+                        "filetype"
+                    },
                     lualine_z = {
                         "progress",
                         "location",

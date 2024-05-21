@@ -1,14 +1,56 @@
 _G.map = vim.keymap.set
 
+function _G.get_indentation_string()
+    if not vim.o.expandtab then
+        return "Tab Size: " .. vim.o.tabstop
+    else
+        return "Spaces: " .. vim.o.shiftwidth
+    end
+end
+
+function _G.show_indentation_size_popup()
+    vim.ui.select({ 2, 4, 8 }, { prompt = "Select Indentation Size for Current File" }, function(choice)
+        if type(choice) == "number" then
+            vim.o.shiftwidth = choice
+            vim.o.tabstop = choice
+        end
+    end)
+end
+
+function _G.show_indentation_popup()
+    vim.ui.select({ "tabs", "spaces", "change", "detect" }, {
+        format_item = function(item)
+            if item == "change" then
+                return "Change indent size"
+            elseif item == "detect" then
+                return "Detect indent size"
+            end
+            return "Indent using " .. stringFirstToUpper(item)
+        end
+    }, function(choice)
+        if choice == "detect" then
+            vim.cmd("Sleuth")
+            return "Detect indent size"
+        elseif choice == "tabs" then
+            vim.o.expandtab = false
+        elseif choice == "spaces" then
+            vim.o.expandtab = true
+        elseif choice ~= "change" then
+            return
+        end
+
+        -- Display change size select UI
+        show_indentation_size_popup()
+    end)
+end
+
 ---Get the MASON LSP executable path
 ---@param name string The name of the LSP (ex: "elixir-ls").
 ---@param default string the default path to use if LSP wasn't found.
 ---@return string string The LSPs path.
 function _G.get_lsp_path(name, default)
     local path = path_join(vim.fn.stdpath("data"), "mason", "bin", name)
-    if file_exists(path) then
-        return path
-    end
+    if file_exists(path) then return path end
     return default
 end
 
@@ -27,33 +69,27 @@ end
 ---@param sep string The separator to use.
 ---@return table table A table of strings.
 function _G.split(inputString, sep)
-  local fields = {}
+    local fields = {}
 
-  local pattern = string.format("([^%s]+)", sep)
-  local _ = string.gsub(inputString, pattern, function(c)
-    fields[#fields + 1] = c
-  end)
+    local pattern = string.format("([^%s]+)", sep)
+    local _ = string.gsub(inputString, pattern, function(c) fields[#fields + 1] = c end)
 
-  return fields
+    return fields
 end
 
 ---Joins arbitrary number of paths together.
 ---@param ... string The paths to join.
 ---@return string
 function _G.path_join(...)
-    local args = {...}
+    local args = { ... }
     if #args == 0 then return "" end
 
     local path_separator = "/"
     local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1
-    if is_windows == true then
-      path_separator = "\\"
-    end
+    if is_windows == true then path_separator = "\\" end
 
     local all_parts = {}
-    if type(args[1]) == "string" and args[1]:sub(1, 1) == path_separator then
-        all_parts[1] = ""
-    end
+    if type(args[1]) == "string" and args[1]:sub(1, 1) == path_separator then all_parts[1] = "" end
 
     for _, arg in ipairs(args) do
         local arg_parts = split(arg, path_separator)
@@ -63,7 +99,7 @@ function _G.path_join(...)
 end
 
 function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, {...})
+    local objects = vim.tbl_map(vim.inspect, { ... })
     print(unpack(objects))
 end
 
@@ -91,6 +127,8 @@ function _G.splitString(str, delimiter)
     end
     return matches
 end
+
+function _G.stringFirstToUpper(str) return (str:gsub("^%l", string.upper)) end
 
 function _G.tableMerge(t1, t2)
     for k, v in pairs(t2) do

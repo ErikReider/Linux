@@ -37,6 +37,7 @@ local Module = {};
 function Module.getOptionsTable()
     local optionsTable = {
         { title = "Open PWD Folder", action = disownCMD("xdg-open .") },
+        { title = "Change indentation style", action = "lua _G.show_indentation_popup()" },
         { title = "Open LazyDocker", action = "LazyDocker" },
         { title = "Search for TODOs", action = "TodoTelescope" },
         { title = "Toggle inactive shade", action = "lua require('shade').toggle()" },
