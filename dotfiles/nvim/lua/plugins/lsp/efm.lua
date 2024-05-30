@@ -1,7 +1,7 @@
 local nvim_lsp = require("lspconfig")
 
-local prettier = require("plugins.lsp.Diagnostics.prettier")
-local biome_formatter = require("plugins.lsp.Diagnostics.biome_formatter")
+local prettier = require("efmls-configs.formatters.prettier")
+local biome_formatter = require("efmls-configs.formatters.biome")
 local shfmt = require("plugins.lsp.Diagnostics.shfmt")
 
 local efm_languages = {
@@ -33,12 +33,12 @@ local efm_languages = {
     sass = { prettier },
     css = { prettier },
     -- Biome
-    javascript = {biome_formatter},
-    javascriptreact = {biome_formatter},
-    ["javascript.jsx"] = {biome_formatter},
-    typescript = {biome_formatter},
-    typescriptreact = {biome_formatter},
-    ["typescript.tsx"] = {biome_formatter},
+    javascript = { biome_formatter },
+    javascriptreact = { biome_formatter },
+    ["javascript.jsx"] = { biome_formatter },
+    typescript = { biome_formatter },
+    typescriptreact = { biome_formatter },
+    ["typescript.tsx"] = { biome_formatter },
     python = { { formatCommand = "autopep8 --ignore E501 -", formatStdin = true } }
     -- latex = {{}},
 }
@@ -51,6 +51,7 @@ nvim_lsp.efm.setup({
     root_dir = nvim_lsp.util.root_pattern(unpack(efm_root_markers)),
     init_options = {
         documentFormatting = true,
+        documentRangeFormatting = true,
         hover = true,
         documentSymbol = true,
         codeAction = true,
