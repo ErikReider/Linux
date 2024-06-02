@@ -11,8 +11,9 @@
   "control-center-margin-left": 8,
   "control-center-width": 500,
   "control-center-height": 600,
-  "fit-to-screen": false,
+  "fit-to-screen": true,
 
+  "layer-shell": true,
   "layer": "overlay",
   "control-center-layer": "overlay",
   "cssPriority": "user",
@@ -25,7 +26,7 @@
   "timeout-critical": 0,
   "notification-window-width": 500,
   "keyboard-shortcuts": true,
-  "image-visibility": "when-available",
+  "image-visibility": "always",
   "transition-time": 200,
   "hide-on-clear": true,
   "hide-on-action": true,
@@ -33,7 +34,6 @@
 
   "widgets": [
     "inhibitors",
-    "title",
     "dnd",
     "mpris",
     "notifications"
@@ -58,7 +58,7 @@
     },
     "mpris": {
       "image-size": 96,
-      "image-radius": 12
+      "blur": true
     }
   }
 }
