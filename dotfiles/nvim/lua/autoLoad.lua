@@ -13,6 +13,11 @@ local autocmd = vim.api.nvim_create_autocmd
 --     group = "remember_folds",
 --     command = "silent! loadview"
 -- })
+
+-- Set titlestring
+-- autocmd BufEnter * let &titlestring = "neovim: " . expand("%:t")
+-- autocmd("BufEnter", { pattern = "*", command = [[let &titlestring = "neovim: " . expand("%:t")]] })
+
 -- SCSS Tweaks
 autocmd("FileType", { pattern = "scss", command = "setl iskeyword+=@-@" })
 
