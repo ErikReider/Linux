@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=Firefox Logins
+Name=Logins Firefox
 Comment=Logins
 GenericName=Logins
 Keywords=Logins
@@ -8,5 +8,5 @@ Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=firefox org.mo
 Icon=org.mozilla.firefox
 Terminal=false
 Type=Application
-StartupNotify=true
-StartupWMClass=firefox
+StartupNotify=false
+StartupWMClass=firefox-logins
