@@ -54,7 +54,7 @@ alias pacs='pamac search'
 alias pacl='pamac list -i'
 alias paclg='pamac list -i | grep -e'
 
-alias nvimcfg="nvim ~/.config/nvim/init.vim"
+alias nvimcfg="nvim --cmd 'cd ~/.config/nvim/'"
 alias zshcfg="nvim ~/.zshrc"
 alias src="exec zsh"
 
