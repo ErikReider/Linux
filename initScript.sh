@@ -144,8 +144,16 @@ if [[ $install_app_var == y ]]; then
         sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
         sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
+        # Copr repos
         sudo dnf copr enable principis/NoiseTorch -y
-        sudo dnf copr enable nickavem/adw-gtk3 -y
+        sudo dnf copr enable alebastr/sway-extras -y
+        sudo dnf copr enable erikreider/packages -y
+        sudo dnf copr enable solopasha/hyprland -y
+        sudo dnf copr enable swayfx/swayfx -y
+        sudo dnf copr enable ublue-os/akmods -y
+
+        # Add thirdparty Terra repo
+        sudo dnf config-manager --add-repo https://terra.fyralabs.com/terra.repo
 
         dnf check-update
 
@@ -198,7 +206,7 @@ if [[ $install_dev_tools == y ]]; then
     elif [[ $distroName == "fedora" ]]; then
         sudo dnf copr enable atim/lazygit -y
         sudo dnf copr enable atim/lazydocker -y
-        sudo dnf copr enable agriffis/neovim-nightly -y
+        # sudo dnf copr enable agriffis/neovim-nightly -y
         sudo dnf copr enable rubemlrm/act-cli -y
         sudo dnf groupinstall "Development Tools"
         sudo dnf groupinstall "RPM Development Tools"
