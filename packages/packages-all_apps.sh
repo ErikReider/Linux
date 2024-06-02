@@ -17,7 +17,7 @@ export common=(
 export fedora=(
 "chromium-freeworld"
 "sushi"
-"adw-gtk3"
+"adw-gtk3-theme"
 "java-1.8.0-openjdk"
 "java-11-openjdk"
 "java-latest-openjdk"
@@ -83,6 +83,7 @@ export flatpak=(
 "org.gnome.Epiphany"
 "org.gnome.SoundRecorder"
 "ca.desrt.dconf-editor"
+"io.missioncenter.MissionCenter"
 )
 export flatpak_beta=(
 "com.discordapp.DiscordCanary"
