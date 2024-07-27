@@ -1,7 +1,8 @@
 return {
     -- Hydra
     {
-        "anuvyklack/hydra.nvim",
+        -- "anuvyklack/hydra.nvim",
+        "nvimtools/hydra.nvim",
         dependencies = {
             {
                 "mrjones2014/smart-splits.nvim",
@@ -101,15 +102,21 @@ _<Left>_  _<Right>_  _<S-Left>_  _<S-Right>_  _<C-Left>_  _<C-Right>_  _v_: vert
             Hydra({
                 name = "Windows",
                 hint = window_hint,
-                config = { invoke_on_body = true, hint = { border = "rounded", offset = 0 } },
+                config = {
+                    invoke_on_body = true,
+                    hint = {
+                        float_opts = { style = "minimal", focusable = false, noautocmd = true },
+                        offset = 0
+                    },
+                    color = "red"
+                },
                 mode = "n",
-                body = "<C-w>",
+                body = "<C-e>",
                 heads = {
                     { "<Left>", "<C-w>h" },
                     { "<Down>", "<C-w>j" },
                     { "<Up>", pcmd("wincmd k", "E11", "close") },
                     { "<Right>", "<C-w>l" },
-
                     { "<S-Left>", cmd("WinShift left") },
                     { "<S-Down>", cmd("WinShift down") },
                     { "<S-Up>", cmd("WinShift up") },
