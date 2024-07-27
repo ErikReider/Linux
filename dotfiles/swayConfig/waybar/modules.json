@@ -157,7 +157,7 @@
       "",
       ""
     ],
-    "on-click": "gnome-control-center wifi",
+    "on-click": "XDG_CURRENT_DESKTOP=gnome gnome-control-center wifi",
     "on-click-right": "wifi toggle",
     "tooltip-format": "{}",
     "tooltip-format-wifi": "{signalStrength} {ipaddr}"
@@ -169,7 +169,7 @@
     "format-linked": "",
     "format-disconnected": "",
     "format-disabled": "",
-    "on-click": "gnome-control-center network",
+    "on-click": "XDG_CURRENT_DESKTOP=gnome gnome-control-center network",
     "tooltip-format": "{}",
     "tooltip-format-ethernet": "{ipaddr}"
   },
