@@ -24,6 +24,7 @@ export common=(
     "swappy"
     "swayidle"
     "udiskie"
+    "hyprlock"
 )
 
 export arch=(
