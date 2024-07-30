@@ -7,7 +7,6 @@ local capabilities = get_lsp_capabilities()
 local servers = {
     -- No configuration needed
     "vimls",
-    "cssls",
     "intelephense",
     "lemminx",
     "dockerls",
@@ -234,6 +233,19 @@ nvim_lsp.jsonls.setup({
     capabilities = capabilities,
     cmd = { "vscode-json-language-server", "--stdio" },
     filetypes = { "json", "jsonc" }
+})
+
+-- CSS LS
+nvim_lsp.cssls.setup({
+    on_attach = function(client, bufnr)
+        client.server_capabilities.document_formatting = false
+        on_attach(client, bufnr)
+    end,
+    init_options = { provideFormatter = false },
+    flags = { debounce_text_changes = 150 },
+    capabilities = capabilities,
+    cmd = { "vscode-css-language-server", "--stdio" },
+    filetypes = { "css", "scss", "less" }
 })
 
 require("rust-tools").setup({
