@@ -93,7 +93,7 @@ nvim_lsp.vala_ls.setup({
 })
 
 -- TypeScript/JavaScript
-nvim_lsp.tsserver.setup({
+nvim_lsp.ts_ls.setup({
     on_attach = function(client, bufnr)
         if client.config.flags then client.config.flags.allow_incremental_sync = true end
         client.server_capabilities.document_formatting = false
