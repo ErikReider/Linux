@@ -58,6 +58,8 @@ alias nvimcfg="nvim --cmd 'cd ~/.config/nvim/'"
 alias zshcfg="nvim ~/.zshrc"
 alias src="exec zsh"
 
+alias pkgconf_fzf="pkgconf --list-all | fzf"
+
 # Combines jq and less with JSON syntax highlighting
 alias jqless="jq -C "." | less"
 
