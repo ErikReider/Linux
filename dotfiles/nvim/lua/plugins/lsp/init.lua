@@ -57,6 +57,8 @@ return {
             "simrat39/rust-tools.nvim",
             -- Java eclipse tools
             "mfussenegger/nvim-jdtls",
+            -- Clang tools
+            "Civitasv/cmake-tools.nvim",
 
             --
             -- Nvim cmp
