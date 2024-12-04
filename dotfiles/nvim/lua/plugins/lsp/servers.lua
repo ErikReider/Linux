@@ -11,7 +11,10 @@ local servers = {
     "lemminx",
     "dockerls",
     "mesonlsp",
-    "neocmake"
+    "neocmake",
+    "blueprint_ls",
+    "zls",
+    "glsl_analyzer",
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
