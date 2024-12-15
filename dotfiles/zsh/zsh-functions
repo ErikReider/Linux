@@ -30,3 +30,16 @@ function man_preview {
         echo "Man file doesn't exist..."
     fi
 }
+
+function git_status_subdirs {
+    for f in $(find . -type d -name .git | awk -F"/.git$" '{print $1}'); do
+        (
+            cd "$f" \
+                && if [ -n "$(git status --porcelain)" ]; then
+                    echo "$f"
+                    git status --short
+                    echo
+                fi
+        )
+    done
+}
