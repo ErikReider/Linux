@@ -23,7 +23,8 @@ return {
                         c = c_comment_string,
                         cpp = c_comment_string,
                         vala = c_comment_string,
-                        glsl = c_comment_string
+                        glsl = c_comment_string,
+                        asm = { __default = "# %s", __multiline = "# %s" }
                     }
                 };
             end

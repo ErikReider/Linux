@@ -1,11 +1,12 @@
 local nvim_lsp = require("lspconfig")
 
+local lua_format = require("efmls-configs.formatters.lua_format")
 local prettier = require("efmls-configs.formatters.prettier")
 local biome_formatter = require("efmls-configs.formatters.biome")
 local shfmt = require("plugins.lsp.Diagnostics.shfmt")
 
 local efm_languages = {
-    lua = { { formatCommand = "lua-format -i", formatStdin = true } },
+    lua = { lua_format },
     sh = { shfmt },
     zsh = { shfmt },
     bash = { shfmt },
@@ -42,7 +43,7 @@ local efm_languages = {
     python = { { formatCommand = "autopep8 --ignore E501 -", formatStdin = true } }
     -- latex = {{}},
 }
-local efm_root_markers = { "package.json", "yarn.lock", "package-lock.json", ".git/", ".zshrc" }
+local efm_root_markers = { "package.json", "yarn.lock", "package-lock.json", ".git/", ".zshrc", "init.lua" }
 nvim_lsp.efm.setup({
     on_attach = require("plugins.lsp.on_attach"),
     flags = { debounce_text_changes = 150 },

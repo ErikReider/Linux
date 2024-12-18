@@ -7,12 +7,14 @@ local capabilities = get_lsp_capabilities()
 local servers = {
     -- No configuration needed
     "vimls",
-    "cssls",
     "intelephense",
     "lemminx",
     "dockerls",
     "mesonlsp",
-    "neocmake"
+    "neocmake",
+    "blueprint_ls",
+    "zls",
+    "glsl_analyzer",
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -94,7 +96,7 @@ nvim_lsp.vala_ls.setup({
 })
 
 -- TypeScript/JavaScript
-nvim_lsp.tsserver.setup({
+nvim_lsp.ts_ls.setup({
     on_attach = function(client, bufnr)
         if client.config.flags then client.config.flags.allow_incremental_sync = true end
         client.server_capabilities.document_formatting = false
@@ -234,6 +236,19 @@ nvim_lsp.jsonls.setup({
     capabilities = capabilities,
     cmd = { "vscode-json-language-server", "--stdio" },
     filetypes = { "json", "jsonc" }
+})
+
+-- CSS LS
+nvim_lsp.cssls.setup({
+    on_attach = function(client, bufnr)
+        client.server_capabilities.document_formatting = false
+        on_attach(client, bufnr)
+    end,
+    init_options = { provideFormatter = false },
+    flags = { debounce_text_changes = 150 },
+    capabilities = capabilities,
+    cmd = { "vscode-css-language-server", "--stdio" },
+    filetypes = { "css", "scss", "less" }
 })
 
 require("rust-tools").setup({

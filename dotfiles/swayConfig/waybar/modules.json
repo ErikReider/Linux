@@ -86,9 +86,6 @@
         "type": "screenshare"
       },
       {
-        "type": "audio-out"
-      },
-      {
         "type": "audio-in"
       }
     ]

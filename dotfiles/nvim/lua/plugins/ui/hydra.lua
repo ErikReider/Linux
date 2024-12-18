@@ -1,7 +1,8 @@
 return {
     -- Hydra
     {
-        "anuvyklack/hydra.nvim",
+        -- "anuvyklack/hydra.nvim",
+        "nvimtools/hydra.nvim",
         dependencies = {
             {
                 "mrjones2014/smart-splits.nvim",
@@ -25,7 +26,7 @@ return {
                             silent = false,
                             -- must be functions, they will be executed when
                             -- entering or exiting the resize mode
-                            hooks = { on_enter = nil, on_leave = nil }
+                            hooks = { on_enter = nil, on_leave = nil },
                         },
                         -- ignore these autocmd events (via :h eventignore) while processing
                         -- smart-splits.nvim computations, which involve visiting different
@@ -36,11 +37,11 @@ return {
                         -- enable or disable the tmux integration
                         tmux_integration = false,
                         -- disable tmux navigation if current tmux pane is zoomed
-                        disable_multiplexer_nav_when_zoomed = true
+                        disable_multiplexer_nav_when_zoomed = true,
                     })
-                end
+                end,
             },
-            "sindrets/winshift.nvim"
+            "sindrets/winshift.nvim",
         },
         config = function()
             local Hydra = require("hydra")
@@ -98,23 +99,35 @@ _<Left>_  _<Right>_  _<S-Left>_  _<S-Right>_  _<C-Left>_  _<C-Right>_  _v_: vert
      ^focus      ^^^^^       window       ^^^      _=_: equalize      ^_o_: remain only
 ]]
 
-            Hydra({
+            local window_hydra = Hydra({
                 name = "Windows",
                 hint = window_hint,
-                config = { invoke_on_body = true, hint = { border = "rounded", offset = 0 } },
+                config = {
+                    invoke_on_body = true,
+                    hint = {
+                        float_opts = {
+                            style = "minimal",
+                            border = "rounded",
+                            title = "Hydra",
+                            title_pos = "center",
+                            focusable = false,
+                            noautocmd = true,
+                        },
+                        offset = 0,
+                    },
+                    color = "red",
+                },
                 mode = "n",
-                body = "<C-w>",
+                body = "<C-e>",
                 heads = {
                     { "<Left>", "<C-w>h" },
                     { "<Down>", "<C-w>j" },
                     { "<Up>", pcmd("wincmd k", "E11", "close") },
                     { "<Right>", "<C-w>l" },
-
                     { "<S-Left>", cmd("WinShift left") },
                     { "<S-Down>", cmd("WinShift down") },
                     { "<S-Up>", cmd("WinShift up") },
                     { "<S-Right>", cmd("WinShift right") },
-
                     { "<C-Left>", function() splits.resize_left(2) end },
                     { "<C-Down>", function() splits.resize_down(2) end },
                     { "<C-Up>", function() splits.resize_up(2) end },
@@ -126,7 +139,6 @@ _<Left>_  _<Right>_  _<S-Left>_  _<S-Right>_  _<C-Left>_  _<C-Right>_  _v_: vert
                     { "<C-v>", pcmd("vsplit", "E36"), { desc = false } },
 
                     { "o", "<C-w>o", { exit = true, desc = "remain only" } },
-
                     { "c", pcmd("close", "E444") },
                     { "<C-c>", pcmd("close", "E444"), { desc = false } },
                     { "<C-q>", pcmd("close", "E444"), { desc = false } },
@@ -136,9 +148,9 @@ _<Left>_  _<Right>_  _<S-Left>_  _<S-Right>_  _<C-Left>_  _<C-Right>_  _v_: vert
                     { "<C-o>", "<C-w>o", { exit = true, desc = false } },
                     { "<Esc>", nil, { exit = true, desc = false } },
                     { "<C-c>", nil, { exit = true, desc = false } },
-                    { "q", nil, { exit = true, desc = false } }
-                }
+                    { "q", nil, { exit = true, desc = false } },
+                },
             })
-        end
-    }
+        end,
+    },
 }
