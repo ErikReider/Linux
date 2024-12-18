@@ -32,7 +32,7 @@ fi
 pip install pulsectl
 
 cd ~/.config/
-dirs=("sway" "swaylock" "wayfire/wayfire.ini" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty" "xdg-desktop-portal-wlr" "wlogout" "swaync")
+dirs=("sway" "swaylock" "wayfire/wayfire.ini" "waybar" "../rofi" "../dunst" "../kitty" "gammastep" "../alacritty" "xdg-desktop-portal-wlr" "wlogout" "swaync" "../hypr")
 
 for item in "${dirs[@]}"; do
     name=$(basename "$item")
