@@ -43,3 +43,14 @@ function git_status_subdirs {
         )
     done
 }
+
+function take_notes {
+    date=$(date +"%d-%m-%Y")
+    name="notes_$date"
+
+    mkdir "$name"
+    cd "$name" && {
+        touch "$name.md"
+        nvim "$name.md"
+    }
+}
