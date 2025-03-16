@@ -3,7 +3,7 @@ set logging file gdb.output
 set logging on
 
 # saves the command history between sessions
-set history save off
+set history save on
 # if the screen is too long, you won't
 set pagination off
 # displays values of classes, structs etc. nicely
