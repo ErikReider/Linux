@@ -42,12 +42,12 @@ nvim_lsp.lua_ls.setup({
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = "LuaJIT",
                 -- Setup your lua path
-                path = runtime_path
+                path = runtime_path,
             },
             hint = { enable = true },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = { "vim" }
+                globals = { "vim" },
             },
             workspace = {
                 checkThirdParty = false,
@@ -61,11 +61,23 @@ nvim_lsp.lua_ls.setup({
                 -- library = vim.api.nvim_get_runtime_file("", true)
             },
             telemetry = { enable = false },
-            format = { enable = false }
-        }
-    }
+            format = { enable = false },
+        },
+    },
 })
 
+-- LaTex
+
+-- Okular as fallback previewer for texlab
+local has_evince = vim.fn.executable("evince") == 1 and vim.fn.executable("evince-synctex") == 1
+local evince_config = { "-f", "%l", "%p",
+                        [[nvim-texlabconfig -file %f -line %l -server ]] .. vim.v.servername }
+local okular_config = {
+    "--unique",
+    "file:%p#src:%l%f",
+    "--editor-cmd",
+    [[nvim-texlabconfig -file %f -line %l -server ]] .. vim.v.servername,
+}
 nvim_lsp.texlab.setup {
     on_attach = on_attach,
     flags = { debounce_text_changes = 150 },
@@ -78,30 +90,25 @@ nvim_lsp.texlab.setup {
                 args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
                 executable = "latexmk",
                 forwardSearchAfter = true,
-                onSave = true
+                onSave = true,
             },
             chktex = { onEdit = false, onOpenAndSave = false },
             diagnosticsDelay = 300,
             formatterLineLength = 80,
             forwardSearch = {
-                executable = "evince-synctex",
-                args = {
-                    "-f",
-                    "%l",
-                    "%p",
-                    [[nvim-texlabconfig -file %f -line %l -server ]] .. vim.v.servername
-                }
+                executable = has_evince and "evince-synctex" or "okular",
+                args = has_evince and evince_config or okular_config,
             },
             latexFormatter = "latexindent",
-            latexindent = { modifyLineBreaks = false }
-        }
-    }
+            latexindent = { modifyLineBreaks = false },
+        },
+    },
 }
 
 nvim_lsp.vala_ls.setup({
     on_attach = on_attach,
     flags = { debounce_text_changes = 150 },
-    capabilities = capabilities
+    capabilities = capabilities,
 })
 
 -- TypeScript/JavaScript
@@ -119,12 +126,13 @@ nvim_lsp.ts_ls.setup({
         "javascript.jsx",
         "typescript",
         "typescriptreact",
-        "typescript.tsx"
+        "typescript.tsx",
     },
     init_options = {
         provideFormatter = false,
         hostInfo = "neovim",
-        preferences = { includeCompletionsWithSnippetText = true, includeCompletionsForImportStatements = true }
+        preferences = { includeCompletionsWithSnippetText = true,
+                        includeCompletionsForImportStatements = true },
     },
     settings = {
         typescript = {
@@ -136,8 +144,8 @@ nvim_lsp.ts_ls.setup({
                 includeInlayVariableTypeHintsWhenTypeMatchesName = false,
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true
-            }
+                includeInlayEnumMemberValueHints = true,
+            },
         },
         javascript = {
             inlayHints = {
@@ -148,10 +156,10 @@ nvim_lsp.ts_ls.setup({
                 includeInlayVariableTypeHintsWhenTypeMatchesName = false,
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true
-            }
-        }
-    }
+                includeInlayEnumMemberValueHints = true,
+            },
+        },
+    },
 })
 
 -- Biome: Web project toolchain
@@ -163,7 +171,7 @@ nvim_lsp.biome.setup({
     filetypes = { "javascript", "javascriptreact", "typescript", "typescript.tsx", "typescriptreact" },
     root_dir = util.root_pattern("biome.json"),
     single_file_support = false,
-    default_config = { root_dir = [[root_pattern('biome.json')]] }
+    default_config = { root_dir = [[root_pattern('biome.json')]] },
 })
 
 nvim_lsp.stylelint_lsp.setup({
@@ -172,7 +180,7 @@ nvim_lsp.stylelint_lsp.setup({
         on_attach(client, bufnr)
     end,
     flags = { debounce_text_changes = 150 },
-    capabilities = capabilities
+    capabilities = capabilities,
 })
 
 nvim_lsp.emmet_language_server.setup({
@@ -192,8 +200,8 @@ nvim_lsp.emmet_language_server.setup({
         "pug",
         "sass",
         "scss",
-        "typescriptreact"
-    }
+        "typescriptreact",
+    },
 })
 
 -- CSharp
@@ -201,7 +209,7 @@ nvim_lsp.omnisharp.setup({
     on_attach = on_attach,
     flags = { debounce_text_changes = 150 },
     capabilities = capabilities,
-    cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
+    cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
 })
 
 -- Clangd
@@ -209,7 +217,7 @@ nvim_lsp.clangd.setup({
     on_attach = on_attach,
     flags = { debounce_text_changes = 150 },
     capabilities = capabilities,
-    cmd = { "clangd", "-fallback-style=Google" }
+    cmd = { "clangd", "-fallback-style=Google" },
 })
 
 -- Bash
@@ -218,7 +226,7 @@ nvim_lsp.bashls.setup({
     flags = { debounce_text_changes = 150 },
     capabilities = capabilities,
     cmd = { "bash-language-server", "start" },
-    filetypes = { "sh", "zsh", "bash" }
+    filetypes = { "sh", "zsh", "bash" },
 })
 
 -- HTML
@@ -231,7 +239,7 @@ nvim_lsp.html.setup({
     flags = { debounce_text_changes = 150 },
     capabilities = capabilities,
     cmd = { "vscode-html-language-server", "--stdio" },
-    filetypes = { "html", "heex", "blade" }
+    filetypes = { "html", "heex", "blade" },
 })
 
 -- JSON
@@ -244,7 +252,7 @@ nvim_lsp.jsonls.setup({
     flags = { debounce_text_changes = 150 },
     capabilities = capabilities,
     cmd = { "vscode-json-language-server", "--stdio" },
-    filetypes = { "json", "jsonc" }
+    filetypes = { "json", "jsonc" },
 })
 
 -- CSS LS
@@ -257,7 +265,7 @@ nvim_lsp.cssls.setup({
     flags = { debounce_text_changes = 150 },
     capabilities = capabilities,
     cmd = { "vscode-css-language-server", "--stdio" },
-    filetypes = { "css", "scss", "less" }
+    filetypes = { "css", "scss", "less" },
 })
 
 require("rust-tools").setup({
@@ -272,8 +280,8 @@ require("rust-tools").setup({
         -- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
         reload_workspace_from_cargo_toml = true,
         -- These apply to the default RustSetInlayHints command
-        inlay_hints = { auto = false }
-    }
+        inlay_hints = { auto = false },
+    },
 })
 
 -- Flutter (Configures dartls)
@@ -284,14 +292,14 @@ require("flutter-tools").setup({
     closing_tags = {
         highlight = "Comment", -- highlight for the closing tag
         prefix = "❯ ", -- character to use for close tag e.g. > Widget
-        enabled = true -- set to false to disable
+        enabled = true, -- set to false to disable
     },
     dev_log = {
-        open_cmd = "tabedit" -- command to use to open the log buffer
+        open_cmd = "tabedit", -- command to use to open the log buffer
     },
     outline = {
         open_cmd = "30vnew", -- command to use to open the outline buffer
-        auto_open = false -- if true this will open the outline automatically when it is first populated
+        auto_open = false, -- if true this will open the outline automatically when it is first populated
     },
     lsp = {
         on_attach = function(...)
@@ -305,14 +313,14 @@ require("flutter-tools").setup({
                     if not commands.is_running() then
                         vim.fn.execute([[!kill -SIGUSR1 $(pgrep -f "[f]lutter_tool.*run")]])
                     end
-                end
+                end,
             })
             -- Format on save
             vim.api.nvim_create_autocmd("BufWritePre",
                                         {
                 group = "hotReload",
                 pattern = "*.dart",
-                callback = function() vim.lsp.buf.format({ async = true }) end
+                callback = function() vim.lsp.buf.format({ async = true }) end,
             })
 
             on_attach(...)
@@ -324,7 +332,7 @@ require("flutter-tools").setup({
             background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
             foreground = false, -- highlight the foreground
             virtual_text = true, -- show the highlight using virtual text
-            virtual_text_str = "■" -- the virtual text character to highlight
+            virtual_text_str = "■", -- the virtual text character to highlight
         },
         settings = {
             -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
@@ -333,23 +341,23 @@ require("flutter-tools").setup({
             renameFilesWithClasses = "prompt", -- "always"
             enableSnippets = true,
             updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
-            dart = { lineLength = 120 }
-        }
-    }
+            dart = { lineLength = 120 },
+        },
+    },
 })
 
 -- Pyright
 nvim_lsp.pyright.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-    settings = { python = { analysis = { useLibraryCodeForTypes = true } } }
+    settings = { python = { analysis = { useLibraryCodeForTypes = true } } },
 })
 
 -- elixir-ls
 nvim_lsp.elixirls.setup({
     cmd = { get_lsp_path("elixir-ls", "/usr/lib/elixir-ls/language_server.sh") },
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
 })
 
 -- Java setup in ftplugins dir

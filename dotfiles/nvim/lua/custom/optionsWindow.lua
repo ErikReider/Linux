@@ -7,7 +7,8 @@ local runOptions = {
         run = "!npm start",
         build = "!npm run build"
     },
-    { filetypes = { "markdown" }, run = "PeekOpenOrClose" }
+    { filetypes = { "markdown" }, run = "PeekOpenOrClose" },
+    { filetypes = { "tex" }, run = "TexlabBuild" }
 }
 local function getRunAction()
     local ft = vim.api.nvim_buf_get_option(0, "filetype")

@@ -227,9 +227,6 @@ if [[ $install_dev_tools == y ]]; then
     # Install deno
     curl -fsSL https://deno.land/x/install/install.sh | sh
 
-    # Install Evince PDF line following for LaTeX
-    pip3 install --user https://github.com/efoerster/evince-synctex/archive/master.zip
-
     # Start docker daemon with system
     sudo systemctl enable --now docker
     # Add user to docker group
@@ -271,7 +268,6 @@ if [[ $vim_var == y ]]; then
     source "$currentDir/packages/packages-nvim.sh"
 
     if [[ $distroName == "arch" ]]; then
-        pip install neovim
         yay -S --needed "${common[@]}" "${arch[@]}"
     elif [[ $distroName == "fedora" ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
@@ -281,6 +277,10 @@ if [[ $vim_var == y ]]; then
     sudo npm i -g --save-dev --save-exact prettier @prettier/plugin-xml
 
     sudo npm install -g neovim
+
+    pip3 install --user neovim
+    # Install Evince PDF line following for LaTeX
+    pip3 install --user https://github.com/efoerster/evince-synctex/archive/master.zip
 
     # brew install dart-sdk
 
