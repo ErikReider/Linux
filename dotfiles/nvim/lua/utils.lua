@@ -1,5 +1,17 @@
 _G.map = vim.keymap.set
 
+function _G.add_to_env_path(path_table)
+    local separator = string.sub(package.config, 1, 1)
+    local path = table.concat(path_table, separator)
+    local path_separator = ":"
+    if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+        path_separator = ";"
+        print(path_separator)
+        print(vim.fn.has("win32") or vim.fn.has("win64"))
+    end
+    vim.env.PATH = path .. path_separator .. vim.env.PATH
+end
+
 function _G.get_indentation_string()
     if not vim.o.expandtab then
         return "Tab Size: " .. vim.o.tabstop
