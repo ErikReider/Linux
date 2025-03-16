@@ -20,7 +20,10 @@ for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = on_attach,
         flags = { debounce_text_changes = 150 },
-        capabilities = capabilities
+        capabilities = capabilities,
+        root_dir = function(fname)
+            return util.root_pattern("package.json", ".git")(fname) or util.path.dirname(fname)
+        end,
     }
 end
 
@@ -222,7 +225,7 @@ nvim_lsp.html.setup({
     flags = { debounce_text_changes = 150 },
     capabilities = capabilities,
     cmd = { "vscode-html-language-server", "--stdio" },
-    filetypes = { "html", "heex" }
+    filetypes = { "html", "heex", "blade" }
 })
 
 -- JSON

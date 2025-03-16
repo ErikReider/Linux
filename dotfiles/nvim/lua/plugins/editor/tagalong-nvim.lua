@@ -5,7 +5,7 @@ return {
         "AndrewRadev/tagalong.vim",
         enabled = true,
         config = function()
-            vim.g.tagalong_additional_filetypes = { "heex" }
+            vim.g.tagalong_additional_filetypes = { "heex", "blade" }
             -- inoremap <silent> <c-c> <c-c>:call tagalong#Apply()<cr>
             map("i", "<c-c>", "<c-c>:call tagalong#Apply()<cr>", { noremap = true, silent = true })
         end

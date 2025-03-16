@@ -2,6 +2,7 @@ require("utils")
 
 -- NeoVim general settings
 require("general")
+require("filetypes")
 require("neovide")
 require("mappings")
 require("autoLoad")

@@ -24,10 +24,10 @@ return {
                         cpp = c_comment_string,
                         vala = c_comment_string,
                         glsl = c_comment_string,
-                        asm = { __default = "# %s", __multiline = "# %s" }
-                    }
+                        asm = { __default = "# %s", __multiline = "# %s" },
+                    },
                 };
-            end
+            end,
         },
         -- Code context
         {
@@ -43,15 +43,15 @@ return {
                     trim_scope = "outer",
                     -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
                     patterns = {
-                        default = { "class", "function", "method", "for", "while", "if", "switch", "case" }
-                    }
+                        default = { "class", "function", "method", "for", "while", "if", "switch", "case" },
+                    },
                 })
-            end
+            end,
         },
         -- Rainbow delimiters for Neovim through Tree-sitter
         "HiPhish/rainbow-delimiters.nvim",
         -- Treesitter auto close tags
-        "windwp/nvim-ts-autotag"
+        "windwp/nvim-ts-autotag",
     },
     config = function()
         -- vim.cmd("set foldmethod=expr")
@@ -70,7 +70,7 @@ return {
                 -- Which query to use for finding delimiters
                 query = "rainbow-parens",
                 -- Highlight the entire buffer all at once: TODO: Change this to local?
-                strategy = require("rainbow-delimiters").strategy.global
+                strategy = require("rainbow-delimiters").strategy.global,
             },
             autotag = {
                 enable = true,
@@ -96,8 +96,9 @@ return {
                     "hbs",
                     "htmldjango",
                     "elixir",
-                    "heex"
-                }
+                    "heex",
+                    "blade",
+                },
             },
             -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
             textobjects = {
@@ -114,7 +115,7 @@ return {
                         ["ac"] = "@class.outer",
                         -- You can optionally set descriptions to the mappings (used in the desc parameter of
                         -- nvim_buf_set_keymap) which plugins like which-key display
-                        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" }
+                        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
                     },
                     -- You can choose the select mode (default is charwise 'v')
                     --
@@ -126,7 +127,7 @@ return {
                     selection_modes = {
                         ["@parameter.outer"] = "v", -- charwise
                         ["@function.outer"] = "V", -- linewise
-                        ["@class.outer"] = "<c-v>" -- blockwise
+                        ["@class.outer"] = "<c-v>", -- blockwise
                     },
                     -- If you set this to `true` (default is `false`) then any textobject is
                     -- extended to include preceding or succeeding whitespace. Succeeding
@@ -137,10 +138,20 @@ return {
                     -- * query_string: eg '@function.inner'
                     -- * selection_mode: eg 'v'
                     -- and should return true of false
-                    include_surrounding_whitespace = true
-                }
-            }
+                    include_surrounding_whitespace = true,
+                },
+            },
         })
-    end
+
+        local parser_config = require"nvim-treesitter.parsers".get_parser_configs()
+        parser_config.blade = {
+            install_info = {
+                url = "https://github.com/EmranMR/tree-sitter-blade",
+                files = { "src/parser.c" },
+                branch = "main",
+            },
+            filetype = "blade",
+        }
+    end,
 }
 
