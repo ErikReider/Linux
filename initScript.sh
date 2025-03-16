@@ -64,9 +64,12 @@ fi
 ## Needed Config Files
 read -rp "Do you wish to symlink needed config files? [y/n] " symlink_etc_var
 if [[ $symlink_etc_var == y ]]; then
+    # $HOME files
     # .pam_environment
     cd "$HOME"
     ln -si "$currentDir/dotfiles/.pam_environment" .
+    # .gitconfig
+    ln -si "$currentDir/dotfiles/.gitconfig" .
 
     # ~/.config/environment.d/*
     if ! [ -d "$HOME/.config/environment.d/" ]; then

@@ -26,6 +26,7 @@ export common=(
 "mold"
 "gucharmap"
 "elixir"
+"git-delta"
 )
 export fedora=(
 "fd-find"
