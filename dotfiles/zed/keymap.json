@@ -1,0 +1,78 @@
+[
+    {
+        "context": "Editor && !VimWaiting && !menu",
+        "bindings": {}
+    },
+    // UI
+    {
+        "bindings": {
+            "ctrl-n": "workspace::ToggleLeftDock",
+            "ctrl-b": "workspace::ToggleLeftDock",
+            "F8": ["task::Spawn", "lazygit"]
+            // "F8": "workspace::ToggleLeftDock",
+        }
+    },
+    // Editor: All modes
+    {
+        "context": "Editor && vim_operator == none && !VimWaiting",
+        "bindings": {
+            // Navigation
+            "shift-down": ["workspace::SendKeystrokes", "5 down"],
+            "shift-up": ["workspace::SendKeystrokes", "5 up"],
+            "ctrl-down": ["workspace::SendKeystrokes", "5 ctrl-e"],
+            "ctrl-up": ["workspace::SendKeystrokes", "5 ctrl-y"],
+            // Editing
+            "alt-up": "editor::MoveLineUp",
+            "alt-down": "editor::MoveLineDown",
+            "alt-left": "editor::Outdent",
+            "alt-right": "editor::Indent",
+            "ctrl-d": "editor::DuplicateLineDown",
+            "ctrl-shift-v": "vim::Paste",
+            // LSP
+            "ctrl-alt-b": "editor::Format"
+        }
+    },
+    // Editor: Normal/visual mode
+    {
+        "context": "(vim_mode == normal || vim_mode == visual) && vim_operator == none && !VimWaiting",
+        "bindings": {
+            "space p": "vim::Paste",
+            // LSP
+            "ctrl-c": "vim::ToggleComments"
+        }
+    },
+    // Editor: Normal/Insert mode
+    {
+        "context": "(vim_mode == normal || vim_mode == insert) && vim_operator == none && !VimWaiting",
+        "bindings": {
+            // LSP
+            // TODO:
+            // "alt-e": "Diagnostics popup",
+        }
+    },
+    // Editor: Normal mode
+    {
+        "context": "vim_mode == normal && vim_operator == none && !VimWaiting",
+        "bindings": {
+            // TODO: Git hunks
+            "ö h": "editor::GoToHunk",
+            "ä h": "editor::GoToHunk",
+
+            // LSP
+            "g s": "editor::GoToDefinition",
+            "g y": "editor::GoToTypeDefinition",
+            "g i": "editor::GoToImplementation",
+            "g r": "editor::FindAllReferences",
+            "K": "editor::Hover",
+            "F2": "editor::Rename",
+            "space a": "editor::ToggleCodeActions",
+            "ö g": "editor::GoToPrevDiagnostic",
+            "ä g": "editor::GoToDiagnostic"
+        }
+    },
+    // Editor: Visual mode
+    {
+        "context": "vim_mode == visual && vim_operator == none && !VimWaiting",
+        "bindings": {}
+    }
+]

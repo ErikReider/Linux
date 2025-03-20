@@ -1,0 +1,81 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+    "ui_font_size": 16,
+    "ui_font_family": "Clear Sans",
+
+    "buffer_font_size": 16,
+    "buffer_font_family": "FiraCode Nerd Font",
+
+    "theme": {
+        "mode": "system",
+        "light": "Zedwaita Light",
+        "dark": "VScode Dark Plus"
+    },
+    "experimental.theme_overrides": {
+        "editor.active_line.background": "#ffffff05",
+        //"background.appearance": "blurred",
+        //"background": "#00000000",
+        //"editor.background": "#00000000",
+        // "editor": "#ffffff05",
+    },
+
+    "format_on_save": "off",
+    "vim": {
+        "use_system_clipboard": "always"
+    },
+    "vim_mode": true,
+
+    "always_treat_brackets_as_autoclosed": true,
+    "auto_install_extensions": {},
+
+    "chat_panel": {
+        "button": false
+    },
+    "assistant": {
+        "button": false,
+        "version": "2"
+    },
+    "ensure_final_newline_on_save": false,
+    "indent_guides": {
+        "line_width": 1,
+        "active_line_width": 4,
+        "coloring": "indent_aware",
+        "background_coloring": "disabled",
+        "enabled": true
+    },
+
+    "preview_tabs": {
+        "enabled": false
+    },
+
+    "remove_trailing_whitespace_on_save": true,
+    "restore_on_startup": "last_workspace",
+    "show_whitespaces": "all",
+    "soft_wrap": "editor_width",
+    "tab_bar": {
+        "show": true,
+        "show_nav_history_buttons": true
+    },
+    "tabs": {
+        "close_position": "right",
+        "git_status": true
+    },
+    "tab_size": 4,
+    "use_auto_surround": false,
+    "vertical_scroll_margin": 5,
+
+    "show_wrap_guides": true,
+    "wrap_guides": [80, 100, 120],
+
+    "telemetry": {
+        "diagnostics": true,
+        "metrics": false
+    }
+}
