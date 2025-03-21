@@ -26,3 +26,7 @@ fi
 if hash snap 2>/dev/null; then
     sudo snap refresh
 fi
+
+if hash rustup 2>/dev/null; then
+    rustup update
+fi
