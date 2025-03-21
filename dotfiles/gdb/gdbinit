@@ -12,10 +12,10 @@ set print pretty on
 set confirm off
 
 # Exit automatically when program exits normally
-python
-def exit_event(event):
-  if hasattr (event, 'exit_code') and event.exit_code == 0:
-    gdb.execute("quit")
-
-gdb.events.exited.connect(exit_event)
-end
+# python
+# def exit_event(event):
+#   if hasattr (event, 'exit_code') and event.exit_code == 0:
+#     gdb.execute("quit")
+#
+# gdb.events.exited.connect(exit_event)
+# end
