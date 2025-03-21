@@ -75,19 +75,16 @@ if [[ $symlink_etc_var == y ]]; then
         sudo cp -ib "$currentDir/system_dotfiles/etc/dnf/dnf.conf" .
     fi
 
-    # $HOME files
-    # .pam_environment
-    cd "$HOME"
-    ln -si "$currentDir/dotfiles/.pam_environment" .
-    # .gitconfig
-    ln -si "$currentDir/dotfiles/.gitconfig" .
-
-    # ~/.config/environment.d/*
-    if ! [ -d "$HOME/.config/environment.d/" ]; then
-        mkdir "$HOME/.config/environment.d/"
+    # Install stow
+    echo "Making sure that GNU stow is installed"
+    if [[ $distroName == "arch" ]]; then
+        sudo pacman -S stow
+    elif [[ $distroName == "fedora" ]]; then
+        sudo dnf install stow
     fi
-    cd "$HOME/.config/environment.d/"
-    ln -si "$currentDir/dotfiles/environment.d/"* .
+
+    # Home files
+    stow -t "$HOME" "$currentDir/dotfiles" -R
 
     # ~/.local/share/applications/*
     if ! [ -d "$HOME/.local/share/applications/" ]; then
@@ -95,11 +92,6 @@ if [[ $symlink_etc_var == y ]]; then
     fi
     cd "$HOME/.local/share/applications/"
     ln -si "$currentDir/dotfiles/applications/"* .
-
-    # ~/.config/MangoHud/*
-    [ -d "$HOME/.config/MangoHud" ] || mkdir "$HOME/.config/MangoHud"
-    cd "$HOME/.config/MangoHud"
-    ln -si "$currentDir/dotfiles/MangoHud/"* .
 
     cd "$currentDir"
 fi

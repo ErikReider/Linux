@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export common=(
+"stow"
 "jq"
 "discord"
 "kitty"

@@ -7,7 +7,7 @@ currentDir=$PWD
 distroName=$(cat </etc/os-release | grep "^ID" | awk -F= '{print $2}')
 
 if [[ $1 == "-i" ]]; then
-    source ./packages.sh
+    source ../packages/packages-sway.sh
 
     if [[ $distroName == "arch" ]]; then
         yay -S --needed "${common[@]}" "${arch[@]}"
