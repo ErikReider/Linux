@@ -64,6 +64,17 @@ fi
 ## Needed Config Files
 read -rp "Do you wish to symlink needed config files? [y/n] " symlink_etc_var
 if [[ $symlink_etc_var == y ]]; then
+    # /etc/sysctl.d/*
+    [ -d "/etc/sysctl.d/" ] || sudo mkdir /etc/sysctl.d/
+    cd /etc/sysctl.d/
+    sudo cp -ir "$currentDir/system_dotfiles/etc/sysctl.d/"* .
+
+    # /etc/dnf/dnf.conf
+    if [ -f "/etc/dnf/dnf.conf" ]; then
+        cd /etc/dnf/
+        sudo cp -ib "$currentDir/system_dotfiles/etc/dnf/dnf.conf" .
+    fi
+
     # $HOME files
     # .pam_environment
     cd "$HOME"
@@ -84,17 +95,6 @@ if [[ $symlink_etc_var == y ]]; then
     fi
     cd "$HOME/.local/share/applications/"
     ln -si "$currentDir/dotfiles/applications/"* .
-
-    # /etc/sysctl.d/*
-    [ -d "/etc/sysctl.d/" ] || sudo mkdir /etc/sysctl.d/
-    cd /etc/sysctl.d/
-    sudo cp -ir "$currentDir/dotfiles/etc/sysctl.d/"* .
-
-    # /etc/dnf/dnf.conf
-    if [ -f "/etc/dnf/dnf.conf" ]; then
-        cd /etc/dnf/
-        sudo cp -ib "$currentDir/dotfiles/etc/dnf/dnf.conf" .
-    fi
 
     # ~/.config/MangoHud/*
     [ -d "$HOME/.config/MangoHud" ] || mkdir "$HOME/.config/MangoHud"
