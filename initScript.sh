@@ -84,14 +84,7 @@ if [[ $symlink_etc_var == y ]]; then
     fi
 
     # Home files
-    stow -t "$HOME" "$currentDir/dotfiles" -R
-
-    # ~/.local/share/applications/*
-    if ! [ -d "$HOME/.local/share/applications/" ]; then
-        mkdir "$HOME/.local/share/applications/"
-    fi
-    cd "$HOME/.local/share/applications/"
-    ln -si "$currentDir/dotfiles/applications/"* .
+    stow dotfiles -t "$HOME" -R --dotfiles
 
     cd "$currentDir"
 fi
@@ -209,10 +202,6 @@ if [[ $install_dev_tools == y ]]; then
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
 
-    # Symlink GDB config file
-    cd "$HOME/.config"
-    ln -si "$currentDir/dotfiles/gdb" .
-
     # Install Flutter
     "$currentDir/scripts/install_flutter.sh"
 
@@ -245,10 +234,6 @@ if [[ $change_to_bash_var == y ]]; then
     cd "$HOME"
     # Remove provided configs and themes
     rm -rf zsh .zshrc
-
-    ln -s "$currentDir"/dotfiles/zsh/.zshrc .zshrc
-    ln -s "$currentDir"/dotfiles/zsh/.zprofile .zprofile
-    ln -s "$currentDir"/dotfiles/zsh .
 fi
 echo ""
 ##
@@ -275,12 +260,6 @@ if [[ $vim_var == y ]]; then
     pip3 install --user https://github.com/efoerster/evince-synctex/archive/master.zip
 
     # brew install dart-sdk
-
-    cd ~/.config/
-    rm -rf nvim
-
-    ln -s "$currentDir"/dotfiles/nvim nvim
-    cd "$currentDir"
 
     # Install Vim Plug
     sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
