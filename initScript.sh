@@ -107,7 +107,7 @@ if [[ $install_pkg_var == y ]]; then
 
         yay -S --needed "${common[@]}" "${arch[@]}"
     elif [[ $distroName == "fedora" ]]; then
-        sudo dnf groupinstall "Development Tools"
+        sudo dnf group install development-tools
         sudo dnf install "${common[@]}" "${fedora[@]}"
 
         # Install LURE (Linux User REpository)
@@ -196,8 +196,8 @@ if [[ $install_dev_tools == y ]]; then
         sudo dnf copr enable atim/lazydocker -y
         # sudo dnf copr enable agriffis/neovim-nightly -y
         sudo dnf copr enable rubemlrm/act-cli -y
-        sudo dnf groupinstall "Development Tools"
-        sudo dnf groupinstall "RPM Development Tools"
+        sudo dnf group install development-tools
+        sudo dnf group install rpm-development-tools
         sudo dnf group install c-development
         sudo dnf install "${common[@]}" "${fedora[@]}"
     fi
