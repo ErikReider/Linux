@@ -3,7 +3,7 @@ return {
     {
         "s1n7ax/nvim-window-picker",
         event = "VeryLazy",
-        opts = { filter_rules = { bo = { filetype = { "NvimTree", "neo-tree", "notify", "incline" } } } },
+        opts = { filter_rules = { bo = { filetype = { "notify", "incline" } } } },
         config = function(plugin_opts)
             require("window-picker").setup(plugin_opts.opts)
 

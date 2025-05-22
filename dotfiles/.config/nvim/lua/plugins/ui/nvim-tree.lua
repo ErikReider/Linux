@@ -4,11 +4,31 @@ return {
         "kyazdani42/nvim-tree.lua",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         keys = {
-              { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "NvimTree Toggle" },
-              { "<C-b>", "<cmd>NvimTreeFindFile<CR>", desc = "NvimTree Find File" },
+            { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "NvimTree Toggle" },
+            { "<C-b>", "<cmd>NvimTreeFindFile<CR>", desc = "NvimTree Find File" },
         },
         lazy = false,
         opts = {
+            on_attach = function(bufnr)
+                local api = require "nvim-tree.api"
+
+                local function opts(desc)
+                    return {
+                        desc = "nvim-tree: " .. desc,
+                        buffer = bufnr,
+                        noremap = true,
+                        silent = true,
+                        nowait = true,
+                    }
+                end
+
+                -- default mappings
+                api.config.mappings.default_on_attach(bufnr)
+
+                -- custom mappings
+                vim.keymap.set("n", "<C-Enter>", api.tree.change_root_to_node, opts("CD"))
+                vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
+            end,
             auto_reload_on_write = true,
             disable_netrw = false,
             hijack_cursor = false,
@@ -48,7 +68,7 @@ return {
                             empty = "",
                             empty_open = "",
                             symlink = "",
-                            symlink_open = ""
+                            symlink_open = "",
                         },
                         git = {
                             unstaged = "M",
@@ -57,11 +77,11 @@ return {
                             renamed = "➜",
                             untracked = "★",
                             deleted = "",
-                            ignored = ""
-                        }
-                    }
+                            ignored = "",
+                        },
+                    },
                 },
-                special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", ".gitignore" }
+                special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", ".gitignore" },
             },
             hijack_directories = { enable = true, auto_open = true },
             update_focused_file = { enable = false, update_cwd = false, ignore_list = {} },
@@ -69,7 +89,7 @@ return {
             diagnostics = {
                 enable = false,
                 show_on_dirs = false,
-                icons = { hint = "", info = "", warning = "", error = "" }
+                icons = { hint = "", info = "", warning = "", error = "" },
             },
             filters = { dotfiles = false, custom = {}, exclude = { "^.git$", "node_modules", ".cache" } },
             git = { enable = true, ignore = false, timeout = 400 },
@@ -84,10 +104,10 @@ return {
                         chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
                         exclude = {
                             filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-                            buftype = { "nofile", "terminal", "help" }
-                        }
-                    }
-                }
+                            buftype = { "nofile", "terminal", "help" },
+                        },
+                    },
+                },
             },
             trash = { cmd = "trash", require_confirm = true },
             log = {
@@ -99,9 +119,9 @@ return {
                     copy_paste = false,
                     diagnostics = false,
                     git = false,
-                    profile = false
-                }
-            }
+                    profile = false,
+                },
+            },
         },
-    }
+    },
 }
