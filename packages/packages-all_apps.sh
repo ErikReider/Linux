@@ -32,6 +32,8 @@ export fedora=(
 "liberation-mono-fonts"
 "liberation-sans-fonts"
 "liberation-serif-fonts"
+"firacode-nerd-fonts"
+"fira-code-fonts"
 )
 export arch=(
 "chromium"
@@ -47,6 +49,8 @@ export arch=(
 "jre-openjdk"
 "ttf-clear-sans"
 "v4l2loopback-dkms"
+"ttf-fira-code"
+"ttf-firacode-nerd"
 )
 
 # TODO: Install native rpm instead...

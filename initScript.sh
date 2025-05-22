@@ -165,17 +165,7 @@ if [[ $install_app_var == y ]]; then
     gsettings set org.gnome.desktop.interface font-name "Clear Sans 11"
     gsettings set org.gnome.desktop.interface document-font-name "Clear Sans 11"
     gsettings set org.gnome.desktop.wm.preferences titlebar-font "Clear Sans Bold 11"
-    gsettings set org.gnome.desktop.interface monospace-font-name "FiraCode Nerd Font weight=450 10"
-
-    # Install Nerd Font patched Fira Code fonts
-    cd /tmp
-    git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
-    cd nerd-fonts
-    git pull
-    git sparse-checkout add patched-fonts/FiraCode
-    ./install.sh --remove
-    ./install.sh
-    cd "$currentDir"
+    gsettings set org.gnome.desktop.interface monospace-font-name "FiraCode Nerd Font Mono weight=450 10"
 
     flatpak install "${flatpak[@]}"
     flatpak install "${flatpak_beta[@]}"
