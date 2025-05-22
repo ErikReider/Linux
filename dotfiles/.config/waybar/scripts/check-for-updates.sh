@@ -25,7 +25,7 @@ if [[ $distroName == "arch" ]]; then
 
     updates=$(("$updates_arch" + "$updates_aur"))
 elif [[ $distroName == "fedora" ]]; then
-    updates=$(("$(dnf check-update -q --refresh 2>/dev/null | wc -l)" - 1))
+    updates=$(dnf check-update -q --refresh 2>/dev/null | wc -l)
     if [[ $updates -lt 1 ]]; then
         updates=0
     fi

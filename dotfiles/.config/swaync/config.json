@@ -58,7 +58,7 @@
     },
     "mpris": {
       "image-size": 96,
-      "blur": true
+      "autohide": true
     }
   }
 }

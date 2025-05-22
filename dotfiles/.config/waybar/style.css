@@ -35,7 +35,7 @@ window {
 
 window > box {
   margin: 6px;
-  border-radius: 12px;
+  border-radius: 16px;
   background: @bg;
   background-clip: border-box;
 }
@@ -43,7 +43,7 @@ window > box {
 /* All module containers */
 window box > box {
   padding: 0 8px;
-  border-radius: 12px;
+  border-radius: 16px;
 }
 
 /* All modules */

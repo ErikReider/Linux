@@ -48,7 +48,7 @@
   },
   "custom/media": {
     "escape": true,
-    "format": " {icon}{}",
+    "format": " {icon}{text}",
     "return-type": "json",
     "format-icons": {
       "Playing": " ",
@@ -210,7 +210,7 @@
     "escape": true
   },
   "custom/weather": {
-    "format": "<span font_family='Weather Icons'>{icon}</span> {}",
+    "format": "<span font_family='Weather Icons'>{icon}</span> {text}",
     "format-icons": {
       "01d": "",
       "01n": "",
