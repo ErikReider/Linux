@@ -94,10 +94,25 @@ map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", lsp_opts)
 -- References
 map("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references({jump_type = 'never'})<CR>", lsp_opts)
 -- Show hover info
-map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
+map("n", "K", function()
+    vim.lsp.buf.hover({ border = "rounded", focusable = true, max_width = 80, max_height = 30 })
+end, lsp_opts)
 -- Show method signature
-map("i", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>", lsp_opts)
-map("n", "<M-x>", "<cmd>lua require('lsp_signature').toggle_float_win()<CR>", lsp_opts)
+map({ "i", "n" }, "<C-s>", function()
+    local base_win_id = vim.api.nvim_get_current_win()
+    local windows = vim.api.nvim_tabpage_list_wins(0)
+    for _, win_id in ipairs(windows) do
+        if win_id ~= base_win_id then
+            local win_cfg = vim.api.nvim_win_get_config(win_id)
+            if win_cfg.relative == "win" and win_cfg.win == base_win_id then
+                -- Toggle
+                vim.api.nvim_win_close(win_id, false)
+                return
+            end
+        end
+    end
+    vim.lsp.buf.signature_help({ border = "rounded", focusable = false, max_width = 80, max_height = 30 })
+end, lsp_opts)
 -- Workspace folder
 -- map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
 --     lsp_opts)

@@ -5,6 +5,7 @@ local exclude = { "help", "terminal", "dashboard", "nerdtree", "lazy" }
 return {
     {
         "lukas-reineke/indent-blankline.nvim",
+        -- TODO: Update to v3
         tag = "v2.20.8",
         event = { "BufReadPost", "BufNewFile" },
         opts = {

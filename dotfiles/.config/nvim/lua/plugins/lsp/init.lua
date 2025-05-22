@@ -4,41 +4,40 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            -- Gutter diagnostic signs
-            local signs = { Error = "❌", Warn = "", Hint = "💡", Info = "" }
-            for type, _ in pairs(signs) do
-                vim.fn.sign_define("DiagnosticSign" .. type, {
-                    text = "",
-                    texthl = "DiagnosticSign" .. type,
-                    numhl = "DiagnosticLineNr" .. type
-                })
-            end
-
-            -- Customizing how diagnostics and handlers are displayed
-            local handler_win_config =
-                { border = "rounded", focusable = true, max_width = 80, max_height = 30 }
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, handler_win_config)
-
-            vim.lsp.handlers["textDocument/signatureHelp"] =
-                vim.lsp.with(vim.lsp.handlers.signature_help, handler_win_config)
-
             vim.lsp.set_log_level("off")
             -- For debugging:
             -- vim.lsp.set_log_level("debug")
 
             vim.diagnostic.config({
+                -- Gutter diagnostic signs
+                signs = {
+                    text = {
+                        -- [vim.diagnostic.severity.ERROR] = "❌",
+                        [vim.diagnostic.severity.ERROR] = "",
+                        -- [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        -- [vim.diagnostic.severity.HINT] = "💡",
+                        [vim.diagnostic.severity.HINT] = "",
+                        -- [vim.diagnostic.severity.INFO] = "",
+                        [vim.diagnostic.severity.INFO] = "",
+                    },
+                    numhl = {
+                        [vim.diagnostic.severity.ERROR] = "DiagnosticLineNrError",
+                        [vim.diagnostic.severity.WARN] = "DiagnosticLineNrWarn",
+                        [vim.diagnostic.severity.HINT] = "DiagnosticLineNrHint",
+                        [vim.diagnostic.severity.INFO] = "DiagnosticLineNrInfo",
+                    },
+                },
                 -- disable virtual text
                 virtual_text = false,
-                -- show signs
-                signs = true,
                 update_in_insert = true,
                 underline = true,
                 severity_sort = true,
                 float = {
-                    focusable = false,
+                    focusable = true,
                     style = "minimal",
                     border = "rounded",
-                    source = "always",
+                    source = true,
                     header = "",
                     prefix = ""
                 }
@@ -137,6 +136,10 @@ return {
                                 return not disabled
                             end
                         end,
+                        window = {
+                            completion = cmp.config.window.bordered(),
+                            documentation = cmp.config.window.bordered(),
+                        },
                         sorting = {
                             comparators = {
                                 cmp.config.compare.offset,
