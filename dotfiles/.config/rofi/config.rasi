@@ -1,10 +1,11 @@
 /* vim: ft=css
 */
 configuration {
-  font: "Clear Sans 14";
-  drun-display-format: "{name}";
+  font: "Adwaita Sans 14";
+  drun-display-format: "{name}[ - <span weight='light' size='small'>{generic}</span>]";
   disable-history: false;
   sidebar-mode: false;
+  hover-select: false;
 }
 
 * {
@@ -13,18 +14,23 @@ configuration {
 
 window {
   background-color: rgba(32, 32, 32, 0.8);
-  border-color: rgb(93, 93, 93);
-  border-radius: 12px;
+  border: 2px solid;
+  border-color: #FFFFFF20;
+  border-radius: 22px;
   width: 512px;
 }
 
 inputbar {
-  background-color: rgba(242, 242, 242, 0.08);
-  margin: 14px;
-  border-radius: 12px;
-  /* children: [prompt, entry]; */
-  children: [ entry ];
+  margin: 6px;
+  children: [ icon-search, entry ];
   border: none;
+}
+
+icon-search {
+  expand: false;
+  filename: "./search.svg";
+  size: 24px;
+  vertical-align: 0.5;
 }
 
 prompt {
@@ -40,9 +46,10 @@ textbox {
 }
 
 entry {
+  placeholder: "Search";
   text-color: white;
-  expand: false;
-  padding: 10px;
+  expand: true;
+  padding: 8px;
 }
 
 listview {
@@ -53,18 +60,21 @@ listview {
   scrollbar: true;
   dynamic: true;
   border: none;
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
 }
 
 scrollbar {
   handle-color: rgba(242, 242, 242, 0.08);
-  handle-width: 8px;
+  handle-width: 12px;
+  handle-rounded-corners: true;
   margin: 0;
   padding: 0;
 }
 
 element {
-  margin: 0 0 0 8px;
+  margin: 0 6px;
+  orientation: horizontal;
+  /* spacing: 6px; */
 }
 
 element alternate.normal,
@@ -79,7 +89,7 @@ element normal.normal {
 element selected.normal,
 element selected.urgent {
   background-color: rgba(242, 242, 242, 0.08);
-  border-radius: 12px;
+  border-radius: 22px;
 }
 
 element-text {
@@ -89,5 +99,5 @@ element-text {
 
 element-icon {
   size: 48px;
-  margin: 4px;
+  margin: 6px;
 }

@@ -163,8 +163,8 @@ if [[ $install_app_var == y ]]; then
     gsettings set org.gnome.desktop.interface font-antialiasing "greyscale"
     gsettings set org.gnome.desktop.interface font-hinting "slight"
     gsettings set org.gnome.desktop.interface font-name "Clear Sans 11"
-    gsettings set org.gnome.desktop.interface document-font-name "Clear Sans 11"
-    gsettings set org.gnome.desktop.wm.preferences titlebar-font "Clear Sans Bold 11"
+    gsettings set org.gnome.desktop.interface document-font-name "Adwaita Sans 11"
+    gsettings set org.gnome.desktop.wm.preferences titlebar-font "Adwaita Sans Bold 11"
     gsettings set org.gnome.desktop.interface monospace-font-name "FiraCode Nerd Font Mono weight=450 10"
 
     flatpak install "${flatpak[@]}"
