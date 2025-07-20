@@ -15,6 +15,7 @@ local servers = {
     "blueprint_ls",
     "zls",
     "glsl_analyzer",
+    "yamlls",
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
