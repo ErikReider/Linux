@@ -30,6 +30,7 @@ return {
         "zls",
         "glsl_analyzer",
         "intelephense",
+        "gh-actions-language-server",
 
         -- Linters/Formatters
         "biome", -- Linter and formatter that replaces prettierd and eslint_d

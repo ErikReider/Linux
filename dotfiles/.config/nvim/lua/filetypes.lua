@@ -30,3 +30,9 @@ vim.filetype.add({
     },
 })
 
+vim.filetype.add({
+    pattern = {
+        -- GitHub Actions
+        [".*/%.github[%w/]+workflows[%w/]+.*%.ya?ml"] = "yaml.github",
+    },
+})
