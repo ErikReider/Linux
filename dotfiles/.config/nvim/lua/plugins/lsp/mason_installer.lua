@@ -31,6 +31,7 @@ return {
         "glsl_analyzer",
         "intelephense",
         "gh-actions-language-server",
+        "hyprls",
         "yaml-language-server",
 
         -- Linters/Formatters

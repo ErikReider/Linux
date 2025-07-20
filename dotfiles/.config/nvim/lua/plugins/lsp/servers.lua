@@ -15,6 +15,7 @@ local servers = {
     "blueprint_ls",
     "zls",
     "glsl_analyzer",
+    "hyprls",
     "yamlls",
 }
 for _, lsp in ipairs(servers) do
