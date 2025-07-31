@@ -3,7 +3,7 @@
     "tooltip": true
   },
   "custom/linux": {
-    "format": "<span font_family='FiraCode Nerd Font'>{}</span> ",
+    "format": "{}",
     "exec": "~/.config/waybar/scripts/systemIcon.sh",
     "interval": "once",
     "tooltip": false,
@@ -16,7 +16,7 @@
     "disable-scroll": false,
     "all-outputs": false,
     "enable-bar-scroll": true,
-    "format": "<span font_family='FiraCode Nerd Font'>{value}</span>"
+    "format": "{value}"
   },
   "hyprland/workspaces": {
     "sort-by-number": true,
@@ -24,7 +24,7 @@
     "disable-scroll": false,
     "all-outputs": false,
     "enable-bar-scroll": true,
-    "format": "<span font_family='FiraCode Nerd Font'>{name}</span>"
+    "format": "{name}"
   },
   "sway/mode": {
     "format": "{}"
@@ -44,7 +44,7 @@
   },
   "memory": {
     "interval": 10,
-    "format": " {used:0.2f} GiB"
+    "format": " {used:0.2f} GiB"
   },
   "custom/media": {
     "escape": true,
@@ -60,16 +60,16 @@
   },
   "custom/notification": {
     "tooltip": true,
-    "format": "{icon}",
+    "format": "<span size='16pt'>{icon}</span>",
     "format-icons": {
-      "notification": "",
-      "none": "",
-      "dnd-notification": "",
-      "dnd-none": "",
-      "inhibited-notification": "",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "",
-      "dnd-inhibited-none": ""
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
@@ -80,7 +80,7 @@
   },
   "privacy": {
     "icon-spacing": 2,
-    "icon-size": 18,
+    "icon-size": 16,
     "modules": [
       {
         "type": "screenshare"
@@ -89,19 +89,6 @@
         "type": "audio-in"
       }
     ]
-  },
-  "custom/usingAudio": {
-    "format": "{icon}",
-    "format-icons": {
-      "output": "",
-      "input": "",
-      "output-input": "  ",
-      "none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which sway-audio-idle-inhibit",
-    "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
-    "escape": true
   },
   "gamemode": {
     "tooltip": true,
@@ -129,14 +116,17 @@
     "escape": true
   },
   "bluetooth": {
-    "format": "",
-    "format-on": "",
-    "format-connected": " {num_connections}",
-    "format-connected-battery": " {num_connections}",
+    "format": "󰂲",
+    "format-off": "󰂲",
+    "format-on": "󰂯",
+    "format-connected": "󰂱 {num_connections}",
+    "format-connected-battery": "󰂱 {num_connections}",
+
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+
     "on-click": "swaysettings -p bluetooth"
   },
   "network#wifi": {
@@ -174,7 +164,7 @@
     "format": "{icon} {volume}%",
     "format-bluetooth": "{icon} {volume}%",
     "format-bluetooth-muted": "{icon} {volume}%",
-    "format-muted": " {volume}%",
+    "format-muted": " {volume}%",
     "format-icons": {
       "default": [
         "",

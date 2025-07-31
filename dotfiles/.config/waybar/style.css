@@ -2,7 +2,6 @@
  * vim: ft=less
  */
 
-@define-color bg rgba(42, 42, 42, 0.7);
 @define-color bg-hover rgba(65, 65, 65, 0.7);
 @define-color text-color white;
 @define-color text-color-disabled rgba(255, 255, 255, 0.4);
@@ -11,13 +10,23 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: FontAwesome, "Clear Sans";
+  font-family: "Adwaita Sans", "FiraCode Nerd Font Propo";
   font-size: 17px;
   font-weight: bold;
   min-height: 0;
 }
 
+label {
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.56);
+}
+
+image {
+  -gtk-icon-style: symbolic;
+  -gtk-icon-shadow: 0 4px 6px rgba(0, 0, 0, 0.56);
+}
+
 window#waybar {
+  /* background: white; */
   color: @text-color;
   transition-property: background-color;
   transition-property: color;
@@ -34,21 +43,45 @@ window {
 }
 
 window > box {
-  margin: 6px;
-  border-radius: 16px;
-  background: @bg;
+  /*
+   * https://larsenwork.com/easing-gradients/#editor
+   * linear-gradient(
+   *   to bottom,
+   *   hsla(330, 0%, 0%, 0.5),
+   *   cubic-bezier(0, 0, 0.75, 1),
+   *   hsla(210, 0%, 100%, 0)
+   * );
+   */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.494) 1%,
+    rgba(0, 0, 0, 0.476) 3.7%,
+    rgba(0, 0, 0, 0.448) 8%,
+    rgba(0, 0, 0, 0.412) 13.6%,
+    rgba(0, 0, 0, 0.37) 20.4%,
+    rgba(0, 0, 0, 0.324) 28%,
+    rgba(0, 0, 0, 0.275) 36.3%,
+    rgba(0, 0, 0, 0.225) 45%,
+    rgba(0, 0, 0, 0.176) 54%,
+    rgba(0, 0, 0, 0.13) 63%,
+    rgba(0, 0, 0, 0.088) 71.7%,
+    rgba(0, 0, 0, 0.052) 80%,
+    rgba(0, 0, 0, 0.024) 87.6%,
+    rgba(0, 0, 0, 0.006) 94.4%,
+    rgba(0, 0, 0, 0) 100%
+  );
   background-clip: border-box;
 }
 
 /* All module containers */
-window box > box {
+window > box > box {
   padding: 0 8px;
-  border-radius: 16px;
 }
 
 /* All modules */
 window > box > box > widget > * {
-  padding: 0 8px;
+  padding: 4 8px;
 }
 
 window > box > box > widget > button:hover {
@@ -122,11 +155,14 @@ window > box > box > widget button:insensitive {
 }
 
 #network {
-  font-family: "Material Icons Round", "Font Awesome 6 Free";
   font-size: 22px;
+}
+#network.wifi {
+  font-family: "Material Icons Round";
 }
 
 #network.disconnected,
+#network.disabled,
 #network.linked {
   color: @text-color-disabled;
 }
@@ -136,15 +172,16 @@ window > box > box > widget button:insensitive {
 }
 
 #privacy {
-    padding: 0;
-    border-radius: 50px;
 }
-
-#privacy > box {
-    padding: 0;
-}
-
 #privacy-item {
-    padding: 0 6px;
-    color: @text-color;
+  margin: 2px 0;
+  padding: 0 16px;
+  color: @text-color;
+  border-radius: 100px;
+}
+#privacy-item.screenshare {
+  background: #30c658;
+}
+#privacy-item.audio-in {
+  background: #ffa915;
 }
