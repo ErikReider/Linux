@@ -202,6 +202,9 @@
   "custom/weather": {
     "format": "<span font_family='Weather Icons'>{icon}</span> {text}",
     "format-icons": {
+      "no-connection": "",
+      "error": "",
+      "loading": "",
       "01d": "",
       "01n": "",
       "02d": "",
@@ -221,10 +224,9 @@
       "50d": "",
       "50n": ""
     },
-    "tooltip": false,
-    "interval": 1200,
+    "tooltip": true,
+    "restart-interval": 10,
     "exec": "python ~/.config/waybar/scripts/openWeatherMap.py",
-    "return-type": "json",
-    "escape": true
+    "return-type": "json"
   }
 }
