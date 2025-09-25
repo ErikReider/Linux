@@ -25,6 +25,8 @@ export common=(
     "swayidle"
     "udiskie"
     "hyprlock"
+    "poweralertd"
+    "wayland-logout"
 )
 
 export arch=(
