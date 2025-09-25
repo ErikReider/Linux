@@ -2,6 +2,8 @@
   "layer": "top",
   "position": "top",
   "margin": 0,
+  "no-center": true,
+  "reload_style_on_change": true,
   "include": [
     "~/.config/waybar/modules.jsonc"
   ],
@@ -19,7 +21,6 @@
     "privacy",
     "cpu",
     "memory",
-    "custom/ArchUpdates",
     "gamemode",
     "bluetooth",
     "upower",

@@ -20,6 +20,11 @@ label {
   text-shadow: 0 4px 6px rgba(0, 0, 0, 0.56);
 }
 
+tooltip {
+  border-radius: 18px;
+  background: rgba(46, 46, 46, 0.7);
+}
+
 image {
   -gtk-icon-style: symbolic;
   -gtk-icon-shadow: 0 4px 6px rgba(0, 0, 0, 0.56);
@@ -178,10 +183,14 @@ window > box > box > widget button:insensitive {
   padding: 0 16px;
   color: @text-color;
   border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 #privacy-item.screenshare {
   background: #30c658;
 }
 #privacy-item.audio-in {
   background: #ffa915;
+}
+#privacy-item.audio-out {
+  background: #1c71d8;
 }
