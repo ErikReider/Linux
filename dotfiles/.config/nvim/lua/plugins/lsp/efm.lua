@@ -40,7 +40,7 @@ local efm_languages = {
     typescript = { biome_formatter },
     typescriptreact = { biome_formatter },
     ["typescript.tsx"] = { biome_formatter },
-    python = { { formatCommand = "autopep8 --ignore E501 -", formatStdin = true } }
+    python = { { formatCommand = "black --quiet -", formatStdin = true } }
     -- latex = {{}},
 }
 local efm_root_markers = { "package.json", "yarn.lock", "package-lock.json", ".git/", ".zshrc", "init.lua" }

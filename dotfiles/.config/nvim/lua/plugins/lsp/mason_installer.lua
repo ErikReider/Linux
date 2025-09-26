@@ -45,7 +45,7 @@ return {
 
         -- Formatters
         "luaformatter",
-        "autopep8",
+        "black",
         "shfmt",
         -- TODO: Prettierd Plugins https://github.com/fsouza/prettierd#additional-plugins
         "prettierd",
