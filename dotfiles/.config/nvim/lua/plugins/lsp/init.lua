@@ -71,6 +71,11 @@ return {
             "mfussenegger/nvim-jdtls",
             -- Clang tools
             "Civitasv/cmake-tools.nvim",
+            -- clangd_extensions.nvim
+            {
+                url = "https://git.sr.ht/~p00f/clangd_extensions.nvim",
+                lazy = false,
+            },
 
             --
             -- Nvim cmp
