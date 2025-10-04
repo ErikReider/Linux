@@ -1,4 +1,4 @@
-local nvim_lsp = require("lspconfig")
+local util = require("lspconfig/util")
 
 local lua_format = require("efmls-configs.formatters.lua_format")
 local prettier = require("efmls-configs.formatters.prettier")
@@ -44,12 +44,10 @@ local efm_languages = {
     -- latex = {{}},
 }
 local efm_root_markers = { "package.json", "yarn.lock", "package-lock.json", ".git/", ".zshrc", "init.lua" }
-nvim_lsp.efm.setup({
-    on_attach = require("plugins.lsp.on_attach"),
-    flags = { debounce_text_changes = 150 },
-    cmd = { "efm-langserver" },
+
+return {
     filetypes = vim.tbl_keys(efm_languages),
-    root_dir = nvim_lsp.util.root_pattern(unpack(efm_root_markers)),
+    root_dir = util.root_pattern(unpack(efm_root_markers)),
     init_options = {
         documentFormatting = true,
         documentRangeFormatting = true,
@@ -59,4 +57,4 @@ nvim_lsp.efm.setup({
         completion = true
     },
     settings = { rootMarkers = efm_root_markers, languages = efm_languages }
-})
+}

@@ -21,7 +21,7 @@ return {
         "lemminx",
         "typescript-language-server",
         "stylelint-lsp",
-        "pyright",
+        "basedpyright",
         "omnisharp",
         "texlab",
         "jdtls",

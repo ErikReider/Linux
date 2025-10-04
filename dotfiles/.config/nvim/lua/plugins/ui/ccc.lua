@@ -14,7 +14,8 @@ return {
                 inputs = { input.rgb, input.hsl },
                 outputs = { output.hex, output.hex_short, output.css_rgb, output.css_hsl },
                 highlighter = {
-                    auto_enable = true,
+                    -- Neovim 0.12 now supports this natively
+                    auto_enable = not vim.lsp["document_color"],
                     max_byte = 100 * 1024, -- 100 KB
                     filetypes = {},
                     excludes = {},

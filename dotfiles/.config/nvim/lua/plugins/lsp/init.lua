@@ -4,9 +4,9 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            vim.lsp.set_log_level("off")
+            vim.lsp.log.set_level(vim.log.levels.WARN)
             -- For debugging:
-            -- vim.lsp.set_log_level("debug")
+            -- vim.lsp.log.set_level(vim.log.levels.DEBUG)
 
             vim.diagnostic.config({
                 -- Gutter diagnostic signs
@@ -51,9 +51,22 @@ return {
             -- Server specific plugins
             --
             -- Vim commands for Flutter, including hot-reload-on-save and more.
-            { "akinsho/flutter-tools.nvim", ft = "dart" },
-            -- Tools for better development in rust using neovim"s builtin lsp
-            "simrat39/rust-tools.nvim",
+            {
+                "akinsho/flutter-tools.nvim",
+                lazy = false,
+                dependencies = {
+                    'nvim-lua/plenary.nvim',
+                    'stevearc/dressing.nvim', -- optional for vim.ui.select
+                },
+                config = true,
+            },
+            -- 🦀 Supercharge your Rust experience in Neovim! A heavily modified fork of rust-tools.nvim
+            -- rust-tools.nvim replacement
+            {
+                "mrcjkb/rustaceanvim",
+                version = '^6', -- Recommended
+                lazy = false, -- This plugin is already lazy
+            },
             -- Java eclipse tools
             "mfussenegger/nvim-jdtls",
             -- Clang tools
@@ -247,6 +260,7 @@ return {
             -- Snippet Engine for Neovim written in Lua.
             {
                 "L3MON4D3/LuaSnip",
+                build = "make install_jsregexp",
                 dependencies = {
                     -- Set of preconfigured snippets for different languages
                     "rafamadriz/friendly-snippets"
@@ -382,33 +396,23 @@ return {
                 "RRethy/vim-illuminate",
                 config = function()
                     require("illuminate").configure({
-                        -- providers: provider used to get references in the buffer, ordered by priority
-                        providers = { "lsp", "treesitter", "regex" },
-                        -- delay: delay in milliseconds
-                        delay = 100,
-                        -- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
                         filetypes_denylist = { "dirvish", "fugitive", "TelescopePrompt" },
-                        -- filetypes_allowlist: filetypes to illuminate, this is overriden by filetypes_denylist
-                        filetypes_allowlist = {},
-                        -- modes_denylist: modes to not illuminate, this overrides modes_allowlist
-                        modes_denylist = {},
-                        -- modes_allowlist: modes to illuminate, this is overriden by modes_denylist
-                        modes_allowlist = {},
-                        -- providers_regex_syntax_denylist: syntax to not illuminate, this overrides providers_regex_syntax_allowlist
-                        -- Only applies to the 'regex' provider
-                        -- Use :echom synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
-                        providers_regex_syntax_denylist = {},
-                        -- providers_regex_syntax_allowlist: syntax to illuminate, this is overriden by providers_regex_syntax_denylist
-                        -- Only applies to the 'regex' provider
-                        -- Use :echom synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name')
-                        providers_regex_syntax_allowlist = {},
-                        -- under_cursor: whether or not to illuminate under the cursor
-                        under_cursor = true
                     })
                 end
             },
             -- See LSP server startup status
-            { "j-hui/fidget.nvim", opts = {} },
+            {
+                "j-hui/fidget.nvim",
+                opts = {
+                    -- Options related to notification subsystem
+                    notification = {
+                        -- Options related to the notification window and buffer
+                        window = {
+                            avoid = { "NvimTree" } -- Filetypes the notification window should avoid
+                        },
+                    }
+                }
+            },
 
             --
             -- Lsp Installer
