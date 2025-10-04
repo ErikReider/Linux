@@ -45,7 +45,7 @@ return {
         "cspell",
 
         -- Formatters
-        "luaformatter",
+        "stylua",
         "black",
         "shfmt",
         -- TODO: Prettierd Plugins https://github.com/fsouza/prettierd#additional-plugins

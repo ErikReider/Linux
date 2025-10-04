@@ -1,12 +1,12 @@
-local util = require("lspconfig/util")
-
-local lua_format = require("efmls-configs.formatters.lua_format")
-local prettier = require("efmls-configs.formatters.prettier")
 local biome_formatter = require("efmls-configs.formatters.biome")
+local black_format = require("efmls-configs.formatters.black")
+local markdown_lint = require("efmls-configs.linters.markdownlint")
+local prettier = require("efmls-configs.formatters.prettier")
 local shfmt = require("plugins.lsp.Diagnostics.shfmt")
+local stylua = require("efmls-configs.formatters.stylua")
 
 local efm_languages = {
-    lua = { lua_format },
+    lua = { stylua },
     sh = { shfmt },
     zsh = { shfmt },
     bash = { shfmt },
@@ -17,14 +17,7 @@ local efm_languages = {
     xsd = { prettier },
     xsl = { prettier },
     xslt = { prettier },
-    markdown = {
-        prettier,
-        {
-            lintCommand = "markdownlint -s",
-            lintStdin = true,
-            lintFormats = { "%f:%l %m", "%f:%l:%c %m", "%f: %l: %m" }
-        }
-    },
+    markdown = { prettier, markdown_lint },
     jsonc = { prettier },
     json = { prettier },
     html = { prettier },
@@ -40,21 +33,18 @@ local efm_languages = {
     typescript = { biome_formatter },
     typescriptreact = { biome_formatter },
     ["typescript.tsx"] = { biome_formatter },
-    python = { { formatCommand = "black --quiet -", formatStdin = true } }
-    -- latex = {{}},
+    python = { black_format },
 }
-local efm_root_markers = { "package.json", "yarn.lock", "package-lock.json", ".git/", ".zshrc", "init.lua" }
 
 return {
     filetypes = vim.tbl_keys(efm_languages),
-    root_dir = util.root_pattern(unpack(efm_root_markers)),
     init_options = {
         documentFormatting = true,
         documentRangeFormatting = true,
         hover = true,
         documentSymbol = true,
         codeAction = true,
-        completion = true
+        completion = true,
     },
-    settings = { rootMarkers = efm_root_markers, languages = efm_languages }
+    settings = { languages = efm_languages },
 }

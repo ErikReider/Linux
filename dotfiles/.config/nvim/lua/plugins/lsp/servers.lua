@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-local capabilities = get_lsp_capabilities()
+local capabilities = _G.get_lsp_capabilities()
 local servers = {
     -- ["example"] = {
     --     -- Append upon the on_attach function from lspconfig
@@ -97,10 +97,24 @@ local servers = {
                     --   vim.api.nvim_get_runtime_file('', true),
                     -- }
                 },
+                telemetry = { enable = false },
+                format = { enable = false },
             })
         end,
         -- NOTE: Needed to extend the config above
         settings = { Lua = {} },
+        root_markers = {
+            "init.lua",
+            ".lua-format",
+            ".luarc.json",
+            ".luarc.jsonc",
+            ".luacheckrc",
+            ".stylua.toml",
+            "stylua.toml",
+            "selene.toml",
+            "selene.yml",
+            ".git",
+        },
     },
     -- LaTex
     ["texlab"] = {
