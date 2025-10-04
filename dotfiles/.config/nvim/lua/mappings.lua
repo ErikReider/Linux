@@ -1,3 +1,6 @@
+local lsp_opts = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true }
+
 -- Duplicate line
 map(
     "n",
@@ -95,7 +98,6 @@ map("n", "<C-c>", ":CommentToggle<CR>", { silent = true, noremap = false })
 map("v", "<C-c>", ":CommentToggle<CR>", { silent = true, noremap = false })
 
 -- LSP
-local lsp_opts = { noremap = true, silent = true }
 -- Go to definition
 map("n", "gs", "<cmd>Telescope lsp_definitions<CR>", lsp_opts)
 -- Go to type_definition
@@ -103,7 +105,9 @@ map("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>", lsp_opts)
 -- Go to implementation
 map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", lsp_opts)
 -- References
-map("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references({jump_type = 'never'})<CR>", lsp_opts)
+map("n", "gr", function()
+    require("telescope.builtin").lsp_references({ jump_type = "never" })
+end, lsp_opts)
 -- Show hover info
 map("n", "K", function()
     vim.lsp.buf.hover({ border = "rounded", focusable = true, max_width = 80, max_height = 30 })
@@ -133,26 +137,88 @@ end, lsp_opts)
 --     "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
 --     lsp_opts)
 -- Rename
-map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", lsp_opts)
+map("n", "<F2>", vim.lsp.buf.rename, lsp_opts)
 -- Code Action
-map("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", lsp_opts)
+map("n", "<Leader>a", vim.lsp.buf.code_action, lsp_opts)
 -- Show error popup
-map("i", "<M-e>", "<cmd>lua vim.diagnostic.open_float()<CR>", lsp_opts)
-map("n", "<M-e>", "<cmd>lua vim.diagnostic.open_float()<CR>", lsp_opts)
--- Next/Previous diagnostic
-map("n", "ög", "<cmd>lua vim.diagnostic.goto_prev()<CR>", lsp_opts)
-map("n", "äg", "<cmd>lua vim.diagnostic.goto_next()<CR>", lsp_opts)
+map("i", "<M-e>", vim.diagnostic.open_float, lsp_opts)
+map("n", "<M-e>", vim.diagnostic.open_float, lsp_opts)
+-- Jump to previous diagnostic
+map("n", "ög", function()
+    vim.diagnostic.jump({ count = -1, float = true })
+end, lsp_opts)
+-- Jump to next diagnostic
+map("n", "äg", function()
+    vim.diagnostic.jump({ count = 1, float = true })
+end, lsp_opts)
 -- Show diagnostics list
 map("n", "<A-S-w>", "<cmd>Telescope diagnostics<CR>", lsp_opts)
 -- Formatting
-map("i", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
-map("n", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
-map("v", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
+map({ "i", "n", "v" }, "<C-M-b>", vim.lsp.buf.format, lsp_opts)
 -- Illuminate
-map("n", "<A-n>", "<cmd>lua require(\"illuminate\").next_reference{wrap=true}<cr>", { noremap = true })
-map(
-    "n",
-    "<A-S-n>",
-    "<cmd>lua require(\"illuminate\").next_reference{reverse=true,wrap=true}<cr>",
-    { noremap = true }
-)
+map("n", "<A-n>", function()
+    require("illuminate").next_reference({ wrap = true })
+end, { noremap = true })
+map("n", "<A-S-n>", function()
+    require("illuminate").next_reference({ reverse = true, wrap = true })
+end, { noremap = true })
+
+-- Floating Terminal
+map("n", "<F7>", [[<CMD>lua require("FTerm").toggle()<CR>]], opts)
+map("t", "<F7>", [[<C-\><C-n><CMD>lua require("FTerm").toggle()<CR>]], opts)
+map("t", "<F9>", [[<C-\><C-n><CMD>lua require("FTerm").exit()<CR>]], opts)
+
+-- Floating LazyGit
+map("n", "<F8>", "<CMD>LazyGit<CR>", opts)
+map("t", "<F8>", "<C-\\><C-n><CMD>LazyGit<CR>", opts)
+map("t", "<F10>", "<C-\\><C-n><CMD>LazyGitClose<CR>", opts)
+
+-- CCC Color adjuster
+map("n", "<leader>c", [[<cmd>CccPick<CR>]], { noremap = true, silent = true })
+
+--
+-- Telescope
+--
+
+-- Options Menu Window
+map("n", "<F5>", require("custom.optionsWindow").show, opts)
+-- Git Menu Window
+map("n", "<F6>", function()
+    showFloatingMenu({
+        { title = "LazyGit", action = "LazyGit" },
+        { title = "Git Hunk Highlight", action = "Gitsigns toggle_linehl" },
+        { title = "Git Toggle Deleted", action = "Gitsigns toggle_deleted" },
+        { title = "Git Diff", action = "Gitsigns diffthis" },
+        { title = "Git log", action = "GV" },
+        { title = "Open in browser", action = "GBrowse" },
+    })
+end, opts)
+
+-- All CWD files (except gitignored)
+map("n", "<Leader>f", function()
+    telescopeFindFiles(true)
+end, opts)
+-- All CWD files
+map("n", "<Leader>F", function()
+    telescopeFindFiles(false)
+end, opts)
+-- Git files git-root
+map("n", "<Leader>G", function()
+    telescopeGFiles(false)
+end, opts)
+-- Git status files
+map("n", "<Leader>g", require("telescope.builtin").git_status, opts)
+-- Search for string inside of all files in CWD
+map("n", "<Leader>s", require("telescope.builtin").live_grep, opts)
+-- Search for string inside buffer
+map("n", "<Leader>S", require("telescope.builtin").current_buffer_fuzzy_find, opts)
+-- Search for open buffers
+map("n", "<Leader>b", require("telescope.builtin").buffers, opts)
+-- Lists previously open files
+map("n", "<Leader>h", require("telescope.builtin").oldfiles, opts)
+-- Lists normal mode keymappings
+map("n", "<Leader>m", require("telescope.builtin").keymaps, opts)
+map("n", "<Leader>t", [[<cmd>TodoTelescope<CR>]], opts)
+
+-- Search for DAP breakpoints
+map("n", "<Leader>B", require("telescope").extensions.dap.list_breakpoints, opts)

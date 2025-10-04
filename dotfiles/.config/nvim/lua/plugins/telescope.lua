@@ -40,8 +40,6 @@ function _G.telescopeFindFiles(git_ignore)
     require("telescope.builtin").find_files(opts)
 end
 
-local opts = { noremap = true, silent = true }
-
 return {
     {
         "nvim-telescope/telescope.nvim",
@@ -146,56 +144,7 @@ return {
 
             telescope.load_extension("fzf")
             telescope.load_extension("dap")
-
-            --
-            -- Keymaps
-            --
-
-            -- Menus
-            map("n", "<F5>", require("custom.optionsWindow").show, opts)
-            map("n", "<F6>", function()
-                showFloatingMenu({
-                    { title = "LazyGit", action = "LazyGit" },
-                    { title = "Git Hunk Highlight", action = "Gitsigns toggle_linehl" },
-                    { title = "Git Toggle Deleted", action = "Gitsigns toggle_deleted" },
-                    { title = "Git Diff", action = "Gitsigns diffthis" },
-                    { title = "Git log", action = "GV" },
-                    { title = "Open in browser", action = "GBrowse" },
-                })
-            end, opts)
-
-            -- All CWD files (except gitignored)
-            map("n", "<Leader>f", [[<cmd>lua telescopeFindFiles(true)<CR>]], opts)
-            -- All CWD files
-            map("n", "<Leader>F", [[<cmd>lua telescopeFindFiles(false)<CR>]], opts)
-            -- Git files git-root
-            map("n", "<Leader>G", [[<cmd>lua telescopeGFiles(false)<CR>]], opts)
-            -- Git status files
-            map("n", "<Leader>g", [[<cmd>lua require("telescope.builtin").git_status()<CR>]], opts)
-            -- Search for string inside of all files in CWD
-            map("n", "<Leader>s", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]], opts)
-            -- Search for string inside buffer
-            map(
-                "n",
-                "<Leader>S",
-                [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>]],
-                opts
-            )
-            -- Search for open buffers
-            map("n", "<Leader>b", [[<cmd>lua require("telescope.builtin").buffers()<CR>]], opts)
-            -- Lists previously open files
-            map("n", "<Leader>h", [[<cmd>lua require("telescope.builtin").oldfiles()<CR>]], opts)
-            -- Lists normal mode keymappings
-            map("n", "<Leader>m", [[<cmd>lua require("telescope.builtin").keymaps()<CR>]], opts)
-            map("n", "<Leader>t", [[<cmd>TodoTelescope<CR>]], opts)
-
-            -- Search for DAP breakpoints
-            map(
-                "n",
-                "<Leader>B",
-                [[<cmd>lua require("telescope").extensions.dap.list_breakpoints()<CR>]],
-                opts
-            )
+            -- telescope.load_extension("noice")
         end,
     },
 }

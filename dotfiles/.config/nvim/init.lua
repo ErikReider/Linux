@@ -7,8 +7,9 @@ _G.add_to_env_path({ vim.fn.stdpath("config"), "bin" })
 require("general")
 require("filetypes")
 require("neovide")
+
+-- Init Lazy
+require("lazy-nvim")
+
 require("mappings")
 require("autoLoad")
-
--- Init Plug
-require("lazy-nvim")

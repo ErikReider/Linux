@@ -88,8 +88,6 @@ return {
                     end,
                 },
             })
-
-            map("n", "<leader>c", [[<cmd>CccPick<CR>]], { noremap = true, silent = true })
         end,
     },
 }
