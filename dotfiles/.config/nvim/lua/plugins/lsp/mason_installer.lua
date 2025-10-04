@@ -31,7 +31,8 @@ return {
         "glsl_analyzer",
         "intelephense",
         "gh-actions-language-server",
-        "hyprls",
+        -- NOTE: Fedora 42 doesn't ship Go 1.25 which is required by newer versions
+        { "hyprls", version = "v0.8.0" },
         "yaml-language-server",
 
         -- Linters/Formatters
