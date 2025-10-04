@@ -128,10 +128,30 @@ _<Left>_  _<Right>_  _<S-Left>_  _<S-Right>_  _<C-Left>_  _<C-Right>_  _v_: vert
                     { "<S-Down>", cmd("WinShift down") },
                     { "<S-Up>", cmd("WinShift up") },
                     { "<S-Right>", cmd("WinShift right") },
-                    { "<C-Left>", function() splits.resize_left(2) end },
-                    { "<C-Down>", function() splits.resize_down(2) end },
-                    { "<C-Up>", function() splits.resize_up(2) end },
-                    { "<C-Right>", function() splits.resize_right(2) end },
+                    {
+                        "<C-Left>",
+                        function()
+                            splits.resize_left(2)
+                        end,
+                    },
+                    {
+                        "<C-Down>",
+                        function()
+                            splits.resize_down(2)
+                        end,
+                    },
+                    {
+                        "<C-Up>",
+                        function()
+                            splits.resize_up(2)
+                        end,
+                    },
+                    {
+                        "<C-Right>",
+                        function()
+                            splits.resize_right(2)
+                        end,
+                    },
                     { "=", "<C-w>=", { desc = "equalize" } },
                     { "x", pcmd("split", "E36") },
                     { "<C-s>", pcmd("split", "E36"), { desc = false } },

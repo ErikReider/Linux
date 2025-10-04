@@ -8,7 +8,7 @@ local flex_options = {
     preview_title = "",
     prompt_prefix = "❯ ",
     selection_caret = "❯ ",
-    no_ignore = true
+    no_ignore = true,
 }
 
 local cursor_options = {
@@ -16,16 +16,18 @@ local cursor_options = {
     theme = "cursor",
     show_line = false,
     results_title = false,
-    preview_title = false
+    preview_title = false,
 }
 
 function _G.telescopeGFiles(local_dir)
     local opts = {
         use_git_root = not local_dir,
-        prompt_title = "Git Files " .. (local_dir and "CWD" or "ROOT")
+        prompt_title = "Git Files " .. (local_dir and "CWD" or "ROOT"),
     }
     local ok = pcall(require("telescope.builtin").git_files, opts)
-    if not ok then require("telescope.builtin").find_files() end
+    if not ok then
+        require("telescope.builtin").find_files()
+    end
 end
 
 function _G.telescopeFindFiles(git_ignore)
@@ -33,7 +35,7 @@ function _G.telescopeFindFiles(git_ignore)
         hidden = true,
         no_ignore = not git_ignore,
         no_ignore_parent = not git_ignore,
-        prompt_title = (git_ignore and "Git " or "") .. "Files"
+        prompt_title = (git_ignore and "Git " or "") .. "Files",
     }
     require("telescope.builtin").find_files(opts)
 end
@@ -47,11 +49,12 @@ return {
             "nvim-lua/plenary.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
-                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && " ..
-                    "cmake --build build --config Release && " .. "cmake --install build --prefix build"
+                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && "
+                    .. "cmake --build build --config Release && "
+                    .. "cmake --install build --prefix build",
             },
             "nvim-telescope/telescope-file-browser.nvim",
-            { "nvim-telescope/telescope-dap.nvim", dependencies = { "mfussenegger/nvim-dap" } }
+            { "nvim-telescope/telescope-dap.nvim", dependencies = { "mfussenegger/nvim-dap" } },
         },
         lazy = false,
         config = function()
@@ -64,12 +67,12 @@ return {
                         fuzzy = true,
                         override_generic_sorter = true,
                         override_file_sorter = true,
-                        case_mode = "smart_case"
-                    }
+                        case_mode = "smart_case",
+                    },
                 },
                 pickers = {
                     find_files = tableMerge(flex_options, {
-                        find_command = { "rg", "--hidden", "--files", "--glob", "!.git/" }
+                        find_command = { "rg", "--hidden", "--files", "--glob", "!.git/" },
                     }),
                     git_files = tableMerge(flex_options, {
                         use_git_root = true,
@@ -80,8 +83,8 @@ return {
                             "--cached",
                             "--deduplicate",
                             "-o",
-                            "-m"
-                        }
+                            "-m",
+                        },
                     }),
                     live_grep = tableMerge(flex_options, {
                         vimgrep_arguments = {
@@ -94,8 +97,8 @@ return {
                             "--with-filename",
                             "--line-number",
                             "--column",
-                            "--smart-case"
-                        }
+                            "--smart-case",
+                        },
                     }),
                     buffers = flex_options,
                     oldfiles = flex_options,
@@ -103,7 +106,7 @@ return {
                     highlights = flex_options,
                     lsp_workspace_diagnostics = flex_options,
                     lsp_references = flex_options,
-                    lsp_code_actions = cursor_options
+                    lsp_code_actions = cursor_options,
                 },
                 defaults = {
                     layout_strategy = "flex",
@@ -112,7 +115,7 @@ return {
                         width = 0.9,
                         flex = { flip_columns = 133, flip_lines = 50 },
                         horizontal = { mirror = false },
-                        vertical = { mirror = false }
+                        vertical = { mirror = false },
                     },
                     mappings = {
                         i = {
@@ -135,10 +138,10 @@ return {
                                 for _ = 1, 5, 1 do
                                     actions.move_selection_next(nr)
                                 end
-                            end
-                        }
-                    }
-                }
+                            end,
+                        },
+                    },
+                },
             })
 
             telescope.load_extension("fzf")
@@ -157,7 +160,7 @@ return {
                     { title = "Git Toggle Deleted", action = "Gitsigns toggle_deleted" },
                     { title = "Git Diff", action = "Gitsigns diffthis" },
                     { title = "Git log", action = "GV" },
-                    { title = "Open in browser", action = "GBrowse" }
+                    { title = "Open in browser", action = "GBrowse" },
                 })
             end, opts)
 
@@ -172,8 +175,12 @@ return {
             -- Search for string inside of all files in CWD
             map("n", "<Leader>s", [[<cmd>lua require("telescope.builtin").live_grep()<CR>]], opts)
             -- Search for string inside buffer
-            map("n", "<Leader>S", [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>]],
-                opts)
+            map(
+                "n",
+                "<Leader>S",
+                [[<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>]],
+                opts
+            )
             -- Search for open buffers
             map("n", "<Leader>b", [[<cmd>lua require("telescope.builtin").buffers()<CR>]], opts)
             -- Lists previously open files
@@ -183,8 +190,12 @@ return {
             map("n", "<Leader>t", [[<cmd>TodoTelescope<CR>]], opts)
 
             -- Search for DAP breakpoints
-            map("n", "<Leader>B", [[<cmd>lua require("telescope").extensions.dap.list_breakpoints()<CR>]],
-                opts)
-        end
-    }
+            map(
+                "n",
+                "<Leader>B",
+                [[<cmd>lua require("telescope").extensions.dap.list_breakpoints()<CR>]],
+                opts
+            )
+        end,
+    },
 }

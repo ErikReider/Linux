@@ -26,14 +26,13 @@ return {
                         glsl = c_comment_string,
                         asm = { __default = "# %s", __multiline = "# %s" },
                     },
-                };
+                }
             end,
         },
         -- Code context
         {
             "nvim-treesitter/nvim-treesitter-context",
             config = function()
-
                 require("treesitter-context").setup({
                     -- Enable this plugin (Can be enabled/disabled later via commands)
                     enable = true,
@@ -143,7 +142,7 @@ return {
             },
         })
 
-        local parser_config = require"nvim-treesitter.parsers".get_parser_configs()
+        local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
         parser_config.blade = {
             install_info = {
                 url = "https://github.com/EmranMR/tree-sitter-blade",
@@ -154,4 +153,3 @@ return {
         }
     end,
 }
-

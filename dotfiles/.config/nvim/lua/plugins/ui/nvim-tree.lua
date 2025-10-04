@@ -10,7 +10,7 @@ return {
         lazy = false,
         opts = {
             on_attach = function(bufnr)
-                local api = require "nvim-tree.api"
+                local api = require("nvim-tree.api")
 
                 local function opts(desc)
                     return {

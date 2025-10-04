@@ -21,12 +21,12 @@ return {
                 local isDark = vim.o.background == "dark"
                 local lspRef = {
                     bg = isDark and colors.vscPopupHighlightGray or colors.vscPopupHighlightLightBlue,
-                    bold = true
+                    bold = true,
                 }
 
                 local lspInlayHint = {
                     bg = isDark and "#3d3d3d" or "#c6c6c6",
-                    fg = isDark and "#ffffff" or "#333333"
+                    fg = isDark and "#ffffff" or "#333333",
                 }
 
                 vscode.setup({
@@ -65,8 +65,8 @@ return {
                         DiagnosticLineNrError = { bg = "#51202A", fg = colors.vscRed, bold = true },
                         DiagnosticLineNrWarn = { bg = "#51412A", fg = colors.vscYellow, bold = true },
                         DiagnosticLineNrInfo = { bg = "#1E535D", fg = "#00FFFF", bold = true },
-                        DiagnosticLineNrHint = { bg = "#1E205D", fg = "#0000FF", bold = true }
-                    }
+                        DiagnosticLineNrHint = { bg = "#1E205D", fg = "#0000FF", bold = true },
+                    },
                 })
 
                 vscode.load()
@@ -78,7 +78,7 @@ return {
                 group = "highlight_yank",
                 callback = function()
                     vim.highlight.on_yank({ higroup = "IncSearch", timeout = 1000 })
-                end
+                end,
             })
 
             -- Shows space and tab as characters
@@ -91,7 +91,7 @@ return {
             vim.opt.listchars:append("extends:⟩")
             vim.opt.listchars:append("precedes:⟨")
             vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-        end
+        end,
     },
-    "folke/tokyonight.nvim"
+    "folke/tokyonight.nvim",
 }

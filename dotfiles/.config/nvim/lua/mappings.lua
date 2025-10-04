@@ -1,16 +1,27 @@
 -- Duplicate line
-map("n", "<C-d>", ":exe 'set clipboard=\"\"' | exe 'normal yyp' | exe 'set clipboard=unnamedplus'<CR>",
-    { silent = true })
+map(
+    "n",
+    "<C-d>",
+    ":exe 'set clipboard=\"\"' | exe 'normal yyp' | exe 'set clipboard=unnamedplus'<CR>",
+    { silent = true }
+)
 
 -- Opens selected link in xdg default browser
 -- https://vim.fandom.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
-map("n", "gx",
+map(
+    "n",
+    "gx",
     ":silent !xdg-open <C-R>=escape(\"<C-R><C-F>\", \"#?&;\\|%\")<CR> 2> /dev/null >&2 & disown<CR>",
-    { silent = true })
+    { silent = true }
+)
 
 -- open init.vim on F3 (split if buffer is selected)
-map("n", "<F3>", "expand('%') == '' ? ':e $MYVIMRC <cr>' : ':vsplit $MYVIMRC <cr>'",
-    { silent = true, expr = true })
+map(
+    "n",
+    "<F3>",
+    "expand('%') == '' ? ':e $MYVIMRC <cr>' : ':vsplit $MYVIMRC <cr>'",
+    { silent = true, expr = true }
+)
 -- Source on F4
 map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR> :Sleuth <CR>", { silent = true })
 
@@ -139,6 +150,9 @@ map("n", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
 map("v", "<C-M-b>", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", lsp_opts)
 -- Illuminate
 map("n", "<A-n>", "<cmd>lua require(\"illuminate\").next_reference{wrap=true}<cr>", { noremap = true })
-map("n", "<A-S-n>", "<cmd>lua require(\"illuminate\").next_reference{reverse=true,wrap=true}<cr>",
-    { noremap = true })
-
+map(
+    "n",
+    "<A-S-n>",
+    "<cmd>lua require(\"illuminate\").next_reference{reverse=true,wrap=true}<cr>",
+    { noremap = true }
+)

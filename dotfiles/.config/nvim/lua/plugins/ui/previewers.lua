@@ -17,7 +17,7 @@ return {
                 -- relevant if update_on_change is true
                 throttle_at = 200000, -- start throttling when file exceeds this
                 -- amount of bytes in size
-                throttle_time = "auto" -- minimum amount of time in milliseconds
+                throttle_time = "auto", -- minimum amount of time in milliseconds
                 -- that has to pass before starting new render
             })
 
@@ -30,8 +30,7 @@ return {
                     peek.open()
                 end
             end, {})
-
-        end
+        end,
     },
     -- HTML
     {
@@ -41,13 +40,15 @@ return {
         config = function()
             vim.g.bracey_server_path = "http://localhost"
             vim.g.bracey_refresh_on_save = 1
-        end
+        end,
     },
     -- Latex: Forward and Inverse Search for Texlab and neovim
     {
         "f3fora/nvim-texlabconfig",
-        config = function() require("texlabconfig").setup({}) end,
+        config = function()
+            require("texlabconfig").setup({})
+        end,
         ft = { "tex", "bib" }, -- Lazy-load on filetype
-        build = "go build"
-    }
+        build = "go build",
+    },
 }

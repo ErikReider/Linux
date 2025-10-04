@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             return
         end
 
-        require('illuminate').on_attach(client)
+        require("illuminate").on_attach(client)
 
         if client:supports_method("textDocument/documentColor") then
             if vim.lsp["document_color"] then
@@ -64,8 +64,10 @@ local servers = {
         on_init = function(client)
             if client.workspace_folders then
                 local path = client.workspace_folders[1].name
-                if path ~= vim.fn.stdpath("config") and
-                    (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc")) then
+                if
+                    path ~= vim.fn.stdpath("config")
+                    and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+                then
                     return
                 end
             end
@@ -163,7 +165,9 @@ local servers = {
     -- TypeScript/JavaScript
     ["ts_ls"] = {
         on_attach = function(client, bufnr)
-            if client.config.flags then client.config.flags.allow_incremental_sync = true end
+            if client.config.flags then
+                client.config.flags.allow_incremental_sync = true
+            end
             client.server_capabilities.document_formatting = false
         end,
         init_options = {
@@ -171,7 +175,7 @@ local servers = {
             hostInfo = "neovim",
             preferences = {
                 includeCompletionsWithSnippetText = true,
-                includeCompletionsForImportStatements = true
+                includeCompletionsForImportStatements = true,
             },
         },
     },
@@ -230,7 +234,7 @@ local servers = {
     -- Java: jdtls
     ["jdtls"] = {},
     -- efm language server
-    ["efm"] = require("plugins.lsp.efm")
+    ["efm"] = require("plugins.lsp.efm"),
 
     -- Rust: Configured by the "mrcjkb/rustaceanvim" plugin automatically
     -- Flutter: Configured by the "nvim-flutter/flutter-tools.nvim" plugin below
@@ -277,7 +281,7 @@ require("flutter-tools").setup({
     },
     outline = {
         open_cmd = "30vnew", -- command to use to open the outline buffer
-        auto_open = false,   -- if true this will open the outline automatically when it is first populated
+        auto_open = false, -- if true this will open the outline automatically when it is first populated
     },
     lsp = {
         on_attach = function(...)
@@ -297,7 +301,9 @@ require("flutter-tools").setup({
             vim.api.nvim_create_autocmd("BufWritePre", {
                 group = "hotReload",
                 pattern = "*.dart",
-                callback = function() vim.lsp.buf.format({ async = true }) end,
+                callback = function()
+                    vim.lsp.buf.format({ async = true })
+                end,
             })
         end,
         capabilities = capabilities, -- e.g. lsp_status capabilities
@@ -315,7 +321,7 @@ require("flutter-tools").setup({
             completeFunctionCalls = true,
             renameFilesWithClasses = "prompt", -- "always"
             enableSnippets = true,
-            updateImportsOnRename = true,      -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
+            updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
             dart = { lineLength = 120 },
         },
     },

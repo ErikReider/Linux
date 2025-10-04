@@ -13,9 +13,8 @@ return {
                 gitsigns = false,
                 handle = true,
                 search = false,
-                ale = false
-            }
-        }
-    }
+                ale = false,
+            },
+        },
+    },
 }
-

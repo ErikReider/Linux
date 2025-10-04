@@ -14,7 +14,9 @@ end
 
 -- Monitor
 local function gsettings_watcher()
-    local function on_stdout(_, data, _) change_theme(data[1]) end
+    local function on_stdout(_, data, _)
+        change_theme(data[1])
+    end
 
     vim.fn.jobstart("gsettings monitor org.gnome.desktop.interface color-scheme", { on_stdout = on_stdout })
 end

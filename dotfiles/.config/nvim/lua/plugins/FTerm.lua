@@ -11,7 +11,7 @@ return {
                 auto_close = true,
                 hl = "Normal",
                 blend = 20,
-                dimensions = { height = 0.9, width = 0.9 }
+                dimensions = { height = 0.9, width = 0.9 },
             })
 
             -- Example keybindings
@@ -28,17 +28,21 @@ return {
 
                 -- Use default config if it exists
                 local default_conf = os.getenv("HOME") .. "/.config/lazygit/config.yml"
-                if file_exists(default_conf) then table.insert(configs, default_conf) end
+                if file_exists(default_conf) then
+                    table.insert(configs, default_conf)
+                end
 
                 -- Supply Light theme if using light mode
                 if style == "light" then
                     local light_conf = os.getenv("HOME") .. "/.config/nvim/lazygit-light-config.yml"
-                    if file_exists(light_conf) then table.insert(configs, light_conf) end
+                    if file_exists(light_conf) then
+                        table.insert(configs, light_conf)
+                    end
                 end
 
                 return fterm:new({
                     cmd = "lazygit --use-config-file=" .. table.concat(configs, ","),
-                    dimensions = { height = 0.9, width = 0.9 }
+                    dimensions = { height = 0.9, width = 0.9 },
                 })
             end
 
@@ -53,7 +57,9 @@ return {
             end, {})
             -- Be able to close when theme changes (lazygit theme doesn't hotreload...)
             vim.api.nvim_create_user_command("LazyGitClose", function()
-                if lazyGit_window ~= nil then lazyGit_window:close() end
+                if lazyGit_window ~= nil then
+                    lazyGit_window:close()
+                end
                 lazyGit_window = nil
             end, {})
 
@@ -69,13 +75,13 @@ return {
                 if lazyDocker_window == nil then
                     lazyDocker_window = fterm:new({
                         cmd = "lazydocker",
-                        dimensions = { height = 0.9, width = 0.9 }
+                        dimensions = { height = 0.9, width = 0.9 },
                     })
                     lazyDocker_window:open()
                 else
                     lazyDocker_window:toggle()
                 end
             end, {})
-        end
-    }
+        end,
+    },
 }

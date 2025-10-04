@@ -3,8 +3,8 @@ return {
     {
         "kevinhwang91/nvim-ufo",
         dependencies = {
-            -- Promise & Async in Lua 
-            "kevinhwang91/promise-async"
+            -- Promise & Async in Lua
+            "kevinhwang91/promise-async",
         },
         event = "BufRead",
         opts = {
@@ -34,7 +34,7 @@ return {
                 end
                 table.insert(newVirtText, { suffix, "MoreMsg" })
                 return newVirtText
-            end
-        }
-    }
+            end,
+        },
+    },
 }

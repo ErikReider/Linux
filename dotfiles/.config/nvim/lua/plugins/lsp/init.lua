@@ -39,8 +39,8 @@ return {
                     border = "rounded",
                     source = true,
                     header = "",
-                    prefix = ""
-                }
+                    prefix = "",
+                },
             })
 
             -- Setup servers
@@ -55,8 +55,8 @@ return {
                 "akinsho/flutter-tools.nvim",
                 lazy = false,
                 dependencies = {
-                    'nvim-lua/plenary.nvim',
-                    'stevearc/dressing.nvim', -- optional for vim.ui.select
+                    "nvim-lua/plenary.nvim",
+                    "stevearc/dressing.nvim", -- optional for vim.ui.select
                 },
                 config = true,
             },
@@ -64,7 +64,7 @@ return {
             -- rust-tools.nvim replacement
             {
                 "mrcjkb/rustaceanvim",
-                version = '^6', -- Recommended
+                version = "^6", -- Recommended
                 lazy = false, -- This plugin is already lazy
             },
             -- Java eclipse tools
@@ -80,7 +80,7 @@ return {
             --
             -- Nvim cmp
             --
-            -- A completion engine plugin for neovim written in Lua. 
+            -- A completion engine plugin for neovim written in Lua.
             {
                 "hrsh7th/nvim-cmp",
                 dependencies = {
@@ -95,7 +95,7 @@ return {
                     -- nvim-cmp source for vim's cmdline
                     "hrsh7th/cmp-cmdline",
                     -- luasnip completion source for nvim-cmp
-                    "saadparwaiz1/cmp_luasnip"
+                    "saadparwaiz1/cmp_luasnip",
                 },
                 opts = {
                     lsp_symbols = {
@@ -123,34 +123,36 @@ return {
                         Struct = "",
                         Event = "",
                         Operator = "",
-                        TypeParameter = ""
-                    }
+                        TypeParameter = "",
+                    },
                 },
                 config = function(plugin_opts)
                     -- Set completeopt to have a better completion experience
                     vim.o.completeopt = "menu,menuone,noinsert"
 
                     local cmp = require("cmp")
-                    local luasnip = require("luasnip");
+                    local luasnip = require("luasnip")
                     cmp.setup({
-                        snippet = { expand = function(args)
-                            luasnip.lsp_expand(args.body)
-                        end },
+                        snippet = {
+                            expand = function(args)
+                                luasnip.lsp_expand(args.body)
+                            end,
+                        },
                         enabled = function()
                             -- disable completion in comments
-                            local context = require "cmp.config.context"
+                            local context = require("cmp.config.context")
                             -- keep command mode completion enabled when cursor is in a comment
                             if vim.api.nvim_get_mode().mode == "c" then
                                 return true
                             else
                                 local disabled = false
-                                disabled = disabled or
-                                               (vim.api.nvim_get_option_value("buftype", { buf = 0 }) ==
-                                                   "prompt")
+                                disabled = disabled
+                                    or (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt")
                                 disabled = disabled or (vim.fn.reg_recording() ~= "")
                                 disabled = disabled or (vim.fn.reg_executing() ~= "")
-                                disabled = disabled or context.in_treesitter_capture("comment") or
-                                               context.in_syntax_group("Comment")
+                                disabled = disabled
+                                    or context.in_treesitter_capture("comment")
+                                    or context.in_syntax_group("Comment")
                                 return not disabled
                             end
                         end,
@@ -167,8 +169,8 @@ return {
                                 cmp.config.compare.kind,
                                 cmp.config.compare.sort_text,
                                 cmp.config.compare.length,
-                                cmp.config.compare.order
-                            }
+                                cmp.config.compare.order,
+                            },
                         },
                         formatting = {
                             fields = { "kind", "abbr" },
@@ -183,7 +185,7 @@ return {
                                 vim_item.kind = plugin_opts.opts.lsp_symbols[vim_item.kind] or ""
                                 vim_item.menu = nil
                                 return vim_item
-                            end
+                            end,
                         },
                         preselect = cmp.PreselectMode.None,
                         completion = { completeopt = vim.o.completeopt },
@@ -201,7 +203,7 @@ return {
                             end, { "i" }),
                             ["<CR>"] = cmp.mapping.confirm({
                                 behavior = cmp.ConfirmBehavior.Insert,
-                                select = true
+                                select = true,
                             }),
                             ["<Tab>"] = cmp.mapping(function(fallback)
                                 if luasnip.expand_or_jumpable() then
@@ -219,9 +221,12 @@ return {
                             end, { "i", "s" }),
                             ["<C-c>"] = cmp.mapping(function(fallback)
                                 -- If inside a snippet
-                                if (luasnip.jumpable(0)) then
+                                if luasnip.jumpable(0) then
                                     vim.api.nvim_feedkeys(
-                                        vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "t", true)
+                                        vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
+                                        "t",
+                                        true
+                                    )
                                 end
                                 cmp.close()
                                 fallback()
@@ -231,21 +236,21 @@ return {
                                     luasnip.unlink_current()
                                 end
                                 fallback()
-                            end, { "i", "s" })
+                            end, { "i", "s" }),
                         }),
                         sources = {
                             { name = "nvim_lsp" },
                             { name = "luasnip" },
                             { name = "path" },
-                            { name = "buffer", option = { keyword_pattern = [[\k\+]] } }
-                        }
+                            { name = "buffer", option = { keyword_pattern = [[\k\+]] } },
+                        },
                     })
 
                     -- Completions for / search based on current buffer:
                     -- `/` cmdline setup.
                     cmp.setup.cmdline("/", {
                         mapping = cmp.mapping.preset.cmdline(),
-                        sources = { { name = "buffer" } }
+                        sources = { { name = "buffer" } },
                     })
 
                     -- Completions for command mode:
@@ -253,10 +258,10 @@ return {
                     cmp.setup.cmdline(":", {
                         mapping = cmp.mapping.preset.cmdline(),
                         sources = cmp.config.sources({ { name = "path" } }, {
-                            { name = "cmdline", option = { ignore_cmds = { "Man", "!" } } }
-                        })
+                            { name = "cmdline", option = { ignore_cmds = { "Man", "!" } } },
+                        }),
                     })
-                end
+                end,
             },
 
             --
@@ -268,7 +273,7 @@ return {
                 build = "make install_jsregexp",
                 dependencies = {
                     -- Set of preconfigured snippets for different languages
-                    "rafamadriz/friendly-snippets"
+                    "rafamadriz/friendly-snippets",
                 },
                 config = function()
                     local luasnip = require("luasnip")
@@ -288,14 +293,23 @@ return {
                                 -- SELECT all text inside the snippet.
                                 if not no_move then
                                     vim.api.nvim_feedkeys(
-                                        vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+                                        vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
+                                        "n",
+                                        true
+                                    )
                                     local pos_begin, pos_end = snip.mark:pos_begin_end()
                                     util.normal_move_on(pos_begin)
                                     vim.api.nvim_feedkeys(
-                                        vim.api.nvim_replace_termcodes("v", true, false, true), "n", true)
+                                        vim.api.nvim_replace_termcodes("v", true, false, true),
+                                        "n",
+                                        true
+                                    )
                                     util.normal_move_before(pos_end)
                                     vim.api.nvim_feedkeys(
-                                        vim.api.nvim_replace_termcodes("o<C-G>", true, false, true), "n", true)
+                                        vim.api.nvim_replace_termcodes("o<C-G>", true, false, true),
+                                        "n",
+                                        true
+                                    )
                                 end
                             end
                             function snippet:jump_into(dir, no_move)
@@ -319,6 +333,7 @@ return {
                                     end
                                 end
                             end
+
                             -- this is called only if the snippet is currently selected.
                             function snippet:jump_from(dir, no_move)
                                 if dir == 1 then
@@ -328,8 +343,9 @@ return {
                                     return self.prev:jump_into(dir, no_move)
                                 end
                             end
+
                             return snippet
-                        end
+                        end,
                     })
 
                     luasnip.filetype_extend("javascriptreact", { "typescript", "javascript" })
@@ -338,7 +354,7 @@ return {
 
                     -- Lazy load custom snippets
                     require("luasnip/loaders/from_vscode").lazy_load()
-                end
+                end,
             },
 
             --
@@ -360,7 +376,7 @@ return {
                     --         tex = "{"
                     --     }
                     -- })
-                end
+                end,
             },
             -- Shows function signature (parameters)
             {
@@ -393,8 +409,8 @@ return {
                     shadow_blend = 36,
                     shadow_guibg = "Black",
                     timer_interval = 200,
-                    toggle_key = nil
-                }
+                    toggle_key = nil,
+                },
             },
             -- Vim plugin for automatically highlighting other uses of the word under the cursor.
             {
@@ -403,7 +419,7 @@ return {
                     require("illuminate").configure({
                         filetypes_denylist = { "dirvish", "fugitive", "TelescopePrompt" },
                     })
-                end
+                end,
             },
             -- See LSP server startup status
             {
@@ -413,10 +429,10 @@ return {
                     notification = {
                         -- Options related to the notification window and buffer
                         window = {
-                            avoid = { "NvimTree" } -- Filetypes the notification window should avoid
+                            avoid = { "NvimTree" }, -- Filetypes the notification window should avoid
                         },
-                    }
-                }
+                    },
+                },
             },
 
             --
@@ -427,7 +443,7 @@ return {
                 "WhoIsSethDaniel/mason-tool-installer.nvim",
                 lazy = false,
                 dependencies = { { "williamboman/mason.nvim", opts = {} } },
-                opts = require("plugins.lsp.mason_installer")
+                opts = require("plugins.lsp.mason_installer"),
             },
             -- Auto installs DAP debuggers
             {
@@ -437,45 +453,50 @@ return {
                     "mfussenegger/nvim-dap",
                     {
                         "rcarriga/nvim-dap-ui",
-                        config = function() require("plugins.lsp.dapui") end,
-                        dependencies = { "nvim-neotest/nvim-nio" }
+                        config = function()
+                            require("plugins.lsp.dapui")
+                        end,
+                        dependencies = { "nvim-neotest/nvim-nio" },
                     },
                     {
                         "Weissle/persistent-breakpoints.nvim",
                         config = function()
-
-                            require("persistent-breakpoints").setup {
+                            require("persistent-breakpoints").setup({
                                 save_dir = vim.fn.stdpath("data") .. "/nvim_checkpoints",
                                 -- when to load the breakpoints? "BufReadPost" is recommanded.
                                 load_breakpoints_event = { "BufReadPost" },
                                 -- record the performance of different function. run :lua require('persistent-breakpoints.api').print_perf_data() to see the result.
-                                perf_record = false
-                            }
+                                perf_record = false,
+                            })
 
                             vim.fn.sign_define("DapBreakpoint", {
                                 text = "",
                                 texthl = "DiagnosticSignError",
                                 linehl = "",
-                                numhl = ""
+                                numhl = "",
                             })
-                            vim.fn.sign_define("DapBreakpointCondition",
-                                               { text = "", texthl = "", linehl = "", numhl = "" })
-                            vim.fn.sign_define("DapLogPoint",
-                                               { text = "ﱴ", texthl = "", linehl = "", numhl = "" })
+                            vim.fn.sign_define(
+                                "DapBreakpointCondition",
+                                { text = "", texthl = "", linehl = "", numhl = "" }
+                            )
+                            vim.fn.sign_define(
+                                "DapLogPoint",
+                                { text = "ﱴ", texthl = "", linehl = "", numhl = "" }
+                            )
                             vim.fn.sign_define("DapStopped", {
                                 text = "",
                                 texthl = "DiagnosticSignInfo",
                                 linehl = "DiagnosticUnderlineInfo",
-                                numhl = "DiagnosticSignInfo"
+                                numhl = "DiagnosticSignInfo",
                             })
                             vim.fn.sign_define("DapBreakpointRejected", {
                                 text = "",
                                 texthl = "DiagnosticSignHint",
                                 linehl = "",
-                                numhl = ""
+                                numhl = "",
                             })
-                        end
-                    }
+                        end,
+                    },
                 },
                 config = function()
                     require("mason-nvim-dap").setup({
@@ -502,23 +523,23 @@ return {
                         -- 	- false: Dap is not automatically configured.
                         -- 	- true: Dap is automatically configured.
                         -- 	- {adapters: {ADAPTER: {}, }, configurations: {ADAPTER: {}, }}. Allows overriding default configuration.
-                        automatic_setup = false
+                        automatic_setup = false,
                     })
 
                     -- local configs = {
-                    --     cppdbg = 
+                    --     cppdbg =
                     -- }
                     --
                     -- mason_dap.setup_handlers({
                     --     cppdbg = function(_source_name)  end
                     -- })
-                end
+                end,
             },
             {
-                'creativenull/efmls-configs-nvim',
-                version = 'v1.x.x', -- version is optional, but recommended
-                dependencies = { 'neovim/nvim-lspconfig' },
-            }
-        }
-    }
+                "creativenull/efmls-configs-nvim",
+                version = "v1.x.x", -- version is optional, but recommended
+                dependencies = { "neovim/nvim-lspconfig" },
+            },
+        },
+    },
 }

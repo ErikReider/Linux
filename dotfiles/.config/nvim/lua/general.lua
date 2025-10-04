@@ -47,7 +47,7 @@ vim.o.foldnestmax = 10
 vim.o.pumheight = 30
 
 -- Support 256 colors
-vim.cmd('set t_Co=256')
+vim.cmd("set t_Co=256")
 
 -- Disable quote concealing in JSON files
 vim.api.nvim_set_var("vim_json_conceal", 0)
@@ -83,7 +83,7 @@ vim.o.hlsearch = true
 vim.bo.autoread = true
 
 -- Yank to clipboard
-vim.cmd('set clipboard=unnamedplus')
+vim.cmd("set clipboard=unnamedplus")
 
 -- Select with mouse
 vim.o.mouse = "a"
@@ -99,7 +99,7 @@ vim.o.laststatus = 3
 -- Keep the line at the same position when creating splits
 vim.o.splitkeep = "screen"
 
-vim.g.virtcolumn_char = '▏' -- char to display the line
+vim.g.virtcolumn_char = "▏" -- char to display the line
 vim.g.virtcolumn_priority = 10 -- priority of extmark
 
 vim.opt.title = true

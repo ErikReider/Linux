@@ -4,7 +4,7 @@ return {
         "romgrk/barbar.nvim",
         dependencies = {
             -- Delete Neovim buffers without losing window layout
-            "famiu/bufdelete.nvim"
+            "famiu/bufdelete.nvim",
         },
         opts = {
             animation = true,
@@ -19,12 +19,12 @@ return {
                 filetype = { enabled = true },
                 pinned = { button = "車" },
                 separator = { left = "" },
-                inactive = { separator = { left = "" } }
+                inactive = { separator = { left = "" } },
             },
             icon_custom_colors = false,
             insert_at_end = false,
             insert_at_start = false,
-            maximum_padding = 1
-        }
-    }
+            maximum_padding = 1,
+        },
+    },
 }

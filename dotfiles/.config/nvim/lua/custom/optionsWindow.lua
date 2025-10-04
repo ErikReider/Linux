@@ -5,10 +5,10 @@ local runOptions = {
         filetypes = { "typescriptreact", "javascriptreact", "typescript", "javascript" },
         hasFiles = { "node_modules", "package.json", "package-lock.json" },
         run = "!npm start",
-        build = "!npm run build"
+        build = "!npm run build",
     },
     { filetypes = { "markdown" }, run = "PeekOpenOrClose" },
-    { filetypes = { "tex" }, run = "TexlabBuild" }
+    { filetypes = { "tex" }, run = "TexlabBuild" },
 }
 local function getRunAction()
     local ft = vim.api.nvim_buf_get_option(0, "filetype")
@@ -22,7 +22,9 @@ local function getRunAction()
             if string.len(run) > 0 or string.len(build) > 0 then
                 local foundFiles = {}
                 for file in lines do
-                    if tableContains(hasFiles, file) then table.insert(foundFiles, file) end
+                    if tableContains(hasFiles, file) then
+                        table.insert(foundFiles, file)
+                    end
                 end
                 if table.maxn(hasFiles) == table.maxn(foundFiles) then
                     return { run = run, build = build }
@@ -33,7 +35,7 @@ local function getRunAction()
     return { run = "", build = "" }
 end
 
-local Module = {};
+local Module = {}
 
 function Module.getOptionsTable()
     local optionsTable = {
@@ -43,28 +45,36 @@ function Module.getOptionsTable()
         { title = "Search for TODOs", action = "TodoTelescope" },
         { title = "Toggle inactive shade", action = "lua require('shade').toggle()" },
         { title = "Edit color", action = "CccPick" },
-        { title = "Toggle Debug Windows", action = "DapUiToggleWindows" }
+        { title = "Toggle Debug Windows", action = "DapUiToggleWindows" },
     }
 
     -- Switch between C/C++ Header and Implementation files
     for _, value in ipairs({ "c", "h", "cpp", "hpp" }) do
         if vim.bo.filetype == value then
-            table.insert(optionsTable,
-                         { title = "Open Header/Implementation file", action = "ClangdSwitchSourceHeader" })
+            table.insert(
+                optionsTable,
+                { title = "Open Header/Implementation file", action = "ClangdSwitchSourceHeader" }
+            )
             break
         end
     end
 
     local currentFileFolderPath = vim.api.nvim_eval("expand('%:p:h')")
     if string.len(currentFileFolderPath) > 0 then
-        table.insert(optionsTable, 1,
-                     { title = "Open File Folder", action = disownCMD("xdg-open " .. currentFileFolderPath) })
+        table.insert(
+            optionsTable,
+            1,
+            { title = "Open File Folder", action = disownCMD("xdg-open " .. currentFileFolderPath) }
+        )
     end
 
     local currentFilePath = vim.api.nvim_buf_get_name(0)
     if string.len(currentFilePath) > 0 then
-        table.insert(optionsTable, 1,
-                     { title = "Open File", action = disownCMD("xdg-open " .. currentFilePath) })
+        table.insert(
+            optionsTable,
+            1,
+            { title = "Open File", action = disownCMD("xdg-open " .. currentFilePath) }
+        )
 
         -- Check if in Git directory
         local function add_file_in_browser()
@@ -73,9 +83,11 @@ function Module.getOptionsTable()
         local _, ret = utils.get_os_command_output({ "git", "rev-parse", "--show-toplevel" }, vim.loop.cwd())
 
         if ret ~= 0 then
-            local is_worktree = utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" },
-                                                            vim.loop.cwd())
-            if is_worktree[1] == "true" then add_file_in_browser() end
+            local is_worktree =
+                utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" }, vim.loop.cwd())
+            if is_worktree[1] == "true" then
+                add_file_in_browser()
+            end
         else
             add_file_in_browser()
         end
@@ -112,6 +124,8 @@ function Module.getOptionsTable()
 end
 
 -- Open options window
-function Module.show() showFloatingMenu(Module.getOptionsTable()) end
+function Module.show()
+    showFloatingMenu(Module.getOptionsTable())
+end
 
 return Module

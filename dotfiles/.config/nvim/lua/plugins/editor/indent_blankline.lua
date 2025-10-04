@@ -44,23 +44,34 @@ return {
             -- Setup rainbow delimiters
             hooks.register(hooks.type.SCOPE_HIGHLIGHT, function(tick, bufnr, scope, scope_index)
                 -- Skip the first indent
-                if scope_index == 1 then return 1 end
+                if scope_index == 1 then
+                    return 1
+                end
                 return hooks.builtin.scope_highlight_from_extmark(tick, bufnr, scope, scope_index)
             end)
 
             -- Skip empty lines
-            hooks.register(hooks.type.SKIP_LINE,
-                           function(_, _, _, line) return (line == nil or line == "") end)
+            hooks.register(hooks.type.SKIP_LINE, function(_, _, _, line)
+                return (line == nil or line == "")
+            end)
             -- Only draw tab on the first indent
             hooks.register(hooks.type.WHITESPACE, function(_, _, _, whitespace_tbl)
                 -- Return early if not a tab char
-                if not (whitespace_tbl[1] == indent.whitespace.TAB_START or whitespace_tbl[1] ==
-                    indent.whitespace.TAB_START_SINGLE) then return whitespace_tbl end
+                if
+                    not (
+                        whitespace_tbl[1] == indent.whitespace.TAB_START
+                        or whitespace_tbl[1] == indent.whitespace.TAB_START_SINGLE
+                    )
+                then
+                    return whitespace_tbl
+                end
 
                 -- Skip the first line and check if any other chars are tab start characters
                 for i = 2, #whitespace_tbl, 1 do
-                    if whitespace_tbl[i] == indent.whitespace.TAB_START or whitespace_tbl[i] ==
-                        indent.whitespace.TAB_START_SINGLE then
+                    if
+                        whitespace_tbl[i] == indent.whitespace.TAB_START
+                        or whitespace_tbl[i] == indent.whitespace.TAB_START_SINGLE
+                    then
                         whitespace_tbl[i] = indent.whitespace.INDENT
                     end
                 end

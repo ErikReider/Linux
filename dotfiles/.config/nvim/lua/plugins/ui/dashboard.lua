@@ -11,7 +11,7 @@ local custom_header = {
     "                ||----w |          ",
     "                ||     ||          ",
     "",
-    ""
+    "",
 }
 
 -- local custom_header = {
@@ -51,14 +51,14 @@ return {
             local _, ret = utils.get_os_command_output({
                 "git",
                 "rev-parse",
-                "--show-toplevel"
+                "--show-toplevel",
             }, vim.loop.cwd())
 
             if ret ~= 0 then
                 local is_worktree = utils.get_os_command_output({
                     "git",
                     "rev-parse",
-                    "--is-inside-work-tree"
+                    "--is-inside-work-tree",
                 }, vim.loop.cwd())
                 if is_worktree[1] == "true" then
                     footer = get_dashboard_git_status()
@@ -82,7 +82,7 @@ return {
                             desc_hi = "String",
                             key = "Leader n",
                             key_hi = "Number",
-                            action = "newfile"
+                            action = "newfile",
                         },
                         {
                             icon = " ",
@@ -91,7 +91,7 @@ return {
                             desc_hi = "String",
                             key = "Ctrl f",
                             key_hi = "Number",
-                            action = "lua telescopeGFiles(true)"
+                            action = "lua telescopeGFiles(true)",
                         },
                         {
                             icon = " ",
@@ -100,17 +100,17 @@ return {
                             desc_hi = "String",
                             key = "Alt shift f",
                             key_hi = "Number",
-                            action = "Telescope live_grep"
-                        }
+                            action = "Telescope live_grep",
+                        },
                     },
-                    footer = footer -- your footer
+                    footer = footer, -- your footer
                 },
                 hide = {
                     statusline = false, -- hide statusline default is true
                     tabline = false, -- hide the tabline
-                    winbar = false -- hide winbar
-                }
+                    winbar = false, -- hide winbar
+                },
             })
-        end
-    }
+        end,
+    },
 }

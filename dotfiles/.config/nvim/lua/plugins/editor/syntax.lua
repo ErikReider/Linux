@@ -22,6 +22,6 @@ return {
 
             map("n", "äj", ":ConflictMarkerNextHunk <CR>", { silent = true })
             map("n", "öj", ":ConflictMarkerPrevHunk <CR>", { silent = true })
-        end
-    }
+        end,
+    },
 }

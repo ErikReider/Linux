@@ -38,7 +38,7 @@ function _G.show_indentation_popup()
                 return "Detect indent size"
             end
             return "Indent using " .. stringFirstToUpper(item)
-        end
+        end,
     }, function(choice)
         if choice == "detect" then
             vim.cmd("Sleuth")
@@ -62,7 +62,9 @@ end
 ---@return string string The LSPs path.
 function _G.get_lsp_path(name, default)
     local path = path_join(vim.fn.stdpath("data"), "mason", "bin", name)
-    if file_exists(path) then return path end
+    if file_exists(path) then
+        return path
+    end
     return default
 end
 
@@ -84,7 +86,9 @@ function _G.split(inputString, sep)
     local fields = {}
 
     local pattern = string.format("([^%s]+)", sep)
-    local _ = string.gsub(inputString, pattern, function(c) fields[#fields + 1] = c end)
+    local _ = string.gsub(inputString, pattern, function(c)
+        fields[#fields + 1] = c
+    end)
 
     return fields
 end
@@ -94,14 +98,20 @@ end
 ---@return string
 function _G.path_join(...)
     local args = { ... }
-    if #args == 0 then return "" end
+    if #args == 0 then
+        return ""
+    end
 
     local path_separator = "/"
     local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1
-    if is_windows == true then path_separator = "\\" end
+    if is_windows == true then
+        path_separator = "\\"
+    end
 
     local all_parts = {}
-    if type(args[1]) == "string" and args[1]:sub(1, 1) == path_separator then all_parts[1] = "" end
+    if type(args[1]) == "string" and args[1]:sub(1, 1) == path_separator then
+        all_parts[1] = ""
+    end
 
     for _, arg in ipairs(args) do
         local arg_parts = split(arg, path_separator)
@@ -117,19 +127,27 @@ end
 
 function _G.iterDir(dir, callback)
     local table = vim.api.nvim_eval("split(glob('" .. dir .. "'), '\n')")
-    for _, f in ipairs(table) do callback(f) end
+    for _, f in ipairs(table) do
+        callback(f)
+    end
 end
 
 function _G.tableContains(table, val)
-    for i = 1, #table do if table[i] == val then return true end end
+    for i = 1, #table do
+        if table[i] == val then
+            return true
+        end
+    end
     return false
 end
 
-function _G.disownCMD(cmd) return "!" .. cmd .. " 2>/dev/null >&2 &; disown" end
+function _G.disownCMD(cmd)
+    return "!" .. cmd .. " 2>/dev/null >&2 &; disown"
+end
 
 function _G.runCmdInTerm(cmd, tryStayOpen)
     local open = tryStayOpen == true and "; exec $SHELL" or ""
-    return disownCMD("$TERM -e $SHELL -c \'" .. cmd .. open .. "\'")
+    return disownCMD("$TERM -e $SHELL -c '" .. cmd .. open .. "'")
 end
 
 function _G.splitString(str, delimiter)
@@ -140,7 +158,9 @@ function _G.splitString(str, delimiter)
     return matches
 end
 
-function _G.stringFirstToUpper(str) return (str:gsub("^%l", string.upper)) end
+function _G.stringFirstToUpper(str)
+    return (str:gsub("^%l", string.upper))
+end
 
 function _G.tableMerge(t1, t2)
     for k, v in pairs(t2) do
@@ -180,18 +200,24 @@ function _G.showFloatingMenu(items)
         table.insert(keysArray, item.title)
         itemsArray[item.title] = item.action
         local len = string.len(item.title)
-        if len > maxStringLength then maxStringLength = len end
+        if len > maxStringLength then
+            maxStringLength = len
+        end
         length = length + 1
     end
-    if maxStringLength < 30 then maxStringLength = 20 end
+    if maxStringLength < 30 then
+        maxStringLength = 20
+    end
 
     vim.ui.select(keysArray, {
         prompt = "Options",
         kind = "floatingwindow",
         maxStringLength = maxStringLength,
-        entries = length
+        entries = length,
     }, function(selected)
-        if selected == nil then return end
+        if selected == nil then
+            return
+        end
         local option = itemsArray[selected]
         vim.cmd("silent " .. option)
     end)

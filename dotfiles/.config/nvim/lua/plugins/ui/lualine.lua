@@ -4,8 +4,7 @@ return {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-
-            require("lualine").setup {
+            require("lualine").setup({
                 options = {
                     icons_enabled = true,
                     theme = "vscode",
@@ -13,7 +12,7 @@ return {
                     section_separators = { left = "", right = "" },
                     disabled_filetypes = { "packer" },
                     always_divide_middle = true,
-                    globalstatus = true
+                    globalstatus = true,
                 },
                 sections = {
                     lualine_a = { "mode" },
@@ -26,18 +25,18 @@ return {
                             symbols = {
                                 modified = "[+]", -- Text to show when the file is modified.
                                 readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-                                unnamed = "[No Name]" -- Text to show for unnamed buffers.
-                            }
+                                unnamed = "[No Name]", -- Text to show for unnamed buffers.
+                            },
                         },
-                        "filesize"
+                        "filesize",
                     },
                     lualine_x = {
                         "encoding",
-                        { "fileformat", symbols = { unix = "", dos = "", mac = "" } }
+                        { "fileformat", symbols = { unix = "", dos = "", mac = "" } },
                     },
                     lualine_y = {
                         { _G.get_indentation_string, on_click = _G.show_indentation_popup },
-                        "filetype"
+                        "filetype",
                     },
                     lualine_z = {
                         "progress",
@@ -50,14 +49,14 @@ return {
                                 error = "DiagnosticError",
                                 warn = "DiagnosticWarn",
                                 info = "DiagnosticInfo",
-                                hint = "DiagnosticHint"
+                                hint = "DiagnosticHint",
                             },
                             symbols = { error = "E", warn = "W", info = "I", hint = "H" },
                             colored = true,
                             update_in_insert = false,
-                            always_visible = false
-                        }
-                    }
+                            always_visible = false,
+                        },
+                    },
                 },
                 -- tabline = {
                 -- lualine_a = {
@@ -68,8 +67,8 @@ return {
                 -- }
                 -- },
                 -- },
-                extensions = { "nvim-tree" }
-            }
-        end
-    }
+                extensions = { "nvim-tree" },
+            })
+        end,
+    },
 }

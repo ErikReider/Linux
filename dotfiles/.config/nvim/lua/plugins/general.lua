@@ -5,7 +5,12 @@ return {
     -- Auto tabwidth and style detection
     "tpope/vim-sleuth",
     -- To save write-protected files
-    { "lambdalisue/suda.vim", config = function() vim.g.suda_smart_edit = 0 end },
+    {
+        "lambdalisue/suda.vim",
+        config = function()
+            vim.g.suda_smart_edit = 0
+        end,
+    },
     -- Neovim plugin for toggling booleans, etc.
     {
         "nat-418/boole.nvim",
@@ -13,8 +18,8 @@ return {
             mappings = { increment = "<C-a>", decrement = "<C-x>" },
             -- User defined loops
             additions = { { "Foo", "Bar" }, { "tic", "tac", "toe" } },
-            allow_caps_additions = { { "enable", "disable" } }
-        }
+            allow_caps_additions = { { "enable", "disable" } },
+        },
     },
 
     -- Git commands in vim like`Git diff`
@@ -27,6 +32,8 @@ return {
     {
         "aurum77/live-server.nvim",
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop", "LiveServerInstall" },
-        build = function() require("live_server.util").install() end
-    }
+        build = function()
+            require("live_server.util").install()
+        end,
+    },
 }

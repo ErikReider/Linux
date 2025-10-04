@@ -19,12 +19,12 @@ return {
                     max_byte = 100 * 1024, -- 100 KB
                     filetypes = {},
                     excludes = {},
-                    lsp = true
+                    lsp = true,
                 },
                 convert = {
                     { picker.hex, output.css_rgb },
                     { picker.css_rgb, output.css_hsl },
-                    { picker.css_hsl, output.hex }
+                    { picker.css_hsl, output.hex },
                 },
                 recognize = {
                     input = true,
@@ -38,8 +38,8 @@ return {
                         [picker.css_lab] = { input.lab, output.css_lab },
                         [picker.css_lch] = { input.lch, output.css_lch },
                         [picker.css_oklab] = { input.oklab, output.css_oklab },
-                        [picker.css_oklch] = { input.oklch, output.css_oklch }
-                    }
+                        [picker.css_oklch] = { input.oklch, output.css_oklch },
+                    },
                 },
                 disable_default_mappings = true,
                 mappings = {
@@ -61,19 +61,35 @@ return {
                     ["<S-Left>"] = mapping.decrease5,
                     ["<C-Left>"] = mapping.decrease10,
                     ["0"] = mapping.set0,
-                    ["1"] = function() ccc.set_percent(10) end,
-                    ["2"] = function() ccc.set_percent(20) end,
-                    ["3"] = function() ccc.set_percent(30) end,
-                    ["4"] = function() ccc.set_percent(40) end,
+                    ["1"] = function()
+                        ccc.set_percent(10)
+                    end,
+                    ["2"] = function()
+                        ccc.set_percent(20)
+                    end,
+                    ["3"] = function()
+                        ccc.set_percent(30)
+                    end,
+                    ["4"] = function()
+                        ccc.set_percent(40)
+                    end,
                     ["5"] = mapping.set50,
-                    ["6"] = function() ccc.set_percent(60) end,
-                    ["7"] = function() ccc.set_percent(70) end,
-                    ["8"] = function() ccc.set_percent(80) end,
-                    ["9"] = function() ccc.set_percent(90) end
-                }
+                    ["6"] = function()
+                        ccc.set_percent(60)
+                    end,
+                    ["7"] = function()
+                        ccc.set_percent(70)
+                    end,
+                    ["8"] = function()
+                        ccc.set_percent(80)
+                    end,
+                    ["9"] = function()
+                        ccc.set_percent(90)
+                    end,
+                },
             })
 
             map("n", "<leader>c", [[<cmd>CccPick<CR>]], { noremap = true, silent = true })
-        end
-    }
+        end,
+    },
 }

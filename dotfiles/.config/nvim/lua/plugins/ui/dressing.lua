@@ -30,7 +30,7 @@ return {
                     -- Window transparency (0-100)
                     winblend = 10,
                     -- Change default highlight groups (see :help winhl)
-                    winhighlight = ""
+                    winhighlight = "",
                 },
                 -- Set to `false` to disable
                 mappings = {
@@ -39,8 +39,8 @@ return {
                         ["<C-c>"] = "Close",
                         ["<CR>"] = "Confirm",
                         ["<Up>"] = "HistoryPrev",
-                        ["<Down>"] = "HistoryNext"
-                    }
+                        ["<Down>"] = "HistoryNext",
+                    },
                 },
                 override = function(conf)
                     -- This is the config that will be passed to nvim_open_win.
@@ -48,7 +48,7 @@ return {
                     return conf
                 end,
                 -- see :help dressing_get_config
-                get_config = nil
+                get_config = nil,
             },
             select = {
                 -- Set to false to disable the vim.ui.select implementation
@@ -76,7 +76,7 @@ return {
                     max_width = 80,
                     max_height = 40,
                     min_width = 40,
-                    min_height = 10
+                    min_height = 10,
                 },
                 -- Options for built-in selector
                 builtin = {
@@ -90,7 +90,7 @@ return {
                         -- Window transparency (0-100)
                         winblend = 10,
                         -- Change default highlight groups (see :help winhl)
-                        winhighlight = ""
+                        winhighlight = "",
                     },
 
                     -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
@@ -109,7 +109,7 @@ return {
                         -- This is the config that will be passed to nvim_open_win.
                         -- Change values here to customize the layout
                         return conf
-                    end
+                    end,
                 },
                 -- Used to override format_item. See :help dressing-format
                 format_item_override = {},
@@ -125,13 +125,13 @@ return {
                                     end,
                                     height = function(_, _, max_lines)
                                         return math.min(max_lines, opts.entries + 4)
-                                    end
-                                }
-                            })
+                                    end,
+                                },
+                            }),
                         }
                     end
-                end
-            }
-        }
-    }
+                end,
+            },
+        },
+    },
 }

@@ -29,12 +29,12 @@ if vim.g.neovide then
 
     ---System clipboard
     -- Copy
-    map("n", "<c-s-c>", "+y", {silent = true, noremap = true})
-    map("v", "<c-s-c>", "+y", {silent = true, noremap = true})
+    map("n", "<c-s-c>", "+y", { silent = true, noremap = true })
+    map("v", "<c-s-c>", "+y", { silent = true, noremap = true })
     -- Paste
-    map("n", "<c-s-v>", "+p", {silent = true, noremap = true})
-    map("i", "<c-s-v>", "<c-r>+", {silent = true, noremap = true})
-    map("c", "<c-s-v>", "<c-r>+", {silent = true, noremap = true})
+    map("n", "<c-s-v>", "+p", { silent = true, noremap = true })
+    map("i", "<c-s-v>", "<c-r>+", { silent = true, noremap = true })
+    map("c", "<c-s-v>", "<c-r>+", { silent = true, noremap = true })
     -- Use <c-r> to insert original character without triggering things like auto-pairs
-    map("i", "<c-r>", "<c-s-v>", {silent = true, noremap = true})
+    map("i", "<c-r>", "<c-s-v>", { silent = true, noremap = true })
 end

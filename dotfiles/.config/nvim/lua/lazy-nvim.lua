@@ -7,7 +7,7 @@ if not vim.loop.fs_stat(lazypath) then
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
         "--branch=stable", -- latest stable release
-        lazypath
+        lazypath,
     })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -17,11 +17,11 @@ require("lazy").setup({
     change_detection = {
         -- automatically check for config file changes and reload the ui
         enabled = true,
-        notify = false -- get a notification when changes are found
+        notify = false, -- get a notification when changes are found
     },
     spec = {
         { import = "plugins" },
         { import = "plugins.ui" },
         { import = "plugins.editor" },
-    }
+    },
 })

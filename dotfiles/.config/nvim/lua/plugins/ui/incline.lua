@@ -7,15 +7,15 @@ return {
             highlight = {
                 groups = {
                     InclineNormal = { default = true, group = "NormalFloat" },
-                    InclineNormalNC = { default = true, group = "BufferInactive" }
-                }
+                    InclineNormalNC = { default = true, group = "BufferInactive" },
+                },
             },
             ignore = {
                 buftypes = "special",
                 filetypes = {},
                 floating_wins = true,
                 unlisted_buffers = true,
-                wintypes = "special"
+                wintypes = "special",
             },
             render = function(props)
                 local bufname = vim.api.nvim_buf_get_name(props.buf)
@@ -32,9 +32,8 @@ return {
                 padding_char = " ",
                 placement = { horizontal = "right", vertical = "top" },
                 width = "fit",
-                zindex = 50
-            }
-        }
-    }
+                zindex = 50,
+            },
+        },
+    },
 }
-
