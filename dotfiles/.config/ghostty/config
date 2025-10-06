@@ -38,6 +38,8 @@ linux-cgroup = always
 
 mouse-scroll-multiplier = 2
 
+window-inherit-working-directory = false
+
 # Keybindings
 
 # Clear all default keybindings
@@ -55,6 +57,8 @@ keybind = ctrl+tab=next_tab
 keybind = ctrl+shift+tab=previous_tab
 keybind = ctrl+shift+arrow_left=previous_tab
 keybind = ctrl+shift+arrow_right=next_tab
+keybind = ctrl+shift+,=move_tab:-1
+keybind = ctrl+shift+.=move_tab:1
 
 keybind = ctrl+shift+0=reset_font_size
 keybind = ctrl+shift++=increase_font_size:1
