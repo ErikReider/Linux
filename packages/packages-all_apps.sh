@@ -5,6 +5,7 @@ export common=(
 "jq"
 "discord"
 "kitty"
+"ghostty"
 "vlc"
 "file-roller"
 "neofetch"

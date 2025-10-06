@@ -1,0 +1,71 @@
+# vim: set ft=conf
+
+font-family = FiraCode Nerd Font Mono
+
+font-style = Retina
+font-style-bold = Bold
+font-style-italic = Retina
+font-style-bold-italic = Bold
+
+font-size = 13
+
+theme = Kitty Default
+
+background-opacity = 0.3
+background-blur = true
+
+shell-integration = detect
+shell-integration-features = no-cursor
+
+cursor-style = block
+cursor-click-to-move = true
+
+link-previews = true
+
+quit-after-last-window-closed = true
+quit-after-last-window-closed-delay = 5m
+
+window-decoration = auto
+window-show-tab-bar = auto
+gtk-titlebar = false
+gtk-toolbar-style = flat
+
+desktop-notifications = true
+
+bell-features = system, attention, title
+
+linux-cgroup = always
+
+mouse-scroll-multiplier = 2
+
+# Keybindings
+
+# Clear all default keybindings
+keybind=clear
+
+keybind = ctrl+shift+f5=reload_config
+keybind = ctrl+shift+escape=toggle_command_palette
+keybind = ctrl+shift+p=toggle_command_palette
+
+keybind = ctrl+shift+n=new_window
+
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+w=close_tab:this
+keybind = ctrl+tab=next_tab
+keybind = ctrl+shift+tab=previous_tab
+keybind = ctrl+shift+arrow_left=previous_tab
+keybind = ctrl+shift+arrow_right=next_tab
+
+keybind = ctrl+shift+0=reset_font_size
+keybind = ctrl+shift++=increase_font_size:1
+keybind = ctrl+shift+-=decrease_font_size:1
+
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = copy=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+keybind = paste=paste_from_clipboard
+
+keybind = ctrl+shift+end=scroll_to_bottom
+keybind = ctrl+shift+home=scroll_to_top
+keybind = ctrl+shift+page_down=scroll_page_down
+keybind = ctrl+shift+page_up=scroll_page_up
