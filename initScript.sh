@@ -5,6 +5,30 @@ distroName=$(cat </etc/os-release | grep "^ID" | awk -F= '{print $2}')
 currentDir="$(dirname "$(readlink -f "$0")")"
 cd "$currentDir"
 
+stow() {
+    echo "Re-running Stow"
+    stow dotfiles -t "$HOME" -R --dotfiles || exit 1
+}
+
+print_help() {
+    printf "Help:\n"
+    printf "\t--stow \n"
+    exit 0
+}
+
+case "$1" in
+    "--stow")
+        stow
+        exit 0
+        ;;
+    "--help")
+        print_help
+        ;;
+    *) ;;
+esac
+
+# TODO: Remove Arch specific stuff
+
 ## Flatpak theme override
 read -rp "Do you wish to enable flatpatk theme override? [y/n] " flatpakTheme
 if [[ $flatpakTheme == y ]]; then
