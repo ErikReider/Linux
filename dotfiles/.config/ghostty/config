@@ -36,7 +36,7 @@ bell-features = system, attention, title
 
 linux-cgroup = always
 
-mouse-scroll-multiplier = 2
+mouse-scroll-multiplier = precision:0.1,discrete:2
 
 window-inherit-working-directory = false
 
