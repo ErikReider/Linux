@@ -1,5 +1,6 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 local util = require("lspconfig/util")
+local colorizer = require("colorizer")
 
 -- on_attach replacement
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -16,6 +17,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if client:supports_method("textDocument/documentColor") then
             if vim.lsp["document_color"] then
                 vim.lsp.document_color.enable(true, args.buf, { style = "virtual" })
+                colorizer.detach_from_buffer(args.buf)
             end
         end
 
