@@ -33,10 +33,34 @@ alias lazd='lazydocker'
 alias cp="cp -i" # Confirm before overwriting something
 alias rm="rm -i" # Confirm before overwriting something
 alias mv="mv -i" # Confirm before overwriting something
-alias ls="ls $LS_OPTIONS"
-alias lsa="ls -a"
-alias ll="ls -l"
-alias lla="ls -la"
+# ls / eza (ls replacement)
+if ! type eza >/dev/null 2>&1; then
+    print "zsh-eza-plugin: eza not found on path. Please install eza before using this plugin." >&2
+
+    # Linux
+    export LS_OPTIONS="--color=auto --group-directories-first"
+    if [[ $(uname -s) != "Linux" ]]; then
+        # BSD / Mac OS
+        export LS_OPTIONS="-G --group-directories-first"
+    fi
+
+    alias ls="ls $LS_OPTIONS"
+    alias lsa="ls -a $LS_OPTIONS"
+    alias ll="ls -l $LS_OPTIONS"
+    alias lla="ls -la $LS_OPTIONS"
+else
+    export LS_OPTIONS="--color=always --group-directories-first"
+    # Regular
+    alias ls="eza -F $LS_OPTIONS"
+    # All
+    alias lsa="eza -a $LS_OPTIONS"
+    # Directories
+    alias lsd="eza -lD $LS_OPTIONS"
+    # Hidden
+    alias lsh="eza -dl .* $LS_OPTIONS"
+    # Regular with more info
+    alias ll="eza -l $LS_OPTIONS"
+fi
 alias df='df -h'     # Human-readable sizes
 alias du='du -h'     # Human-readable sizes
 
@@ -61,7 +85,7 @@ alias src="exec zsh"
 alias pkgconf_fzf="pkgconf --list-all | fzf"
 
 # Combines jq and less with JSON syntax highlighting
-alias jqless="jq -C "." | less"
+alias jqless="jq -C \".\" | less"
 
 if [[ $(uname -s) != "Darwin" ]]; then
     # Non Mac OS
