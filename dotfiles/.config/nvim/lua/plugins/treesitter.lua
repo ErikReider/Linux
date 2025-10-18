@@ -61,6 +61,7 @@ return {
 
         require("nvim-treesitter.configs").setup({
             ensure_installed = "all",
+            ignore_install = { "dart" },
             highlight = { enable = true, additional_vim_regex_highlighting = false },
             rainbow = {
                 enable = true,

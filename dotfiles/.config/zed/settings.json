@@ -8,24 +8,16 @@
 // from the command palette or from `Zed` application menu.
 {
     "ui_font_size": 16,
-    "ui_font_family": "Clear Sans",
+    "ui_font_family": "Adwaita Sans",
 
     "buffer_font_size": 16,
     "buffer_font_family": "FiraCode Nerd Font",
 
     "theme": {
         "mode": "system",
-        "light": "Zedwaita Light",
-        "dark": "VScode Dark Plus"
+        "light": "Catppuccin Macchiato",
+        "dark": "Catppuccin Macchiato"
     },
-    "experimental.theme_overrides": {
-        "editor.active_line.background": "#ffffff05",
-        //"background.appearance": "blurred",
-        //"background": "#00000000",
-        //"editor.background": "#00000000",
-        // "editor": "#ffffff05",
-    },
-
     "format_on_save": "off",
     "vim": {
         "use_system_clipboard": "always"
@@ -75,7 +67,7 @@
     "wrap_guides": [80, 100, 120],
 
     "telemetry": {
-        "diagnostics": true,
+        "diagnostics": false,
         "metrics": false
     }
 }

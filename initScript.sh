@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+# TODO: Check if awk is installed
 distroName=$(cat </etc/os-release | grep "^ID" | awk -F= '{print $2}')
 
 currentDir="$(dirname "$(readlink -f "$0")")"
@@ -68,6 +69,7 @@ if [[ $distroName == "fedora" ]]; then
         sudo dnf group upgrade --with-optional Multimedia
         sudo dnf config-manager --set-enabled fedora-cisco-openh264
         # Codecs in Mesa
+        # TODO: Investigate conflict with mesa-va-drivers when installing wine...
         sudo dnf swap --enablerepo=rpmfusion-free-updates-testing mesa-va-drivers mesa-va-drivers-freeworld
         sudo dnf swap --enablerepo=rpmfusion-free-updates-testing mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
         # Enable thirdparty fedora repos
@@ -81,6 +83,14 @@ if [[ $distroName == "fedora" ]]; then
         sudo dnf install rpmfusion-nonfree-release-tainted
         sudo dnf install \*-firmware
     fi
+
+    echo "###"
+    echo "### Also make sure to add these kernel boot parameters:"
+    echo "### - amdgpu.ppfeaturemask=0xffffffff"
+    echo "### - split_lock_detect=off"
+    echo "### - preempt=full"
+    echo "###"
+
     echo ""
 fi
 ##
@@ -169,6 +179,17 @@ if [[ $install_app_var == y ]]; then
 
         dnf check-update
 
+        # v4l2Loopback Secure boot signing
+        sudo dnf install akmods
+        sudo systemctl enable --now akmods
+        if mokutil --list-enrolled | grep "Issuer: O=$(cat /etc/hostname)"; then
+            echo "Enrolling akmods secureboot keys!"
+            sudo mokutil --import /etc/pki/akmods/certs/public_key.der
+            echo "Reboot is needed for MOK enrollment"
+        else
+            sudo dnf install v4l2loopback
+        fi
+
         sudo dnf install "${common[@]}" "${fedora[@]}"
 
         if [ ${#fedoraRemove[@]} -gt 0 ]; then
@@ -190,6 +211,7 @@ if [[ $install_app_var == y ]]; then
     gsettings set org.gnome.desktop.interface document-font-name "Adwaita Sans 11"
     gsettings set org.gnome.desktop.wm.preferences titlebar-font "Adwaita Sans Bold 11"
     gsettings set org.gnome.desktop.interface monospace-font-name "FiraCode Nerd Font Mono weight=450 10"
+    gsettings get org.gnome.desktop.default-applications.terminal exec "kitty"
 
     flatpak install "${flatpak[@]}"
     flatpak install "${flatpak_beta[@]}"

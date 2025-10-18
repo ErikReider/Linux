@@ -1,6 +1,5 @@
-# autoload -Uz compinit
-autoload -Uz bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
+
 zstyle ':completion:*' menu select
 zmodload -i zsh/complist
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"

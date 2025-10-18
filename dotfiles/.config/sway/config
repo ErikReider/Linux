@@ -1,5 +1,9 @@
-# vim: ft=sway
+# vim: ft=conf
 # Read `man 5 sway` for a complete reference.
+
+include /etc/sway/config.d/10-systemd-cgroups.conf
+include /etc/sway/config.d/10-systemd-session.conf
+include /usr/share/sway-systemd/95-xdg-desktop-autostart.conf
 
 include ~/.config/sway/sway.d/01_general.conf
 include ~/.config/sway/sway.d/02_input.conf

@@ -1,0 +1,27 @@
+[general]
+# Start Satty in fullscreen mode
+fullscreen = false
+# Exit directly after copy/save action
+early-exit = true
+# Configure the command to be called on copy, for example `wl-copy`
+copy-command = "wl-copy"
+# Hide toolbars by default
+default-hide-toolbars = false
+# Disable notifications
+disable-notifications = true
+# Filename to use for saving action. Omit to disable saving to file. Might contain format specifiers: https://docs.rs/chrono/latest/chrono/format/strftime/index.html
+output-filename = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S_edited.png"
+# Actions to trigger on right click (order is important)
+# [possible values: save-to-clipboard, save-to-file, exit]
+actions-on-right-click = []
+# Actions to trigger on Enter key (order is important)
+# [possible values: save-to-clipboard, save-to-file, exit]
+actions-on-enter = []
+# Actions to trigger on Escape key (order is important)
+# [possible values: save-to-clipboard, save-to-file, exit]
+actions-on-escape = ["exit"]
+
+# Font to use for text annotations
+[font]
+family = "Adwaita Sans"
+style = "Regular"

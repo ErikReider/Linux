@@ -27,6 +27,13 @@ vim.filetype.add({
         tsx = "typescriptreact",
         js = "javascriptreact",
         jsx = "javascriptreact",
+
+        -- Python Jinja HTML Engine
+        jinja = "jinja",
+        jinja2 = "jinja",
+        j2 = "jinja",
+        py = "python",
+        html = "html",
     },
 })
 

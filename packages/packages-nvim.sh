@@ -10,6 +10,7 @@ export fedora=(
 "fd-find"
 "lua-devel"
 "texlive-scheme-basic"
+"compat-lua"
 )
 export arch=(
 "fd"
@@ -22,4 +23,5 @@ export arch=(
 "texlive-latexextra"
 "texlive-science"
 "biber"
+"lua51"
 )

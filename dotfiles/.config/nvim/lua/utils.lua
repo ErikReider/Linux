@@ -1,4 +1,5 @@
 _G.map = vim.keymap.set
+_G.map_del = vim.keymap.del
 
 function _G.add_to_env_path(path_table)
     local separator = string.sub(package.config, 1, 1)

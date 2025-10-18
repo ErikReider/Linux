@@ -1,1 +1,3 @@
-antigen.zsh
+.antidote/
+.zcompdump
+.zsh_plugins.zsh

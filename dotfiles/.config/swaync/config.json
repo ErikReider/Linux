@@ -1,5 +1,6 @@
 {
-  "$schema": "/etc/xdg/swaync/configSchema.json",
+  // "$schema": "/etc/xdg/swaync/configSchema.json",
+  "$schema": "/home/erikreider/Git/SwayNotificationCenter/src/configSchema.json",
 
   "positionX": "right",
   "positionY": "top",
@@ -31,14 +32,18 @@
   "hide-on-clear": true,
   "hide-on-action": true,
   "script-fail-notify": true,
-
   "widgets": [
     "inhibitors",
     "dnd",
     "mpris",
+    "volume",
     "notifications"
   ],
   "widget-config": {
+    "volume": {
+      "show-per-app": true,
+      "expand-per-app": false
+    },
     "notifications": {
       "vexpand": false
     },

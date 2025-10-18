@@ -8,6 +8,8 @@ return {
     { "mboughaba/i3config.vim", ft = "i3config" },
     -- Sway syntax highlighting
     { "ajouellette/sway-vim-syntax", ft = "sway" },
+    -- Dart syntax highlighting
+    { "dart-lang/dart-vim-plugin", ft = "dart" },
     -- Highlight Git conflicts
     {
         "rhysd/conflict-marker.vim",

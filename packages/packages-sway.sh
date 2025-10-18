@@ -11,6 +11,8 @@ export common=(
     "wdisplays"
     "kitty"
     "qt5ct"
+    "qt6ct-kde"
+    "satty"
     "geocode-glib"
     "brightnessctl"
     "playerctl"
@@ -30,16 +32,6 @@ export common=(
 )
 
 export arch=(
-    "lsb-release"
-    "dbus-python"
-    "xdg-desktop-portal-wlr-git"
-    "geoclue"
-    "bluez"
-    "bluez-utils"
-    "ttf-roboto"
-    "swaync-git"
-    "rofi-lbonn-wayland-git"
-    "ttf-weather-icons"
     "pacdep"
     "ttf-material-icons-git"
     "avizo"
@@ -53,7 +45,7 @@ export arch=(
 )
 
 export fedora=(
-    "redhat-lsb-core"
+    "redhat-lsb"
     "dbus-python-devel"
     "python3-dbus"
     "xdg-desktop-portal-wlr"
@@ -64,6 +56,8 @@ export fedora=(
     "bluez-tools"
     "qt5-qtconfiguration"
     "rofi-wayland"
+    # TODO: ttf-weather-icons
+
     # Wallpapers
     "verne-backgrounds-extras-gnome"
     "verne-backgrounds-gnome"
@@ -71,6 +65,29 @@ export fedora=(
     "schroedinger-cat-backgrounds-gnome"
     "deepin-wallpapers"
     "adapta-backgrounds"
+    "cosmic-wallpapers"
+    "gnome-backgrounds"
+    "desktop-backgrounds-compat"
+    "desktop-backgrounds-gnome"
+    "f37-backgrounds-base"
+    "f37-backgrounds-gnome"
+    "f38-backgrounds-base"
+    "f38-backgrounds-gnome"
+    "f39-backgrounds-base"
+    "f39-backgrounds-gnome"
+    "f40-backgrounds-base"
+    "f40-backgrounds-gnome"
+    "f41-backgrounds-base"
+    "f41-backgrounds-gnome"
+    "f42-backgrounds-base"
+    "f42-backgrounds-gnome"
+    "fedora-workstation-backgrounds"
+    "gnome-shell-extension-background-logo"
+    "schroedinger-cat-backgrounds-animated"
+    "schroedinger-cat-backgrounds-base"
+    "schroedinger-cat-backgrounds-extras-base"
+    "verne-backgrounds-extras-single"
+    "verne-backgrounds-single"
 
     # avizo
     # swaytools

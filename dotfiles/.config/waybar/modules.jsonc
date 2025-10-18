@@ -90,6 +90,9 @@
       },
       {
         "type": "audio-in"
+      },
+      {
+        "type": "location"
       }
     ]
   },

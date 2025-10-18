@@ -105,3 +105,7 @@ vim.g.virtcolumn_priority = 10 -- priority of extmark
 vim.opt.title = true
 vim.opt.titlestring = [[%(%{expand("%:p:~:h")}%) - %{v:progname}]]
 vim.opt.titlelen = 15
+
+vim.opt.spelloptions = "camel"
+vim.opt.spelllang = { "en", "sv" }
+vim.opt.spell = true

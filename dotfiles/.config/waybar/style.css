@@ -191,6 +191,9 @@ window > box > box > widget button:insensitive {
 #privacy-item.audio-in {
   background: #ffa915;
 }
-#privacy-item.audio-out {
+#privacy-item.location {
   background: #1c71d8;
+}
+#privacy-item.audio-out {
+  background: #00afff;
 }
