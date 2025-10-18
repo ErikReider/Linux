@@ -7,6 +7,8 @@ export ZDOTDIR="$HOME/zsh"
 # If ZSH is not defined, use the current script's directory.
 [[ -z "$ZSH" ]] && export ZSH="${${(%):-%x}:a:h}"
 
+source "$ZDOTDIR"/.zshenv
+
 # Set ZSH_CACHE_DIR to the path where cache files should be created
 # or else we will use the default cache/
 if [[ -z "$ZSH_CACHE_DIR" ]]; then
@@ -66,3 +68,4 @@ source ${zsh_plugins}.zsh
 
 source "$ZDOTDIR/plugin-conf/zsh-autosuggestions"
 source "$ZDOTDIR/plugin-conf/zsh-history-substring-search"
+source "$ZDOTDIR/plugin-conf/zsh-fzf-tab"
