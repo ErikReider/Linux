@@ -31,6 +31,14 @@ function man_preview {
     fi
 }
 
+function man_preview_compiled {
+    if [[ -f $1 ]]; then
+        man -l "$1"
+    else
+        echo "Man file doesn't exist..."
+    fi
+}
+
 function git_status_subdirs {
     for f in $(find . -type d -name .git | awk -F"/.git$" '{print $1}'); do
         (
