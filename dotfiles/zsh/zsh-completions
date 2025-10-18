@@ -1,6 +1,14 @@
 autoload -Uz compinit && compinit
 
 zstyle ':completion:*' menu select
+
+# Use completion cache
+zstyle ":completion:*" use-cache on
+[ -d "$XDG_STATE_HOME"/zsh ] || mkdir -p "$XDG_STATE_HOME"/zsh
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+
+# Enable filename colors (need complist loaded for some reason)
 zmodload -i zsh/complist
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
