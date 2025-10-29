@@ -10,8 +10,7 @@ return {
         "clangd",
         "lua-language-server",
         "vim-language-server",
-        -- TODO: Use rust-tools
-        "rust-analyzer",
+        -- Note: Rust uses rustaceanvim instead with the natively packaged analyzer
         "css-lsp",
         "html-lsp",
         "json-lsp",
@@ -34,6 +33,8 @@ return {
         -- NOTE: Fedora 42 doesn't ship Go 1.25 which is required by newer versions
         { "hyprls", version = "v0.8.0" },
         "yaml-language-server",
+        "systemd-language-server",
+        "ansible-language-server",
 
         -- Linters/Formatters
         "biome", -- Linter and formatter that replaces prettierd and eslint_d
@@ -43,6 +44,9 @@ return {
         "markdownlint",
         "cpplint",
         "cspell",
+        "actionlint",
+        "systemdlint",
+        "ansible-lint",
 
         -- Formatters
         "stylua",

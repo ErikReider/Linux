@@ -1,6 +1,6 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
-local util = require("lspconfig/util")
 local colorizer = require("colorizer")
+local util = require("lspconfig/util")
 
 -- on_attach replacement
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -236,6 +236,14 @@ local servers = {
     },
     -- Java: jdtls
     ["jdtls"] = {},
+    -- Swift: included in the swift RPM package
+    ["sourcekit"] = {
+        filetypes = { "swift", "objc", "objcpp" },
+    },
+    -- Ansible
+    ["ansiblels"] = {},
+    -- Systemd LSP
+    ["systemd_ls"] = {},
     -- efm language server
     ["efm"] = require("plugins.lsp.efm"),
 
@@ -262,9 +270,9 @@ for name, value in pairs(servers) do
                 new_on_attach(client, bufnr)
             end
         end
-
-        vim.lsp.config(name, value)
     end
+
+    vim.lsp.config(name, value)
 end
 -- Enable all listed language servers
 vim.lsp.enable(vim.tbl_keys(servers), true)

@@ -378,40 +378,6 @@ return {
                     -- })
                 end,
             },
-            -- Shows function signature (parameters)
-            {
-                enabled = false,
-                "ray-x/lsp_signature.nvim",
-                opts = {
-                    -- Diabled until "https://github.com/ray-x/lsp_signature.nvim/issues/94" is fixed
-                    bind = true,
-                    doc_lines = 0,
-                    handler_opts = { border = "rounded" },
-                    always_trigger = false,
-
-                    floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
-
-                    floating_window_above_cur_line = true,
-
-                    floating_window_off_x = 0,
-                    floating_window_off_y = 0,
-
-                    fix_pos = false,
-                    hint_enable = true,
-                    hint_prefix = "",
-                    hint_scheme = "Comment",
-                    hi_parameter = "LspSignatureActiveParameter",
-                    max_height = 10,
-                    max_width = 80,
-
-                    zindex = 200,
-
-                    shadow_blend = 36,
-                    shadow_guibg = "Black",
-                    timer_interval = 200,
-                    toggle_key = nil,
-                },
-            },
             -- Vim plugin for automatically highlighting other uses of the word under the cursor.
             {
                 "RRethy/vim-illuminate",

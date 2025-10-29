@@ -11,6 +11,10 @@ vim.filetype.add({
         -- Json files support comments
         json = "jsonc",
 
+        -- Vala
+        vala = "vala",
+        vapi = "vala",
+
         -- GLSL
         glsl = "glsl",
         vert = "glsl",
@@ -27,6 +31,8 @@ vim.filetype.add({
         tsx = "typescriptreact",
         js = "javascriptreact",
         jsx = "javascriptreact",
+
+        html = "html",
     },
 })
 
