@@ -29,7 +29,7 @@ export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-r
 
 # Fzf
-[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+[ -f "$HOME/.fzf.zsh" ] && source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'
 export FZF_DEFAULT_OPTS='-e -i'
 

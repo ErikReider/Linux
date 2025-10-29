@@ -1,6 +1,5 @@
 # vim: set ft=zsh
 
-ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 
 ohmyzsh/ohmyzsh path:plugins/git
@@ -12,4 +11,6 @@ zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search
 zsh-users/zsh-syntax-highlighting
+
 Aloxaf/fzf-tab
+Freed-Wu/fzf-tab-source
