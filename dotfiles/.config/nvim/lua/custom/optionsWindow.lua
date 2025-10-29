@@ -11,11 +11,10 @@ local runOptions = {
     { filetypes = { "tex" }, run = "TexlabBuild" },
 }
 local function getRunAction()
-    local ft = vim.api.nvim_buf_get_option(0, "filetype")
     local lines = io.popen("ls -a"):lines()
     for _, option in pairs(runOptions) do
         local filetypes = option.filetypes == nil and {} or option.filetypes
-        if table.maxn(filetypes) > 0 and tableContains(filetypes, ft) then
+        if table.maxn(filetypes) > 0 and tableContains(filetypes, vim.bo.filetype) then
             local run = option.run == nil and "" or option.run
             local build = option.build == nil and "" or option.build
             local hasFiles = option.hasFiles == nil and {} or option.hasFiles
