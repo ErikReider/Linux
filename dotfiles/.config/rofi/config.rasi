@@ -3,9 +3,14 @@
 configuration {
   font: "Adwaita Sans 14";
   drun-display-format: "{name}[ - <span weight='light' size='small'>{generic}</span>]";
+  sorting-method: "fzf";
   disable-history: false;
   sidebar-mode: false;
   hover-select: false;
+
+  run,drun {
+    fallback-icon: "application-x-executable";
+  }
 }
 
 * {
