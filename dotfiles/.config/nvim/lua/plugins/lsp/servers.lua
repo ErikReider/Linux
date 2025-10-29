@@ -171,6 +171,7 @@ local servers = {
                 client.config.flags.allow_incremental_sync = true
             end
             client.server_capabilities.document_formatting = false
+            client.server_capabilities.documentFormattingProvider = false
         end,
         init_options = {
             provideFormatter = false,

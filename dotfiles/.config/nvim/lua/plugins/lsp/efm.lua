@@ -1,7 +1,7 @@
 local biome_formatter = require("efmls-configs.formatters.biome")
 local black_format = require("efmls-configs.formatters.black")
 local markdown_lint = require("efmls-configs.linters.markdownlint")
-local prettier = require("efmls-configs.formatters.prettier")
+local prettier = require("efmls-configs.formatters.prettier_d")
 local shfmt = require("plugins.lsp.Diagnostics.shfmt")
 local stylua = require("efmls-configs.formatters.stylua")
 
@@ -27,12 +27,12 @@ local efm_languages = {
     sass = { prettier },
     css = { prettier },
     -- Biome
-    javascript = { biome_formatter },
-    javascriptreact = { biome_formatter },
-    ["javascript.jsx"] = { biome_formatter },
-    typescript = { biome_formatter },
-    typescriptreact = { biome_formatter },
-    ["typescript.tsx"] = { biome_formatter },
+    javascript = { prettier },
+    javascriptreact = { prettier },
+    ["javascript.jsx"] = { prettier },
+    typescript = { prettier },
+    typescriptreact = { prettier },
+    ["typescript.tsx"] = { prettier },
     python = { black_format },
 }
 
