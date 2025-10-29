@@ -10,7 +10,7 @@ ssh_info() {
 function git_info() {
 
   # Exit if not inside a Git repository
-  ! git rev-parse --is-inside-work-tree > /dev/null 2>&1 && return
+  git rev-parse --is-inside-work-tree &> /dev/null || return
 
   # Git branch/tag, or name-rev if on detached head
   local GIT_LOCATION=${$(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD)#(refs/heads/|tags/)}
@@ -45,11 +45,11 @@ function git_info() {
     FLAGS+=( "$UNTRACKED" )
   fi
 
-  if ! git diff --quiet 2> /dev/null; then
+  if ! git diff --quiet &> /dev/null; then
     FLAGS+=( "$MODIFIED" )
   fi
 
-  if ! git diff --cached --quiet 2> /dev/null; then
+  if ! git diff --cached --quiet &> /dev/null; then
     FLAGS+=( "$STAGED" )
   fi
 
