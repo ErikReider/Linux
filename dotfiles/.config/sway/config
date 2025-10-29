@@ -1,4 +1,4 @@
-# vim: ft=sway
+# vim: ft=swayconfig
 # Read `man 5 sway` for a complete reference.
 
 include ~/.config/sway/sway.d/01_general.conf
