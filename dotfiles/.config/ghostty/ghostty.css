@@ -1,0 +1,7 @@
+window {
+  background: alpha(var(--window-bg-color), 0.3);
+}
+
+toolbarview > revealer {
+  background: alpha(var(--window-bg-color), 0.8);
+}
