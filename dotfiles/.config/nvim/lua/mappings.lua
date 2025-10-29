@@ -9,6 +9,10 @@ map(
     { silent = true }
 )
 
+-- Bring search results to midscreen
+map("n", "n", "nzzzv", { noremap = true })
+map("n", "N", "Nzzzv", { noremap = true })
+
 -- Opens selected link in xdg default browser
 -- https://vim.fandom.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
 map(
@@ -36,6 +40,7 @@ map("x", "<Leader>p", "\"_dP", { noremap = true, silent = true })
 
 -- Substitute word under cursor
 map("n", "<Leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {})
+map("v", "<Leader>r", [[y:%s/\<<C-r>"\>/<C-r>"/gI<Left><Left><Left>]], {})
 
 -- Bufferline
 local barbar_opts = { noremap = true, silent = true }

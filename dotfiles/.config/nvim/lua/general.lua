@@ -74,6 +74,7 @@ vim.o.scrolloff = 5
 
 vim.o.wildmenu = true
 
+-- When a bracket is inserted, briefly jump to the matching one.
 vim.o.showmatch = true
 
 -- When there is a previous search pattern, highlight all its matches
