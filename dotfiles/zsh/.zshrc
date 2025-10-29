@@ -69,3 +69,7 @@ source ${zsh_plugins}.zsh
 source "$ZDOTDIR/plugin-conf/zsh-autosuggestions"
 source "$ZDOTDIR/plugin-conf/zsh-history-substring-search"
 source "$ZDOTDIR/plugin-conf/zsh-fzf-tab"
+
+if type cargo >/dev/null 2>&1; then
+    eval "$(CARGO_COMPLETE=zsh cargo +nightly)"
+fi
