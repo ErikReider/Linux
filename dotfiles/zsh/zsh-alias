@@ -33,6 +33,12 @@ alias lazd='lazydocker'
 alias cp="cp -i" # Confirm before overwriting something
 alias rm="rm -i" # Confirm before overwriting something
 alias mv="mv -i" # Confirm before overwriting something
+# cd replacement
+if type zoxide >/dev/null 2>&1; then
+    alias cd="z"
+else
+    print "cd replacement zoxide not found on path" >&2
+fi
 # ls / eza (ls replacement)
 if ! type eza >/dev/null 2>&1; then
     print "zsh-eza-plugin: eza not found on path. Please install eza before using this plugin." >&2
