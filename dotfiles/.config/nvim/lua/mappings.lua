@@ -169,9 +169,9 @@ map("n", "<A-S-n>", function()
 end, { noremap = true })
 
 -- Floating Terminal
-map("n", "<F7>", [[<CMD>lua require("FTerm").toggle()<CR>]], opts)
-map("t", "<F7>", [[<C-\><C-n><CMD>lua require("FTerm").toggle()<CR>]], opts)
-map("t", "<F9>", [[<C-\><C-n><CMD>lua require("FTerm").exit()<CR>]], opts)
+map("n", "<F7>", [[<CMD>lua Snacks.terminal.toggle()<CR>]], opts)
+map("t", "<F7>", [[<C-\><C-n><CMD>lua Snacks.terminal.toggle()<CR>]], opts)
+map("t", "<F9>", [[<C-\><C-n><CMD>lua Snacks.terminal.get():destroy()<CR>]], opts)
 
 -- Floating LazyGit
 map("n", "<F8>", "<CMD>LazyGit<CR>", opts)

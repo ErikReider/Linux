@@ -52,6 +52,11 @@ return {
                     },
                 },
 
+                ---@type snacks.lazygit.Config
+                lazygit = { enabled = true },
+                ---@type snacks.terminal.Config
+                terminal = { enabled = true },
+
                 statuscolumn = {
                     enabled = true,
                     folds = {

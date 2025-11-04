@@ -11,5 +11,6 @@ require("neovide")
 -- Init Lazy
 require("lazy-nvim")
 
+require("commands")
 require("mappings")
 require("autoLoad")
