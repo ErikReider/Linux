@@ -21,6 +21,7 @@ return {
                 notifier = { enabled = true },
                 notify = { enabled = true },
                 quickfile = { enabled = true },
+                bufdelete = { enabled = true },
 
                 ---@type snacks.animate.Config
                 animate = {

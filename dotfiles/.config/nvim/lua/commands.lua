@@ -18,3 +18,26 @@ vim.api.nvim_create_user_command("LazyDocker", function()
         lazyDocker_window:toggle()
     end
 end, {})
+
+-- Delete Neovim buffers without losing window layout
+-- Define Bdelete and Bwipeout.
+vim.api.nvim_create_user_command("Bdelete", function(opts)
+    Snacks.bufdelete()
+end, {
+    bang = true,
+    bar = true,
+    count = true,
+    addr = "buffers",
+    nargs = "*",
+    complete = "buffer",
+})
+vim.api.nvim_create_user_command("Bwipeout", function(opts)
+    Snacks.bufdelete({ wipe = true })
+end, {
+    bang = true,
+    bar = true,
+    count = true,
+    addr = "buffers",
+    nargs = "*",
+    complete = "buffer",
+})

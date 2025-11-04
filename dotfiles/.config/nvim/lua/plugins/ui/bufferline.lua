@@ -2,10 +2,6 @@
 return {
     {
         "romgrk/barbar.nvim",
-        dependencies = {
-            -- Delete Neovim buffers without losing window layout
-            "famiu/bufdelete.nvim",
-        },
         opts = {
             animation = true,
             auto_hide = false,
