@@ -84,8 +84,6 @@ return {
             {
                 "hrsh7th/nvim-cmp",
                 dependencies = {
-                    -- nvim-cmp comparator function for completion items that start with one or more underlines
-                    "lukas-reineke/cmp-under-comparator",
                     -- nvim-cmp source for neovim builtin LSP client
                     "hrsh7th/cmp-nvim-lsp",
                     -- nvim-cmp source for buffer words.
@@ -160,18 +158,6 @@ return {
                             completion = cmp.config.window.bordered(),
                             documentation = cmp.config.window.bordered(),
                         },
-                        sorting = {
-                            comparators = {
-                                cmp.config.compare.offset,
-                                cmp.config.compare.exact,
-                                cmp.config.compare.score,
-                                require("cmp-under-comparator").under,
-                                cmp.config.compare.kind,
-                                cmp.config.compare.sort_text,
-                                cmp.config.compare.length,
-                                cmp.config.compare.order,
-                            },
-                        },
                         formatting = {
                             fields = { "kind", "abbr" },
                             format = function(_, vim_item)
@@ -187,7 +173,7 @@ return {
                                 return vim_item
                             end,
                         },
-                        preselect = cmp.PreselectMode.None,
+                        preselect = "item",
                         completion = { completeopt = vim.o.completeopt },
                         mapping = cmp.mapping.preset.insert({
                             ["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -246,20 +232,29 @@ return {
                         },
                     })
 
-                    -- Completions for / search based on current buffer:
-                    -- `/` cmdline setup.
-                    cmp.setup.cmdline("/", {
+                    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+                    cmp.setup.cmdline({ "/", "?" }, {
+                        completion = {
+                            completeopt = vim.o.completeopt .. ",noselect",
+                        },
                         mapping = cmp.mapping.preset.cmdline(),
-                        sources = { { name = "buffer" } },
+                        sources = {
+                            { name = "buffer" },
+                        },
                     })
 
-                    -- Completions for command mode:
-                    -- `:` cmdline setup.
+                    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
                     cmp.setup.cmdline(":", {
+                        completion = {
+                            completeopt = vim.o.completeopt .. ",noselect",
+                        },
                         mapping = cmp.mapping.preset.cmdline(),
-                        sources = cmp.config.sources({ { name = "path" } }, {
-                            { name = "cmdline", option = { ignore_cmds = { "Man", "!" } } },
+                        sources = cmp.config.sources({
+                            { name = "path" },
+                        }, {
+                            { name = "cmdline" },
                         }),
+                        matching = { disallow_symbol_nonprefix_matching = false },
                     })
                 end,
             },
