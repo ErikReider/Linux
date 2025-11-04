@@ -43,10 +43,10 @@ return {
                 preserve_window_proportions = false,
                 number = false,
                 relativenumber = false,
-                signcolumn = "yes",
+                signcolumn = "no",
             },
             renderer = {
-                add_trailing = false,
+                add_trailing = true,
                 group_empty = false,
                 highlight_git = true,
                 root_folder_modifier = ":~",
