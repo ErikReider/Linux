@@ -66,6 +66,23 @@ return {
                 version = "^6", -- Recommended
                 lazy = false, -- This plugin is already lazy
             },
+            -- Faster LuaLS setup for Neovim
+            {
+                "folke/lazydev.nvim",
+                ft = "lua", -- only load on lua files
+                ---@alias lazydev.Library {path:string, words:string[], mods:string[]}
+                ---@alias lazydev.Library.spec string|{path:string, words?:string[], mods?:string[]}
+                ---@class lazydev.Config
+                opts = {
+                    library = {
+                        -- See the configuration section for more details
+                        -- Load luvit types when the `vim.uv` word is found
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                        -- Plugins
+                        -- { path = vim.fn.stdpath("data") .. "/lazy" },
+                    },
+                },
+            },
             -- Java eclipse tools
             "mfussenegger/nvim-jdtls",
             -- Clang tools
@@ -228,6 +245,10 @@ return {
                             { name = "luasnip" },
                             { name = "path" },
                             { name = "buffer", option = { keyword_pattern = [[\k\+]] } },
+                            {
+                                name = "lazydev",
+                                group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+                            },
                         },
                     })
 
