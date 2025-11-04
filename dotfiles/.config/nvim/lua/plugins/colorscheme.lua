@@ -91,6 +91,27 @@ return {
             vim.opt.listchars:append("extends:⟩")
             vim.opt.listchars:append("precedes:⟨")
             vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
+            -- Display whitespaces as errors
+            ---@param value boolean
+            local function set_whitespace_hl(value)
+                if value then
+                    vim.api.nvim_set_hl(0, "TrailingWhitespace", { link = "errorMsg" })
+                else
+                    vim.api.nvim_set_hl(0, "TrailingWhitespace", { link = "Whitespace" })
+                end
+            end
+            vim.cmd([[match errorMsg /\s\+$/]])
+            vim.api.nvim_create_autocmd("InsertEnter", {
+                callback = function()
+                    set_whitespace_hl(false)
+                end,
+            })
+            vim.api.nvim_create_autocmd("InsertLeave", {
+                callback = function()
+                    set_whitespace_hl(true)
+                end,
+            })
         end,
     },
     "folke/tokyonight.nvim",
