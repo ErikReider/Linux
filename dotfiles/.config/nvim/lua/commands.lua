@@ -41,3 +41,14 @@ end, {
     nargs = "*",
     complete = "buffer",
 })
+
+-- Restart while saving session
+if vim.fn.has("nvim-0.12") then
+    vim.api.nvim_create_user_command("Restart", function(opts)
+        -- Create a tmp file to save the session
+        local file_path = os.tmpname()
+        vim.cmd(string.format("mksession! %s", file_path))
+        -- Restore from the tmp file and remove it after the restart
+        vim.cmd(string.format([[restart source %s | lua os.remove('%s')]], file_path, file_path))
+    end, {})
+end

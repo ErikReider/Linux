@@ -47,6 +47,11 @@ function Module.getOptionsTable()
         { title = "Toggle Debug Windows", action = "DapUiToggleWindows" },
     }
 
+    -- Restart command, but only for >= nvim-0.12
+    if vim.fn.has("nvim-0.12") then
+        table.insert(optionsTable, { title = "Restart Neovim", action = "Restart" })
+    end
+
     -- Switch between C/C++ Header and Implementation files
     for _, value in ipairs({ "c", "h", "cpp", "hpp" }) do
         if vim.bo.filetype == value then
