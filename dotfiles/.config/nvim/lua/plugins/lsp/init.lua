@@ -2,6 +2,7 @@
 return {
     {
         "neovim/nvim-lspconfig",
+        lazy = false,
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             vim.lsp.log.set_level(vim.log.levels.WARN)
