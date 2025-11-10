@@ -2,12 +2,9 @@ local lsp_opts = { noremap = true, silent = true }
 local opts = { noremap = true, silent = true }
 
 -- Duplicate line
-map(
-    "n",
-    "<C-d>",
-    ":exe 'set clipboard=\"\"' | exe 'normal yyp' | exe 'set clipboard=unnamedplus'<CR>",
-    { silent = true }
-)
+map("n", "<C-d>", [[:normal ""yy""p<CR>]], { silent = true })
+-- Duplicate lines
+map("x", "<C-d>", "\"\"y']\"\"p", { silent = false })
 
 -- Bring search results to midscreen
 map("n", "n", "nzzzv", { noremap = true })
@@ -40,7 +37,7 @@ map("x", "<Leader>p", "\"_dP", { noremap = true, silent = true })
 
 -- Substitute word under cursor
 map("n", "<Leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {})
-map("v", "<Leader>r", [[y:%s/\<<C-r>"\>/<C-r>"/gI<Left><Left><Left>]], {})
+map("v", "<Leader>r", [[""y:%s/\<<C-r>"\>/<C-r>"/gI<Left><Left><Left>]], {})
 
 -- Bufferline
 local barbar_opts = { noremap = true, silent = true }
