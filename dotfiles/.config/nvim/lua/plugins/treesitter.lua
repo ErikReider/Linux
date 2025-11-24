@@ -18,12 +18,11 @@ return {
                     enable = true,
                     enable_autocmd = false,
                     languages = {
-                        -- css = c_comment_string,
-                        -- scss = c_comment_string,
                         c = c_comment_string,
                         cpp = c_comment_string,
                         vala = c_comment_string,
                         glsl = c_comment_string,
+                        blueprint = c_comment_string,
                         asm = { __default = "# %s", __multiline = "# %s" },
                     },
                 }

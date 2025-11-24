@@ -96,8 +96,14 @@ map("n", "äh", ":Gitsigns next_hunk <CR>", { silent = true })
 map("n", "öh", ":Gitsigns prev_hunk <CR>", { silent = true })
 
 -- Comments
-map("n", "<C-c>", ":CommentToggle<CR>", { silent = true, noremap = false })
-map("v", "<C-c>", ":CommentToggle<CR>", { silent = true, noremap = false })
+map("n", "<C-c>", require("Comment.api").call("toggle.linewise.current", "g@$"), {
+    expr = true,
+    desc = "Comment current line",
+})
+map("v", "<C-c>", require("Comment.api").call("toggle.linewise", "g@"), {
+    expr = true,
+    desc = "Comment selected lines",
+})
 
 -- LSP
 -- Go to definition
