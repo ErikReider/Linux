@@ -190,23 +190,24 @@ return {
                                 return vim_item
                             end,
                         },
-                        preselect = "item",
+                        preselect = cmp.PreselectMode.Item,
                         completion = { completeopt = vim.o.completeopt },
                         mapping = cmp.mapping.preset.insert({
                             ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                             ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                            ["<C-Space>"] = cmp.mapping(function(fallback)
+                            ["<C-Space>"] = cmp.mapping(function()
                                 if not cmp.visible() then
                                     cmp.complete()
-                                elseif cmp.visible() then
-                                    cmp.close()
                                 else
-                                    fallback()
+                                    cmp.close()
                                 end
                             end, { "i" }),
                             ["<CR>"] = cmp.mapping.confirm({
                                 behavior = cmp.ConfirmBehavior.Insert,
-                                select = true,
+                                -- Don't select anything if the isn't actually
+                                -- "focused" / preselected, like with cmdline
+                                -- and markdown where PreselectMode == None
+                                select = false,
                             }),
                             ["<Tab>"] = cmp.mapping(function(fallback)
                                 if luasnip.expand_or_jumpable() then
@@ -223,19 +224,14 @@ return {
                                 end
                             end, { "i", "s" }),
                             ["<C-c>"] = cmp.mapping(function(fallback)
-                                -- If inside a snippet
-                                if luasnip.jumpable(0) then
-                                    vim.api.nvim_feedkeys(
-                                        vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
-                                        "t",
-                                        true
-                                    )
+                                if luasnip.get_active_snip() then
+                                    luasnip.unlink_current()
                                 end
                                 cmp.close()
                                 fallback()
                             end, { "i", "s" }),
                             ["<ESC>"] = cmp.mapping(function(fallback)
-                                if luasnip.get_active_snip() ~= nil then
+                                if luasnip.get_active_snip() then
                                     luasnip.unlink_current()
                                 end
                                 fallback()
@@ -253,12 +249,79 @@ return {
                         },
                     })
 
-                    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-                    cmp.setup.cmdline({ "/", "?" }, {
+                    local cmdline_mappings = {
+                        ["<C-Space>"] = {
+                            c = function()
+                                if cmp.visible() then
+                                    cmp.close()
+                                else
+                                    cmp.complete()
+                                end
+                            end,
+                        },
+                        ["<CR>"] = {
+                            c = function(fallback)
+                                if cmp.visible() and cmp.get_selected_entry() then
+                                    cmp.confirm()
+                                else
+                                    fallback()
+                                end
+                            end,
+                        },
+                        ["<Up>"] = {
+                            c = function(fallback)
+                                if cmp.visible() then
+                                    cmp.select_prev_item()
+                                else
+                                    fallback()
+                                end
+                            end,
+                        },
+                        ["<Down>"] = {
+                            c = function(fallback)
+                                if cmp.visible() then
+                                    cmp.select_next_item()
+                                else
+                                    fallback()
+                                end
+                            end,
+                        },
+                        ["<C-p>"] = {
+                            c = function(fallback)
+                                if cmp.visible() then
+                                    cmp.select_prev_item()
+                                else
+                                    fallback()
+                                end
+                            end,
+                        },
+                        ["<C-n>"] = {
+                            c = function(fallback)
+                                if cmp.visible() then
+                                    cmp.select_next_item()
+                                else
+                                    fallback()
+                                end
+                            end,
+                        },
+                    }
+
+                    -- Disable preselect
+                    cmp.setup.filetype({ "markdown", "tex" }, {
+                        preselect = cmp.PreselectMode.None,
                         completion = {
                             completeopt = vim.o.completeopt .. ",noselect",
                         },
-                        mapping = cmp.mapping.preset.cmdline(),
+                    })
+
+                    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+                    cmp.setup.cmdline({ "/", "?" }, {
+                        preselect = cmp.PreselectMode.None,
+                        completion = {
+                            autocomplete = false,
+                            completeopt = vim.o.completeopt .. ",noselect",
+                        },
+                        mapping = cmp.mapping.preset.cmdline(cmdline_mappings),
                         sources = {
                             { name = "buffer" },
                         },
@@ -266,10 +329,12 @@ return {
 
                     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
                     cmp.setup.cmdline(":", {
+                        preselect = cmp.PreselectMode.None,
                         completion = {
+                            autocomplete = false,
                             completeopt = vim.o.completeopt .. ",noselect",
                         },
-                        mapping = cmp.mapping.preset.cmdline(),
+                        mapping = cmp.mapping.preset.cmdline(cmdline_mappings),
                         sources = cmp.config.sources({
                             { name = "path" },
                         }, {
