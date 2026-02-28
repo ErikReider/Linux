@@ -230,3 +230,29 @@ map("n", "<Leader>t", [[<cmd>TodoTelescope<CR>]], opts)
 
 -- Search for DAP breakpoints
 map("n", "<Leader>B", require("telescope").extensions.dap.list_breakpoints, opts)
+
+--
+-- Treesitter Text Objects
+--
+
+-- Select around Method
+map({ "x", "o" }, "am", function()
+    require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+end)
+-- Select inner Method
+map({ "x", "o" }, "im", function()
+    require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+end)
+-- Select around Class
+map({ "x", "o" }, "ac", function()
+    require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+end)
+-- Select inner Class
+map({ "x", "o" }, "ic", function()
+    require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+end)
+-- Select around scope
+map({ "x", "o" }, "as", function()
+    require("nvim-treesitter-textobjects.select").select_textobject("@local.scope", "locals")
+end)
+

@@ -1,0 +1,3 @@
+[submodule "dotfiles/.config/nvim/ts-parsers/tree-sitter-blueprint"]
+	path = dotfiles/.config/nvim/ts-parsers/tree-sitter-blueprint
+	url = https://gitlab.com/gabmus/tree-sitter-blueprint.git
