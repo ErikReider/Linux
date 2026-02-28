@@ -1,6 +1,9 @@
 -- Show line number
 vim.o.number = true
 
+-- Default window border style
+vim.o.winborder = "rounded"
+
 -- Sets the command height to 0 rows
 vim.o.cmdheight = 1
 
