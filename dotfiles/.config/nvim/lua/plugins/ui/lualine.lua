@@ -7,7 +7,6 @@ return {
             require("lualine").setup({
                 options = {
                     icons_enabled = true,
-                    theme = "vscode",
                     component_separators = { left = "", right = "" },
                     section_separators = { left = "", right = "" },
                     disabled_filetypes = { "packer" },
@@ -28,7 +27,6 @@ return {
                                 unnamed = "[No Name]", -- Text to show for unnamed buffers.
                             },
                         },
-                        "filesize",
                     },
                     lualine_x = {
                         "encoding",
@@ -39,11 +37,10 @@ return {
                         "filetype",
                     },
                     lualine_z = {
-                        "progress",
                         "location",
                         {
                             "diagnostics",
-                            sources = { "nvim_diagnostic", "coc" },
+                            sources = { "nvim_diagnostic" },
                             sections = { "error", "warn", "info", "hint" },
                             diagnostics_color = {
                                 error = "DiagnosticError",
