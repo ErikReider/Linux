@@ -4,3 +4,5 @@ keybinding:
   universal:
     nextTab: ä
     prevTab: ö
+gui:
+  useHunkModeInStagingView: false
