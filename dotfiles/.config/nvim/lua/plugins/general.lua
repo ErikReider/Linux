@@ -2,6 +2,56 @@ return {
     -- Neovim lua functions
     "nvim-lua/plenary.nvim",
 
+    -- A replacement for mksession with a better API.
+    -- Also support restoring sessions
+    {
+        "stevearc/resession.nvim",
+        lazy = false,
+        config = function()
+            local resession = require("resession")
+            resession.setup({
+                -- Periodically save the current session
+                autosave = {
+                    enabled = true,
+                    interval = 60,
+                    notify = false,
+                },
+            })
+
+            -- Automatically save a session when you exit Neovim
+            vim.api.nvim_create_autocmd("VimLeavePre", {
+                callback = function()
+                    -- Always save a special session named "last"
+                    resession.save("last")
+                end,
+            })
+
+            -- Create one session per directory
+            vim.api.nvim_create_autocmd("VimEnter", {
+                callback = function()
+                    -- Only load the session if nvim was started with no args and without reading from stdin
+                    if vim.fn.argc(-1) ~= 0 or vim.g.using_stdin then
+                        return
+                    end
+                    -- Save these to a different directory, so our manual sessions don't get polluted
+                    resession.load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
+                end,
+                nested = true,
+            })
+            vim.api.nvim_create_autocmd("VimLeavePre", {
+                callback = function()
+                    resession.save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
+                end,
+            })
+            vim.api.nvim_create_autocmd("StdinReadPre", {
+                callback = function()
+                    -- Store this for later
+                    vim.g.using_stdin = true
+                end,
+            })
+        end,
+    },
+
     -- Auto tabwidth and style detection
     "tpope/vim-sleuth",
     -- To save write-protected files

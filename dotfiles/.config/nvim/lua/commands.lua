@@ -56,3 +56,14 @@ if vim.fn.has("nvim-0.12") then
         vim.cmd(string.format([[restart source %s | lua os.remove('%s')]], file_path, file_path))
     end, {})
 end
+
+-- Load resession picker
+vim.api.nvim_create_user_command("SessionSelect", function()
+    require("resession").load()
+end, {})
+vim.api.nvim_create_user_command("SessionDelete", function()
+    require("resession").delete()
+end, {})
+vim.api.nvim_create_user_command("SessionSave", function()
+    require("resession").save()
+end, {})
