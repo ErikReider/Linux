@@ -15,6 +15,9 @@ vim.filetype.add({
         vala = "vala",
         vapi = "vala",
 
+        -- C/C++
+        tpp = "cpp",
+
         -- GLSL
         glsl = "glsl",
         vert = "glsl",
