@@ -216,17 +216,11 @@ map("i", "<c-c>", "<c-c>:call tagalong#Apply()<cr>", { noremap = true, silent = 
 --
 
 -- All CWD files (except gitignored)
-map("n", "<Leader>f", function()
-    telescopeFindFiles(true)
-end, opts)
+map("n", "<Leader>f", [[<cmd>TelescopeFindFiles<CR>]], opts)
 -- All CWD files
-map("n", "<Leader>F", function()
-    telescopeFindFiles(false)
-end, opts)
+map("n", "<Leader>F", [[<cmd>TelescopeFindFiles no_git_ignore<CR>]], opts)
 -- Git files git-root
-map("n", "<Leader>G", function()
-    telescopeGFiles(false)
-end, opts)
+map("n", "<Leader>G", [[<cmd>TelescopeGitFiles<CR>]], opts)
 -- Git status files
 map("n", "<Leader>g", require("telescope.builtin").git_status, opts)
 -- Search for string inside of all files in CWD

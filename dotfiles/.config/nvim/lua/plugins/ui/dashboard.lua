@@ -55,7 +55,7 @@ return {
                         desc_hi = "String",
                         key = "Leader f",
                         key_hi = "Number",
-                        action = "lua telescopeGFiles(true)",
+                        action = "TelescopeGitFiles local",
                     },
                     {
                         icon = " ",

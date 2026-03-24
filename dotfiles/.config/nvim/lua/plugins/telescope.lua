@@ -1,15 +1,8 @@
+-- TODO: https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#use-terminal-image-viewer-to-preview-images
+-- TODO: https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#fast-image-preview-on-terminal-with-caching-using-chafa
+
 -- Searching
 local winblend = 20
-
-local flex_options = {
-    winblend = winblend,
-    show_line = false,
-    results_title = "",
-    preview_title = "",
-    prompt_prefix = "❯ ",
-    selection_caret = "❯ ",
-    no_ignore = true,
-}
 
 local cursor_options = {
     winblend = winblend,
@@ -19,27 +12,7 @@ local cursor_options = {
     preview_title = false,
 }
 
-function _G.telescopeGFiles(local_dir)
-    local opts = {
-        use_git_root = not local_dir,
-        prompt_title = "Git Files " .. (local_dir and "CWD" or "ROOT"),
-    }
-    local ok = pcall(require("telescope.builtin").git_files, opts)
-    if not ok then
-        require("telescope.builtin").find_files()
-    end
-end
-
-function _G.telescopeFindFiles(git_ignore)
-    local opts = {
-        hidden = true,
-        no_ignore = not git_ignore,
-        no_ignore_parent = not git_ignore,
-        prompt_title = (git_ignore and "Git " or "") .. "Files",
-    }
-    require("telescope.builtin").find_files(opts)
-end
-
+---@type LazySpec
 return {
     {
         "nvim-telescope/telescope.nvim",
@@ -47,9 +20,7 @@ return {
             "nvim-lua/plenary.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
-                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && "
-                    .. "cmake --build build --config Release && "
-                    .. "cmake --install build --prefix build",
+                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install",
             },
             "nvim-telescope/telescope-file-browser.nvim",
             { "nvim-telescope/telescope-dap.nvim", dependencies = { "mfussenegger/nvim-dap" } },
@@ -69,11 +40,15 @@ return {
                     },
                 },
                 pickers = {
-                    find_files = vim.tbl_deep_extend("force", flex_options, {
-                        find_command = { "rg", "--hidden", "--files", "--glob", "!.git/" },
-                    }),
-                    git_files = vim.tbl_deep_extend("force", flex_options, {
-                        use_git_root = true,
+                    find_files = {
+                        find_command = {
+                            "rg",
+                            "--files",
+                            "--glob",
+                            "!.git/",
+                        },
+                    },
+                    git_files = {
                         git_command = {
                             "git",
                             "ls-files",
@@ -83,11 +58,10 @@ return {
                             "-o",
                             "-m",
                         },
-                    }),
-                    live_grep = vim.tbl_deep_extend("force", flex_options, {
+                    },
+                    live_grep = {
                         vimgrep_arguments = {
                             "rg",
-                            "--hidden",
                             "--glob",
                             "!.git/",
                             "--color=never",
@@ -97,16 +71,17 @@ return {
                             "--column",
                             "--smart-case",
                         },
-                    }),
-                    buffers = flex_options,
-                    oldfiles = flex_options,
-                    keymaps = flex_options,
-                    highlights = flex_options,
-                    lsp_workspace_diagnostics = flex_options,
-                    lsp_references = flex_options,
+                    },
                     lsp_code_actions = cursor_options,
                 },
                 defaults = {
+                    winblend = winblend,
+                    show_line = false,
+                    results_title = "",
+                    preview_title = "",
+                    prompt_prefix = "❯ ",
+                    selection_caret = "❯ ",
+                    no_ignore = false,
                     layout_strategy = "flex",
                     layout_config = {
                         height = 0.9,
@@ -115,6 +90,11 @@ return {
                         horizontal = { mirror = false },
                         vertical = { mirror = false },
                     },
+                    -- Picker defaults
+                    hidden = true,
+                    use_git_root = true,
+                    show_untracked = true,
+
                     mappings = {
                         i = {
                             ["<C-h>"] = actions.which_key,
