@@ -69,10 +69,10 @@ return {
                     },
                 },
                 pickers = {
-                    find_files = tableMerge(flex_options, {
+                    find_files = vim.tbl_deep_extend("force", flex_options, {
                         find_command = { "rg", "--hidden", "--files", "--glob", "!.git/" },
                     }),
-                    git_files = tableMerge(flex_options, {
+                    git_files = vim.tbl_deep_extend("force", flex_options, {
                         use_git_root = true,
                         git_command = {
                             "git",
@@ -84,7 +84,7 @@ return {
                             "-m",
                         },
                     }),
-                    live_grep = tableMerge(flex_options, {
+                    live_grep = vim.tbl_deep_extend("force", flex_options, {
                         vimgrep_arguments = {
                             "rg",
                             "--hidden",

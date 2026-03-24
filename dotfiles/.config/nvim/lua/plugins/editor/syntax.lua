@@ -11,7 +11,7 @@ return {
     -- Highlight Git conflicts
     {
         "rhysd/conflict-marker.vim",
-        config = function()
+        init = function()
             -- disable the default highlight group
             vim.g.conflict_marker_highlight_group = ""
             vim.g.conflict_marker_enable_mappings = 0
@@ -19,9 +19,6 @@ return {
             -- Include text after begin and end markers
             vim.g.conflict_marker_begin = "^<<<<<<< .*$"
             vim.g.conflict_marker_end = "^>>>>>>> .*$"
-
-            map("n", "äj", ":ConflictMarkerNextHunk <CR>", { silent = true })
-            map("n", "öj", ":ConflictMarkerPrevHunk <CR>", { silent = true })
         end,
     },
 }

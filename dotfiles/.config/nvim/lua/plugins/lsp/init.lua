@@ -358,7 +358,7 @@ return {
                 },
                 config = function()
                     local luasnip = require("luasnip")
-                    local util = require("luasnip.util.util")
+                    local luasnap_util = require("luasnip.util.util")
 
                     luasnip.config.setup({
                         history = false,
@@ -379,13 +379,13 @@ return {
                                         true
                                     )
                                     local pos_begin, pos_end = snip.mark:pos_begin_end()
-                                    util.normal_move_on(pos_begin)
+                                    luasnap_util.normal_move_on(pos_begin)
                                     vim.api.nvim_feedkeys(
                                         vim.api.nvim_replace_termcodes("v", true, false, true),
                                         "n",
                                         true
                                     )
-                                    util.normal_move_before(pos_end)
+                                    luasnap_util.normal_move_before(pos_end)
                                     vim.api.nvim_feedkeys(
                                         vim.api.nvim_replace_termcodes("o<C-G>", true, false, true),
                                         "n",

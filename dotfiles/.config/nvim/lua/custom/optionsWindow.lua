@@ -1,4 +1,4 @@
-local utils = require("telescope.utils")
+local utils = require("utils")
 
 local runOptions = {
     {
@@ -14,14 +14,14 @@ local function getRunAction()
     local lines = io.popen("ls -a"):lines()
     for _, option in pairs(runOptions) do
         local filetypes = option.filetypes == nil and {} or option.filetypes
-        if table.maxn(filetypes) > 0 and tableContains(filetypes, vim.bo.filetype) then
+        if table.maxn(filetypes) > 0 and vim.tbl_contains(filetypes, vim.bo.filetype) then
             local run = option.run == nil and "" or option.run
             local build = option.build == nil and "" or option.build
             local hasFiles = option.hasFiles == nil and {} or option.hasFiles
             if string.len(run) > 0 or string.len(build) > 0 then
                 local foundFiles = {}
                 for file in lines do
-                    if tableContains(hasFiles, file) then
+                    if vim.tbl_contains(hasFiles, file) then
                         table.insert(foundFiles, file)
                     end
                 end
@@ -36,13 +36,25 @@ end
 
 local Module = {}
 
+---@return FloatingWindowItem[]
 function Module.getOptionsTable()
+    ---@type FloatingWindowItem[]
     local optionsTable = {
         { title = "Open PWD Folder", action = disownCMD("xdg-open .") },
-        { title = "Change indentation style", action = "lua _G.show_indentation_popup()" },
+        {
+            title = "Change indentation style",
+            action = function()
+                require("utils").show_indentation_popup()
+            end,
+        },
         { title = "Open LazyDocker", action = "LazyDocker" },
         { title = "Search for TODOs", action = "TodoTelescope" },
-        { title = "Toggle inactive shade", action = "lua require('shade').toggle()" },
+        {
+            title = "Toggle inactive shade",
+            action = function()
+                require("shade").toggle()
+            end,
+        },
         { title = "Edit color", action = "CccPick" },
         { title = "Toggle Debug Windows", action = "DapUiToggleWindows" },
     }
@@ -81,19 +93,10 @@ function Module.getOptionsTable()
         )
 
         -- Check if in Git directory
-        local function add_file_in_browser()
+        local in_git_repo = utils.cwd_in_git_repo()
+        if in_git_repo == "repo" or in_git_repo == "worktree" then
+            -- TODO: Also check if the current buffer is actually a file
             table.insert(optionsTable, 2, { title = "Open File In Browser", action = "GBrowse" })
-        end
-        local _, ret = utils.get_os_command_output({ "git", "rev-parse", "--show-toplevel" }, vim.loop.cwd())
-
-        if ret ~= 0 then
-            local is_worktree =
-                utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" }, vim.loop.cwd())
-            if is_worktree[1] == "true" then
-                add_file_in_browser()
-            end
-        else
-            add_file_in_browser()
         end
     end
 
@@ -129,7 +132,7 @@ end
 
 -- Open options window
 function Module.show()
-    showFloatingMenu(Module.getOptionsTable())
+    utils.showFloatingMenu(Module.getOptionsTable())
 end
 
 return Module

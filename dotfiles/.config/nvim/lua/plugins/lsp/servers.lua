@@ -1,6 +1,7 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 local colorizer = require("colorizer")
-local util = require("lspconfig/util")
+local lsp_util = require("lspconfig/util")
+local utils = require("utils")
 
 -- on_attach replacement
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -27,7 +28,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-local capabilities = _G.get_lsp_capabilities()
+local capabilities = utils.get_lsp_capabilities()
 local servers = {
     -- ["example"] = {
     --     -- Append upon the on_attach function from lspconfig
@@ -185,7 +186,7 @@ local servers = {
     -- JS/TS Linter: Biome, Web project toolchain
     ["biome"] = {
         filetypes = { "javascript", "javascriptreact", "typescript", "typescript.tsx", "typescriptreact" },
-        root_dir = util.root_pattern("biome.json"),
+        root_dir = lsp_util.root_pattern("biome.json"),
         single_file_support = false,
     },
     -- Stylelint: CSS linter

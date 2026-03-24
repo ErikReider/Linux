@@ -1,3 +1,6 @@
+local utils = require("utils")
+
+local map = vim.keymap.set
 local lsp_opts = { noremap = true, silent = true }
 local opts = { noremap = true, silent = true }
 
@@ -95,6 +98,10 @@ map("n", "<A-Right>", ">>", { silent = true, noremap = false })
 map("n", "äh", ":Gitsigns next_hunk <CR>", { silent = true })
 map("n", "öh", ":Gitsigns prev_hunk <CR>", { silent = true })
 
+-- Git conflicts
+map("n", "äj", ":ConflictMarkerNextHunk <CR>", { silent = true })
+map("n", "öj", ":ConflictMarkerPrevHunk <CR>", { silent = true })
+
 -- Comments
 map("n", "<C-c>", require("Comment.api").call("toggle.linewise.current", "g@$"), {
     expr = true,
@@ -105,7 +112,24 @@ map("v", "<C-c>", require("Comment.api").call("toggle.linewise", "g@"), {
     desc = "Comment selected lines",
 })
 
+-- Options Menu Window
+map("n", "<F5>", require("custom.optionsWindow").show, opts)
+-- Git Menu Window
+map("n", "<F6>", function()
+    utils.showFloatingMenu({
+        { title = "LazyGit", action = "LazyGit" },
+        { title = "Git Hunk Highlight", action = "Gitsigns toggle_linehl" },
+        { title = "Git Toggle Deleted", action = "Gitsigns toggle_deleted" },
+        { title = "Git Diff", action = "Gitsigns diffthis" },
+        { title = "Git log", action = "GV" },
+        { title = "Open in browser", action = "GBrowse" },
+    })
+end, opts)
+
+--
 -- LSP
+--
+
 -- Go to definition
 map("n", "gs", "<cmd>Telescope lsp_definitions<CR>", lsp_opts)
 -- Go to type_definition
@@ -184,23 +208,12 @@ map("t", "<F10>", "<C-\\><C-n><CMD>LazyGitClose<CR>", opts)
 -- CCC Color adjuster
 map("n", "<leader>c", [[<cmd>CccPick<CR>]], { noremap = true, silent = true })
 
+-- Tagalong: Changing tag name also changed matching tag
+map("i", "<c-c>", "<c-c>:call tagalong#Apply()<cr>", { noremap = true, silent = true })
+
 --
 -- Telescope
 --
-
--- Options Menu Window
-map("n", "<F5>", require("custom.optionsWindow").show, opts)
--- Git Menu Window
-map("n", "<F6>", function()
-    showFloatingMenu({
-        { title = "LazyGit", action = "LazyGit" },
-        { title = "Git Hunk Highlight", action = "Gitsigns toggle_linehl" },
-        { title = "Git Toggle Deleted", action = "Gitsigns toggle_deleted" },
-        { title = "Git Diff", action = "Gitsigns diffthis" },
-        { title = "Git log", action = "GV" },
-        { title = "Open in browser", action = "GBrowse" },
-    })
-end, opts)
 
 -- All CWD files (except gitignored)
 map("n", "<Leader>f", function()
@@ -255,4 +268,3 @@ end)
 map({ "x", "o" }, "as", function()
     require("nvim-treesitter-textobjects.select").select_textobject("@local.scope", "locals")
 end)
-

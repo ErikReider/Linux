@@ -1,18 +1,167 @@
-_G.map = vim.keymap.set
+local Job = require("plenary.job")
 
-function _G.add_to_env_path(path_table)
-    local separator = string.sub(package.config, 1, 1)
-    local path = table.concat(path_table, separator)
-    local path_separator = ":"
-    if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-        path_separator = ";"
-        print(path_separator)
-        print(vim.fn.has("win32") or vim.fn.has("win64"))
+local utils = {}
+
+--
+-- LSP
+--
+
+---Get the MASON LSP executable path
+---@param name string The name of the LSP (ex: "elixir-ls").
+---@param default string the default path to use if LSP wasn't found.
+---@return string string The LSPs path.
+function utils.get_lsp_path(name, default)
+    local path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "bin", name)
+    if utils.file_exists(path) then
+        return path
     end
+    return default
+end
+
+---Get the LSP capabilities
+function utils.get_lsp_capabilities()
+    -- Add additional capabilities supported by nvim-cmp
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    -- For nvim-ufo
+    capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
+    return capabilities
+end
+
+--
+-- Helpers
+--
+
+---@param msg string
+function utils.notify_error(msg)
+    vim.notify(msg, vim.log.levels.ERROR, nil)
+end
+
+---@alias CwdGitResult ("repo"|"worktree"|"bare")
+---We cache the results of "git rev-parse"
+---@type { [string]: CwdGitResult? }
+local cwd_in_git_repo_cache = {}
+---@return CwdGitResult?
+function utils.cwd_in_git_repo()
+    local cwd = vim.uv.cwd()
+    if cwd == nil then
+        utils.notify_error("utils.cwd_in_git_repo: cwd is nil")
+        return nil
+    end
+
+    local cached_value = cwd_in_git_repo_cache[cwd]
+    if cached_value ~= nil then
+        return cached_value
+    end
+
+    ---@type CwdGitResult?
+    local result = nil
+    if utils.get_os_command_success({ "git", "rev-parse", "--show-toplevel" }, cwd) then
+        result = "repo"
+    elseif utils.get_os_command_success({ "git", "rev-parse", "--is-inside-work-tree" }, cwd) then
+        result = "worktree"
+    elseif utils.get_os_command_success({ "git", "rev-parse", "--is-bare-repository" }, cwd) then
+        result = "bare"
+    end
+
+    cwd_in_git_repo_cache[cwd] = result
+    return result
+end
+
+---We cache the results of "git rev-parse"
+---@type { [string]: boolean? }
+local cwd_is_git_repo_root_cache = {}
+---@return boolean
+function utils.cwd_is_git_repo_root()
+    local cwd = vim.uv.cwd()
+    if cwd == nil then
+        utils.notify_error("utils.cwd_is_git_repo_root: cwd is nil")
+        return false
+    end
+
+    local cached_value = cwd_is_git_repo_root_cache[cwd]
+    if cached_value ~= nil then
+        return cached_value
+    end
+
+    local result = vim.uv.fs_stat(vim.fs.joinpath(cwd, ".git")) ~= nil
+    cwd_is_git_repo_root_cache[cwd] = result
+    return result
+end
+
+--
+-- String
+--
+
+---Converts the first character in a string to upper-case
+---@param s string
+---@return string
+function utils.string_first_to_upper(s)
+    return (s:gsub("^%l", string.upper))
+end
+
+---@param ... any
+---@return string
+function utils.serialize(...)
+    local objects = vim.tbl_map(vim.inspect, { ... })
+    return vim.inspect(objects)
+end
+
+--
+-- OS Helpers
+--
+
+utils.is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1
+
+---@param ... string
+function utils.file_exists(...)
+    return vim.uv.fs_stat(vim.fs.joinpath(...)) ~= nil
+end
+
+---Prepends the provided path to NeoVims Environment PATH variable
+---@param ... string The path
+function utils.prepend_path_to_PATH(...)
+    local path = vim.fs.joinpath(...)
+    local path_separator = not utils.is_windows and ":" or ";"
     vim.env.PATH = path .. path_separator .. vim.env.PATH
 end
 
-function _G.get_indentation_string()
+---@param cmd string[] Command to run
+---@param cwd string? Current working directory
+---@return boolean?
+function utils.get_os_command_success(cmd, cwd)
+    if type(cmd) ~= "table" then
+        utils.notify_error("get_os_command_success: cmd must be a table")
+        return nil
+    end
+    local command = table.remove(cmd, 1)
+    local _, ret = Job:new({
+        command = command,
+        args = cmd,
+        cwd = cwd,
+    }):sync()
+    return ret == 0
+end
+
+-- TODO: Replace...
+function _G.disownCMD(cmd)
+    return "!" .. cmd .. " 2>/dev/null >&2 &; disown"
+end
+
+-- TODO: Replace...
+function _G.runCmdInTerm(cmd, tryStayOpen)
+    local open = tryStayOpen == true and "; exec $SHELL" or ""
+    return disownCMD("$TERM -e $SHELL -c '" .. cmd .. open .. "'")
+end
+
+--
+-- Other
+--
+
+---@return string
+function utils.get_indentation_string()
     if not vim.o.expandtab then
         return "Tab Size: " .. vim.o.tabstop
     else
@@ -20,16 +169,7 @@ function _G.get_indentation_string()
     end
 end
 
-function _G.show_indentation_size_popup()
-    vim.ui.select({ 2, 4, 8 }, { prompt = "Select Indentation Size for Current File" }, function(choice)
-        if type(choice) == "number" then
-            vim.o.shiftwidth = choice
-            vim.o.tabstop = choice
-        end
-    end)
-end
-
-function _G.show_indentation_popup()
+function utils.show_indentation_popup()
     vim.ui.select({ "tabs", "spaces", "change", "detect" }, {
         format_item = function(item)
             if item == "change" then
@@ -37,188 +177,80 @@ function _G.show_indentation_popup()
             elseif item == "detect" then
                 return "Detect indent size"
             end
-            return "Indent using " .. stringFirstToUpper(item)
+            return "Indent using " .. utils.string_first_to_upper(item)
         end,
-    }, function(choice)
-        if choice == "detect" then
+    }, function(type_choice)
+        if type(type_choice) ~= "string" then
+            return
+        end
+        if type_choice == "detect" then
             vim.cmd("Sleuth")
-            return "Detect indent size"
-        elseif choice == "tabs" then
-            vim.o.expandtab = false
-        elseif choice == "spaces" then
-            vim.o.expandtab = true
-        elseif choice ~= "change" then
             return
         end
 
         -- Display change size select UI
-        show_indentation_size_popup()
-    end)
-end
-
----Get the MASON LSP executable path
----@param name string The name of the LSP (ex: "elixir-ls").
----@param default string the default path to use if LSP wasn't found.
----@return string string The LSPs path.
-function _G.get_lsp_path(name, default)
-    local path = path_join(vim.fn.stdpath("data"), "mason", "bin", name)
-    if file_exists(path) then
-        return path
-    end
-    return default
-end
-
----Get the LSP capabilities
-function _G.get_lsp_capabilities()
-    -- Add additional capabilities supported by nvim-cmp
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    -- For nvim-ufo
-    capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
-    return capabilities
-end
-
----Split string into a table of strings using a separator.
----@param inputString string The string to split.
----@param sep string The separator to use.
----@return table table A table of strings.
-function _G.split(inputString, sep)
-    local fields = {}
-
-    local pattern = string.format("([^%s]+)", sep)
-    local _ = string.gsub(inputString, pattern, function(c)
-        fields[#fields + 1] = c
-    end)
-
-    return fields
-end
-
----Joins arbitrary number of paths together.
----@param ... string The paths to join.
----@return string
-function _G.path_join(...)
-    local args = { ... }
-    if #args == 0 then
-        return ""
-    end
-
-    local path_separator = "/"
-    local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1
-    if is_windows == true then
-        path_separator = "\\"
-    end
-
-    local all_parts = {}
-    if type(args[1]) == "string" and args[1]:sub(1, 1) == path_separator then
-        all_parts[1] = ""
-    end
-
-    for _, arg in ipairs(args) do
-        local arg_parts = split(arg, path_separator)
-        vim.list_extend(all_parts, arg_parts)
-    end
-    return table.concat(all_parts, path_separator)
-end
-
-function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, { ... })
-    print(unpack(objects))
-end
-
-function _G.iterDir(dir, callback)
-    local table = vim.api.nvim_eval("split(glob('" .. dir .. "'), '\n')")
-    for _, f in ipairs(table) do
-        callback(f)
-    end
-end
-
-function _G.tableContains(table, val)
-    for i = 1, #table do
-        if table[i] == val then
-            return true
-        end
-    end
-    return false
-end
-
-function _G.disownCMD(cmd)
-    return "!" .. cmd .. " 2>/dev/null >&2 &; disown"
-end
-
-function _G.runCmdInTerm(cmd, tryStayOpen)
-    local open = tryStayOpen == true and "; exec $SHELL" or ""
-    return disownCMD("$TERM -e $SHELL -c '" .. cmd .. open .. "'")
-end
-
-function _G.splitString(str, delimiter)
-    local matches = {}
-    for substring in string.gmatch((str .. delimiter), "(.-)" .. delimiter) do
-        table.insert(matches, substring)
-    end
-    return matches
-end
-
-function _G.stringFirstToUpper(str)
-    return (str:gsub("^%l", string.upper))
-end
-
-function _G.tableMerge(t1, t2)
-    for k, v in pairs(t2) do
-        if type(v) == "table" then
-            if type(t1[k] or false) == "table" then
-                tableMerge(t1[k] or {}, t2[k] or {})
-            else
-                t1[k] = v
+        vim.ui.select({ 2, 4, 8 }, {
+            prompt = "Select indentation size for current file",
+        }, function(size_choice)
+            if type(size_choice) ~= "number" then
+                return
             end
-        else
-            t1[k] = v
-        end
-    end
-    return t1
+            vim.o.expandtab = type_choice == "spaces"
+            vim.o.shiftwidth = size_choice
+            vim.o.tabstop = size_choice
+        end)
+    end)
 end
 
-function _G.file_exists(path)
-    local f = io.open(path, "r")
-    if f ~= nil then
-        io.close(f)
-        return true
-    else
-        return false
-    end
-end
+---@alias FloatingWindowItemAction string|function
 
-function _G.showFloatingMenu(items)
-    if type(items) ~= "table" then
-        print("ITEMS NOT A TABLE!")
+---@class FloatingWindowItem
+---@field title string
+---@field action FloatingWindowItemAction
+
+---@param items FloatingWindowItem[]
+function utils.showFloatingMenu(items)
+    if not vim.islist(items) then
+        utils.notify_error("showFloatingMenu: items must be a table")
         return
     end
-    local keysArray = {}
+
+    ---@type string[]
+    local titleArray = {}
+    ---@type FloatingWindowItemAction[]
     local itemsArray = {}
+
     local maxStringLength = 0
-    local length = 0
+    local numEntries = 0
     for _, item in pairs(items) do
-        table.insert(keysArray, item.title)
+        table.insert(titleArray, item.title)
         itemsArray[item.title] = item.action
         local len = string.len(item.title)
         if len > maxStringLength then
             maxStringLength = len
         end
-        length = length + 1
+        numEntries = numEntries + 1
     end
     if maxStringLength < 30 then
         maxStringLength = 20
     end
 
-    vim.ui.select(keysArray, {
+    vim.ui.select(titleArray, {
         prompt = "Options",
         kind = "floatingwindow",
         maxStringLength = maxStringLength,
-        entries = length,
+        entries = numEntries,
     }, function(selected)
         if selected == nil then
             return
         end
         local option = itemsArray[selected]
-        vim.cmd("silent " .. option)
+        if type(option) == "function" and vim.is_callable(option) then
+            option()
+        else
+            vim.cmd("silent " .. option)
+        end
     end)
 end
+
+return utils

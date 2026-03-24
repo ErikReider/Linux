@@ -13,8 +13,10 @@ vim.o.updatetime = 300
 -- always show signcolumns
 vim.o.signcolumn = "yes:1"
 
--- Set <leader> key
+-- Set <Leader> key
 vim.g.mapleader = " "
+-- Set <LocalLeader> key (local to buffer)
+vim.g.maplocalleader = "\\"
 -- Key timeout eg. leader timeout
 vim.o.timeoutlen = 1500
 

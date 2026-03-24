@@ -1,7 +1,4 @@
 return {
-    -- Neovim lua functions
-    "nvim-lua/plenary.nvim",
-
     -- A replacement for mksession with a better API.
     -- Also support restoring sessions
     {
