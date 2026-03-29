@@ -1,12 +1,13 @@
 pcall(require, "snacks")
 local utils = require("utils")
+local snacks = require("snacks")
 
 -- LazyGit
 vim.api.nvim_create_user_command("LazyGit", function()
-    Snacks.lazygit()
+    snacks.lazygit()
 end, {})
 vim.api.nvim_create_user_command("LazyGitClose", function()
-    Snacks.lazygit():close()
+    snacks.lazygit():close()
 end, {})
 
 -- LazyDocker
@@ -14,7 +15,7 @@ end, {})
 local lazyDocker_window = nil
 vim.api.nvim_create_user_command("LazyDocker", function()
     if lazyDocker_window == nil then
-        lazyDocker_window = Snacks.terminal.open("lazydocker", {
+        lazyDocker_window = snacks.terminal.open("lazydocker", {
             style = "lazygit",
         })
     else
@@ -25,7 +26,7 @@ end, {})
 -- Delete Neovim buffers without losing window layout
 -- Define Bdelete and Bwipeout.
 vim.api.nvim_create_user_command("Bdelete", function()
-    Snacks.bufdelete()
+    snacks.bufdelete()
 end, {
     bang = true,
     bar = true,
@@ -35,7 +36,7 @@ end, {
     complete = "buffer",
 })
 vim.api.nvim_create_user_command("Bwipeout", function()
-    Snacks.bufdelete({ wipe = true })
+    snacks.bufdelete({ wipe = true })
 end, {
     bang = true,
     bar = true,

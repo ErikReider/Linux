@@ -1,5 +1,7 @@
+local constants = require("constants")
+
 -- Install lazy.nvim Plugin Manager if not installed
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy", "lazy.nvim")
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local out = vim.fn.system({
         "git",
@@ -25,12 +27,17 @@ return {
     ---@param spec LazySpec Lazy spec to import
     setup = function(spec)
         require("lazy").setup({
+            spec = spec,
+
+            root = constants.dir_lazy,
             change_detection = {
                 -- automatically check for config file changes and reload the ui
                 enabled = true,
                 notify = false, -- get a notification when changes are found
             },
-            spec = spec,
+            ui = {
+                border = vim.o.winborder,
+            },
         })
     end,
 }

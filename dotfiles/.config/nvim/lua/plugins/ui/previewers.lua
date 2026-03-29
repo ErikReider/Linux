@@ -1,9 +1,13 @@
+---@module "lazy"
+
 -- File preview
+---@type LazySpec
 return {
     -- Markdown preview
     {
         "toppair/peek.nvim",
         build = "deno task --quiet build:fast",
+        ft = "markdown",
         config = function()
             local peek = require("peek")
 
@@ -42,13 +46,28 @@ return {
             vim.g.bracey_refresh_on_save = 1
         end,
     },
+    {
+        "aurum77/live-server.nvim",
+        cmd = { "LiveServer", "LiveServerStart", "LiveServerStop", "LiveServerInstall" },
+        build = function()
+            require("live_server.util").install()
+        end,
+    },
     -- Latex: Forward and Inverse Search for Texlab and neovim
     {
         "f3fora/nvim-texlabconfig",
-        config = function()
-            require("texlabconfig").setup({})
+        ft = require("filetypes")["latex"],
+        build = {
+            "go build",
+            -- Install evince synctex through pip3
+            "pip3 install --target=. https://github.com/efoerster/evince-synctex/archive/master.zip",
+        },
+        main = "texlabconfig",
+        init = function(plugin)
+            local utils = require("utils")
+            utils.prepend_plugin_to_PATH(plugin)
+            utils.prepend_plugin_to_PATH(plugin, "bin")
+            utils.prepend_plugin_to_PYTHONPATH(plugin)
         end,
-        ft = { "tex", "bib" }, -- Lazy-load on filetype
-        build = "go build",
     },
 }

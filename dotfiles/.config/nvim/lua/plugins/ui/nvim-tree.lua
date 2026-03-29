@@ -1,16 +1,16 @@
+---@module "lazy"
+
 -- Tree
+---@type LazySpec
 return {
     {
+        -- https://github.com/nvim-tree/nvim-tree.lua
         "kyazdani42/nvim-tree.lua",
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        keys = {
-            { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "NvimTree Toggle" },
-            { "<C-b>", "<cmd>NvimTreeFindFile<CR>", desc = "NvimTree Find File" },
-        },
         lazy = false,
         opts = {
             on_attach = function(bufnr)
-                local api = require("nvim-tree.api")
+                local tree_api = require("nvim-tree.api")
 
                 local function opts(desc)
                     return {
@@ -23,11 +23,11 @@ return {
                 end
 
                 -- default mappings
-                api.config.mappings.default_on_attach(bufnr)
+                tree_api.map.on_attach.default(bufnr)
 
                 -- custom mappings
-                vim.keymap.set("n", "<C-Enter>", api.tree.change_root_to_node, opts("CD"))
-                vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
+                vim.keymap.set("n", "<C-Enter>", tree_api.tree.change_root_to_node, opts("CD"))
+                vim.keymap.set("n", "?", tree_api.tree.toggle_help, opts("Help"))
             end,
             auto_reload_on_write = true,
             disable_netrw = false,
@@ -81,14 +81,21 @@ return {
                         },
                     },
                 },
-                special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", ".gitignore" },
+                special_files = {
+                    "Cargo.toml",
+                    "meson.build",
+                    "Makefile",
+                    "README.md",
+                    "readme.md",
+                    ".gitignore",
+                },
             },
             hijack_directories = { enable = true, auto_open = true },
             update_focused_file = { enable = false, update_cwd = false, ignore_list = {} },
             system_open = { cmd = "", args = {} },
             diagnostics = {
-                enable = false,
-                show_on_dirs = false,
+                enable = true,
+                show_on_dirs = true,
                 icons = { hint = "", info = "", warning = "", error = "" },
             },
             filters = { dotfiles = false, custom = {}, exclude = { "^.git$", "node_modules", ".cache" } },

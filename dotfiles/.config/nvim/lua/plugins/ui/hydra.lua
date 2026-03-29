@@ -107,7 +107,7 @@ _<Left>_  _<Right>_  _<S-Left>_  _<S-Right>_  _<C-Left>_  _<C-Right>_  _v_: vert
                     hint = {
                         float_opts = {
                             style = "minimal",
-                            border = "rounded",
+                            border = vim.o.winborder,
                             title = "Hydra",
                             title_pos = "center",
                             focusable = false,

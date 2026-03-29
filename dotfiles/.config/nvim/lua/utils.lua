@@ -1,3 +1,5 @@
+---@module "lazy"
+
 local Job = require("plenary.job")
 
 local utils = {}
@@ -96,10 +98,10 @@ end
 --
 
 ---Converts the first character in a string to upper-case
----@param s string
+---@param str string
 ---@return string
-function utils.string_first_to_upper(s)
-    return (s:gsub("^%l", string.upper))
+function utils.str_first_to_upper(str)
+    return (str:gsub("^%l", string.upper))
 end
 
 ---@param ... any
@@ -110,22 +112,58 @@ function utils.serialize(...)
 end
 
 --
+-- Table
+--
+
+---@param table table|nil
+---@return boolean
+function utils.tbl_is_empty(table)
+    return not table or next(table) == nil
+end
+
+--
 -- OS Helpers
 --
 
-utils.is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1
+utils.is_windows = vim.fn.has("win32") == 1
+utils.env_path_separator = (not utils.is_windows) and ":" or ";"
 
----@param ... string
+---Check if file exists
+---@param ... string Path to file
 function utils.file_exists(...)
     return vim.uv.fs_stat(vim.fs.joinpath(...)) ~= nil
 end
 
----Prepends the provided path to NeoVims Environment PATH variable
+---Prepends the provided path to NeoVims `variable` environment variable
+---@param variable string
+---@param ... string Additional path
+function utils.prepend_path_to_ENV(variable, ...)
+    local path = vim.fs.joinpath(...)
+    if not vim.env[variable] then
+        vim.env[variable] = path
+    else
+        vim.env[variable] = path .. utils.env_path_separator .. vim.env[variable]
+    end
+end
+
+---Prepends the provided path to NeoVims PATH environment variable
 ---@param ... string The path
 function utils.prepend_path_to_PATH(...)
-    local path = vim.fs.joinpath(...)
-    local path_separator = not utils.is_windows and ":" or ";"
-    vim.env.PATH = path .. path_separator .. vim.env.PATH
+    utils.prepend_path_to_ENV("PATH", ...)
+end
+
+---Prepends the provided plugins path to NeoVims PATH environment variable
+---@param plugin LazyPlugin
+---@param ... string Additional path
+function utils.prepend_plugin_to_PATH(plugin, ...)
+    utils.prepend_path_to_PATH(plugin.dir, ...)
+end
+
+---Prepends the provided plugins path to NeoVims PATH environment variable
+---@param plugin LazyPlugin
+---@param ... string Additional path
+function utils.prepend_plugin_to_PYTHONPATH(plugin, ...)
+    utils.prepend_path_to_ENV("PYTHONPATH", plugin.dir, ...)
 end
 
 ---@param cmd string[] Command to run
@@ -145,15 +183,15 @@ function utils.get_os_command_success(cmd, cwd)
     return ret == 0
 end
 
--- TODO: Replace...
-function _G.disownCMD(cmd)
-    return "!" .. cmd .. " 2>/dev/null >&2 &; disown"
-end
-
--- TODO: Replace...
-function _G.runCmdInTerm(cmd, tryStayOpen)
-    local open = tryStayOpen == true and "; exec $SHELL" or ""
-    return disownCMD("$TERM -e $SHELL -c '" .. cmd .. open .. "'")
+---@param cmd table
+---@param stay_open boolean?
+function utils.run_cmd_in_term(cmd, stay_open)
+    return require("snacks").terminal.open(cmd, {
+        auto_close = not stay_open,
+        win = {
+            position = "bottom",
+        },
+    })
 end
 
 --
@@ -177,7 +215,7 @@ function utils.show_indentation_popup()
             elseif item == "detect" then
                 return "Detect indent size"
             end
-            return "Indent using " .. utils.string_first_to_upper(item)
+            return "Indent using " .. utils.str_first_to_upper(item)
         end,
     }, function(type_choice)
         if type(type_choice) ~= "string" then

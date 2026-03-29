@@ -30,7 +30,7 @@ return {
                 styles = {
                     input = {
                         title = "Input:",
-                        border = "rounded",
+                        border = vim.o.winborder,
                         backdrop = 60,
                         height = 1,
                         width = 80,
@@ -45,10 +45,10 @@ return {
                         col = false,
                     },
                     lazygit = {
-                        border = "rounded",
+                        border = vim.o.winborder,
                     },
                     terminal = {
-                        border = "rounded",
+                        border = vim.o.winborder,
                         position = "float",
                     },
                 },
@@ -120,7 +120,7 @@ return {
                                 ---@type (number|boolean|fun(self: snacks.win):number)?
                                 col = false,
 
-                                border = "rounded",
+                                border = vim.o.winborder,
                                 title = "{title}",
                                 title_pos = "center",
 

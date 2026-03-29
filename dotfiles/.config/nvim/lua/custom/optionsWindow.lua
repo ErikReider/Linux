@@ -1,37 +1,65 @@
 local utils = require("utils")
 
+---@class OptionsWindowRunOptions
+---@field filetypes table?
+---@field hasFiles table?
+---@field run string|function?
+---@field preview string|function?
+---@field build string|function?
+
+---@type OptionsWindowRunOptions[]
 local runOptions = {
     {
         filetypes = { "typescriptreact", "javascriptreact", "typescript", "javascript" },
         hasFiles = { "node_modules", "package.json", "package-lock.json" },
-        run = "!npm start",
-        build = "!npm run build",
+        run = function()
+            utils.run_cmd_in_term({ "npm", "start" })
+        end,
+        build = function()
+            utils.run_cmd_in_term({ "npm", "run", "build" })
+        end,
     },
-    { filetypes = { "markdown" }, run = "PeekOpenOrClose" },
-    { filetypes = { "tex" }, run = "TexlabBuild" },
+    {
+        filetypes = { "markdown" },
+        preview = "PeekOpenOrClose",
+    },
+    {
+        filetypes = require("filetypes")["latex"],
+        preview = "LspTexlabForward",
+        build = "LspTexlabBuild",
+    },
 }
+---@return OptionsWindowRunOptions?
 local function getRunAction()
-    local lines = io.popen("ls -a"):lines()
+    local files = vim.fs.dir(vim.fs.normalize(vim.fn.getcwd()))
     for _, option in pairs(runOptions) do
-        local filetypes = option.filetypes == nil and {} or option.filetypes
-        if table.maxn(filetypes) > 0 and vim.tbl_contains(filetypes, vim.bo.filetype) then
-            local run = option.run == nil and "" or option.run
-            local build = option.build == nil and "" or option.build
-            local hasFiles = option.hasFiles == nil and {} or option.hasFiles
-            if string.len(run) > 0 or string.len(build) > 0 then
+        local filetypes = option.filetypes or {}
+        local hasFiles = option.hasFiles or {}
+        local run = option.run == "" and nil or option.run
+        local preview = option.preview == "" and nil or option.preview
+        local build = option.build == "" and nil or option.build
+        if
+            not utils.tbl_is_empty(filetypes)
+            and vim.list_contains(filetypes, vim.bo.filetype)
+            and (run or preview or build)
+        then
+            if hasFiles == {} then
+                return option
+            else
+                -- Make sure the required files exist
                 local foundFiles = {}
-                for file in lines do
-                    if vim.tbl_contains(hasFiles, file) then
-                        table.insert(foundFiles, file)
+                for filename, type in files do
+                    if type == "file" and vim.tbl_contains(hasFiles, filename) then
+                        table.insert(foundFiles, filename)
                     end
                 end
-                if table.maxn(hasFiles) == table.maxn(foundFiles) then
-                    return { run = run, build = build }
+                if vim.tbl_count(hasFiles) == vim.tbl_count(foundFiles) then
+                    return option
                 end
             end
         end
     end
-    return { run = "", build = "" }
+    return nil
 end
 
 local Module = {}
@@ -40,7 +68,12 @@ local Module = {}
 function Module.getOptionsTable()
     ---@type FloatingWindowItem[]
     local optionsTable = {
-        { title = "Open PWD Folder", action = disownCMD("xdg-open .") },
+        {
+            title = "Open PWD Folder",
+            action = function()
+                vim.ui.open(".")
+            end,
+        },
         {
             title = "Change indentation style",
             action = function()
@@ -65,32 +98,31 @@ function Module.getOptionsTable()
     end
 
     -- Switch between C/C++ Header and Implementation files
-    for _, value in ipairs({ "c", "h", "cpp", "hpp" }) do
-        if vim.bo.filetype == value then
-            table.insert(
-                optionsTable,
-                { title = "Open Header/Implementation file", action = "ClangdSwitchSourceHeader" }
-            )
-            break
-        end
+    if vim.tbl_contains(require("filetypes")["cpp"], vim.bo.filetype) then
+        table.insert(optionsTable, {
+            title = "Open Header/Implementation file",
+            action = "ClangdSwitchSourceHeader",
+        })
     end
 
     local currentFileFolderPath = vim.api.nvim_eval("expand('%:p:h')")
     if string.len(currentFileFolderPath) > 0 then
-        table.insert(
-            optionsTable,
-            1,
-            { title = "Open File Folder", action = disownCMD("xdg-open " .. currentFileFolderPath) }
-        )
+        table.insert(optionsTable, 1, {
+            title = "Open File Folder",
+            action = function()
+                vim.ui.open(currentFileFolderPath)
+            end,
+        })
     end
 
     local currentFilePath = vim.api.nvim_buf_get_name(0)
     if string.len(currentFilePath) > 0 then
-        table.insert(
-            optionsTable,
-            1,
-            { title = "Open File", action = disownCMD("xdg-open " .. currentFilePath) }
-        )
+        table.insert(optionsTable, 1, {
+            title = "Open File",
+            action = function()
+                vim.ui.open(currentFilePath)
+            end,
+        })
 
         -- Check if in Git directory
         local in_git_repo = utils.cwd_in_git_repo()
@@ -110,21 +142,19 @@ function Module.getOptionsTable()
     end
 
     local action = getRunAction()
-    if string.len(action.build) > 0 then
-        local text = "Build"
-        if action.build:sub(0, 1) == "!" then
-            action.build = runCmdInTerm(action.build, true)
-            text = text .. " in terminal"
+    if action then
+        if action.build then
+            local text = vim.is_callable(action.build) and "Build in terminal" or "Build"
+            table.insert(optionsTable, 1, { title = text, action = action.build })
         end
-        table.insert(optionsTable, 1, { title = text, action = action.build })
-    end
-    if string.len(action.run) > 0 then
-        local text = "Run"
-        if action.run:sub(0, 1) == "!" then
-            action.run = runCmdInTerm(action.run, true)
-            text = text .. " in terminal"
+        if action.run then
+            local text = vim.is_callable(action.run) and "Run in terminal" or "Run"
+            table.insert(optionsTable, 1, { title = text, action = action.run })
         end
-        table.insert(optionsTable, 1, { title = text, action = action.run })
+        if action.preview then
+            local text = vim.is_callable(action.preview) and "Preview in terminal" or "Preview"
+            table.insert(optionsTable, 1, { title = text, action = action.preview })
+        end
     end
 
     return optionsTable

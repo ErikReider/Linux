@@ -89,8 +89,7 @@ return {
     },
     {
         -- Rainbow delimiters for Neovim through Tree-sitter
-        -- https://github.com/HiPhish/rainbow-delimiters.nvim
-        "HiPhish/rainbow-delimiters.nvim",
+        "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
         lazy = false,
         priority = ts_load_priority + 1,
     },

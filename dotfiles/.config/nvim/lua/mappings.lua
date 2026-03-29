@@ -18,19 +18,9 @@ map("n", "N", "Nzzzv", { noremap = true })
 map(
     "n",
     "gx",
-    ":silent !xdg-open <C-R>=escape(\"<C-R><C-F>\", \"#?&;\\|%\")<CR> 2> /dev/null >&2 & disown<CR>",
+    [[:Open <C-R>=escape("<C-R><C-F>", "#?&;\\|%")<CR><CR>]],
     { silent = true }
 )
-
--- open init.vim on F3 (split if buffer is selected)
-map(
-    "n",
-    "<F3>",
-    "expand('%') == '' ? ':e $MYVIMRC <cr>' : ':vsplit $MYVIMRC <cr>'",
-    { silent = true, expr = true }
-)
--- Source on F4
-map("n", "<F4>", ":checktime <CR> :source $MYVIMRC | redraw! <CR> :Sleuth <CR>", { silent = true })
 
 -- Use double ESC to clear highlights
 map("n", "<Esc><Esc>", ":nohl<CR>", { silent = true })
@@ -112,6 +102,10 @@ map("v", "<C-c>", require("Comment.api").call("toggle.linewise", "g@"), {
     desc = "Comment selected lines",
 })
 
+-- Nvim Tree
+map({"n", "i"}, "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "NvimTree Toggle" })
+map({"n", "i"}, "<C-b>", "<cmd>NvimTreeFindFile<CR>", { desc = "NvimTree Find File" })
+
 -- Options Menu Window
 map("n", "<F5>", require("custom.optionsWindow").show, opts)
 -- Git Menu Window
@@ -131,18 +125,24 @@ end, opts)
 --
 
 -- Go to definition
-map("n", "gs", "<cmd>Telescope lsp_definitions<CR>", lsp_opts)
+map("n", "gs", function()
+    require("telescope.builtin").lsp_definitions()
+end, lsp_opts)
 -- Go to type_definition
-map("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>", lsp_opts)
+map("n", "gy", function()
+    require("telescope.builtin").lsp_type_definitions()
+end, lsp_opts)
 -- Go to implementation
-map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", lsp_opts)
+map("n", "gi", function()
+    require("telescope.builtin").lsp_implementations()
+end, lsp_opts)
 -- References
 map("n", "gr", function()
     require("telescope.builtin").lsp_references({ jump_type = "never" })
 end, lsp_opts)
 -- Show hover info
 map("n", "K", function()
-    vim.lsp.buf.hover({ border = "rounded", focusable = true, max_width = 80, max_height = 30 })
+    vim.lsp.buf.hover({ border = vim.o.winborder, focusable = true, max_width = 80, max_height = 30 })
 end, lsp_opts)
 -- Show method signature
 map({ "i", "n" }, "<C-s>", function()
@@ -158,7 +158,12 @@ map({ "i", "n" }, "<C-s>", function()
             end
         end
     end
-    vim.lsp.buf.signature_help({ border = "rounded", focusable = false, max_width = 80, max_height = 30 })
+    vim.lsp.buf.signature_help({
+        border = vim.o.winborder,
+        focusable = false,
+        max_width = 80,
+        max_height = 30,
+    })
 end, lsp_opts)
 -- Workspace folder
 -- map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
@@ -196,9 +201,15 @@ map("n", "<A-S-n>", function()
 end, { noremap = true })
 
 -- Floating Terminal
-map("n", "<F7>", [[<CMD>lua Snacks.terminal.toggle()<CR>]], opts)
-map("t", "<F7>", [[<C-\><C-n><CMD>lua Snacks.terminal.toggle()<CR>]], opts)
-map("t", "<F9>", [[<C-\><C-n><CMD>lua Snacks.terminal.get():destroy()<CR>]], opts)
+map("n", "<F7>", function()
+    require("snacks").terminal.toggle()
+end, opts)
+map("t", "<F7>", function()
+    require("snacks").terminal.toggle()
+end, opts)
+map("t", "<F9>", function()
+    require("snacks").terminal.get():destroy()
+end, opts)
 
 -- Floating LazyGit
 map("n", "<F8>", "<CMD>LazyGit<CR>", opts)

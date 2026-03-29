@@ -32,7 +32,10 @@ return {
                 vscode.setup({
                     transparent = false,
                     italic_comments = true,
+                    italic_inlayhints = true,
+                    underline_links = true,
                     disable_nvimtree_bg = false,
+                    terminal_colors = false,
                     -- Override highlight groups (see ./lua/vscode/theme.lua)
                     group_overrides = {
                         -- this supports the same val table as vim.api.nvim_set_hl

@@ -48,6 +48,10 @@ vim.o.foldenable = true
 -- Max nested folds
 vim.o.foldnestmax = 10
 
+vim.o.foldmethod = "expr"
+-- Default to treesitter folding
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
 -- Makes popup menu smaller
 vim.o.pumheight = 30
 
@@ -109,7 +113,6 @@ vim.g.virtcolumn_char = "▏" -- char to display the line
 vim.g.virtcolumn_priority = 10 -- priority of extmark
 
 vim.opt.title = true
-vim.opt.titlestring = [[%(%{expand("%:p:~:h")}%) - %{v:progname}]]
-vim.opt.titlelen = 15
+vim.opt.titlestring = [[%{fnamemodify(getcwd(), ":~")} - %t%( (%M)%) %a - %{v:progname}]]
 
 vim.opt.sessionoptions:append("globals")

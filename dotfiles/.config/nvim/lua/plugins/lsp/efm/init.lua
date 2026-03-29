@@ -2,7 +2,7 @@ local biome_formatter = require("efmls-configs.formatters.biome")
 local black_format = require("efmls-configs.formatters.black")
 local markdown_lint = require("efmls-configs.linters.markdownlint")
 local prettier = require("efmls-configs.formatters.prettier_d")
-local shfmt = require("plugins.lsp.Diagnostics.shfmt")
+local shfmt = require("plugins.lsp.efm.shfmt")
 local stylua = require("efmls-configs.formatters.stylua")
 
 local efm_languages = {

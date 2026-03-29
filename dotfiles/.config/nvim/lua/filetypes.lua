@@ -45,3 +45,8 @@ vim.filetype.add({
 --         [".*/%.github[%w/]+workflows[%w/]+.*%.ya?ml"] = "yaml.github",
 --     },
 -- })
+
+return {
+    ["latex"] = { "tex", "plaintex", "bib" },
+    ["cpp"] = { "c", "h", "cpp", "hpp", "tpp" },
+}
