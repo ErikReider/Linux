@@ -1,253 +1,354 @@
+---Used to get a string with the number of spaces to offset the label details from the label.
+---@param max_width number
+---@param text string
+---@param detail string
+---@return string
+local function label_center_spaces(max_width, text, detail)
+    -- Handle percentage of screen width
+    if max_width < 1 and max_width > 0 then
+        max_width = math.floor(max_width * vim.api.nvim_win_get_width(0))
+    end
+
+    local blank = max_width - vim.fn.strdisplaywidth(text) - vim.fn.strdisplaywidth(detail)
+    if blank <= 1 then
+        return " "
+    end
+    return string.rep(" ", blank)
+end
+
+---@class Highlights
+---@field text string
+---@field highlights blink.cmp.DrawHighlight[]
+---
+---@param ctx blink.cmp.DrawItemContext
+---@return Highlights
+local function get_ctx_highlights(ctx)
+    local label = ctx.label
+
+    ---@type blink.cmp.DrawHighlight[]
+    local highlights = {}
+
+    -- ~ indicator, but only for non-snippets as blink handles that
+    local is_expandable = false
+    if ctx.item and ctx.item.kind ~= require("blink.cmp.types").CompletionItemKind.Snippet then
+        if #(ctx.item.additionalTextEdits or {}) > 0 then
+            is_expandable = true
+        elseif ctx.item.insertTextFormat == vim.lsp.protocol.InsertTextFormat.Snippet then
+            is_expandable = true
+        end
+        if is_expandable then
+            label = label .. ctx.self.snippet_indicator
+        end
+    end
+
+    table.insert(highlights, {
+        0,
+        #label,
+        group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
+    })
+
+    local spaces = ""
+    local detail = ""
+    if ctx.label_detail and ctx.label_detail ~= "" then
+        detail = ctx.label_detail
+
+        spaces = " "
+        if ctx.self.components then
+            local component_label = ctx.self.components.label
+            if not component_label.width or component_label.width.fill then
+                spaces = label_center_spaces(component_label.width.max, label, detail)
+            end
+        end
+
+        local text_length = #label + #spaces
+        table.insert(highlights, {
+            text_length,
+            text_length + #detail,
+            group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpGhostText",
+        })
+    end
+
+    return { text = label .. spaces .. detail, highlights = highlights }
+end
+
+---@type blink.cmp.SortFunction
+local function lsp_sorter(a, b)
+    ---@diagnostic disable-next-line: undefined-field
+    if not a.lsp_score or not b.lsp_score then
+        return
+    end
+
+    ---@diagnostic disable-next-line: undefined-field
+    if a.lsp_score > b.lsp_score then
+        return true
+    ---@diagnostic disable-next-line: undefined-field
+    elseif a.lsp_score < b.lsp_score then
+        return false
+    end
+end
+
 return {
     --
-    -- Nvim cmp
+    -- Blink.cmp
     --
-    -- A completion engine plugin for neovim written in Lua.
+    -- Performant, batteries-included completion plugin for Neovim
     {
-        "hrsh7th/nvim-cmp",
+        "saghen/blink.cmp",
         dependencies = {
-            -- nvim-cmp source for neovim builtin LSP client
-            "hrsh7th/cmp-nvim-lsp",
-            -- nvim-cmp source for buffer words.
-            "hrsh7th/cmp-buffer",
-            -- nvim-cmp source for filesystem paths.
-            "hrsh7th/cmp-path",
-            -- nvim-cmp source for vim's cmdline
-            "hrsh7th/cmp-cmdline",
-            -- luasnip completion source for nvim-cmp
-            "saadparwaiz1/cmp_luasnip",
+            "rafamadriz/friendly-snippets",
         },
+        -- version = "1.*",
+        build = "cargo build --release",
+
+        ---@type blink.cmp.Config
         opts = {
-            lsp_symbols = {
-                Text = "",
-                Method = "",
-                Function = "",
-                Constructor = "",
-                Field = "",
-                Variable = "",
-                Class = "",
-                Interface = "",
-                Module = "",
-                Property = "",
-                Unit = "",
-                Value = "",
-                Enum = "",
-                Keyword = "",
-                Snippet = "",
-                Color = "",
-                File = "",
-                Reference = "",
-                Folder = "",
-                EnumMember = "",
-                Constant = "",
-                Struct = "",
-                Event = "",
-                Operator = "",
-                TypeParameter = "",
+            enabled = function()
+                -- keep command mode completion enabled when cursor is recording, etc...
+                if vim.api.nvim_get_mode().mode == "c" then
+                    return true
+                else
+                    local disabled = false
+                    disabled = disabled or (vim.bo.buftype == "prompt")
+                    disabled = disabled or (vim.b.completion == false)
+                    disabled = disabled or (vim.fn.reg_recording() ~= "")
+                    disabled = disabled or (vim.fn.reg_executing() ~= "")
+                    return not disabled
+                end
+            end,
+            keymap = {
+                preset = "enter",
+                ["<C-Space>"] = { "show", "cancel" },
+                ["<C-e>"] = { "show_documentation", "hide_documentation", "fallback" },
+                ["<CR>"] = { "accept", "fallback" },
+
+                ["<Tab>"] = { "snippet_forward", "fallback" },
+                ["<S-Tab>"] = { "snippet_backward", "fallback" },
+
+                ["<Up>"] = { "select_prev", "fallback" },
+                ["<Down>"] = { "select_next", "fallback" },
+                ["<C-p>"] = { "select_prev", "fallback" },
+                ["<C-n>"] = { "select_next", "fallback" },
+
+                ["<C-d>"] = { "scroll_documentation_up", "fallback" },
+                ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+
+                ["<C-c>"] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            require("luasnip").unlink_current()
+                        end
+                        cmp.cancel()
+                    end,
+                    "fallback",
+                },
+                ["<ESC>"] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            require("luasnip").unlink_current()
+                        end
+                    end,
+                    "fallback",
+                },
             },
-        },
-        config = function(plugin_opts)
-            -- Set completeopt to have a better completion experience
-            vim.o.completeopt = "menu,menuone,noinsert"
 
-            local cmp = require("cmp")
-            local luasnip = require("luasnip")
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        luasnip.lsp_expand(args.body)
-                    end,
+            appearance = {
+                kind_icons = {
+                    Text = "",
+                    Method = "",
+                    Function = "",
+                    Constructor = "",
+                    Field = "",
+                    Variable = "",
+                    Class = "",
+                    Interface = "",
+                    Module = "",
+                    Property = "",
+                    Unit = "",
+                    Value = "",
+                    Enum = "",
+                    Keyword = "",
+                    Snippet = "",
+                    Color = "",
+                    File = "",
+                    Reference = "",
+                    Folder = "",
+                    EnumMember = "",
+                    Constant = "",
+                    Struct = "",
+                    Event = "",
+                    Operator = "",
+                    TypeParameter = "",
                 },
-                enabled = function()
-                    -- disable completion in comments
-                    local context = require("cmp.config.context")
-                    -- keep command mode completion enabled when cursor is in a comment
-                    if vim.api.nvim_get_mode().mode == "c" then
-                        return true
-                    else
-                        local disabled = false
-                        disabled = disabled
-                            or (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt")
-                        disabled = disabled or (vim.fn.reg_recording() ~= "")
-                        disabled = disabled or (vim.fn.reg_executing() ~= "")
-                        disabled = disabled
-                            or context.in_treesitter_capture("comment")
-                            or context.in_syntax_group("Comment")
-                        return not disabled
-                    end
-                end,
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                formatting = {
-                    fields = { "kind", "abbr" },
-                    format = function(_, vim_item)
-                        -- Truncate text
-                        local label = vim_item.abbr
-                        local truncated_label = vim.fn.strcharpart(label, 0, 40)
-                        if truncated_label ~= label then
-                            vim_item.abbr = truncated_label .. "…"
-                        end
+            },
 
-                        vim_item.kind = plugin_opts.opts.lsp_symbols[vim_item.kind] or ""
-                        vim_item.menu = nil
-                        return vim_item
-                    end,
-                },
-                preselect = cmp.PreselectMode.Item,
-                completion = { completeopt = vim.o.completeopt },
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-Space>"] = cmp.mapping(function()
-                        if not cmp.visible() then
-                            cmp.complete()
-                        else
-                            cmp.close()
-                        end
-                    end, { "i" }),
-                    ["<CR>"] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Insert,
-                        -- Don't select anything if the isn't actually
-                        -- "focused" / preselected, like with cmdline
-                        -- and markdown where PreselectMode == None
-                        select = false,
-                    }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if luasnip.expand_or_jumpable() then
-                            luasnip.jump(1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    ["<C-c>"] = cmp.mapping(function(fallback)
-                        if luasnip.get_active_snip() then
-                            luasnip.unlink_current()
-                        end
-                        cmp.close()
-                        fallback()
-                    end, { "i", "s" }),
-                    ["<ESC>"] = cmp.mapping(function(fallback)
-                        if luasnip.get_active_snip() then
-                            luasnip.unlink_current()
-                        end
-                        fallback()
-                    end, { "i", "s" }),
-                }),
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "luasnip" },
-                    { name = "path" },
-                    { name = "buffer", option = { keyword_pattern = [[\k\+]] } },
-                    {
-                        name = "lazydev",
-                        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+            completion = {
+                accept = {
+                    auto_brackets = {
+                        enabled = true,
                     },
                 },
-            })
+                list = {
+                    selection = {
+                        preselect = function()
+                            local no_preselect_ft = { "markdown", unpack(require("filetypes")["latex"]) }
+                            return not require("blink.cmp").snippet_active({ direction = 1 })
+                                and not vim.tbl_contains(no_preselect_ft, vim.bo.filetype)
+                        end,
+                        auto_insert = false,
+                    },
+                },
+                menu = {
+                    max_height = 15,
+                    auto_show = true,
+                    border = vim.o.winborder,
+                    draw = {
+                        snippet_indicator = "~",
+                        columns = { { "kind_icon" }, { "label", gap = 1 } },
+                        components = {
+                            label = {
+                                width = { fill = true },
+                                ellipsis = true,
+                                text = function(ctx)
+                                    return get_ctx_highlights(ctx).text
+                                end,
+                                highlight = function(ctx)
+                                    local highlights = get_ctx_highlights(ctx).highlights
 
-            local cmdline_mappings = {
-                ["<C-Space>"] = {
-                    c = function()
-                        if cmp.visible() then
-                            cmp.close()
-                        else
-                            cmp.complete()
-                        end
-                    end,
+                                    -- characters matched on the label by the fuzzy matcher
+                                    for _, idx in ipairs(ctx.label_matched_indices) do
+                                        table.insert(
+                                            highlights,
+                                            { idx, idx + 1, group = "BlinkCmpLabelMatch" }
+                                        )
+                                    end
+                                    return highlights
+                                end,
+                            },
+                        },
+                    },
                 },
-                ["<CR>"] = {
-                    c = function(fallback)
-                        if cmp.visible() and cmp.get_selected_entry() then
-                            cmp.confirm()
-                        else
-                            fallback()
-                        end
-                    end,
-                },
-                ["<Up>"] = {
-                    c = function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        else
-                            fallback()
-                        end
-                    end,
-                },
-                ["<Down>"] = {
-                    c = function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        else
-                            fallback()
-                        end
-                    end,
-                },
-                ["<C-p>"] = {
-                    c = function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        else
-                            fallback()
-                        end
-                    end,
-                },
-                ["<C-n>"] = {
-                    c = function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        else
-                            fallback()
-                        end
-                    end,
-                },
-            }
 
-            -- Disable preselect
-            cmp.setup.filetype({ "markdown", "tex" }, {
-                preselect = cmp.PreselectMode.None,
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 500,
+                    window = {
+                        border = vim.o.winborder,
+                    },
+                },
+
+                -- Displays a preview of the selected item on the current line
+                ghost_text = { enabled = false },
+            },
+
+            -- default list of enabled providers defined so that you can extend it
+            -- elsewhere in your config, without redefining it, via `opts_extend`
+            sources = {
+                default = function()
+                    -- Only use buffer source when in comment
+                    local node = vim.treesitter.get_node()
+                    if node then
+                        if vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
+                            return { "buffer" }
+                        end
+                    end
+                    return { "lsp", "snippets", "path", "buffer" }
+                end,
+                per_filetype = {
+                    lua = { inherit_defaults = true, "lazydev" },
+                },
+                providers = {
+                    lsp = { fallbacks = {} },
+                    buffer = {
+                        -- Fixes buffer sometimes being higher priority than snippets
+                        score_offset = -20
+                    },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
+                },
+            },
+
+            snippets = {
+                preset = "luasnip",
+                expand = function(snippet)
+                    require("luasnip").lsp_expand(snippet)
+                end,
+                active = function(filter)
+                    if filter and filter.direction then
+                        return require("luasnip").jumpable(filter.direction)
+                    end
+                    return require("luasnip").in_snippet()
+                end,
+                jump = function(direction)
+                    return require("luasnip").jump(direction)
+                end,
+            },
+
+            -- experimental signature help support
+            signature = {
+                enabled = true,
+                window = {
+                    show_documentation = true,
+                    treesitter_highlighting = true,
+                    border = vim.o.winborder,
+                },
+            },
+
+            fuzzy = {
+                implementation = "rust",
+                sorts = function()
+                    local default_sorts = { "score", "sort_text", "label" }
+                    if vim.bo.filetype == "lua" then
+                        -- Prioritize label sorting for Lua files
+                        return { "score", "label" }
+                    elseif not vim.tbl_contains(require("filetypes")["cpp"], vim.bo.filetype) then
+                        -- Default sorting for other filetypes
+                        return {
+                            -- custom sort using clangd `.lsp_score` property
+                            -- https://github.com/saghen/blink.cmp/issues/1778
+                            lsp_sorter,
+                            -- your other sorts, below are defaults
+                            unpack(default_sorts),
+                        }
+                    else
+                        -- Default sorting for other filetypes
+                        return default_sorts
+                    end
+                end,
+            },
+
+            cmdline = {
                 completion = {
-                    completeopt = vim.o.completeopt .. ",noselect",
+                    list = {
+                        selection = {
+                            preselect = false,
+                        },
+                    },
+                    menu = {
+                        auto_show = false,
+                    },
                 },
-            })
-
-            -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-            cmp.setup.cmdline({ "/", "?" }, {
-                preselect = cmp.PreselectMode.None,
-                completion = {
-                    autocomplete = false,
-                    completeopt = vim.o.completeopt .. ",noselect",
+                sources = function()
+                    local cmdtype = vim.fn.getcmdtype()
+                    if cmdtype == "/" or cmdtype == "?" then
+                        return { "buffer" }
+                    else
+                        return { "cmdline", "path" }
+                    end
+                end,
+                keymap = {
+                    ["<C-Space>"] = { "show", "cancel" },
+                    ["<CR>"] = { "accept", "fallback" },
+                    ["<Up>"] = { "select_prev", "fallback" },
+                    ["<Down>"] = { "select_next", "fallback" },
+                    ["<C-p>"] = { "select_prev", "fallback" },
+                    ["<C-n>"] = { "select_next", "fallback" },
                 },
-                mapping = cmp.mapping.preset.cmdline(cmdline_mappings),
-                sources = {
-                    { name = "buffer" },
-                },
-            })
-
-            -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-            cmp.setup.cmdline(":", {
-                preselect = cmp.PreselectMode.None,
-                completion = {
-                    autocomplete = false,
-                    completeopt = vim.o.completeopt .. ",noselect",
-                },
-                mapping = cmp.mapping.preset.cmdline(cmdline_mappings),
-                sources = cmp.config.sources({
-                    { name = "path" },
-                }, {
-                    { name = "cmdline" },
-                }),
-                matching = { disallow_symbol_nonprefix_matching = false },
-            })
-        end,
+            },
+        },
     },
 
     --
@@ -346,22 +447,12 @@ return {
     --
     -- Other
     --
+
     -- A super powerful autopair for Neovim
     {
+        -- https://github.com/windwp/nvim-autopairs
         "windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup({ disable_filetype = { "TelescopePrompt" } })
-            -- Adds auto insertion of "()" in cmp
-            -- require("nvim-autopairs.completion.cmp").setup({
-            --     map_cr = true, --  map <CR> on insert mode
-            --     map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-            --     auto_select = true, -- automatically select the first item
-            --     insert = false, -- use insert confirm behavior instead of replace
-            --     map_char = { -- modifies the function or method delimiter by filetypes
-            --         all = "(",
-            --         tex = "{"
-            --     }
-            -- })
-        end,
+        event = "InsertEnter",
+        config = true,
     },
 }

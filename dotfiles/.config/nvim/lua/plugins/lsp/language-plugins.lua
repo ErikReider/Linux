@@ -74,7 +74,6 @@ return {
     "Civitasv/cmake-tools.nvim",
     -- Clangd Protocol extensions support
     {
-        -- TODO: Setup Completion Scores with nvim-cmp
         url = "https://git.sr.ht/~p00f/clangd_extensions.nvim",
         lazy = false,
     },

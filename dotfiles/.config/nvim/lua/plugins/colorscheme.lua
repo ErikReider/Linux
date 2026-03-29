@@ -52,6 +52,34 @@ return {
                         -- LSP InlineHint
                         LspInlayHint = lspInlayHint,
 
+                        -- Blink-cmp fixes
+                        BlinkCmpKind = { link = "CmpItemKind" },
+                        BlinkCmpKindClass = { link = "CmpItemKindClass" },
+                        BlinkCmpKindColor = { link = "CmpItemKindColor" },
+                        BlinkCmpKindConstant = { link = "CmpItemKindConstant" },
+                        BlinkCmpKindConstructor = { link = "CmpItemKindConstructor" },
+                        BlinkCmpKindEnum = { link = "CmpItemKindEnum" },
+                        BlinkCmpKindEnumMember = { link = "CmpItemKindEnumMember" },
+                        BlinkCmpKindEvent = { link = "CmpItemKindEvent" },
+                        BlinkCmpKindField = { link = "CmpItemKindField" },
+                        BlinkCmpKindFile = { link = "CmpItemKindFile" },
+                        BlinkCmpKindFolder = { link = "CmpItemKindFolder" },
+                        BlinkCmpKindFunction = { link = "CmpItemKindFunction" },
+                        BlinkCmpKindInterface = { link = "CmpItemKindInterface" },
+                        BlinkCmpKindKeyword = { link = "CmpItemKindKeyword" },
+                        BlinkCmpKindMethod = { link = "CmpItemKindMethod" },
+                        BlinkCmpKindModule = { link = "CmpItemKindModule" },
+                        BlinkCmpKindOperator = { link = "CmpItemKindOperator" },
+                        BlinkCmpKindProperty = { link = "CmpItemKindProperty" },
+                        BlinkCmpKindReference = { link = "CmpItemKindReference" },
+                        BlinkCmpKindSnippet = { link = "CmpItemKindSnippet" },
+                        BlinkCmpKindStruct = { link = "CmpItemKindStruct" },
+                        BlinkCmpKindText = { link = "CmpItemKindText" },
+                        BlinkCmpKindTypeParameter = { link = "CmpItemKindTypeParameter" },
+                        BlinkCmpKindUnit = { link = "CmpItemKindUnit" },
+                        BlinkCmpKindValue = { link = "CmpItemKindValue" },
+                        BlinkCmpKindVariable = { link = "CmpItemKindVariable" },
+
                         -- Custom colorcolumn color
                         VirtColumn = { link = "LineNr" },
                         -- Make floating window title more visible
