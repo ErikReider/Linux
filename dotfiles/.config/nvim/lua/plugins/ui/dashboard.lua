@@ -1,3 +1,5 @@
+---@module "lazy"
+
 -- TODO: https://api.adviceslip.com/advice
 local custom_header = {
     "",
@@ -31,6 +33,7 @@ local custom_header = {
 --     "         ,,,           ////        ", "", ""
 -- }
 
+---@type LazySpec
 return {
     -- Start Screen
     {

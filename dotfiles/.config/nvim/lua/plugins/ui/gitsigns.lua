@@ -1,8 +1,11 @@
+---@module "lazy"
+
 -- Git in gutter
+
+---@type LazySpec
 return {
     {
         "lewis6991/gitsigns.nvim",
-        enabled = true,
         opts = {
             signs = {
                 add = { text = "┃" },

@@ -1,4 +1,8 @@
+---@module "lazy"
+
 -- Syntax
+
+---@type LazySpec
 return {
     -- BSPWM sxhk syntax
     { "kovetskiy/sxhkd-vim", ft = "conf" },

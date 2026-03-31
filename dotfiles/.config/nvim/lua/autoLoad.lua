@@ -1,7 +1,12 @@
 -- SCSS: add '@' to keyword (includes said character when navigating)
 vim.api.nvim_create_autocmd(
     "FileType",
-    { pattern = { "scss", "css", "less", "sass" }, command = "setl iskeyword+=@-@" }
+    { pattern = require("filetypes")["css"], command = "setl iskeyword+=@-@" }
+)
+-- SH: add '-' to keyword (includes said character when navigating)
+vim.api.nvim_create_autocmd(
+    "FileType",
+    { pattern = require("filetypes")["sh"], command = "setl iskeyword+=-" }
 )
 
 -- HACK: Used until https://github.com/folke/lazy.nvim/issues/1951 is fixed

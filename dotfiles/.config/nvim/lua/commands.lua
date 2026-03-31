@@ -1,4 +1,3 @@
-pcall(require, "snacks")
 local utils = require("utils")
 local snacks = require("snacks")
 

@@ -1,4 +1,8 @@
+---@module "lazy"
+
 -- Not UFO in the sky, but an ultra fold in Neovim (nicer folds)
+
+---@type LazySpec
 return {
     {
         "kevinhwang91/nvim-ufo",

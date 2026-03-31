@@ -1,9 +1,12 @@
+---@module "lazy"
+
 local additional_filetypes = { "heex", "blade" }
 
----@type LazySpec[]
+---@type LazySpec
 return {
-    -- Changing tag name also changed matching tag
     {
+        -- Changing tag name also changed matching tag
+        -- https://github.com/AndrewRadev/tagalong.vim
         -- NOTE: Needed for Elixir heex files
         "AndrewRadev/tagalong.vim",
         enabled = true,

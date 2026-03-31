@@ -1,4 +1,11 @@
+---@module "lazy"
+
+---@type LazySpec
 return {
-    -- Neovim lua functions
-    "nvim-lua/plenary.nvim",
+    ---@module "plenary"
+    {
+        -- Neovim lua functions
+        "nvim-lua/plenary.nvim",
+        config = true,
+    },
 }

@@ -1,3 +1,5 @@
+---@module "lazy"
+
 vim.fn.sign_define("DapBreakpoint", {
     text = "",
     texthl = "DiagnosticSignError",
@@ -19,6 +21,7 @@ vim.fn.sign_define("DapBreakpointRejected", {
     numhl = "",
 })
 
+---@type LazySpec
 return {
     -- Debug Adapter Protocol client implementation for Neovim
     {

@@ -1,8 +1,13 @@
+---@module "lazy"
+
 -- Super powerful color picker / colorizer plugin
+
+---@type LazySpec
 return {
     {
         "uga-rosa/ccc.nvim",
         event = { "BufReadPost", "BufNewFile" },
+        -- TODO: Use `lua vim.lsp.document_color.color_presentation()`
         config = function()
             local ccc = require("ccc")
             local mapping = ccc.mapping

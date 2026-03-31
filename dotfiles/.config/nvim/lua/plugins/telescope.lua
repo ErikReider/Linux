@@ -1,3 +1,5 @@
+---@module "lazy"
+
 -- TODO: https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#use-terminal-image-viewer-to-preview-images
 -- TODO: https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#fast-image-preview-on-terminal-with-caching-using-chafa
 
@@ -14,6 +16,7 @@ local cursor_options = {
 
 ---@type LazySpec
 return {
+    ---@module "telescope"
     {
         "nvim-telescope/telescope.nvim",
         dependencies = {

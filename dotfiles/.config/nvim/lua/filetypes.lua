@@ -49,4 +49,6 @@ vim.filetype.add({
 return {
     ["latex"] = { "tex", "plaintex", "bib" },
     ["cpp"] = { "c", "h", "cpp", "hpp", "tpp" },
+    ["css"] = { "scss", "css", "less", "sass" },
+    ["sh"] = { "sh", "zsh", "bash" },
 }

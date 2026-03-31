@@ -1,4 +1,8 @@
+---@module "lazy"
+
 local ts_load_priority = 50
+
+---@type LazySpec
 return {
     {
         "nvim-treesitter/nvim-treesitter",
@@ -8,14 +12,7 @@ return {
         },
         lazy = false,
         priority = ts_load_priority,
-        init = function()
-            -- Skip backwards compatibility routines and speed up loading.
-            -- vim.g.skip_ts_context_commentstring_module = true
-        end,
         config = function()
-            -- vim.cmd("set foldmethod=expr")
-            -- vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
-
             local treesitter = require("nvim-treesitter")
             treesitter.install("all")
 
@@ -89,6 +86,7 @@ return {
     },
     {
         -- Rainbow delimiters for Neovim through Tree-sitter
+        -- https://gitlab.com/HiPhish/rainbow-delimiters.nvim
         "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
         lazy = false,
         priority = ts_load_priority + 1,

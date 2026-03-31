@@ -1,8 +1,12 @@
+---@module "lazy"
+
 local utils = require("utils")
 
 --
 -- Language specific plugins
 --
+
+---@type LazySpec
 return {
     -- Vim commands for Flutter, including hot-reload-on-save and more.
     {

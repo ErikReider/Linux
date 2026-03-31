@@ -44,8 +44,22 @@ local servers = {
     ["gh_actions_ls"] = {},
     -- Lua
     ["lua_ls"] = {
+        ---@type lspconfig.settings.lua_ls
         settings = {
             Lua = {
+                runtime = {
+                    path = {
+                        "lua/?.lua",
+                        "lua/?/init.lua",
+
+                        "?.lua",
+                        "?/init.lua",
+                        vim.fn.expand("~/.luarocks/share/lua/5.?/?.lua"),
+                        vim.fn.expand("~/.luarocks/share/lua/5.?/?/init.lua"),
+                        "/usr/share/5.?/?.lua",
+                        "/usr/share/lua/5.?/?/init.lua",
+                    },
+                },
                 telemetry = { enable = false },
                 format = { enable = false },
             },
@@ -146,7 +160,7 @@ local servers = {
     },
     -- Bash
     ["bashls"] = {
-        filetypes = { "sh", "zsh", "bash" },
+        filetypes = require("filetypes")["css"],
     },
     -- HTML: vscode-html-language-server
     ["html"] = {

@@ -16,7 +16,7 @@ return {
                     return {
                         desc = "nvim-tree: " .. desc,
                         buffer = bufnr,
-                        noremap = true,
+                        remap = false,
                         silent = true,
                         nowait = true,
                     }

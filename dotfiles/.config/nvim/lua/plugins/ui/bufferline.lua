@@ -1,4 +1,8 @@
+---@module "lazy"
+
 -- Bufferline
+
+---@type LazySpec
 return {
     {
         "romgrk/barbar.nvim",

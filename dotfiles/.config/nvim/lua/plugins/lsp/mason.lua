@@ -1,3 +1,5 @@
+---@module "lazy"
+
 local lsps = {
     -- LSPs
     { "vala-language-server", version = "HEAD" },
@@ -64,6 +66,7 @@ local daps = {
     "elixir",
 }
 
+---@type LazySpec
 return {
     --
     -- Lsp Installer

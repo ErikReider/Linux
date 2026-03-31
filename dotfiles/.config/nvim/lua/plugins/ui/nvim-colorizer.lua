@@ -1,6 +1,10 @@
+---@module "lazy"
+
+---@type LazySpec
 return {
     {
-        "norcalli/nvim-colorizer.lua",
+        -- TODO: Use https://github.com/brenoprata10/nvim-highlight-colors instead
+        "catgoose/nvim-colorizer.lua",
         main = "colorizer",
         opts = {
             -- Enable for all filetypes.

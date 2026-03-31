@@ -1,4 +1,8 @@
+---@module "lazy"
+
 -- Buffer title over split
+
+---@type LazySpec
 return {
     {
         "b0o/incline.nvim",

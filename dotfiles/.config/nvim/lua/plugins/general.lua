@@ -1,3 +1,6 @@
+---@module "lazy"
+
+---@type LazySpec
 return {
     -- A replacement for mksession with a better API.
     -- Also support restoring sessions

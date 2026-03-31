@@ -1,3 +1,5 @@
+---@module "lazy"
+
 ---Used to get a string with the number of spaces to offset the label details from the label.
 ---@param max_width number
 ---@param text string
@@ -87,12 +89,12 @@ local function lsp_sorter(a, b)
     end
 end
 
+---@type LazySpec
 return {
-    --
-    -- Blink.cmp
-    --
-    -- Performant, batteries-included completion plugin for Neovim
+    ---@module "blink-cmp"
     {
+        -- Performant, batteries-included completion plugin for Neovim
+        -- https://github.com/saghen/blink.cmp
         "saghen/blink.cmp",
         dependencies = {
             "rafamadriz/friendly-snippets",
@@ -351,11 +353,10 @@ return {
         },
     },
 
-    --
-    -- Lua Snip
-    --
-    -- Snippet Engine for Neovim written in Lua.
+    ---@module "luasnip"
     {
+        -- Snippet Engine for Neovim written in Lua.
+        -- https://github.com/L3MON4D3/LuaSnip
         "L3MON4D3/LuaSnip",
         build = "make install_jsregexp",
         dependencies = {
@@ -448,8 +449,9 @@ return {
     -- Other
     --
 
-    -- A super powerful autopair for Neovim
+    ---@module "nvim-autopairs"
     {
+        -- A super powerful autopair for Neovim
         -- https://github.com/windwp/nvim-autopairs
         "windwp/nvim-autopairs",
         event = "InsertEnter",

@@ -1,9 +1,13 @@
+---@module "lazy"
+
 -- Status line
+
+---@type LazySpec
 return {
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = {
+        opts = {
             options = {
                 icons_enabled = true,
                 component_separators = { left = "", right = "" },
@@ -32,7 +36,7 @@ return {
                     { "fileformat", symbols = { unix = "", dos = "", mac = "" } },
                 },
                 lualine_y = {
-                    { require("utils").get_indentation_string, on_click = show_indentation_popup },
+                    { require("utils").get_indentation_string, on_click = require("utils").show_indentation_popup },
                     "filetype",
                 },
                 lualine_z = {

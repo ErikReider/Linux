@@ -1,3 +1,5 @@
+---@module "lazy"
+
 local constants = require("constants")
 
 -- Install lazy.nvim Plugin Manager if not installed

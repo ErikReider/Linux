@@ -1,8 +1,8 @@
 local utils = require("utils")
 
 local map = vim.keymap.set
-local lsp_opts = { noremap = true, silent = true }
-local opts = { noremap = true, silent = true }
+local lsp_opts = { remap = false, silent = true }
+local opts = { remap = false, silent = true }
 
 -- Duplicate line
 map("n", "<C-d>", [[:normal ""yy""p<CR>]], { silent = true })
@@ -10,8 +10,8 @@ map("n", "<C-d>", [[:normal ""yy""p<CR>]], { silent = true })
 map("x", "<C-d>", "\"\"y']\"\"p", { silent = false })
 
 -- Bring search results to midscreen
-map("n", "n", "nzzzv", { noremap = true })
-map("n", "N", "Nzzzv", { noremap = true })
+map("n", "n", "nzzzv", { remap = false })
+map("n", "N", "Nzzzv", { remap = false })
 
 -- Opens selected link in xdg default browser
 -- https://vim.fandom.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
@@ -26,14 +26,14 @@ map(
 map("n", "<Esc><Esc>", ":nohl<CR>", { silent = true })
 
 -- Pasting without overriding clipboard!
-map("x", "<Leader>p", "\"_dP", { noremap = true, silent = true })
+map("x", "<Leader>p", "\"_dP", { remap = false, silent = true })
 
 -- Substitute word under cursor
 map("n", "<Leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {})
 map("v", "<Leader>r", [[""y:%s/\<<C-r>"\>/<C-r>"/gI<Left><Left><Left>]], {})
 
 -- Bufferline
-local barbar_opts = { noremap = true, silent = true }
+local barbar_opts = { remap = false, silent = true }
 map("n", "<C-PageUp>", ":BufferPrevious<CR>", barbar_opts)
 map("n", "<C-PageDown>", ":BufferNext<CR>", barbar_opts)
 map("n", "<M-S-Left>", "<Cmd>BufferMovePrevious<CR>", {})
@@ -58,31 +58,31 @@ map("", "<Home>", "g<Home>", { desc = "Move to the start of the display line" })
 map("", "<End>", "g<End>", { desc = "Move to the end of the display line" })
 
 -- Shift up/down to move cursor +/- 5 lines
-map("", "<S-Up>", "5<Up>", { silent = true, noremap = true })
-map("", "<S-Down>", "5<Down>", { silent = true, noremap = true })
-map("i", "<S-Up>", "<C-O>5<Up>", { silent = true, noremap = true })
-map("i", "<S-Down>", "<C-O>5<Down>", { silent = true, noremap = true })
+map("", "<S-Up>", "5<Up>", { silent = true, remap = false })
+map("", "<S-Down>", "5<Down>", { silent = true, remap = false })
+map("i", "<S-Up>", "<C-O>5<Up>", { silent = true, remap = false })
+map("i", "<S-Down>", "<C-O>5<Down>", { silent = true, remap = false })
 -- Control up/down to scroll +/- 5 lines
-map("", "<C-Up>", "5<C-y>", { silent = true, noremap = true })
-map("", "<C-Down>", "5<C-e>", { silent = true, noremap = true })
-map("i", "<C-Up>", "<C-O>5<C-y>", { silent = true, noremap = true })
-map("i", "<C-Down>", "<C-O>5<C-e>", { silent = true, noremap = true })
+map("", "<C-Up>", "5<C-y>", { silent = true, remap = false })
+map("", "<C-Down>", "5<C-e>", { silent = true, remap = false })
+map("i", "<C-Up>", "<C-O>5<C-y>", { silent = true, remap = false })
+map("i", "<C-Down>", "<C-O>5<C-e>", { silent = true, remap = false })
 
 -- Move line up or down
-map("n", "<A-Up>", ":MoveLine(-1)<CR>", { noremap = true, silent = true })
-map("n", "<A-Down>", ":MoveLine(1)<CR>", { noremap = true, silent = true })
-map("i", "<A-Up>", "<C-O>:MoveLine(-1)<CR>", { noremap = true, silent = true })
-map("i", "<A-Down>", "<C-O>:MoveLine(1)<CR>", { noremap = true, silent = true })
-map("v", "<A-Up>", ":MoveBlock(-1)<CR>", { noremap = true, silent = true })
-map("v", "<A-Down>", ":MoveBlock(1)<CR>", { noremap = true, silent = true })
+map("n", "<A-Up>", ":MoveLine(-1)<CR>", { remap = false, silent = true })
+map("n", "<A-Down>", ":MoveLine(1)<CR>", { remap = false, silent = true })
+map("i", "<A-Up>", "<C-O>:MoveLine(-1)<CR>", { remap = false, silent = true })
+map("i", "<A-Down>", "<C-O>:MoveLine(1)<CR>", { remap = false, silent = true })
+map("v", "<A-Up>", ":MoveBlock(-1)<CR>", { remap = false, silent = true })
+map("v", "<A-Down>", ":MoveBlock(1)<CR>", { remap = false, silent = true })
 
 -- Better indenting
-map("v", "<", "<gv", { silent = true, noremap = true })
-map("v", ">", ">gv", { silent = true, noremap = true })
-map("v", "<A-Left>", "<gv", { silent = true, noremap = false })
-map("v", "<A-Right>", ">gv", { silent = true, noremap = false })
-map("n", "<A-Left>", "<<", { silent = true, noremap = false })
-map("n", "<A-Right>", ">>", { silent = true, noremap = false })
+map("v", "<", "<gv", { silent = true, remap = false })
+map("v", ">", ">gv", { silent = true, remap = false })
+map("v", "<A-Left>", "<gv", { silent = true, remap = true })
+map("v", "<A-Right>", ">gv", { silent = true, remap = true })
+map("n", "<A-Left>", "<<", { silent = true, remap = true })
+map("n", "<A-Right>", ">>", { silent = true, remap = true })
 
 -- Git
 map("n", "äh", ":Gitsigns next_hunk <CR>", { silent = true })
@@ -195,10 +195,10 @@ map({ "i", "n", "v" }, "<C-M-b>", vim.lsp.buf.format, lsp_opts)
 -- Illuminate
 map("n", "<A-n>", function()
     require("illuminate").next_reference({ wrap = true })
-end, { noremap = true })
+end, { remap = false })
 map("n", "<A-S-n>", function()
     require("illuminate").next_reference({ reverse = true, wrap = true })
-end, { noremap = true })
+end, { remap = false })
 
 -- Floating Terminal
 map("n", "<F7>", function()
@@ -217,10 +217,10 @@ map("t", "<F8>", "<C-\\><C-n><CMD>LazyGit<CR>", opts)
 map("t", "<F10>", "<C-\\><C-n><CMD>LazyGitClose<CR>", opts)
 
 -- CCC Color adjuster
-map("n", "<leader>c", [[<cmd>CccPick<CR>]], { noremap = true, silent = true })
+map("n", "<leader>c", [[<cmd>CccPick<CR>]], { remap = false, silent = true })
 
 -- Tagalong: Changing tag name also changed matching tag
-map("i", "<c-c>", "<c-c>:call tagalong#Apply()<cr>", { noremap = true, silent = true })
+map("i", "<c-c>", "<c-c>:call tagalong#Apply()<cr>", { remap = false, silent = true })
 
 --
 -- Telescope

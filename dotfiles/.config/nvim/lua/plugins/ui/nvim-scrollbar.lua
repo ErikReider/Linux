@@ -1,4 +1,8 @@
+---@module "lazy"
+
 -- Extensible Neovim Scrollbar
+
+---@type LazySpec
 return {
     {
         "petertriho/nvim-scrollbar",

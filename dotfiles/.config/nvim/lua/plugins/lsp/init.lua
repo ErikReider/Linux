@@ -1,3 +1,5 @@
+---@module "lazy"
+
 -- NeoVim LSP
 vim.lsp.log.set_level(vim.log.levels.WARN)
 -- For debugging:
@@ -49,6 +51,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         require("illuminate").on_attach(client)
 
+        -- Disable nvim-colorizer plugin highlighting for bufer if the attached
+        -- LSP supports color highlighting.
         if client:supports_method("textDocument/documentColor") then
             if vim.lsp["document_color"] and vim.lsp.document_color.is_enabled() then
                 vim.lsp.document_color.enable(true, { bufnr = args.buf }, { style = "virtual" })
@@ -70,6 +74,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 ---@type LazySpec
 return {
+    ---@module "lspconfig"
     {
         "neovim/nvim-lspconfig",
         lazy = false,

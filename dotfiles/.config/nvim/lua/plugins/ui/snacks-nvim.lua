@@ -1,4 +1,4 @@
-pcall(require, "snacks")
+---@module "lazy"
 
 local indent_exlude = {
     "help",
@@ -8,8 +8,10 @@ local indent_exlude = {
     "lazy",
 }
 
+---@type LazySpec
 return {
     {
+        ---@module "snacks"
         "folke/snacks.nvim",
         priority = 1000,
         enabled = true,
@@ -19,7 +21,6 @@ return {
             {
                 bigfile = { enabled = true },
                 notifier = { enabled = true },
-                notify = { enabled = true },
                 quickfile = { enabled = true },
                 bufdelete = { enabled = true },
 
@@ -27,7 +28,9 @@ return {
                 animate = {
                     fps = 60,
                 },
+                ---@type table<string, snacks.win.Config>
                 styles = {
+                    ---@type snacks.input.Config
                     input = {
                         title = "Input:",
                         border = vim.o.winborder,
@@ -44,9 +47,11 @@ return {
                         ---@type (number|boolean|fun(self: snacks.win):number)?
                         col = false,
                     },
+                    ---@type snacks.lazygit.Config
                     lazygit = {
                         border = vim.o.winborder,
                     },
+                    ---@type snacks.terminal.Config
                     terminal = {
                         border = vim.o.winborder,
                         position = "float",
