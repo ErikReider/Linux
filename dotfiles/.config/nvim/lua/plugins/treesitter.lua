@@ -54,29 +54,6 @@ return {
         main = "nvim-treesitter-textobjects",
     },
     {
-        -- Sets commentstring for JS/TS files
-        -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        lazy = false,
-        priority = ts_load_priority + 1,
-        main = "ts_context_commentstring",
-        opts = function()
-            local c_comment_string = { __default = "// %s", __multiline = "// %s" }
-            return {
-                enable = true,
-                enable_autocmd = false,
-                languages = {
-                    c = c_comment_string,
-                    cpp = c_comment_string,
-                    vala = c_comment_string,
-                    glsl = c_comment_string,
-                    blueprint = c_comment_string,
-                    asm = { __default = "# %s", __multiline = "# %s" },
-                },
-            }
-        end,
-    },
-    {
         -- Code context
         -- https://github.com/nvim-treesitter/nvim-treesitter-context
         "nvim-treesitter/nvim-treesitter-context",

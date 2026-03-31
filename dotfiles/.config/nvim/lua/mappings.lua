@@ -93,14 +93,8 @@ map("n", "äj", ":ConflictMarkerNextHunk <CR>", { silent = true })
 map("n", "öj", ":ConflictMarkerPrevHunk <CR>", { silent = true })
 
 -- Comments
-map("n", "<C-c>", require("Comment.api").call("toggle.linewise.current", "g@$"), {
-    expr = true,
-    desc = "Comment current line",
-})
-map("v", "<C-c>", require("Comment.api").call("toggle.linewise", "g@"), {
-    expr = true,
-    desc = "Comment selected lines",
-})
+map("n", "<C-c>", "gcc", { remap = true, desc = "Toggle-comment current line" })
+map("v", "<C-c>", "gc", { remap = true, desc = "Toggle-comment current lines" })
 
 -- Nvim Tree
 map({"n", "i"}, "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "NvimTree Toggle" })
