@@ -160,7 +160,7 @@ local servers = {
     },
     -- Bash
     ["bashls"] = {
-        filetypes = require("filetypes")["css"],
+        filetypes = require("filetypes")["sh"],
     },
     -- HTML: vscode-html-language-server
     ["html"] = {
