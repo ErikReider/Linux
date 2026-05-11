@@ -152,8 +152,8 @@ local servers = {
     },
     -- HTML "snippets": Emmet language server, A language server for emmet.io
     ["emmet_language_server"] = {},
-    -- C#: TODO: Replace with csharp-language-server?
-    ["omnisharp"] = {},
+    -- C#: Uses the seblyng/roslyn.nvim plugin
+    ["roslyn"] = {},
     -- Clangd
     ["clangd"] = {
         cmd = { "clangd", "-fallback-style=Google", "--clang-tidy" },

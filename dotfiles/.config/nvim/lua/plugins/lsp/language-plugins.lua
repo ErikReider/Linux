@@ -81,4 +81,12 @@ return {
         url = "https://git.sr.ht/~p00f/clangd_extensions.nvim",
         lazy = false,
     },
+    {
+        "seblyng/roslyn.nvim",
+        ---@module 'roslyn.config'
+        ---@type RoslynNvimConfig
+        opts = {
+            -- your configuration comes here; leave empty for default settings
+        },
+    },
 }

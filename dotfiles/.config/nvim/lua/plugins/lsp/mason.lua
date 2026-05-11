@@ -20,7 +20,7 @@ local lsps = {
     "typescript-language-server",
     "stylelint-lsp",
     "basedpyright",
-    "omnisharp",
+    "roslyn",
     "texlab",
     "jdtls",
     "mesonlsp",
@@ -73,7 +73,12 @@ return {
     --
     {
         "williamboman/mason.nvim",
-        opts = {},
+        opts = {
+            registries = {
+                "github:mason-org/mason-registry",
+                "github:Crashdummyy/mason-registry",
+            },
+        },
     },
     -- Auto installs lsps
     {
